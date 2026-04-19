@@ -19,7 +19,7 @@ Bem-vindo ao portal de estudos! Aqui você encontra os roteiros das aulas, mater
 - [[Aula 02 - Introducao a Redes|Aula 02 — Introdução a Redes]]
 - [[Aula 03 - Topologias e Meios|Aula 03 — Topologias e Meios de Transmissão]]
 - [[Aula 04 - Camada Fisica e Enlace|Aula 04 — Camada Física e de Enlace]]
-- [[Aula 05 - Modelo OSI vs TCP IP|Aula 05 — Modelo OSI vs TCP/IP]]
+- [[Aula 05 - Modelo OSI vs TCP IP|Aula 05 — Modelo OSI vs TCP IP]]
 
 ---
 
