@@ -21,6 +21,7 @@ Bem-vindo ao portal de estudos! Aqui você encontra os roteiros das aulas, mater
 - [[Aula 04 - Camada Fisica e Enlace|Aula 04 — Camada Física e de Enlace]]
 - [[Aula 05 - Modelo OSI vs TCP IP|Aula 05 — Modelo OSI vs TCP IP]]
 - [[Aula 06 - Pratica Enderecamento IPv4 e Sub-redes Packet Tracer|Aula 06 — Prática Endereçamento IPv4 e Sub-redes no Packet Tracer]]
+- [[Aula 07 - Camada de Transporte TCP UDP Portas e Three-Way Handshake|Aula 07 — Camada de Transporte: TCP, UDP, Portas e Three-Way Handshake]]
 
 ---
 
