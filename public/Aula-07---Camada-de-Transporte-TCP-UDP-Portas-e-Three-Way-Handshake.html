@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr"><head><title>🌐 🟢 Aula 07: Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake | Prof. Romualdo</title><meta charset="utf-8"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;family=Inter:ital,wght@0,400;0,600;1,400;1,600&amp;family=JetBrains Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="🌐 Redes de Computadores I"/><meta property="og:title" content="🌐 🟢 Aula 07: Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake | Prof. Romualdo"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="🌐 🟢 Aula 07: Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake | Prof. Romualdo"/><meta name="twitter:description" content="disciplina: Redes de Computadores I codigo: “49325” aula: 7 titulo: “Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake” tipo: teorica semana: 7 data: 2026-05-07 status: publicado tags: redes tcp udp transporte handshake portas publicar: true 🟢 Aula 07: Camada de Transporte — TCP, UDP, ..."/><meta property="og:description" content="disciplina: Redes de Computadores I codigo: “49325” aula: 7 titulo: “Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake” tipo: teorica semana: 7 data: 2026-05-07 status: publicado tags: redes tcp udp transporte handshake portas publicar: true 🟢 Aula 07: Camada de Transporte — TCP, UDP, ..."/><meta property="og:image:alt" content="disciplina: Redes de Computadores I codigo: “49325” aula: 7 titulo: “Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake” tipo: teorica semana: 7 data: 2026-05-07 status: publicado tags: redes tcp udp transporte handshake portas publicar: true 🟢 Aula 07: Camada de Transporte — TCP, UDP, ..."/><meta property="twitter:domain" content="rofilho.github.io/redes1"/><meta property="og:url" content="https://rofilho.github.io/redes1/Aula-07---Camada-de-Transporte-TCP-UDP-Portas-e-Three-Way-Handshake"/><meta property="twitter:url" content="https://rofilho.github.io/redes1/Aula-07---Camada-de-Transporte-TCP-UDP-Portas-e-Three-Way-Handshake"/><link rel="icon" href="./static/icon.png"/><meta name="description" content="disciplina: Redes de Computadores I codigo: “49325” aula: 7 titulo: “Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake” tipo: teorica semana: 7 data: 2026-05-07 status: publicado tags: redes tcp udp transporte handshake portas publicar: true 🟢 Aula 07: Camada de Transporte — TCP, UDP, ..."/><meta name="generator" content="Quartz"/><link href="./index.css" rel="stylesheet" type="text/css" data-persist="true"/><style>.expand-button {
+  position: absolute;
+  display: flex;
+  float: right;
+  padding: 0.4rem;
+  margin: 0.3rem;
+  right: 0;
+  color: var(--gray);
+  border-color: var(--dark);
+  background-color: var(--light);
+  border: 1px solid;
+  border-radius: 5px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.expand-button > svg {
+  fill: var(--light);
+  filter: contrast(0.3);
+}
+.expand-button:hover {
+  cursor: pointer;
+  border-color: var(--secondary);
+}
+.expand-button:focus {
+  outline: 0;
+}
+
+pre:hover > .expand-button {
+  opacity: 1;
+  transition: 0.2s;
+}
+
+#mermaid-container {
+  position: fixed;
+  contain: layout;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+}
+#mermaid-container.active {
+  display: inline-block;
+}
+#mermaid-container > #mermaid-space {
+  border: 1px solid var(--lightgray);
+  background-color: var(--light);
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80vh;
+  width: 80vw;
+  overflow: hidden;
+}
+#mermaid-container > #mermaid-space > .mermaid-content {
+  position: relative;
+  transform-origin: 0 0;
+  transition: transform 0.1s ease;
+  overflow: visible;
+  min-height: 200px;
+  min-width: 200px;
+}
+#mermaid-container > #mermaid-space > .mermaid-content pre {
+  margin: 0;
+  border: none;
+}
+#mermaid-container > #mermaid-space > .mermaid-content svg {
+  max-width: none;
+  height: auto;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--lightgray);
+  background: var(--light);
+  color: var(--dark);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: var(--bodyFont);
+  transition: all 0.2s ease;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:hover {
+  background: var(--lightgray);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:active {
+  transform: translateY(1px);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:nth-child(2) {
+  width: auto;
+  padding: 0 12px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiQzpcXFVzZXJzXFxyb211YVxcQXBwRGF0YVxcTG9jYWxcXFRlbXBcXHJlZGVzMVxccXVhcnR6XFxjb21wb25lbnRzXFxzdHlsZXMiLCJzb3VyY2VzIjpbIm1lcm1haWQuaW5saW5lLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFO0VBQ0E7O0FBR0Y7RUFDRTtFQUNBOztBQUdGO0VBQ0U7OztBQUtGO0VBQ0U7RUFDQTs7O0FBSUo7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFO0VBQ0E7O0FBR0Y7RUFDRTtFQUNBOztBQUlKO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTs7QUFHRjtFQUNFOztBQUlGO0VBQ0U7RUFDQTtFQUNBIiwic291cmNlc0NvbnRlbnQiOlsiLmV4cGFuZC1idXR0b24ge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsb2F0OiByaWdodDtcbiAgcGFkZGluZzogMC40cmVtO1xuICBtYXJnaW46IDAuM3JlbTtcbiAgcmlnaHQ6IDA7IC8vIE5PVEU6IHJpZ2h0IHdpbGwgYmUgc2V0IGluIG1lcm1haWQuaW5saW5lLnRzXG4gIGNvbG9yOiB2YXIoLS1ncmF5KTtcbiAgYm9yZGVyLWNvbG9yOiB2YXIoLS1kYXJrKTtcbiAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tbGlnaHQpO1xuICBib3JkZXI6IDFweCBzb2xpZDtcbiAgYm9yZGVyLXJhZGl1czogNXB4O1xuICBvcGFjaXR5OiAwO1xuICB0cmFuc2l0aW9uOiAwLjJzO1xuXG4gICYgPiBzdmcge1xuICAgIGZpbGw6IHZhcigtLWxpZ2h0KTtcbiAgICBmaWx0ZXI6IGNvbnRyYXN0KDAuMyk7XG4gIH1cblxuICAmOmhvdmVyIHtcbiAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgYm9yZGVyLWNvbG9yOiB2YXIoLS1zZWNvbmRhcnkpO1xuICB9XG5cbiAgJjpmb2N1cyB7XG4gICAgb3V0bGluZTogMDtcbiAgfVxufVxuXG5wcmUge1xuICAmOmhvdmVyID4gLmV4cGFuZC1idXR0b24ge1xuICAgIG9wYWNpdHk6IDE7XG4gICAgdHJhbnNpdGlvbjogMC4ycztcbiAgfVxufVxuXG4jbWVybWFpZC1jb250YWluZXIge1xuICBwb3NpdGlvbjogZml4ZWQ7XG4gIGNvbnRhaW46IGxheW91dDtcbiAgei1pbmRleDogOTk5O1xuICBsZWZ0OiAwO1xuICB0b3A6IDA7XG4gIHdpZHRoOiAxMDB2dztcbiAgaGVpZ2h0OiAxMDB2aDtcbiAgb3ZlcmZsb3c6IGhpZGRlbjtcbiAgZGlzcGxheTogbm9uZTtcbiAgYmFja2Ryb3AtZmlsdGVyOiBibHVyKDRweCk7XG4gIGJhY2tncm91bmQ6IHJnYmEoMCwgMCwgMCwgMC41KTtcblxuICAmLmFjdGl2ZSB7XG4gICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xuICB9XG5cbiAgJiA+ICNtZXJtYWlkLXNwYWNlIHtcbiAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1saWdodGdyYXkpO1xuICAgIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWxpZ2h0KTtcbiAgICBib3JkZXItcmFkaXVzOiA1cHg7XG4gICAgcG9zaXRpb246IGZpeGVkO1xuICAgIHRvcDogNTAlO1xuICAgIGxlZnQ6IDUwJTtcbiAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZSgtNTAlLCAtNTAlKTtcbiAgICBoZWlnaHQ6IDgwdmg7XG4gICAgd2lkdGg6IDgwdnc7XG4gICAgb3ZlcmZsb3c6IGhpZGRlbjtcblxuICAgICYgPiAubWVybWFpZC1jb250ZW50IHtcbiAgICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgICAgIHRyYW5zZm9ybS1vcmlnaW46IDAgMDtcbiAgICAgIHRyYW5zaXRpb246IHRyYW5zZm9ybSAwLjFzIGVhc2U7XG4gICAgICBvdmVyZmxvdzogdmlzaWJsZTtcbiAgICAgIG1pbi1oZWlnaHQ6IDIwMHB4O1xuICAgICAgbWluLXdpZHRoOiAyMDBweDtcblxuICAgICAgcHJlIHtcbiAgICAgICAgbWFyZ2luOiAwO1xuICAgICAgICBib3JkZXI6IG5vbmU7XG4gICAgICB9XG5cbiAgICAgIHN2ZyB7XG4gICAgICAgIG1heC13aWR0aDogbm9uZTtcbiAgICAgICAgaGVpZ2h0OiBhdXRvO1xuICAgICAgfVxuICAgIH1cblxuICAgICYgPiAubWVybWFpZC1jb250cm9scyB7XG4gICAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgICBib3R0b206IDIwcHg7XG4gICAgICByaWdodDogMjBweDtcbiAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICBnYXA6IDhweDtcbiAgICAgIHBhZGRpbmc6IDhweDtcbiAgICAgIGJhY2tncm91bmQ6IHZhcigtLWxpZ2h0KTtcbiAgICAgIGJvcmRlcjogMXB4IHNvbGlkIHZhcigtLWxpZ2h0Z3JheSk7XG4gICAgICBib3JkZXItcmFkaXVzOiA2cHg7XG4gICAgICBib3gtc2hhZG93OiAwIDJweCA0cHggcmdiYSgwLCAwLCAwLCAwLjEpO1xuICAgICAgei1pbmRleDogMjtcblxuICAgICAgLm1lcm1haWQtY29udHJvbC1idXR0b24ge1xuICAgICAgICBkaXNwbGF5OiBmbGV4O1xuICAgICAgICBhbGlnbi1pdGVtczogY2VudGVyO1xuICAgICAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgICAgICAgd2lkdGg6IDMycHg7XG4gICAgICAgIGhlaWdodDogMzJweDtcbiAgICAgICAgcGFkZGluZzogMDtcbiAgICAgICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICAgICAgYmFja2dyb3VuZDogdmFyKC0tbGlnaHQpO1xuICAgICAgICBjb2xvcjogdmFyKC0tZGFyayk7XG4gICAgICAgIGJvcmRlci1yYWRpdXM6IDRweDtcbiAgICAgICAgY3Vyc29yOiBwb2ludGVyO1xuICAgICAgICBmb250LXNpemU6IDE2cHg7XG4gICAgICAgIGZvbnQtZmFtaWx5OiB2YXIoLS1ib2R5Rm9udCk7XG4gICAgICAgIHRyYW5zaXRpb246IGFsbCAwLjJzIGVhc2U7XG5cbiAgICAgICAgJjpob3ZlciB7XG4gICAgICAgICAgYmFja2dyb3VuZDogdmFyKC0tbGlnaHRncmF5KTtcbiAgICAgICAgfVxuXG4gICAgICAgICY6YWN0aXZlIHtcbiAgICAgICAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZVkoMXB4KTtcbiAgICAgICAgfVxuXG4gICAgICAgIC8vIFN0eWxlIHRoZSByZXNldCBidXR0b24gZGlmZmVyZW50bHlcbiAgICAgICAgJjpudGgtY2hpbGQoMikge1xuICAgICAgICAgIHdpZHRoOiBhdXRvO1xuICAgICAgICAgIHBhZGRpbmc6IDAgMTJweDtcbiAgICAgICAgICBmb250LXNpemU6IDE0cHg7XG4gICAgICAgIH1cbiAgICAgIH1cbiAgICB9XG4gIH1cbn1cbiJdfQ== */</style><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="./prescript.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("./static/contentIndex.json").then(data => data.json())</script><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://rofilho.github.io/redes1/index.xml"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://rofilho.github.io/redes1/Aula-07---Camada-de-Transporte-TCP-UDP-Portas-e-Three-Way-Handshake-og-image.webp"/><meta property="og:image:url" content="https://rofilho.github.io/redes1/Aula-07---Camada-de-Transporte-TCP-UDP-Portas-e-Three-Way-Handshake-og-image.webp"/><meta name="twitter:image" content="https://rofilho.github.io/redes1/Aula-07---Camada-de-Transporte-TCP-UDP-Portas-e-Three-Way-Handshake-og-image.webp"/><meta property="og:image:type" content="image/.webp"/></head><body data-slug="Aula-07---Camada-de-Transporte-TCP-UDP-Portas-e-Three-Way-Handshake"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"></div><div class="center"><div class="page-header"><header><h2 class="page-title"><a href="." class="page-title__link"><img src="https://uniube.br/img/landing/logo_azul.svg" alt="Uniube" class="page-title__logo page-title__logo--light"/><img src="https://uniube.br/img/landing/logo_branca.svg" alt="Uniube" class="page-title__logo page-title__logo--dark"/><span class="page-title__text">🌐 Redes de Computadores I</span></a></h2><div class="search"><button class="search-button"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>Pesquisar</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="Pesquisar por algo" placeholder="Pesquisar por algo"/><div class="search-layout" data-preview="true"></div></div></div></div><button class="darkmode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="Tema escuro"><title>Tema escuro</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="Tema claro"><title>Tema claro</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></header><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="./">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>🌐 🟢 Aula 07: Camada de Transporte — TCP, UDP, Portas e Three Way Handshake</a></div></nav><nav class="lesson-nav" aria-label="Navegação entre aulas"><div class="lesson-nav__slot"><a href="/Aula-04---Camada-Fisica-e-Enlace" class="nav-pill nav-pill--prev" data-spa="true"><div class="nav-pill__icon">📖</div><div class="nav-pill__body"><span class="nav-pill__label">← Anterior</span><span class="nav-pill__title">🌐 🔌 Aula 04: Camada Física, Camada de Enlace e Ethernet</span></div></a></div><div class="lesson-nav__slot lesson-nav__slot--right"><a href="/Aula-02---Introducao-a-Redes" class="nav-pill nav-pill--next" data-spa="true"><div class="nav-pill__icon">📖</div><div class="nav-pill__body"><span class="nav-pill__label">Próxima →</span><span class="nav-pill__title">🌐 Aula  – Introdução a Redes de Computadores</span></div></a></div></nav><h1 class="article-title">🌐 🟢 Aula 07: Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake</h1><p show-comma="true" class="content-meta"><time datetime="2026-04-29T21:45:26.000Z">29 de abr. de 2026</time><span>Leitura de 13 min</span></p></div></div><article class="popover-hint"><hr/>
+<p>disciplina: Redes de Computadores I
+codigo: “49325”
+aula: 7
+titulo: “Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake”
+tipo: teorica
+semana: 7
+data: 2026-05-07
+status: publicado
+tags:</p>
+<ul>
+<li>redes</li>
+<li>tcp</li>
+<li>udp</li>
+<li>transporte</li>
+<li>handshake</li>
+<li>portas
+publicar: true</li>
+</ul>
+<hr/>
+<h1 id="-aula-07-camada-de-transporte--tcp-udp-portas-e-three-way-handshake">🟢 Aula 07: Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-aula-07-camada-de-transporte--tcp-udp-portas-e-three-way-handshake" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p><strong>Disciplina:</strong> Redes de Computadores I (Cód. 49325)
+<strong>Curso:</strong> Sistemas de Informação — Uniube
+<strong>Semana:</strong> 7 | Quarta-feira
+<strong>Professor:</strong> Romualdo Mathias Filho
+<strong>Tipo:</strong> 📘 Teórica
+<strong>Tópicos:</strong> Camada de Transporte, TCP, UDP, Three-Way Handshake, Portas, Multiplexação, Controle de Fluxo</p>
+<hr/>
+<blockquote>
+<p>💬 <em>“O IP sabe onde entregar o pacote. O TCP sabe como garantir que ele chegou inteiro, na ordem certa e sem erros.”</em></p>
+</blockquote>
+<hr/>
+<h2 id="-objetivo-da-aula">🎯 Objetivo da Aula<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-objetivo-da-aula" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Ao final desta aula, os alunos serão capazes de:</p>
+<ul>
+<li>Compreender o papel da <strong>Camada de Transporte</strong> no modelo TCP/IP e OSI.</li>
+<li>Distinguir as características, vantagens e casos de uso de <strong>TCP</strong> e <strong>UDP</strong>.</li>
+<li>Explicar o processo de <strong>Three-Way Handshake</strong> do TCP passo a passo.</li>
+<li>Entender o conceito de <strong>portas de rede</strong> e como elas permitem que múltiplos serviços funcionem no mesmo host.</li>
+<li>Identificar as <strong>portas mais comuns</strong> (HTTP, HTTPS, SSH, DNS, SMTP etc.).</li>
+<li>Relacionar esses conceitos com aplicações do cotidiano (streaming, WhatsApp, banco online, etc.).</li>
+</ul>
+<hr/>
+<h2 id="-revisão-rápida-5-min">🔄 Revisão Rápida (5 min)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-revisão-rápida-5-min" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th><strong>Conceito (Aulas Anteriores)</strong></th><th><strong>Conexão com hoje</strong></th></tr></thead><tbody><tr><td>Endereço IP (Camada 3)</td><td>O IP entrega o pacote ao host correto. A Camada de Transporte entrega ao <em>processo</em> correto (via porta).</td></tr><tr><td>Roteamento e Encaminhamento</td><td>Vimos como pacotes atravessam redes. Hoje, vemos o que acontece <em>dentro</em> do host após a chegada.</td></tr><tr><td>Pacotes e Encapsulamento</td><td>Cada camada adiciona um cabeçalho. Hoje, estudamos o cabeçalho de Transporte (TCP/UDP).</td></tr><tr><td>Modelo OSI vs TCP/IP (Aula 05)</td><td>A Camada 4 (Transporte) do OSI corresponde à Camada de Transporte do TCP/IP — é exatamente aqui.</td></tr></tbody></table></div>
+<blockquote>
+<p>💡 <strong>Metáfora central:</strong> O IP é como o CEP de uma casa. A porta TCP/UDP é o número do apartamento dentro do prédio. Sem o número do apartamento, a correspondência chega ao endereço certo, mas ninguém sabe a qual morador entregar.</p>
+</blockquote>
+<hr/>
+<h2 id="-1-a-camada-de-transporte--por-que-ela-existe">📌 1. A Camada de Transporte — Por que ela existe?<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-1-a-camada-de-transporte--por-que-ela-existe" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="o-problema-sem-a-camada-de-transporte">O problema sem a Camada de Transporte<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#o-problema-sem-a-camada-de-transporte" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Imagine um computador recebendo dados simultaneamente de:</p>
+<ul>
+<li>Uma aba do navegador carregando uma página web</li>
+<li>O WhatsApp Web recebendo mensagens</li>
+<li>Um streaming de música tocando em segundo plano</li>
+<li>Uma chamada de vídeo em andamento</li>
+</ul>
+<p>Todos esses dados chegam pelo mesmo endereço IP. <strong>Como o sistema operacional sabe qual dado pertence a qual aplicação?</strong></p>
+<p>A resposta são as <strong>portas</strong> — números que identificam processos específicos dentro de um host.</p>
+<h3 id="o-que-a-camada-de-transporte-faz">O que a Camada de Transporte faz?<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#o-que-a-camada-de-transporte-faz" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Função</th><th>Descrição</th></tr></thead><tbody><tr><td><strong>Multiplexação</strong></td><td>Múltiplas aplicações usam a rede ao mesmo tempo, identificadas por portas</td></tr><tr><td><strong>Demultiplexação</strong></td><td>O SO redireciona os dados recebidos para a aplicação correta</td></tr><tr><td><strong>Controle de erros</strong></td><td>TCP verifica se os dados chegaram íntegros (via checksum)</td></tr><tr><td><strong>Controle de fluxo</strong></td><td>TCP ajusta a velocidade de envio para não sobrecarregar o receptor</td></tr><tr><td><strong>Controle de congestionamento</strong></td><td>TCP reduz a velocidade se a rede estiver congestionada</td></tr><tr><td><strong>Entrega ordenada</strong></td><td>TCP garante que os segmentos cheguem na ordem correta</td></tr></tbody></table></div>
+<p><img src="./assets/aula07_camada_transporte.png" width="auto" height="auto" alt/></p>
+<blockquote>
+<p><em>Figura 1: Posição da Camada de Transporte no modelo TCP/IP e sua função de multiplexação por portas.</em></p>
+</blockquote>
+<blockquote>
+<p>💡 <strong>Exemplo brasileiro:</strong> Pense no Pix. Quando você faz uma transferência, o banco usa TCP para garantir que <strong>cada centavo chegue, sem erros, na ordem certa</strong>. UDP seria inaceitável nesse cenário — imagina perder metade da transação!</p>
+</blockquote>
+<hr/>
+<h2 id="-2-tcp--transmission-control-protocol">📌 2. TCP — Transmission Control Protocol<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-2-tcp--transmission-control-protocol" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>O TCP é o protocolo de transporte <strong>orientado à conexão</strong>. Antes de enviar qualquer dado, ele estabelece uma conexão formal entre emissor e receptor.</p>
+<h3 id="características-do-tcp">Características do TCP<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#características-do-tcp" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Característica</th><th>Detalhe</th></tr></thead><tbody><tr><td><strong>Orientado à conexão</strong></td><td>Exige estabelecimento de conexão antes de transmitir (Three-Way Handshake)</td></tr><tr><td><strong>Confiável</strong></td><td>Garante entrega — reenvia pacotes perdidos automaticamente</td></tr><tr><td><strong>Entrega ordenada</strong></td><td>Numera cada segmento; o receptor reordena se necessário</td></tr><tr><td><strong>Controle de fluxo</strong></td><td>Usa janela deslizante (sliding window) para regular o ritmo de envio</td></tr><tr><td><strong>Controle de congestionamento</strong></td><td>Reduz taxa de envio quando detecta congestionamento na rede</td></tr><tr><td><strong>Verificação de integridade</strong></td><td>Checksum em cada segmento</td></tr></tbody></table></div>
+<h3 id="como-o-tcp-funciona--visão-geral">Como o TCP funciona — visão geral<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#como-o-tcp-funciona--visão-geral" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<pre><code>Emissor                          Receptor
+  |                                  |
+  |--- [Three-Way Handshake] ------->|   (1) Estabelece conexão
+  |                                  |
+  |--- SEG 1 (bytes 1-1000) -------->|
+  |&lt;-- ACK 1001 ---------------------|   (2) Transferência de dados
+  |--- SEG 2 (bytes 1001-2000) ----->|       com confirmação
+  |&lt;-- ACK 2001 ---------------------|
+  |                                  |
+  |--- [FIN / FIN-ACK / ACK] ------->|   (3) Encerramento da conexão
+</code></pre>
+<h3 id="cabeçalho-tcp--campos-importantes">Cabeçalho TCP — campos importantes<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#cabeçalho-tcp--campos-importantes" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<pre><code> 0                   1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|          Porta Origem         |         Porta Destino         |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                      Número de Sequência                      |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|                    Número de Confirmação (ACK)                |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|  Data |           |U|A|P|R|S|F|                               |
+| Offs. |  Reserv.  |R|C|S|S|Y|I|            Janela            |
+|       |           |G|K|H|T|N|N|                               |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|          Checksum             |        Ponteiro Urgente       |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</code></pre>
+<ul>
+<li><strong>SYN</strong> — Synchronize: inicia a conexão</li>
+<li><strong>ACK</strong> — Acknowledgment: confirma recebimento</li>
+<li><strong>FIN</strong> — Finish: encerra a conexão</li>
+<li><strong>RST</strong> — Reset: aborta a conexão abruptamente</li>
+<li><strong>Número de Sequência</strong> — identifica o byte inicial do segmento</li>
+<li><strong>Número de Confirmação</strong> — indica o próximo byte esperado</li>
+</ul>
+<hr/>
+<h2 id="-3-o-three-way-handshake--estabelecendo-a-conexão-tcp">📌 3. O Three-Way Handshake — Estabelecendo a Conexão TCP<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-3-o-three-way-handshake--estabelecendo-a-conexão-tcp" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>O <strong>Three-Way Handshake</strong> é o ritual de três mensagens que o TCP usa para sincronizar cliente e servidor antes de transmitir dados.</p>
+<h3 id="passo-a-passo">Passo a passo<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#passo-a-passo" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<pre><code>    CLIENTE                              SERVIDOR
+       |                                    |
+       |--- 1. SYN (SEQ=1000) ------------->|  &quot;Quero conectar. Meu SEQ é 1000.&quot;
+       |                                    |
+       |&lt;-- 2. SYN+ACK (SEQ=2000,ACK=1001) -|  &quot;Ok! Meu SEQ é 2000. Confirmo SEQ=1001.&quot;
+       |                                    |
+       |--- 3. ACK (ACK=2001) ------------->|  &quot;Perfeito. Confirmo SEQ=2001. Pode falar!&quot;
+       |                                    |
+       |&lt;=== CONEXÃO ESTABELECIDA ==========>|
+       |                                    |
+       |=== DADOS FLUINDO ===================|
+</code></pre>
+<p><img src="./assets/aula07_handshake.png" width="auto" height="auto" alt/></p>
+<blockquote>
+<p><em>Figura 2: Diagrama do Three-Way Handshake TCP — as três mensagens que estabelecem uma conexão confiável.</em></p>
+</blockquote>
+<h3 id="por-que-three-mensagens-e-não-duas">Por que THREE mensagens e não duas?<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#por-que-three-mensagens-e-não-duas" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Com <strong>apenas 2 mensagens</strong> (SYN + SYN-ACK), o cliente saberia que o servidor o ouviu, mas o <strong>servidor não saberia se o cliente recebeu seu SYN-ACK</strong>. O terceiro ACK fecha esse ciclo — ambos confirmam que ambos estão sincronizados.</p>
+<blockquote>
+<p>💡 <strong>Analogia cotidiana:</strong> É como uma ligação telefônica:</p>
+<ul>
+<li>“Alô?” <em>(SYN)</em></li>
+<li>“Alô! Tô te ouvindo, pode falar?” <em>(SYN-ACK)</em></li>
+<li>“Tô te ouvindo também, pode começar!” <em>(ACK)</em></li>
+</ul>
+<p>Só depois das três frases a conversa de fato começa.</p>
+</blockquote>
+<h3 id="encerrando-a-conexão--four-way-handshake">Encerrando a conexão — Four-Way Handshake<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#encerrando-a-conexão--four-way-handshake" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Para encerrar, o TCP usa <strong>4 mensagens</strong> (porque cada lado encerra sua direção de forma independente):</p>
+<pre><code>    CLIENTE                              SERVIDOR
+       |--- FIN --------------------------->|  &quot;Terminei de enviar.&quot;
+       |&lt;-- ACK -----------------------------|  &quot;Ok, recebi.&quot;
+       |&lt;-- FIN -----------------------------|  &quot;Eu também terminei.&quot;
+       |--- ACK --------------------------->|  &quot;Ok, conexão encerrada.&quot;
+</code></pre>
+<h3 id="vulnerabilidade--syn-flood">Vulnerabilidade — SYN Flood<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#vulnerabilidade--syn-flood" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>O atacante explora o Handshake enviando <strong>milhares de SYNs falsos</strong>. O servidor responde com SYN-ACK e aguarda o ACK que nunca vem, consumindo recursos com conexões “semiabertas” até travar.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Ataque</th><th>Descrição</th></tr></thead><tbody><tr><td><strong>SYN Flood</strong></td><td>Envia SYNs com IPs falsos — servidor fica aguardando ACKs que nunca chegam</td></tr><tr><td><strong>Prevenção</strong></td><td>SYN Cookies, Rate Limiting, Firewall com inspeção de estado (Stateful)</td></tr></tbody></table></div>
+<hr/>
+<h2 id="-4-udp--user-datagram-protocol">📌 4. UDP — User Datagram Protocol<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-4-udp--user-datagram-protocol" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>O UDP é o protocolo de transporte <strong>sem conexão</strong> — envia dados diretamente, sem handshake, sem confirmação, sem controle de ordem.</p>
+<h3 id="características-do-udp">Características do UDP<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#características-do-udp" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Característica</th><th>Detalhe</th></tr></thead><tbody><tr><td><strong>Sem conexão</strong></td><td>Não há handshake — os dados são enviados diretamente</td></tr><tr><td><strong>Não confiável</strong></td><td>Não há garantia de entrega; pacotes perdidos não são reenviados</td></tr><tr><td><strong>Sem ordenação</strong></td><td>Datagramas podem chegar fora de ordem</td></tr><tr><td><strong>Baixa latência</strong></td><td>Overhead mínimo — cabeçalho de apenas 8 bytes</td></tr><tr><td><strong>Alta velocidade</strong></td><td>Sem espera por confirmações — ideal para tempo real</td></tr></tbody></table></div>
+<h3 id="cabeçalho-udp--simples-e-leve">Cabeçalho UDP — simples e leve<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#cabeçalho-udp--simples-e-leve" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<pre><code> 0                   1                   2                   3
+ 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5 6 7 8 9 0 1
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|          Porta Origem         |         Porta Destino         |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+|            Comprimento        |           Checksum            |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+</code></pre>
+<p>Apenas 4 campos! Compare com os 10+ campos do TCP.</p>
+<blockquote>
+<p>💡 <strong>Analogia:</strong> UDP é como enviar uma carta pelos Correios sem AR (Aviso de Recebimento). Você despacha e não sabe se chegou. TCP é como enviar com AR — você recebe confirmação de entrega.</p>
+</blockquote>
+<p><img src="./assets/aula07_tcp_vs_udp.png" width="auto" height="auto" alt/></p>
+<blockquote>
+<p><em>Figura 3: Comparativo TCP vs UDP — características e casos de uso de cada protocolo.</em></p>
+</blockquote>
+<hr/>
+<h2 id="-5-tcp-vs-udp--quando-usar-cada-um">📌 5. TCP vs UDP — Quando usar cada um?<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-5-tcp-vs-udp--quando-usar-cada-um" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th><strong>Aspecto</strong></th><th><strong>TCP</strong></th><th><strong>UDP</strong></th></tr></thead><tbody><tr><td>Conexão</td><td>Orientado à conexão</td><td>Sem conexão</td></tr><tr><td>Confiabilidade</td><td>Alta — garante entrega</td><td>Baixa — não garante</td></tr><tr><td>Ordenação</td><td>Sim</td><td>Não</td></tr><tr><td>Velocidade</td><td>Menor (overhead do handshake e ACKs)</td><td>Maior (mínimo overhead)</td></tr><tr><td>Controle de fluxo</td><td>Sim</td><td>Não</td></tr><tr><td>Tamanho do cabeçalho</td><td>20-60 bytes</td><td>8 bytes fixos</td></tr><tr><td><strong>Quando usar</strong></td><td>Quando a <strong>integridade importa mais que a velocidade</strong></td><td>Quando a <strong>velocidade importa mais que a integridade</strong></td></tr><tr><td><strong>Exemplos</strong></td><td>HTTP/HTTPS, e-mail (SMTP/IMAP), transferência de arquivos (FTP), SSH</td><td>Streaming (Netflix, YouTube), VoIP, jogos online, DNS, DHCP</td></tr></tbody></table></div>
+<h3 id="regra-prática-do-mercado">Regra prática do mercado:<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#regra-prática-do-mercado" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li><strong>Perder um frame de vídeo?</strong> Aceitável — o vídeo continua. → <strong>UDP</strong></li>
+<li><strong>Perder um byte de uma transferência bancária?</strong> Catastrófico. → <strong>TCP</strong></li>
+<li><strong>DNS?</strong> Consulta rápida, tolerável repetir se falhar. → <strong>UDP</strong> (mas usa TCP para transferências de zona)</li>
+</ul>
+<hr/>
+<h2 id="-6-portas-de-rede--o-endereçamento-de-processos">📌 6. Portas de Rede — O Endereçamento de Processos<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-6-portas-de-rede--o-endereçamento-de-processos" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="o-que-é-uma-porta">O que é uma porta?<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#o-que-é-uma-porta" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Uma <strong>porta</strong> é um número de 16 bits (0 a 65.535) que identifica um <strong>processo</strong> ou <strong>serviço</strong> específico dentro de um host. O par <code>(IP, Porta)</code> forma um <strong>socket</strong> — o endereço completo de um processo na rede.</p>
+<pre><code>Endereço completo de um serviço:
+
+  192.168.1.10  :  443
+  └────────────┘   └───┘
+     Endereço IP    Porta
+     (qual host)   (qual processo)
+
+Socket: (192.168.1.10, 443) = servidor HTTPS nessa máquina
+</code></pre>
+<h3 id="categorias-de-portas">Categorias de portas<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#categorias-de-portas" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Faixa</th><th>Nome</th><th>Uso</th></tr></thead><tbody><tr><td><strong>0 – 1023</strong></td><td>Well-Known (Bem conhecidas)</td><td>Protocolos padronizados (HTTP, SSH, DNS…)</td></tr><tr><td><strong>1024 – 49151</strong></td><td>Registered (Registradas)</td><td>Aplicações específicas (MySQL: 3306, RDP: 3389…)</td></tr><tr><td><strong>49152 – 65535</strong></td><td>Dynamic/Ephemeral (Efêmeras)</td><td>Portas temporárias usadas pelos clientes nas conexões</td></tr></tbody></table></div>
+<h3 id="portas-mais-importantes--saiba-de-cor">Portas mais importantes — saiba de cor!<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#portas-mais-importantes--saiba-de-cor" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Porta</th><th>Protocolo</th><th>Serviço</th><th>Transporte</th></tr></thead><tbody><tr><td><strong>20/21</strong></td><td>FTP</td><td>Transferência de arquivos</td><td>TCP</td></tr><tr><td><strong>22</strong></td><td>SSH</td><td>Acesso remoto seguro</td><td>TCP</td></tr><tr><td><strong>23</strong></td><td>Telnet</td><td>Acesso remoto (inseguro — evitar!)</td><td>TCP</td></tr><tr><td><strong>25</strong></td><td>SMTP</td><td>Envio de e-mail</td><td>TCP</td></tr><tr><td><strong>53</strong></td><td>DNS</td><td>Resolução de nomes</td><td>UDP (consulta) / TCP (zona)</td></tr><tr><td><strong>67/68</strong></td><td>DHCP</td><td>Configuração automática de IP</td><td>UDP</td></tr><tr><td><strong>80</strong></td><td>HTTP</td><td>Web sem criptografia</td><td>TCP</td></tr><tr><td><strong>110</strong></td><td>POP3</td><td>Recebimento de e-mail</td><td>TCP</td></tr><tr><td><strong>143</strong></td><td>IMAP</td><td>Acesso a e-mail no servidor</td><td>TCP</td></tr><tr><td><strong>443</strong></td><td>HTTPS</td><td>Web com criptografia (TLS/SSL)</td><td>TCP</td></tr><tr><td><strong>3306</strong></td><td>MySQL</td><td>Banco de dados</td><td>TCP</td></tr><tr><td><strong>3389</strong></td><td>RDP</td><td>Desktop Remoto (Windows)</td><td>TCP</td></tr></tbody></table></div>
+<blockquote>
+<p>💡 <strong>Dica de prova:</strong> Porta 80 = HTTP, Porta 443 = HTTPS, Porta 22 = SSH, Porta 53 = DNS. Essas 4 são cobradas em todo concurso de TI e certificação de redes.</p>
+</blockquote>
+<p><img src="./assets/aula07_portas_sockets.png" width="auto" height="auto" alt/></p>
+<blockquote>
+<p><em>Figura 4: Portas de rede e sockets — múltiplos clientes acessando diferentes serviços no mesmo servidor.</em></p>
+</blockquote>
+<h3 id="como-funciona-a-comunicação-com-portas">Como funciona a comunicação com portas<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#como-funciona-a-comunicação-com-portas" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<pre><code>CLIENTE (Navegador)               SERVIDOR Web
+IP: 192.168.1.5                   IP: 93.184.216.34
+Porta efêmera: 52341              Porta destino: 443
+
+Pacote saindo:
+  Origem: 192.168.1.5:52341
+  Destino: 93.184.216.34:443
+
+Resposta voltando:
+  Origem: 93.184.216.34:443
+  Destino: 192.168.1.5:52341
+</code></pre>
+<p>O cliente usa uma <strong>porta efêmera</strong> (gerada aleatoriamente acima de 49152) para identificar aquela conexão específica. Assim, você pode ter 10 abas do navegador abertas — cada uma com uma porta efêmera diferente, mas todas falando com a porta 443 do servidor.</p>
+<hr/>
+<h2 id="-resumo-estrutural">📋 Resumo Estrutural<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-resumo-estrutural" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th><strong>Conceito</strong></th><th><strong>Definição</strong></th></tr></thead><tbody><tr><td><strong>Camada de Transporte</strong></td><td>Responsável pela comunicação processo a processo (identifica aplicações via portas).</td></tr><tr><td><strong>TCP</strong></td><td>Protocolo orientado à conexão, confiável, com handshake, ACKs e controle de fluxo.</td></tr><tr><td><strong>UDP</strong></td><td>Protocolo sem conexão, rápido, sem garantias — ideal para tempo real.</td></tr><tr><td><strong>Three-Way Handshake</strong></td><td>Processo de 3 mensagens (SYN → SYN-ACK → ACK) que estabelece uma conexão TCP.</td></tr><tr><td><strong>SYN Flood</strong></td><td>Ataque que explora o handshake enviando SYNs falsos para esgotar recursos do servidor.</td></tr><tr><td><strong>Porta</strong></td><td>Número de 16 bits que identifica um processo/serviço dentro de um host.</td></tr><tr><td><strong>Socket</strong></td><td>Par (IP, Porta) que endereça completamente um processo na rede.</td></tr><tr><td><strong>Porta Well-Known</strong></td><td>Portas 0–1023 reservadas para protocolos padronizados.</td></tr><tr><td><strong>Porta Efêmera</strong></td><td>Porta temporária usada pelo cliente para identificar uma conexão específica.</td></tr><tr><td><strong>Multiplexação</strong></td><td>Capacidade de múltiplas aplicações usarem a rede simultaneamente, via portas.</td></tr></tbody></table></div>
+<hr/>
+<h2 id="-banco-de-questões">❓ Banco de Questões<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-banco-de-questões" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<blockquote>
+<p>🔒 <em>Seção exclusiva do professor — não publicada para os alunos.</em></p>
+</blockquote>
+<h3 id="questão-1-prática--múltipla-escolha-nível-básico">Questão 1: Prática — Múltipla Escolha (Nível Básico)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#questão-1-prática--múltipla-escolha-nível-básico" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>Enunciado:</strong> Um desenvolvedor está construindo um aplicativo de streaming de músicas ao vivo. Qual protocolo de transporte é mais adequado e por quê?</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled/> A) TCP, porque garante a entrega ordenada de cada frame de áudio.</li>
+<li class="task-list-item"><input type="checkbox" checked disabled/> B) UDP, porque a baixa latência é mais importante que a entrega garantida de cada pacote. ✅</li>
+<li class="task-list-item"><input type="checkbox" disabled/> C) TCP, porque o UDP não suporta streaming de áudio.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> D) UDP, porque o TCP não possui portas de comunicação.</li>
+</ul>
+<p><strong>Justificativa:</strong> No streaming ao vivo, um frame de áudio perdido pode simplesmente ser descartado — uma imperceptível falha de milissegundos é aceitável. O TCP, ao tentar reenviar pacotes perdidos, introduziria latência inaceitável para tempo real. Por isso, protocolos de streaming (como RTP) usam UDP como transporte.</p>
+<hr/>
+<h3 id="questão-2-teórica--dissertativa-nível-intermediário">Questão 2: Teórica — Dissertativa (Nível Intermediário)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#questão-2-teórica--dissertativa-nível-intermediário" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>Enunciado:</strong> Explique o processo de Three-Way Handshake do TCP. Por que são necessárias três mensagens e não apenas duas?</p>
+<p><strong>Resposta esperada:</strong> O Three-Way Handshake é o processo pelo qual o TCP estabelece uma conexão entre cliente e servidor antes de transmitir dados. Ele ocorre em três etapas: (1) o cliente envia um segmento SYN com seu número de sequência inicial; (2) o servidor responde com SYN-ACK, confirmando o número do cliente e enviando seu próprio número de sequência; (3) o cliente responde com ACK, confirmando o número do servidor. São necessárias três mensagens porque apenas duas não garantiriam que o servidor soubesse que o cliente recebeu sua resposta — o terceiro ACK fecha esse ciclo de confirmação bilateral, garantindo que <strong>ambos os lados</strong> tenham seus números de sequência sincronizados antes da transmissão começar.</p>
+<hr/>
+<h3 id="questão-3-prática--múltipla-escolha-nível-intermediário">Questão 3: Prática — Múltipla Escolha (Nível Intermediário)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#questão-3-prática--múltipla-escolha-nível-intermediário" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>Enunciado:</strong> Um firewall está bloqueando conexões de entrada na porta 443 de um servidor web. Qual é o impacto direto para os usuários?</p>
+<ul class="contains-task-list">
+<li class="task-list-item"><input type="checkbox" disabled/> A) Não conseguirão enviar e-mails pelo servidor.</li>
+<li class="task-list-item"><input type="checkbox" disabled/> B) Não conseguirão acessar o servidor via SSH.</li>
+<li class="task-list-item"><input type="checkbox" checked disabled/> C) Não conseguirão acessar páginas web via HTTPS (conexão segura). ✅</li>
+<li class="task-list-item"><input type="checkbox" disabled/> D) O servidor não conseguirá resolver nomes de domínio.</li>
+</ul>
+<p><strong>Justificativa:</strong> A porta 443 é a porta padrão do protocolo HTTPS (HTTP sobre TLS). Um bloqueio nessa porta impede conexões HTTPS. E-mail usa as portas 25/110/143, SSH usa a porta 22, e DNS usa a porta 53 — nenhuma delas é afetada pelo bloqueio da 443.</p>
+<hr/>
+<h2 id="️-atividade-de-fixação">🏋️ Atividade de Fixação<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#️-atividade-de-fixação" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Responda no caderno ou no Moodle:</p>
+<ol>
+<li>
+<p><strong>Analise o cenário:</strong> O WhatsApp usa UDP para chamadas de voz e TCP para envio de mensagens de texto. Explique tecnicamente por que esse design faz sentido.</p>
+</li>
+<li>
+<p><strong>Identifique:</strong> Para cada serviço abaixo, indique a porta padrão e o protocolo de transporte (TCP ou UDP):</p>
+<ul>
+<li>Acesso remoto seguro a um servidor Linux</li>
+<li>Carregamento de uma página bancária no navegador</li>
+<li>Consulta ao nome <code>google.com</code> para obter seu IP</li>
+<li>Recebimento de IP automático ao conectar no Wi-Fi</li>
+</ul>
+</li>
+<li>
+<p><strong>Diagrame:</strong> Desenhe (à mão ou digital) o Three-Way Handshake TCP entre seu computador e o servidor <code>rofilho.github.io</code>. Inclua as flags SYN, SYN-ACK e ACK com números de sequência fictícios.</p>
+</li>
+</ol>
+<blockquote>
+<p>🏁 <strong>Próxima aula:</strong> Prática no Wireshark — capturando pacotes TCP reais e observando o Handshake acontecendo em tempo real!</p>
+</blockquote>
+<hr/>
+<h2 id="-artigo-de-aprofundamento">📄 Artigo de Aprofundamento<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-artigo-de-aprofundamento" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>
+<p><a href="https://datatracker.ietf.org/doc/html/rfc793" class="external">RFC 793 — Transmission Control Protocol (IETF)<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></p>
+<blockquote>
+<p><em>Especificação original do TCP, de 1981. Vale a leitura da seção 3.4 (Establishing a Connection) para ver o Handshake definido formalmente pelos criadores da internet.</em></p>
+</blockquote>
+</li>
+<li>
+<p><a href="https://datatracker.ietf.org/doc/html/rfc768" class="external">RFC 768 — User Datagram Protocol (IETF)<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></p>
+<blockquote>
+<p><em>O RFC do UDP tem apenas 3 páginas — a prova mais elegante de que o protocolo é propositalmente simples.</em></p>
+</blockquote>
+</li>
+</ul>
+<hr/>
+<h2 id="-referências-bibliográficas">📚 Referências Bibliográficas<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-referências-bibliográficas" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>KUROSE, J. F.; ROSS, K. W. <em>Redes de Computadores e a Internet</em>. 8. ed. Pearson, 2021. <strong>Cap. 3 — Camada de Transporte</strong> (Seções 3.1 a 3.5).</li>
+<li>TANENBAUM, A. S.; FEAMSTER, N.; WETHERALL, D. J. <em>Redes de Computadores</em>. 6. ed. Pearson, 2021. <strong>Cap. 6 — Camada de Transporte</strong>.</li>
+<li>FOROUZAN, B. A. <em>Comunicação de Dados e Redes de Computadores</em>. 4. ed. McGraw-Hill, 2008. <strong>Cap. 23 — TCP</strong> e <strong>Cap. 22 — UDP</strong>.</li>
+<li>IETF. <em>RFC 793 — Transmission Control Protocol</em>. 1981. Disponível em: <a href="https://datatracker.ietf.org/doc/html/rfc793" class="external">https://datatracker.ietf.org/doc/html/rfc793<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+</ul>
+<hr/>
+<p><em>Última atualização: 2026-04-29 | Status: publicado</em></p></article><hr/><div class="page-footer"></div></div><div class="right sidebar"></div><footer class="footer "><div class="footer__brand"><img src="https://uniube.br/img/landing/logo_azul.svg" alt="Universidade de Uberaba" class="footer__logo footer__logo--light"/><img src="https://uniube.br/img/landing/logo_branca.svg" alt="Universidade de Uberaba" class="footer__logo footer__logo--dark"/><div class="footer__info"><span class="footer__name">Prof. Romualdo Filho</span><a class="footer__email" href="mailto:romualdo.filho@uniube.br">romualdo.filho@uniube.br</a></div></div><ul class="footer__links"><li><a href="https://uniube.br" target="_blank" rel="noopener noreferrer">Mural Uniube</a></li></ul></footer></div></div></body><script type="application/javascript" data-persist="true">function n(){let t=this.parentElement;t.classList.toggle("is-collapsed");let e=t.getElementsByClassName("callout-content")[0];if(!e)return;let l=t.classList.contains("is-collapsed");e.style.gridTemplateRows=l?"0fr":"1fr"}function c(){let t=document.getElementsByClassName("callout is-collapsible");for(let e of t){let l=e.getElementsByClassName("callout-title")[0],s=e.getElementsByClassName("callout-content")[0];if(!l||!s)continue;l.addEventListener("click",n),window.addCleanup(()=>l.removeEventListener("click",n));let o=e.classList.contains("is-collapsed");s.style.gridTemplateRows=o?"0fr":"1fr"}}document.addEventListener("nav",c);
+</script><script type="module" data-persist="true">function E(a,e){if(!a)return;function t(o){o.target===this&&(o.preventDefault(),o.stopPropagation(),e())}function n(o){o.key.startsWith("Esc")&&(o.preventDefault(),e())}a?.addEventListener("click",t),window.addCleanup(()=>a?.removeEventListener("click",t)),document.addEventListener("keydown",n),window.addCleanup(()=>document.removeEventListener("keydown",n))}function f(a){for(;a.firstChild;)a.removeChild(a.firstChild)}var m=class{constructor(e,t){this.container=e;this.content=t;this.setupEventListeners(),this.setupNavigationControls(),this.resetTransform()}isDragging=!1;startPan={x:0,y:0};currentPan={x:0,y:0};scale=1;MIN_SCALE=.5;MAX_SCALE=3;cleanups=[];setupEventListeners(){let e=this.onMouseDown.bind(this),t=this.onMouseMove.bind(this),n=this.onMouseUp.bind(this),o=this.onTouchStart.bind(this),r=this.onTouchMove.bind(this),i=this.onTouchEnd.bind(this),s=this.resetTransform.bind(this);this.container.addEventListener("mousedown",e),document.addEventListener("mousemove",t),document.addEventListener("mouseup",n),this.container.addEventListener("touchstart",o,{passive:!1}),document.addEventListener("touchmove",r,{passive:!1}),document.addEventListener("touchend",i),window.addEventListener("resize",s),this.cleanups.push(()=>this.container.removeEventListener("mousedown",e),()=>document.removeEventListener("mousemove",t),()=>document.removeEventListener("mouseup",n),()=>this.container.removeEventListener("touchstart",o),()=>document.removeEventListener("touchmove",r),()=>document.removeEventListener("touchend",i),()=>window.removeEventListener("resize",s))}cleanup(){for(let e of this.cleanups)e()}setupNavigationControls(){let e=document.createElement("div");e.className="mermaid-controls";let t=this.createButton("+",()=>this.zoom(.1)),n=this.createButton("-",()=>this.zoom(-.1)),o=this.createButton("Reset",()=>this.resetTransform());e.appendChild(n),e.appendChild(o),e.appendChild(t),this.container.appendChild(e)}createButton(e,t){let n=document.createElement("button");return n.textContent=e,n.className="mermaid-control-button",n.addEventListener("click",t),window.addCleanup(()=>n.removeEventListener("click",t)),n}onMouseDown(e){e.button===0&&(this.isDragging=!0,this.startPan={x:e.clientX-this.currentPan.x,y:e.clientY-this.currentPan.y},this.container.style.cursor="grabbing")}onMouseMove(e){this.isDragging&&(e.preventDefault(),this.currentPan={x:e.clientX-this.startPan.x,y:e.clientY-this.startPan.y},this.updateTransform())}onMouseUp(){this.isDragging=!1,this.container.style.cursor="grab"}onTouchStart(e){if(e.touches.length!==1)return;this.isDragging=!0;let t=e.touches[0];this.startPan={x:t.clientX-this.currentPan.x,y:t.clientY-this.currentPan.y}}onTouchMove(e){if(!this.isDragging||e.touches.length!==1)return;e.preventDefault();let t=e.touches[0];this.currentPan={x:t.clientX-this.startPan.x,y:t.clientY-this.startPan.y},this.updateTransform()}onTouchEnd(){this.isDragging=!1}zoom(e){let t=Math.min(Math.max(this.scale+e,this.MIN_SCALE),this.MAX_SCALE),n=this.content.getBoundingClientRect(),o=n.width/2,r=n.height/2,i=t-this.scale;this.currentPan.x-=o*i,this.currentPan.y-=r*i,this.scale=t,this.updateTransform()}updateTransform(){this.content.style.transform=`translate(${this.currentPan.x}px, ${this.currentPan.y}px) scale(${this.scale})`}resetTransform(){let t=this.content.querySelector("svg").getBoundingClientRect(),n=t.width/this.scale,o=t.height/this.scale;this.scale=1,this.currentPan={x:(this.container.clientWidth-n)/2,y:(this.container.clientHeight-o)/2},this.updateTransform()}},T=["--secondary","--tertiary","--gray","--light","--lightgray","--highlight","--dark","--darkgray","--codeFont"],y;document.addEventListener("nav",async()=>{let e=document.querySelector(".center").querySelectorAll("code.mermaid");if(e.length===0)return;y||=await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs");let t=y.default,n=new WeakMap;for(let r of e)n.set(r,r.innerText);async function o(){for(let s of e){s.removeAttribute("data-processed");let c=n.get(s);c&&(s.innerHTML=c)}let r=T.reduce((s,c)=>(s[c]=window.getComputedStyle(document.documentElement).getPropertyValue(c),s),{}),i=document.documentElement.getAttribute("saved-theme")==="dark";t.initialize({startOnLoad:!1,securityLevel:"loose",theme:i?"dark":"base",themeVariables:{fontFamily:r["--codeFont"],primaryColor:r["--light"],primaryTextColor:r["--darkgray"],primaryBorderColor:r["--tertiary"],lineColor:r["--darkgray"],secondaryColor:r["--secondary"],tertiaryColor:r["--tertiary"],clusterBkg:r["--light"],edgeLabelBackground:r["--highlight"]}}),await t.run({nodes:e})}await o(),document.addEventListener("themechange",o),window.addCleanup(()=>document.removeEventListener("themechange",o));for(let r=0;r<e.length;r++){let v=function(){let g=l.querySelector("#mermaid-space"),h=l.querySelector(".mermaid-content");if(!h)return;f(h);let w=i.querySelector("svg").cloneNode(!0);h.appendChild(w),l.classList.add("active"),g.style.cursor="grab",u=new m(g,h)},M=function(){l.classList.remove("active"),u?.cleanup(),u=null},i=e[r],s=i.parentElement,c=s.querySelector(".clipboard-button"),d=s.querySelector(".expand-button"),p=window.getComputedStyle(c),L=c.offsetWidth+parseFloat(p.marginLeft||"0")+parseFloat(p.marginRight||"0");d.style.right=`calc(${L}px + 0.3rem)`,s.prepend(d);let l=s.querySelector("#mermaid-container");if(!l)return;let u=null;d.addEventListener("click",v),E(l,M),window.addCleanup(()=>{u?.cleanup(),d.removeEventListener("click",v)})}});
+</script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="./postscript.js" type="module" data-persist="true"></script></html>

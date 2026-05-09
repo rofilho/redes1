@@ -1,3 +1,7 @@
+﻿---
+title: "🌐 Aula  – Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer"
+---
+
 # Aula 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
 
 > **Disciplina:** Redes de Computadores I (Cód. 49325) | **Curso:** Sistemas de Informação, Uniube | **Semana 5** | 22/04/2026 | Prof. Romualdo Mathias Filho

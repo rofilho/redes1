@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr"><head><title>🌐 Aula  – Modelo OSI vs. TCP/IP, ARP e Prática no Packet Tracer | Prof. Romualdo</title><meta charset="utf-8"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;family=Inter:ital,wght@0,400;0,600;1,400;1,600&amp;family=JetBrains Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="🌐 Redes de Computadores I"/><meta property="og:title" content="🌐 Aula  – Modelo OSI vs. TCP/IP, ARP e Prática no Packet Tracer | Prof. Romualdo"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="🌐 Aula  – Modelo OSI vs. TCP/IP, ARP e Prática no Packet Tracer | Prof. Romualdo"/><meta name="twitter:description" content="Aula 05: Modelo OSI vs. TCP/IP, ARP e Prática no Packet Tracer Disciplina: Redes de Computadores I (Cód."/><meta property="og:description" content="Aula 05: Modelo OSI vs. TCP/IP, ARP e Prática no Packet Tracer Disciplina: Redes de Computadores I (Cód."/><meta property="og:image:alt" content="Aula 05: Modelo OSI vs. TCP/IP, ARP e Prática no Packet Tracer Disciplina: Redes de Computadores I (Cód."/><meta property="twitter:domain" content="rofilho.github.io/redes1"/><meta property="og:url" content="https://rofilho.github.io/redes1/Aula-05---Modelo-OSI-vs-TCP-IP"/><meta property="twitter:url" content="https://rofilho.github.io/redes1/Aula-05---Modelo-OSI-vs-TCP-IP"/><link rel="icon" href="./static/icon.png"/><meta name="description" content="Aula 05: Modelo OSI vs. TCP/IP, ARP e Prática no Packet Tracer Disciplina: Redes de Computadores I (Cód."/><meta name="generator" content="Quartz"/><link href="./index.css" rel="stylesheet" type="text/css" data-persist="true"/><style>.expand-button {
+  position: absolute;
+  display: flex;
+  float: right;
+  padding: 0.4rem;
+  margin: 0.3rem;
+  right: 0;
+  color: var(--gray);
+  border-color: var(--dark);
+  background-color: var(--light);
+  border: 1px solid;
+  border-radius: 5px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.expand-button > svg {
+  fill: var(--light);
+  filter: contrast(0.3);
+}
+.expand-button:hover {
+  cursor: pointer;
+  border-color: var(--secondary);
+}
+.expand-button:focus {
+  outline: 0;
+}
+
+pre:hover > .expand-button {
+  opacity: 1;
+  transition: 0.2s;
+}
+
+#mermaid-container {
+  position: fixed;
+  contain: layout;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+}
+#mermaid-container.active {
+  display: inline-block;
+}
+#mermaid-container > #mermaid-space {
+  border: 1px solid var(--lightgray);
+  background-color: var(--light);
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80vh;
+  width: 80vw;
+  overflow: hidden;
+}
+#mermaid-container > #mermaid-space > .mermaid-content {
+  position: relative;
+  transform-origin: 0 0;
+  transition: transform 0.1s ease;
+  overflow: visible;
+  min-height: 200px;
+  min-width: 200px;
+}
+#mermaid-container > #mermaid-space > .mermaid-content pre {
+  margin: 0;
+  border: none;
+}
+#mermaid-container > #mermaid-space > .mermaid-content svg {
+  max-width: none;
+  height: auto;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--lightgray);
+  background: var(--light);
+  color: var(--dark);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: var(--bodyFont);
+  transition: all 0.2s ease;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:hover {
+  background: var(--lightgray);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:active {
+  transform: translateY(1px);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:nth-child(2) {
+  width: auto;
+  padding: 0 12px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiQzpcXFVzZXJzXFxyb211YVxcQXBwRGF0YVxcTG9jYWxcXFRlbXBcXHJlZGVzMVxccXVhcnR6XFxjb21wb25lbnRzXFxzdHlsZXMiLCJzb3VyY2VzIjpbIm1lcm1haWQuaW5saW5lLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFO0VBQ0E7O0FBR0Y7RUFDRTtFQUNBOztBQUdGO0VBQ0U7OztBQUtGO0VBQ0U7RUFDQTs7O0FBSUo7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFO0VBQ0E7O0FBR0Y7RUFDRTtFQUNBOztBQUlKO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTs7QUFHRjtFQUNFOztBQUlGO0VBQ0U7RUFDQTtFQUNBIiwic291cmNlc0NvbnRlbnQiOlsiLmV4cGFuZC1idXR0b24ge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsb2F0OiByaWdodDtcbiAgcGFkZGluZzogMC40cmVtO1xuICBtYXJnaW46IDAuM3JlbTtcbiAgcmlnaHQ6IDA7IC8vIE5PVEU6IHJpZ2h0IHdpbGwgYmUgc2V0IGluIG1lcm1haWQuaW5saW5lLnRzXG4gIGNvbG9yOiB2YXIoLS1ncmF5KTtcbiAgYm9yZGVyLWNvbG9yOiB2YXIoLS1kYXJrKTtcbiAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tbGlnaHQpO1xuICBib3JkZXI6IDFweCBzb2xpZDtcbiAgYm9yZGVyLXJhZGl1czogNXB4O1xuICBvcGFjaXR5OiAwO1xuICB0cmFuc2l0aW9uOiAwLjJzO1xuXG4gICYgPiBzdmcge1xuICAgIGZpbGw6IHZhcigtLWxpZ2h0KTtcbiAgICBmaWx0ZXI6IGNvbnRyYXN0KDAuMyk7XG4gIH1cblxuICAmOmhvdmVyIHtcbiAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgYm9yZGVyLWNvbG9yOiB2YXIoLS1zZWNvbmRhcnkpO1xuICB9XG5cbiAgJjpmb2N1cyB7XG4gICAgb3V0bGluZTogMDtcbiAgfVxufVxuXG5wcmUge1xuICAmOmhvdmVyID4gLmV4cGFuZC1idXR0b24ge1xuICAgIG9wYWNpdHk6IDE7XG4gICAgdHJhbnNpdGlvbjogMC4ycztcbiAgfVxufVxuXG4jbWVybWFpZC1jb250YWluZXIge1xuICBwb3NpdGlvbjogZml4ZWQ7XG4gIGNvbnRhaW46IGxheW91dDtcbiAgei1pbmRleDogOTk5O1xuICBsZWZ0OiAwO1xuICB0b3A6IDA7XG4gIHdpZHRoOiAxMDB2dztcbiAgaGVpZ2h0OiAxMDB2aDtcbiAgb3ZlcmZsb3c6IGhpZGRlbjtcbiAgZGlzcGxheTogbm9uZTtcbiAgYmFja2Ryb3AtZmlsdGVyOiBibHVyKDRweCk7XG4gIGJhY2tncm91bmQ6IHJnYmEoMCwgMCwgMCwgMC41KTtcblxuICAmLmFjdGl2ZSB7XG4gICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xuICB9XG5cbiAgJiA+ICNtZXJtYWlkLXNwYWNlIHtcbiAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1saWdodGdyYXkpO1xuICAgIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWxpZ2h0KTtcbiAgICBib3JkZXItcmFkaXVzOiA1cHg7XG4gICAgcG9zaXRpb246IGZpeGVkO1xuICAgIHRvcDogNTAlO1xuICAgIGxlZnQ6IDUwJTtcbiAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZSgtNTAlLCAtNTAlKTtcbiAgICBoZWlnaHQ6IDgwdmg7XG4gICAgd2lkdGg6IDgwdnc7XG4gICAgb3ZlcmZsb3c6IGhpZGRlbjtcblxuICAgICYgPiAubWVybWFpZC1jb250ZW50IHtcbiAgICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgICAgIHRyYW5zZm9ybS1vcmlnaW46IDAgMDtcbiAgICAgIHRyYW5zaXRpb246IHRyYW5zZm9ybSAwLjFzIGVhc2U7XG4gICAgICBvdmVyZmxvdzogdmlzaWJsZTtcbiAgICAgIG1pbi1oZWlnaHQ6IDIwMHB4O1xuICAgICAgbWluLXdpZHRoOiAyMDBweDtcblxuICAgICAgcHJlIHtcbiAgICAgICAgbWFyZ2luOiAwO1xuICAgICAgICBib3JkZXI6IG5vbmU7XG4gICAgICB9XG5cbiAgICAgIHN2ZyB7XG4gICAgICAgIG1heC13aWR0aDogbm9uZTtcbiAgICAgICAgaGVpZ2h0OiBhdXRvO1xuICAgICAgfVxuICAgIH1cblxuICAgICYgPiAubWVybWFpZC1jb250cm9scyB7XG4gICAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgICBib3R0b206IDIwcHg7XG4gICAgICByaWdodDogMjBweDtcbiAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICBnYXA6IDhweDtcbiAgICAgIHBhZGRpbmc6IDhweDtcbiAgICAgIGJhY2tncm91bmQ6IHZhcigtLWxpZ2h0KTtcbiAgICAgIGJvcmRlcjogMXB4IHNvbGlkIHZhcigtLWxpZ2h0Z3JheSk7XG4gICAgICBib3JkZXItcmFkaXVzOiA2cHg7XG4gICAgICBib3gtc2hhZG93OiAwIDJweCA0cHggcmdiYSgwLCAwLCAwLCAwLjEpO1xuICAgICAgei1pbmRleDogMjtcblxuICAgICAgLm1lcm1haWQtY29udHJvbC1idXR0b24ge1xuICAgICAgICBkaXNwbGF5OiBmbGV4O1xuICAgICAgICBhbGlnbi1pdGVtczogY2VudGVyO1xuICAgICAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgICAgICAgd2lkdGg6IDMycHg7XG4gICAgICAgIGhlaWdodDogMzJweDtcbiAgICAgICAgcGFkZGluZzogMDtcbiAgICAgICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICAgICAgYmFja2dyb3VuZDogdmFyKC0tbGlnaHQpO1xuICAgICAgICBjb2xvcjogdmFyKC0tZGFyayk7XG4gICAgICAgIGJvcmRlci1yYWRpdXM6IDRweDtcbiAgICAgICAgY3Vyc29yOiBwb2ludGVyO1xuICAgICAgICBmb250LXNpemU6IDE2cHg7XG4gICAgICAgIGZvbnQtZmFtaWx5OiB2YXIoLS1ib2R5Rm9udCk7XG4gICAgICAgIHRyYW5zaXRpb246IGFsbCAwLjJzIGVhc2U7XG5cbiAgICAgICAgJjpob3ZlciB7XG4gICAgICAgICAgYmFja2dyb3VuZDogdmFyKC0tbGlnaHRncmF5KTtcbiAgICAgICAgfVxuXG4gICAgICAgICY6YWN0aXZlIHtcbiAgICAgICAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZVkoMXB4KTtcbiAgICAgICAgfVxuXG4gICAgICAgIC8vIFN0eWxlIHRoZSByZXNldCBidXR0b24gZGlmZmVyZW50bHlcbiAgICAgICAgJjpudGgtY2hpbGQoMikge1xuICAgICAgICAgIHdpZHRoOiBhdXRvO1xuICAgICAgICAgIHBhZGRpbmc6IDAgMTJweDtcbiAgICAgICAgICBmb250LXNpemU6IDE0cHg7XG4gICAgICAgIH1cbiAgICAgIH1cbiAgICB9XG4gIH1cbn1cbiJdfQ== */</style><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="./prescript.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("./static/contentIndex.json").then(data => data.json())</script><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://rofilho.github.io/redes1/index.xml"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://rofilho.github.io/redes1/Aula-05---Modelo-OSI-vs-TCP-IP-og-image.webp"/><meta property="og:image:url" content="https://rofilho.github.io/redes1/Aula-05---Modelo-OSI-vs-TCP-IP-og-image.webp"/><meta name="twitter:image" content="https://rofilho.github.io/redes1/Aula-05---Modelo-OSI-vs-TCP-IP-og-image.webp"/><meta property="og:image:type" content="image/.webp"/></head><body data-slug="Aula-05---Modelo-OSI-vs-TCP-IP"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"></div><div class="center"><div class="page-header"><header><h2 class="page-title"><a href="." class="page-title__link"><img src="https://uniube.br/img/landing/logo_azul.svg" alt="Uniube" class="page-title__logo page-title__logo--light"/><img src="https://uniube.br/img/landing/logo_branca.svg" alt="Uniube" class="page-title__logo page-title__logo--dark"/><span class="page-title__text">🌐 Redes de Computadores I</span></a></h2><div class="search"><button class="search-button"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>Pesquisar</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="Pesquisar por algo" placeholder="Pesquisar por algo"/><div class="search-layout" data-preview="true"></div></div></div></div><button class="darkmode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="Tema escuro"><title>Tema escuro</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="Tema claro"><title>Tema claro</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></header><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="./">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>🌐 Aula  – Modelo OSI vs. TCP/IP, ARP e Prática no Packet Tracer</a></div></nav><nav class="lesson-nav" aria-label="Navegação entre aulas"><div class="lesson-nav__slot"><a href="/Aula-02---Introducao-a-Redes" class="nav-pill nav-pill--prev" data-spa="true"><div class="nav-pill__icon">📖</div><div class="nav-pill__body"><span class="nav-pill__label">← Anterior</span><span class="nav-pill__title">🌐 Aula  – Introdução a Redes de Computadores</span></div></a></div><div class="lesson-nav__slot lesson-nav__slot--right"><a href="/Aula-01---Plano-de-Aulas-e-Organizacao" class="nav-pill nav-pill--next" data-spa="true"><div class="nav-pill__icon">📖</div><div class="nav-pill__body"><span class="nav-pill__label">Próxima →</span><span class="nav-pill__title">🌐 Aula  – Plano de Aulas e Organização da Disciplina</span></div></a></div></nav><h1 class="article-title">🌐 Aula  – Modelo OSI vs. TCP/IP, ARP e Prática no Packet Tracer</h1><p show-comma="true" class="content-meta"><time datetime="2026-04-19T16:04:47.000Z">19 de abr. de 2026</time><span>Leitura de 14 min</span></p></div></div><article class="popover-hint"><h1 id="aula-05-modelo-osi-vstcpip-arp-e-prática-no-packet-tracer">Aula 05: Modelo OSI vs. TCP/IP, ARP e Prática no Packet Tracer<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#aula-05-modelo-osi-vstcpip-arp-e-prática-no-packet-tracer" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<blockquote>
+<p><strong>Disciplina:</strong> Redes de Computadores I (Cód. 49325) | <strong>Curso:</strong> Sistemas de Informação, Uniube | <strong>Semana 4</strong> | 09/03/2026 | Prof. Romualdo Mathias Filho</p>
+</blockquote>
+<hr/>
+<h2 id="-0-objetivo-da-aula"><strong>🎯 0. Objetivo da Aula</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-0-objetivo-da-aula" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Ao final desta aula, o aluno deve ser capaz de:</p>
+<ul>
+<li><strong>Comparar</strong> a estrutura teórica do modelo OSI com a arquitetura prática do modelo TCP/IP.</li>
+<li><strong>Entender detalhadamente</strong> os processos de encapsulamento e desencapsulamento (A Jornada do Pacote).</li>
+<li><strong>Compreender</strong> a função do protocolo ARP para integração entre as camadas de Rede (IP) e Enlace (MAC).</li>
+<li><strong>Aplicar comandos e simulações</strong> utilizando a ferramenta Cisco Packet Tracer, validando na prática o comportamento dos protocolos estudados.</li>
+</ul>
+<hr/>
+<h2 id="-1-recapitulação"><strong>🔄 1. Recapitulação</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-1-recapitulação" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th><strong>Aula</strong></th><th><strong>Conceito</strong></th><th><strong>Definição</strong></th></tr></thead><tbody><tr><td>04</td><td>Camada Física</td><td>Transmissão de bits brutos pelo cabeamento/meio sem fio (Sinal elétrico, RF, luz).</td></tr><tr><td>04</td><td>Camada de Enlace</td><td>Entrega confiável de quadros (frames) entre nós locais adjacentes.</td></tr><tr><td>04</td><td>Endereço MAC</td><td>Identificador físico de 48 bits, gravado na placa de rede, usado na rede local.</td></tr><tr><td>04</td><td>Switch</td><td>Equipamento de camada 2 que encaminha quadros consultando sua Tabela MAC.</td></tr></tbody></table></div>
+<blockquote>
+<p><strong>Conexão:</strong> Na última aula exploramos profundamente as camadas 1 e 2. Vimos como dispositivos locais “conversam”. Mas e quando queremos acessar um site do outro lado do mundo, e a comunicação passa por múltiplos roteadores? É aí que a pilha de protocolos inteira atua, e é exatamente como tudo isso se organiza que veremos hoje, focando na união de teoria (Modelos OSI e TCP/IP) e <strong>prática guiada (Packet Tracer)</strong>.</p>
+</blockquote>
+<hr/>
+<h2 id="️-2-modelos-de-referência-osi-vstcpip"><strong>🏗️ 2. Modelos de Referência: OSI vs. TCP/IP</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#️-2-modelos-de-referência-osi-vstcpip" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Existem dois grandes modelos que padronizam a arquitetura de redes. O modelo OSI é o nosso mapa teórico de 7 camadas, mas o mundo real roda essencialmente sobre a arquitetura TCP/IP de 4 (ou 5, dependendo dos autores) camadas.</p>
+<h3 id="-tabela-comparativa-direta"><strong>📌 Tabela Comparativa direta</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-tabela-comparativa-direta" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;graph TD\n    subgraph Modelo TCP/IP\n    TCP4[4. Aplicação]:::tcp\n    TCP3[3. Transporte]:::tcp\n    TCP2[2. Internet/Rede]:::tcp\n    TCP1[1. Acesso à Rede]:::tcp\n    end\n\n    subgraph Modelo OSI\n    OSI7[7. Aplicação]:::osi\n    OSI6[6. Apresentação]:::osi\n    OSI5[5. Sessão]:::osi\n    OSI4[4. Transporte]:::osi\n    OSI3[3. Rede]:::osi\n    OSI2[2. Enlace de Dados]:::osi\n    OSI1[1. Física]:::osi\n    end\n\n    OSI7 -.-> TCP4\n    OSI6 -.-> TCP4\n    OSI5 -.-> TCP4\n\n    OSI4 -.-> TCP3\n\n    OSI3 -.-> TCP2\n\n    OSI2 -.-> TCP1\n    OSI1 -.-> TCP1\n\n    classDef osi fill:#0078D7,stroke:#333,stroke-width:2px,color:#fff;\n    classDef tcp fill:#107C10,stroke:#333,stroke-width:2px,color:#fff;&quot;">graph TD
+    subgraph Modelo TCP/IP
+    TCP4[4. Aplicação]:::tcp
+    TCP3[3. Transporte]:::tcp
+    TCP2[2. Internet/Rede]:::tcp
+    TCP1[1. Acesso à Rede]:::tcp
+    end
+
+    subgraph Modelo OSI
+    OSI7[7. Aplicação]:::osi
+    OSI6[6. Apresentação]:::osi
+    OSI5[5. Sessão]:::osi
+    OSI4[4. Transporte]:::osi
+    OSI3[3. Rede]:::osi
+    OSI2[2. Enlace de Dados]:::osi
+    OSI1[1. Física]:::osi
+    end
+
+    OSI7 -.-> TCP4
+    OSI6 -.-> TCP4
+    OSI5 -.-> TCP4
+
+    OSI4 -.-> TCP3
+
+    OSI3 -.-> TCP2
+
+    OSI2 -.-> TCP1
+    OSI1 -.-> TCP1
+
+    classDef osi fill:#0078D7,stroke:#333,stroke-width:2px,color:#fff;
+    classDef tcp fill:#107C10,stroke:#333,stroke-width:2px,color:#fff;
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th><strong>Camada OSI (7 camadas)</strong></th><th><strong>Camada TCP/IP (4 camadas)</strong></th><th><strong>Unidade de Protocolo (PDU)</strong></th><th><strong>Exemplos de Protocolos</strong></th></tr></thead><tbody><tr><td>7. Aplicação</td><td><strong>4. Aplicação</strong></td><td>Mensagem / Dados</td><td>HTTP, DNS, SMTP, FTP</td></tr><tr><td>6. Apresentação</td><td>(Incluída na Aplicação)</td><td>Mensagem / Dados</td><td>SSL, TLS</td></tr><tr><td>5. Sessão</td><td>(Incluída na Aplicação)</td><td>Mensagem / Dados</td><td>NetBIOS</td></tr><tr><td>4. Transporte</td><td><strong>3. Transporte</strong></td><td>Segmento</td><td>TCP, UDP</td></tr><tr><td>3. Rede</td><td><strong>2. Internet (Rede)</strong></td><td>Pacote (Packet)</td><td>IPv4, IPv6, ICMP, IPsec</td></tr><tr><td>2. Enlace de Dados</td><td><strong>1. Acesso à Rede (Enlace/Física)</strong></td><td>Quadro (Frame)</td><td>Ethernet, Wi-Fi, MAC, ARP</td></tr><tr><td>1. Física</td><td>(Lida em conjunto c/ Acesso)</td><td>Bits</td><td>1000BASE-T, Cabos metálicos</td></tr></tbody></table></div>
+<blockquote>
+<p><strong>Observação Pedagógica:</strong> Alguns autores modernos (como Kurose e Tanenbaum) usam uma visão do TCP/IP baseada em 5 camadas (separando Enlace e Física) apenas por fins didáticos para dar as aulas de rede de forma sequencial.</p>
+</blockquote>
+<hr/>
+<h2 id="-3-a-jornada-do-pacote-encapsulamento"><strong>📦 3. A Jornada do Pacote: Encapsulamento</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-3-a-jornada-do-pacote-encapsulamento" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>A comunicação através dos modelos de referência ocorre por <strong>encapsulamento</strong> na origem, e por <strong>desencapsulamento</strong> no destino. É o ato de envelopar informações de uma camada dentro da outra.</p>
+<p><strong>O passo a passo (Origem / Envio):</strong></p>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;flowchart TD\n    Navegador(\&quot;📡 Navegador (Web)\&quot;) --> A[\&quot;Camada 7/4: DADOS\&quot;]\n    A -->|\&quot;Encapsula\&quot;| B[\&quot;Camada 4/3: SEGMENTO\\n(+ Cabeçalho TCP)\&quot;]\n    B -->|\&quot;Encapsula\&quot;| C[\&quot;Camada 3/2: PACOTE\\n(+ Cabeçalho IP)\&quot;]\n    C -->|\&quot;Encapsula\&quot;| D[\&quot;Camada 2/1: QUADRO (FRAME)\\n(+ Cabeçalho MAC + FCS)\&quot;]\n    D -->|\&quot;Converte e Transmite\&quot;| E((\&quot;Camada 1: BITS\\n(Sinais Elétricos/Luz)\&quot;))\n\n    style A fill:#FF9A33,color:#fff,stroke:#333,stroke-width:2px\n    style B fill:#33D4FF,color:#333,stroke:#333,stroke-width:2px\n    style C fill:#33FF57,color:#333,stroke:#333,stroke-width:2px\n    style D fill:#FF33A8,color:#fff,stroke:#333,stroke-width:2px\n    style E fill:#8333FF,color:#fff,stroke:#333,stroke-width:2px&quot;">flowchart TD
+    Navegador(&quot;📡 Navegador (Web)&quot;) --> A[&quot;Camada 7/4: DADOS&quot;]
+    A -->|&quot;Encapsula&quot;| B[&quot;Camada 4/3: SEGMENTO\n(+ Cabeçalho TCP)&quot;]
+    B -->|&quot;Encapsula&quot;| C[&quot;Camada 3/2: PACOTE\n(+ Cabeçalho IP)&quot;]
+    C -->|&quot;Encapsula&quot;| D[&quot;Camada 2/1: QUADRO (FRAME)\n(+ Cabeçalho MAC + FCS)&quot;]
+    D -->|&quot;Converte e Transmite&quot;| E((&quot;Camada 1: BITS\n(Sinais Elétricos/Luz)&quot;))
+
+    style A fill:#FF9A33,color:#fff,stroke:#333,stroke-width:2px
+    style B fill:#33D4FF,color:#333,stroke:#333,stroke-width:2px
+    style C fill:#33FF57,color:#333,stroke:#333,stroke-width:2px
+    style D fill:#FF33A8,color:#fff,stroke:#333,stroke-width:2px
+    style E fill:#8333FF,color:#fff,stroke:#333,stroke-width:2px
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+<ol>
+<li><strong>Camada de Aplicação:</strong> O seu navegador gera o “Dado” (ex: requisição web).</li>
+<li><strong>Camada de Transporte:</strong> Pega esse dado e coloca num envelope chamado <strong>Segmento</strong>. Adiciona o cabeçalho TCP (com porta de origem e destino).</li>
+<li><strong>Camada de Rede:</strong> Pega o segmento e coloca em um envelope chamado <strong>Pacote</strong>. Adiciona no cabeçalho o Endereço IP de origem e do destino final.</li>
+<li><strong>Camada de Enlace:</strong> Pega o pacote IP e coloca num envelope chamado <strong>Quadro (Frame)</strong>. Adiciona o Endereço MAC de origem e do destino do <strong>próximo salto</strong> (ex: o seu gateway roteador de casa).</li>
+<li><strong>Camada Física:</strong> Converte esse quadro Ethernet inteiro numa corrente eletromagnética ou de luz (bits).</li>
+</ol>
+<p><strong>O passo a passo (Destino / Recebimento):</strong></p>
+<ul>
+<li>A rede recebe bits → Remonta o Quadro e confere o MAC → Descarta o quadro e olha para o Pacote → Lê os IPs → Descarta o pacote e olha para o Segmento → Lê a porta (ex: 80 <span>→</span> WebServer) → Entrega os Dados à Aplicação correta.</li>
+</ul>
+<hr/>
+<h2 id="-4-o-elo-perdido-o-protocolo-arp"><strong>🔍 4. O Elo Perdido: O Protocolo ARP</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-4-o-elo-perdido-o-protocolo-arp" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Nós sabíamos o IP do roteador (camada 3), mas para colocar o pacote no quadro Ethernet (camada 2), precisamos do MAC da interface daquele roteador. Como descobrir?</p>
+<p><strong>Definição:</strong> O <strong>ARP (Address Resolution Protocol)</strong> é responsável por mapear (traduzir) um endereço IP conhecido em um endereço MAC desconhecido dentro da mesma rede local.</p>
+<p><strong>Como funciona (A Dinâmica do “Quem é?”):</strong></p>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;sequenceDiagram\n    participant PCA as PC-A (IP: .10)\n    participant Switch\n    participant PCB as PC-B (IP: .100)\n    participant Outros as Outros PCs\n\n    PCA->>Switch: 1. ARP Request (Broadcast FF:FF...)&lt;br/>\&quot;Quem tem o IP .100?\&quot;\n    Switch-->>Outros: Inunda portas (Ignoram pacote)\n    Switch->>PCB: Inunda até destino correto\n    Note over PCB: PC-B checa: \&quot;Sou eu!\&quot;\n    PCB-->>Switch: 2. ARP Reply (Unicast)&lt;br/>\&quot;Meu MAC é BB:22:CC\&quot;\n    Switch-->>PCA: Resposta Direta\n    Note over PCA: 3. Tabela ARP &lt;br/>atualizada com sucesso!&quot;">sequenceDiagram
+    participant PCA as PC-A (IP: .10)
+    participant Switch
+    participant PCB as PC-B (IP: .100)
+    participant Outros as Outros PCs
+
+    PCA->>Switch: 1. ARP Request (Broadcast FF:FF...)&lt;br/>&quot;Quem tem o IP .100?&quot;
+    Switch-->>Outros: Inunda portas (Ignoram pacote)
+    Switch->>PCB: Inunda até destino correto
+    Note over PCB: PC-B checa: &quot;Sou eu!&quot;
+    PCB-->>Switch: 2. ARP Reply (Unicast)&lt;br/>&quot;Meu MAC é BB:22:CC&quot;
+    Switch-->>PCA: Resposta Direta
+    Note over PCA: 3. Tabela ARP &lt;br/>atualizada com sucesso!
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+<ol>
+<li>PC-A quer conversar com PC-B, que tem o IP <code>192.168.1.100</code>.</li>
+<li>PC-A sabe o IP, mas <strong>não tem o MAC</strong> na sua tabela (Cache ARP).</li>
+<li>PC-A envia um quadro de <strong>Broadcast MAC</strong> (<code>FF:FF:FF:FF:FF:FF</code>), ou seja, grita para toda a rede (switch inunda a porta):
+<em>▶ MENSAGEM ARP:</em> <em>“Quem aqui tem o IP 192.168.1.100? Por favor responda para o meu MAC e meu IP!”</em></li>
+<li>O PC-B (e só ele) percebe que o pacote é para ele, e <strong>responde diretamente via Unicast</strong> de volta para o MAC do PC-A:
+<em>▶ RESPOSTA ARP:</em> <em>“Eu sou o IP 192.168.1.100 e aqui está meu MAC: 00:AA:11:BB:22:CC”</em></li>
+<li>PC-A processa, guarda a info no cache ARP, e agora consegue envelopar o quadro de IP no Ethernet!</li>
+</ol>
+<blockquote>
+<p><strong>Dica Prática:</strong> No Packet Tracer (modo Simulation), o ARP Request aparece como envelope laranja. Clique nele ao sair do PC0 e observe o campo <code>Dest MAC = FFFF.FFFF.FFFF</code> (Broadcast) na aba <strong>Outbound PDU Details</strong>.</p>
+</blockquote>
+<hr/>
+<h2 id="️-5-laboratório-prático-packet-tracer"><strong>🛠️ 5. Laboratório Prático (Packet Tracer)</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#️-5-laboratório-prático-packet-tracer" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><em>(Metade final da aula será dedicada EXCLUSIVAMENTE ao uso da ferramenta pela turma).</em></p>
+<blockquote>
+<p><strong>Aviso de Professor:</strong> <em>A teoria de encapsulamento costuma voar da mente rápido quando não pegamos com as próprias mãos. A mágica do Packet Tracer está no modo de Simulação, onde conseguimos colocar a rede em câmera lenta e ver cada bit e cabeçalho.</em></p>
+</blockquote>
+<h3 id="-atividade-1-observando-tabelas-mac-de-um-switch-a-bordo"><strong>📌 Atividade 1: Observando Tabelas MAC de um Switch a Bordo</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-atividade-1-observando-tabelas-mac-de-um-switch-a-bordo" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>Objetivo:</strong> Verificar como um Switch aprende os MACs baseado no que explicamos na Aula 04.</p>
+<ol>
+<li>Abra o Packet Tracer e adicione <strong>1 Switch 2960</strong> e <strong>3 PCs</strong> (PC0, PC1, PC2).</li>
+<li>Conecte os PCs nas interfaces <code>FastEthernet 0/1</code>, <code>0/2</code> e <code>0/3</code> do Switch usando Cabos de Cobre Direto (Straight-Through).</li>
+<li>Atribua IPs aos PCs (Ex: PC0: <code>192.168.1.10</code>, PC1: <code>192.168.1.11</code>, PC2: <code>192.168.1.12</code>).</li>
+<li>Clique no Switch > Vá na Aba CLI. Pressione ENTER até ver o prompt <code>Switch></code>.</li>
+<li>Digite:</li>
+</ol>
+<ul>
+<li><code>enable</code></li>
+<li><code>show mac address-table</code> <em>(Pode constatar que está vazia no início).</em></li>
+</ul>
+<ol start="6">
+<li>No PC0, faça ping para o PC1: (Desktop > Command Prompt > <code>ping 192.168.1.11</code>).</li>
+<li>Volte ao Switch e digite <code>show mac address-table</code> novamente. O que aconteceu?
+<em>Explicação prática:</em> O Switch ativamente aprendeu as origens e guardou dinamicamente as portas!</li>
+</ol>
+<hr/>
+<h3 id="-atividade-2-simulando-a-jornada-do-pacote-e-o-arp"><strong>📌 Atividade 2: Simulando a Jornada do Pacote e o ARP</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-atividade-2-simulando-a-jornada-do-pacote-e-o-arp" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>Objetivo:</strong> Capturar o “envelope” no exato momento da transmissão e observar a “Mágica do ARP”.</p>
+<ol>
+<li>Com a topologia montada da Atividade 1, no Packet Tracer, altere do modo <strong>Realtime</strong> (canto inferior direito) para o modo <strong>Simulation</strong>.</li>
+<li>Clique no botão de <strong>Edit Filters</strong> na janela de simulação e marque apenas <code>ICMP</code> e <code>ARP</code>. O resto deixe desmarcado para reduzir o barulho visual.</li>
+<li>No PC0 (Command Prompt), limpe a tabela de ARP do host com o comando:</li>
+</ol>
+<ul>
+<li><code>arp -d</code> <em>(Força que ele esqueça os endereços).</em></li>
+</ul>
+<ol start="4">
+<li>Emita o comando <code>ping 192.168.1.12</code> (para PC2).</li>
+<li>Você notará que o Packet Tracer irá gerar <strong>DOIS pacotinhos (envelopes)</strong> sobre o PC0 antes de enviar. Um é de uma cor, que é o ICMP travado em espera, e o outro é o Pacote ARP.</li>
+<li>Dê o Play (<code>Capture / Forward</code> passo a passo).</li>
+<li>Clique sobre o envelopinho de ARP quando ele sair do PC0:</li>
+</ol>
+<ul>
+<li>Navegue na guia <strong>Inbound PDU Details</strong> e <strong>Outbound PDU Details</strong>.</li>
+<li>Mostre como o <code>Dest MAC</code> está todo como <code>FFFF.FFFF.FFFF</code> (Broadcast)!!</li>
+</ul>
+<ol start="8">
+<li>Reveja o pacote ARP ir, ser ignorado por PC1 e ser respondido pelo PC2 até a origem (PC0).</li>
+<li>Mande avançar novamente e note que agora sim o pacote ICMP (cor diferente) prosseguirá porque o Enquadramento da Camada 2 finalmente foi viabilizado graças ao ARP.</li>
+</ol>
+<hr/>
+<h3 id="-atividade-3-dissecando-o-encapsulamento-anatomia-do-pdu"><strong>📌 Atividade 3: Dissecando o Encapsulamento (Anatomia do PDU)</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-atividade-3-dissecando-o-encapsulamento-anatomia-do-pdu" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>Objetivo:</strong> Ver as 7 (ou 4) camadas funcionando em um pacote no Packet Tracer.</p>
+<ol>
+<li>Pegue um envelopinho de um ping (ICMP) sendo recebido/transmitido em um PC do modo Simulation da Atividade 2.</li>
+<li>Na janela de PDU Information, clique na guia <strong>OSI Model</strong>.</li>
+<li>Peça para reparem do lado direito (“Out Layers”) ou esquerdo (“In Layers”):</li>
+</ol>
+<ul>
+<li>Como a <strong>Layer 3 (IP)</strong> descreve os Src. e Dst. IP de ponta a ponta.</li>
+<li>Como a <strong>Layer 2 (Ethernet II)</strong> descreve o pacote com o Preamble, MACs, etc.</li>
+<li>Como ele indica exatamente qual porta a camada 1 (Port) está transmitindo os dados elétricos e o valor da banda (<code>Layer 1: FastEthernet</code>).</li>
+</ul>
+<p><em>Reflexão para a Turma:</em> “E quando houver um roteador no meio de dois continentes? O Layer 3 (IP) muda? E o Layer 2 (MAC)? Vamos testar os limites do rastreio!”</p>
+<hr/>
+<h2 id="-6-desafio-prático--sala-de-aula-invertida"><strong>🚀 6. Desafio Prático &amp; Sala de Aula Invertida</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-6-desafio-prático--sala-de-aula-invertida" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>Missões para o Aluno (Treino no Packet Tracer e Preparo Semanal):</strong></p>
+<ol>
+<li>Reproduza em casa o Laboratório 1 e 2 sozinhos, e respondam como questionário:
+<ul>
+<li>O comando <code>arp -a</code> no terminal do Windows tem a mesma sintaxe do Packet Tracer? O que ele retorna na sua máquina real agora? Verifique IPs do seu gateway (Roteador Wi-Fi) emparelhado com o MAC do roteador.</li>
+</ul>
+</li>
+<li><strong>Leitura de Contexto:</strong> Como o IPv4 faz para dividir computadores? Para nossa próxima aula (Redes IPv4 Cap. 4 Tanenbaum / Cap. 4 Kurose), estudaremos <em>Endereçamento IP (Classes, Máscaras e introdução de Roteamento).</em> Pesquisem: o que significam os termos <code>IP Público</code> vs. <code>IP Privado</code> e a técnica chamada <code>NAT</code>? Serão cruciais.</li>
+</ol>
+<hr/>
+<h2 id="-7-resumo-estrutural"><strong>📋 7. Resumo Estrutural</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-7-resumo-estrutural" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th><strong>Conceito</strong></th><th><strong>Definição em Uma Frase</strong></th></tr></thead><tbody><tr><td><strong>Modelo OSI</strong></td><td>Modelo de referência teórico com 7 camadas que padroniza a comunicação em redes</td></tr><tr><td><strong>Modelo TCP/IP</strong></td><td>Arquitetura real de 4 camadas usada na Internet moderna</td></tr><tr><td><strong>Encapsulamento</strong></td><td>Processo de envolver os dados de uma camada superior em um envelope da camada inferior</td></tr><tr><td><strong>Desencapsulamento</strong></td><td>Remoção dos cabeçalhos camada por camada no dispositivo de destino</td></tr><tr><td><strong>PDU</strong></td><td>Protocol Data Unit — unidade de dados em cada camada (Mensagem, Segmento, Pacote, Quadro, Bit)</td></tr><tr><td><strong>ARP</strong></td><td>Protocolo que traduz um endereço IP em um endereço MAC dentro da mesma rede local</td></tr><tr><td><strong>ARP Request</strong></td><td>Mensagem Broadcast enviada para descobrir o MAC associado a um IP desconhecido</td></tr><tr><td><strong>ARP Reply</strong></td><td>Resposta Unicast contendo o MAC do dispositivo que possui o IP solicitado</td></tr><tr><td><strong>Cache ARP</strong></td><td>Tabela local que guarda temporariamente os mapeamentos IP → MAC já resolvidos</td></tr><tr><td><strong>Modo Simulation</strong></td><td>Recurso do Packet Tracer que exibe PDUs “viajando” pela rede passo a passo</td></tr></tbody></table></div>
+<hr/>
+<h2 id="-8-exercícios-pbl"><strong>🧩 8. Exercícios (PBL)</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-8-exercícios-pbl" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="parte-a--questões-de-múltipla-escolha--verdadeiro-ou-falso"><strong>Parte A — Questões de Múltipla Escolha / Verdadeiro ou Falso</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#parte-a--questões-de-múltipla-escolha--verdadeiro-ou-falso" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>Q1. (OSI vs. TCP/IP)</strong>
+Um desenvolvedor afirma que o TCP/IP tem 4 camadas; seu colega insiste em 5. Ambos podem estar corretos?</p>
+<ul>
+<li><strong>a)</strong> Sim. Depende se a Camada Física é separada da de Enlace ou agrupada como “Acesso à Rede”.</li>
+<li><strong>b)</strong> Não. O TCP/IP sempre teve exatamente 4 camadas.</li>
+<li><strong>c)</strong> Sim. Depende se a Camada de Aplicação incorpora ou não Sessão e Apresentação.</li>
+<li><strong>d)</strong> Não. O TCP/IP é padronizado com 7 camadas pelo IEEE.</li>
+</ul>
+<blockquote>
+<p><strong>Gabarito:</strong> <strong>A</strong> — O TCP/IP pode ser apresentado com 4 ou 5 camadas conforme o autor. Ambas as visões são aceitas na literatura de redes.</p>
+</blockquote>
+<hr/>
+<p><strong>Q2. (Encapsulamento — Ordenação)</strong>
+Numere a sequência CORRETA para o envio de uma requisição HTTP:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th><strong>Ordem</strong></th><th><strong>Ação</strong></th></tr></thead><tbody><tr><td>( )</td><td>O payload é convertido em bits para transmissão pelo cabo</td></tr><tr><td>( )</td><td>O HTTP gera os Dados e os entrega à pilha TCP/IP</td></tr><tr><td>( )</td><td>O cabeçalho TCP (porta 80) é adicionado → forma o Segmento</td></tr><tr><td>( )</td><td>O cabeçalho Ethernet (MACs de origem e próximo salto) é adicionado → forma o Quadro</td></tr><tr><td>( )</td><td>O cabeçalho IP (IPs de origem e destino) é adicionado → forma o Pacote</td></tr></tbody></table></div>
+<blockquote>
+<p><strong>Gabarito:</strong> 5 – 1 – 2 – 4 – 3 <em>(Dados → Segmento → Pacote → Quadro → Bits)</em></p>
+</blockquote>
+<hr/>
+<p><strong>Q3. (ARP — Verdadeiro ou Falso)</strong>
+PC-A (<code>192.168.1.10</code>) quer enviar dados para PC-C (<code>192.168.1.30</code>) com o cache ARP vazio:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th><strong>#</strong></th><th><strong>Afirmativa</strong></th><th><strong>V/F</strong></th></tr></thead><tbody><tr><td>1</td><td>PC-A enviará um ARP Request com MAC destino <code>FF:FF:FF:FF:FF:FF</code>.</td><td></td></tr><tr><td>2</td><td>Apenas PC-C responde ao ARP Request, via Unicast, com seu MAC.</td><td></td></tr><tr><td>3</td><td>PC-B (<code>192.168.1.20</code>) descarta o ARP Request sem nem recebê-lo.</td><td></td></tr><tr><td>4</td><td>Após a resolução ARP, os próximos pacotes para PC-C dispensam novo ARP (enquanto o cache não expirar).</td><td></td></tr><tr><td>5</td><td>O ARP opera exclusivamente na Camada 4 (Transporte) do modelo OSI.</td><td></td></tr></tbody></table></div>
+<blockquote>
+<p><strong>Gabarito:</strong> <strong>V, V, F</strong> <em>(PC-B recebe e processa, mas descarta ao constatar que não é o destino)</em>, <strong>V, F</strong> <em>(ARP opera na interface entre Camadas 2 e 3)</em></p>
+</blockquote>
+<hr/>
+<p><strong>Q4. (Roteamento e PDU)</strong>
+Quando um Pacote IP atravessa um <strong>roteador</strong> entre duas redes distintas, o que se altera?</p>
+<ul>
+<li><strong>a)</strong> O IP de destino muda a cada salto, substituído pelo IP do roteador.</li>
+<li><strong>b)</strong> Apenas os endereços MAC mudam a cada salto; os IPs de ponta a ponta permanecem inalterados.</li>
+<li><strong>c)</strong> Tanto IPs quanto MACs são substituídos a cada salto pelo roteador.</li>
+<li><strong>d)</strong> O MAC de destino permanece o mesmo do destinatário final em toda a jornada.</li>
+</ul>
+<blockquote>
+<p><strong>Gabarito:</strong> <strong>B</strong> — O IP identifica origem e destino finais (ponta a ponta) e nunca muda. O MAC identifica apenas o <strong>próximo salto</strong> e é recriado a cada roteador. Esta é uma das questões mais frequentes em provas de Redes.</p>
+</blockquote>
+<hr/>
+<p><strong>Q5. (PDU — Identificação de Camadas)</strong>
+Relacione cada unidade de dados (PDU) com a camada OSI correspondente:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th><strong>PDU</strong></th><th><strong>Camada OSI</strong></th></tr></thead><tbody><tr><td>Segmento</td><td>( ) Camada 1 — Física</td></tr><tr><td>Quadro (Frame)</td><td>( ) Camada 2 — Enlace</td></tr><tr><td>Bit</td><td>( ) Camada 3 — Rede</td></tr><tr><td>Pacote</td><td>( ) Camada 4 — Transporte</td></tr><tr><td>Mensagem/Dado</td><td>( ) Camadas 5–7 — Sessão/Apresentação/Aplicação</td></tr></tbody></table></div>
+<blockquote>
+<p><strong>Gabarito:</strong> Bits → C1, Quadro → C2, Pacote → C3, Segmento → C4, Mensagem → C5–7</p>
+</blockquote>
+<hr/>
+<h3 id="parte-b--exercício-prático-no-packet-tracer"><strong>Parte B — Exercício Prático no Packet Tracer</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#parte-b--exercício-prático-no-packet-tracer" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>Cenário:</strong> Monte a seguinte topologia:</p>
+<pre><code>[PC0: 192.168.1.10] ---+
+[PC1: 192.168.1.20] ---+--- [Switch 2960] --- [PC3: 192.168.1.40]
+[PC2: 192.168.1.30] ---+
+</code></pre>
+<p><strong>Tarefas:</strong></p>
+<ol>
+<li><strong>Configure</strong> os IPs em todos os PCs e verifique conectividade com <code>ping</code> entre PC0 e PC3.</li>
+<li><strong>Tabela MAC:</strong> Execute <code>show mac address-table</code> no switch antes e depois dos pings. Quantas entradas foram aprendidas? Por quê?</li>
+<li><strong>Modo Simulation (filtro: ARP + ICMP):</strong> Execute <code>ping 192.168.1.40</code> a partir do PC0. Registre:
+<ul>
+<li>Qual é o <code>Dest MAC</code> no ARP Request?</li>
+<li>Qual é o <code>Src MAC</code> no ARP Reply?</li>
+<li>Por quais portas o Switch encaminhou o ARP Request?</li>
+</ul>
+</li>
+<li><strong>(Desafio):</strong> Execute <code>arp -d</code> no PC0 e repita o ping. O Switch fez flooding novamente? Por quê?</li>
+<li><strong>(Reflexão Escrita — 3 a 5 linhas):</strong> Explique com suas palavras por que o endereço MAC muda a cada roteador, mas o IP de destino permanece o mesmo durante toda a jornada do pacote.</li>
+</ol>
+<hr/>
+<h2 id="-9-sala-de-aula-invertida-próxima-aula"><strong>🚀 9. Sala de Aula Invertida (Próxima Aula)</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-9-sala-de-aula-invertida-próxima-aula" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>Para a próxima aula (Semana 5: Endereçamento IPv4, Máscaras e Sub-redes):</strong></p>
+<ol>
+<li>Pesquise o que são <strong>endereços IPv4 públicos</strong> e <strong>privados</strong> (RFC 1918). Anote os três blocos de IP privado.</li>
+<li>Explique com suas palavras o que é <strong>NAT (Network Address Translation)</strong> e por que ele é necessário na Internet atual.</li>
+<li><strong>Experimento real:</strong> Execute <code>ipconfig /all</code> no seu computador. Identifique o IP, a máscara de sub-rede e o gateway padrão. O IP é público ou privado?</li>
+<li><strong>(Opcional avançado):</strong> O que é <strong>CIDR</strong>? Qual a diferença entre <code>192.168.1.0/24</code> e <code>192.168.1.0/26</code>? Quantos hosts cabem em cada uma?</li>
+</ol>
+<blockquote>
+<p><strong>Dica:</strong> Consulte Tanenbaum, Cap. 5 (Seção 5.4: Sub-redes) e Kurose, Cap. 4 (Seção 4.3: Endereçamento IPv4).</p>
+</blockquote>
+<hr/>
+<h2 id="-10-referências-bibliográficas"><strong>📚 10. Referências Bibliográficas</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-10-referências-bibliográficas" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="-referências-obrigatórias"><strong>📖 Referências Obrigatórias</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-referências-obrigatórias" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th><strong>Autor</strong></th><th><strong>Obra</strong></th><th><strong>Capítulo/Seção Utilizada</strong></th></tr></thead><tbody><tr><td>TANENBAUM, A. S.; FEAMSTER, N.; WETHERALL, D. J.</td><td>Redes de Computadores. 6. ed. Pearson, 2021</td><td>Cap. 1 (Seção 1.4: Modelos de Referência), Cap. 5 (ARP e Endereçamento)</td></tr><tr><td>KUROSE, J. F.</td><td>Redes de Computadores e a Internet. 8. ed. Pearson, 2021</td><td>Cap. 1 (Seção 1.5: Camadas Protocolares), Cap. 6 (Seção 6.4: ARP)</td></tr><tr><td>CISCO NETWORKING ACADEMY</td><td>Curso CCNAv7: Introduction to Networks</td><td>Módulos: Modelo OSI/TCP, ARP, Packet Tracer Labs</td></tr></tbody></table></div>
+<h3 id="-links-úteis-e-materiais-complementares"><strong>🔗 Links Úteis e Materiais Complementares</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-links-úteis-e-materiais-complementares" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li><a href="https://www.netacad.com/courses/packet-tracer" class="external">Download Cisco Packet Tracer Oficial<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><a href="https://datatracker.ietf.org/doc/html/rfc826" class="external">RFC 826: Especificação oficial do ARP<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><a href="https://datatracker.ietf.org/doc/html/rfc1918" class="external">RFC 1918: Espaços de endereços privados IPv4<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+</ul></article><hr/><div class="page-footer"></div></div><div class="right sidebar"></div><footer class="footer "><div class="footer__brand"><img src="https://uniube.br/img/landing/logo_azul.svg" alt="Universidade de Uberaba" class="footer__logo footer__logo--light"/><img src="https://uniube.br/img/landing/logo_branca.svg" alt="Universidade de Uberaba" class="footer__logo footer__logo--dark"/><div class="footer__info"><span class="footer__name">Prof. Romualdo Filho</span><a class="footer__email" href="mailto:romualdo.filho@uniube.br">romualdo.filho@uniube.br</a></div></div><ul class="footer__links"><li><a href="https://uniube.br" target="_blank" rel="noopener noreferrer">Mural Uniube</a></li></ul></footer></div></div></body><script type="application/javascript" data-persist="true">function n(){let t=this.parentElement;t.classList.toggle("is-collapsed");let e=t.getElementsByClassName("callout-content")[0];if(!e)return;let l=t.classList.contains("is-collapsed");e.style.gridTemplateRows=l?"0fr":"1fr"}function c(){let t=document.getElementsByClassName("callout is-collapsible");for(let e of t){let l=e.getElementsByClassName("callout-title")[0],s=e.getElementsByClassName("callout-content")[0];if(!l||!s)continue;l.addEventListener("click",n),window.addCleanup(()=>l.removeEventListener("click",n));let o=e.classList.contains("is-collapsed");s.style.gridTemplateRows=o?"0fr":"1fr"}}document.addEventListener("nav",c);
+</script><script type="module" data-persist="true">function E(a,e){if(!a)return;function t(o){o.target===this&&(o.preventDefault(),o.stopPropagation(),e())}function n(o){o.key.startsWith("Esc")&&(o.preventDefault(),e())}a?.addEventListener("click",t),window.addCleanup(()=>a?.removeEventListener("click",t)),document.addEventListener("keydown",n),window.addCleanup(()=>document.removeEventListener("keydown",n))}function f(a){for(;a.firstChild;)a.removeChild(a.firstChild)}var m=class{constructor(e,t){this.container=e;this.content=t;this.setupEventListeners(),this.setupNavigationControls(),this.resetTransform()}isDragging=!1;startPan={x:0,y:0};currentPan={x:0,y:0};scale=1;MIN_SCALE=.5;MAX_SCALE=3;cleanups=[];setupEventListeners(){let e=this.onMouseDown.bind(this),t=this.onMouseMove.bind(this),n=this.onMouseUp.bind(this),o=this.onTouchStart.bind(this),r=this.onTouchMove.bind(this),i=this.onTouchEnd.bind(this),s=this.resetTransform.bind(this);this.container.addEventListener("mousedown",e),document.addEventListener("mousemove",t),document.addEventListener("mouseup",n),this.container.addEventListener("touchstart",o,{passive:!1}),document.addEventListener("touchmove",r,{passive:!1}),document.addEventListener("touchend",i),window.addEventListener("resize",s),this.cleanups.push(()=>this.container.removeEventListener("mousedown",e),()=>document.removeEventListener("mousemove",t),()=>document.removeEventListener("mouseup",n),()=>this.container.removeEventListener("touchstart",o),()=>document.removeEventListener("touchmove",r),()=>document.removeEventListener("touchend",i),()=>window.removeEventListener("resize",s))}cleanup(){for(let e of this.cleanups)e()}setupNavigationControls(){let e=document.createElement("div");e.className="mermaid-controls";let t=this.createButton("+",()=>this.zoom(.1)),n=this.createButton("-",()=>this.zoom(-.1)),o=this.createButton("Reset",()=>this.resetTransform());e.appendChild(n),e.appendChild(o),e.appendChild(t),this.container.appendChild(e)}createButton(e,t){let n=document.createElement("button");return n.textContent=e,n.className="mermaid-control-button",n.addEventListener("click",t),window.addCleanup(()=>n.removeEventListener("click",t)),n}onMouseDown(e){e.button===0&&(this.isDragging=!0,this.startPan={x:e.clientX-this.currentPan.x,y:e.clientY-this.currentPan.y},this.container.style.cursor="grabbing")}onMouseMove(e){this.isDragging&&(e.preventDefault(),this.currentPan={x:e.clientX-this.startPan.x,y:e.clientY-this.startPan.y},this.updateTransform())}onMouseUp(){this.isDragging=!1,this.container.style.cursor="grab"}onTouchStart(e){if(e.touches.length!==1)return;this.isDragging=!0;let t=e.touches[0];this.startPan={x:t.clientX-this.currentPan.x,y:t.clientY-this.currentPan.y}}onTouchMove(e){if(!this.isDragging||e.touches.length!==1)return;e.preventDefault();let t=e.touches[0];this.currentPan={x:t.clientX-this.startPan.x,y:t.clientY-this.startPan.y},this.updateTransform()}onTouchEnd(){this.isDragging=!1}zoom(e){let t=Math.min(Math.max(this.scale+e,this.MIN_SCALE),this.MAX_SCALE),n=this.content.getBoundingClientRect(),o=n.width/2,r=n.height/2,i=t-this.scale;this.currentPan.x-=o*i,this.currentPan.y-=r*i,this.scale=t,this.updateTransform()}updateTransform(){this.content.style.transform=`translate(${this.currentPan.x}px, ${this.currentPan.y}px) scale(${this.scale})`}resetTransform(){let t=this.content.querySelector("svg").getBoundingClientRect(),n=t.width/this.scale,o=t.height/this.scale;this.scale=1,this.currentPan={x:(this.container.clientWidth-n)/2,y:(this.container.clientHeight-o)/2},this.updateTransform()}},T=["--secondary","--tertiary","--gray","--light","--lightgray","--highlight","--dark","--darkgray","--codeFont"],y;document.addEventListener("nav",async()=>{let e=document.querySelector(".center").querySelectorAll("code.mermaid");if(e.length===0)return;y||=await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs");let t=y.default,n=new WeakMap;for(let r of e)n.set(r,r.innerText);async function o(){for(let s of e){s.removeAttribute("data-processed");let c=n.get(s);c&&(s.innerHTML=c)}let r=T.reduce((s,c)=>(s[c]=window.getComputedStyle(document.documentElement).getPropertyValue(c),s),{}),i=document.documentElement.getAttribute("saved-theme")==="dark";t.initialize({startOnLoad:!1,securityLevel:"loose",theme:i?"dark":"base",themeVariables:{fontFamily:r["--codeFont"],primaryColor:r["--light"],primaryTextColor:r["--darkgray"],primaryBorderColor:r["--tertiary"],lineColor:r["--darkgray"],secondaryColor:r["--secondary"],tertiaryColor:r["--tertiary"],clusterBkg:r["--light"],edgeLabelBackground:r["--highlight"]}}),await t.run({nodes:e})}await o(),document.addEventListener("themechange",o),window.addCleanup(()=>document.removeEventListener("themechange",o));for(let r=0;r<e.length;r++){let v=function(){let g=l.querySelector("#mermaid-space"),h=l.querySelector(".mermaid-content");if(!h)return;f(h);let w=i.querySelector("svg").cloneNode(!0);h.appendChild(w),l.classList.add("active"),g.style.cursor="grab",u=new m(g,h)},M=function(){l.classList.remove("active"),u?.cleanup(),u=null},i=e[r],s=i.parentElement,c=s.querySelector(".clipboard-button"),d=s.querySelector(".expand-button"),p=window.getComputedStyle(c),L=c.offsetWidth+parseFloat(p.marginLeft||"0")+parseFloat(p.marginRight||"0");d.style.right=`calc(${L}px + 0.3rem)`,s.prepend(d);let l=s.querySelector("#mermaid-container");if(!l)return;let u=null;d.addEventListener("click",v),E(l,M),window.addCleanup(()=>{u?.cleanup(),d.removeEventListener("click",v)})}});
+</script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="./postscript.js" type="module" data-persist="true"></script></html>

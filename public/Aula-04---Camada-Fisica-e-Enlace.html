@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr"><head><title>🌐 🔌 Aula 04: Camada Física, Camada de Enlace e Ethernet | Prof. Romualdo</title><meta charset="utf-8"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&amp;family=Inter:ital,wght@0,400;0,600;1,400;1,600&amp;family=JetBrains Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="🌐 Redes de Computadores I"/><meta property="og:title" content="🌐 🔌 Aula 04: Camada Física, Camada de Enlace e Ethernet | Prof. Romualdo"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="🌐 🔌 Aula 04: Camada Física, Camada de Enlace e Ethernet | Prof. Romualdo"/><meta name="twitter:description" content="🔌 Aula 04: Camada Física, Camada de Enlace e Ethernet Disciplina: Redes de Computadores I (Cód."/><meta property="og:description" content="🔌 Aula 04: Camada Física, Camada de Enlace e Ethernet Disciplina: Redes de Computadores I (Cód."/><meta property="og:image:alt" content="🔌 Aula 04: Camada Física, Camada de Enlace e Ethernet Disciplina: Redes de Computadores I (Cód."/><meta property="twitter:domain" content="rofilho.github.io/redes1"/><meta property="og:url" content="https://rofilho.github.io/redes1/Aula-04---Camada-Fisica-e-Enlace"/><meta property="twitter:url" content="https://rofilho.github.io/redes1/Aula-04---Camada-Fisica-e-Enlace"/><link rel="icon" href="./static/icon.png"/><meta name="description" content="🔌 Aula 04: Camada Física, Camada de Enlace e Ethernet Disciplina: Redes de Computadores I (Cód."/><meta name="generator" content="Quartz"/><link href="./index.css" rel="stylesheet" type="text/css" data-persist="true"/><style>.expand-button {
+  position: absolute;
+  display: flex;
+  float: right;
+  padding: 0.4rem;
+  margin: 0.3rem;
+  right: 0;
+  color: var(--gray);
+  border-color: var(--dark);
+  background-color: var(--light);
+  border: 1px solid;
+  border-radius: 5px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.expand-button > svg {
+  fill: var(--light);
+  filter: contrast(0.3);
+}
+.expand-button:hover {
+  cursor: pointer;
+  border-color: var(--secondary);
+}
+.expand-button:focus {
+  outline: 0;
+}
+
+pre:hover > .expand-button {
+  opacity: 1;
+  transition: 0.2s;
+}
+
+#mermaid-container {
+  position: fixed;
+  contain: layout;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+}
+#mermaid-container.active {
+  display: inline-block;
+}
+#mermaid-container > #mermaid-space {
+  border: 1px solid var(--lightgray);
+  background-color: var(--light);
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80vh;
+  width: 80vw;
+  overflow: hidden;
+}
+#mermaid-container > #mermaid-space > .mermaid-content {
+  position: relative;
+  transform-origin: 0 0;
+  transition: transform 0.1s ease;
+  overflow: visible;
+  min-height: 200px;
+  min-width: 200px;
+}
+#mermaid-container > #mermaid-space > .mermaid-content pre {
+  margin: 0;
+  border: none;
+}
+#mermaid-container > #mermaid-space > .mermaid-content svg {
+  max-width: none;
+  height: auto;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--lightgray);
+  background: var(--light);
+  color: var(--dark);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: var(--bodyFont);
+  transition: all 0.2s ease;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:hover {
+  background: var(--lightgray);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:active {
+  transform: translateY(1px);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:nth-child(2) {
+  width: auto;
+  padding: 0 12px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiQzpcXFVzZXJzXFxyb211YVxcQXBwRGF0YVxcTG9jYWxcXFRlbXBcXHJlZGVzMVxccXVhcnR6XFxjb21wb25lbnRzXFxzdHlsZXMiLCJzb3VyY2VzIjpbIm1lcm1haWQuaW5saW5lLnNjc3MiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFO0VBQ0E7O0FBR0Y7RUFDRTtFQUNBOztBQUdGO0VBQ0U7OztBQUtGO0VBQ0U7RUFDQTs7O0FBSUo7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7O0FBR0Y7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFO0VBQ0E7O0FBR0Y7RUFDRTtFQUNBOztBQUlKO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTs7QUFHRjtFQUNFOztBQUlGO0VBQ0U7RUFDQTtFQUNBIiwic291cmNlc0NvbnRlbnQiOlsiLmV4cGFuZC1idXR0b24ge1xuICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gIGRpc3BsYXk6IGZsZXg7XG4gIGZsb2F0OiByaWdodDtcbiAgcGFkZGluZzogMC40cmVtO1xuICBtYXJnaW46IDAuM3JlbTtcbiAgcmlnaHQ6IDA7IC8vIE5PVEU6IHJpZ2h0IHdpbGwgYmUgc2V0IGluIG1lcm1haWQuaW5saW5lLnRzXG4gIGNvbG9yOiB2YXIoLS1ncmF5KTtcbiAgYm9yZGVyLWNvbG9yOiB2YXIoLS1kYXJrKTtcbiAgYmFja2dyb3VuZC1jb2xvcjogdmFyKC0tbGlnaHQpO1xuICBib3JkZXI6IDFweCBzb2xpZDtcbiAgYm9yZGVyLXJhZGl1czogNXB4O1xuICBvcGFjaXR5OiAwO1xuICB0cmFuc2l0aW9uOiAwLjJzO1xuXG4gICYgPiBzdmcge1xuICAgIGZpbGw6IHZhcigtLWxpZ2h0KTtcbiAgICBmaWx0ZXI6IGNvbnRyYXN0KDAuMyk7XG4gIH1cblxuICAmOmhvdmVyIHtcbiAgICBjdXJzb3I6IHBvaW50ZXI7XG4gICAgYm9yZGVyLWNvbG9yOiB2YXIoLS1zZWNvbmRhcnkpO1xuICB9XG5cbiAgJjpmb2N1cyB7XG4gICAgb3V0bGluZTogMDtcbiAgfVxufVxuXG5wcmUge1xuICAmOmhvdmVyID4gLmV4cGFuZC1idXR0b24ge1xuICAgIG9wYWNpdHk6IDE7XG4gICAgdHJhbnNpdGlvbjogMC4ycztcbiAgfVxufVxuXG4jbWVybWFpZC1jb250YWluZXIge1xuICBwb3NpdGlvbjogZml4ZWQ7XG4gIGNvbnRhaW46IGxheW91dDtcbiAgei1pbmRleDogOTk5O1xuICBsZWZ0OiAwO1xuICB0b3A6IDA7XG4gIHdpZHRoOiAxMDB2dztcbiAgaGVpZ2h0OiAxMDB2aDtcbiAgb3ZlcmZsb3c6IGhpZGRlbjtcbiAgZGlzcGxheTogbm9uZTtcbiAgYmFja2Ryb3AtZmlsdGVyOiBibHVyKDRweCk7XG4gIGJhY2tncm91bmQ6IHJnYmEoMCwgMCwgMCwgMC41KTtcblxuICAmLmFjdGl2ZSB7XG4gICAgZGlzcGxheTogaW5saW5lLWJsb2NrO1xuICB9XG5cbiAgJiA+ICNtZXJtYWlkLXNwYWNlIHtcbiAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1saWdodGdyYXkpO1xuICAgIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWxpZ2h0KTtcbiAgICBib3JkZXItcmFkaXVzOiA1cHg7XG4gICAgcG9zaXRpb246IGZpeGVkO1xuICAgIHRvcDogNTAlO1xuICAgIGxlZnQ6IDUwJTtcbiAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZSgtNTAlLCAtNTAlKTtcbiAgICBoZWlnaHQ6IDgwdmg7XG4gICAgd2lkdGg6IDgwdnc7XG4gICAgb3ZlcmZsb3c6IGhpZGRlbjtcblxuICAgICYgPiAubWVybWFpZC1jb250ZW50IHtcbiAgICAgIHBvc2l0aW9uOiByZWxhdGl2ZTtcbiAgICAgIHRyYW5zZm9ybS1vcmlnaW46IDAgMDtcbiAgICAgIHRyYW5zaXRpb246IHRyYW5zZm9ybSAwLjFzIGVhc2U7XG4gICAgICBvdmVyZmxvdzogdmlzaWJsZTtcbiAgICAgIG1pbi1oZWlnaHQ6IDIwMHB4O1xuICAgICAgbWluLXdpZHRoOiAyMDBweDtcblxuICAgICAgcHJlIHtcbiAgICAgICAgbWFyZ2luOiAwO1xuICAgICAgICBib3JkZXI6IG5vbmU7XG4gICAgICB9XG5cbiAgICAgIHN2ZyB7XG4gICAgICAgIG1heC13aWR0aDogbm9uZTtcbiAgICAgICAgaGVpZ2h0OiBhdXRvO1xuICAgICAgfVxuICAgIH1cblxuICAgICYgPiAubWVybWFpZC1jb250cm9scyB7XG4gICAgICBwb3NpdGlvbjogYWJzb2x1dGU7XG4gICAgICBib3R0b206IDIwcHg7XG4gICAgICByaWdodDogMjBweDtcbiAgICAgIGRpc3BsYXk6IGZsZXg7XG4gICAgICBnYXA6IDhweDtcbiAgICAgIHBhZGRpbmc6IDhweDtcbiAgICAgIGJhY2tncm91bmQ6IHZhcigtLWxpZ2h0KTtcbiAgICAgIGJvcmRlcjogMXB4IHNvbGlkIHZhcigtLWxpZ2h0Z3JheSk7XG4gICAgICBib3JkZXItcmFkaXVzOiA2cHg7XG4gICAgICBib3gtc2hhZG93OiAwIDJweCA0cHggcmdiYSgwLCAwLCAwLCAwLjEpO1xuICAgICAgei1pbmRleDogMjtcblxuICAgICAgLm1lcm1haWQtY29udHJvbC1idXR0b24ge1xuICAgICAgICBkaXNwbGF5OiBmbGV4O1xuICAgICAgICBhbGlnbi1pdGVtczogY2VudGVyO1xuICAgICAgICBqdXN0aWZ5LWNvbnRlbnQ6IGNlbnRlcjtcbiAgICAgICAgd2lkdGg6IDMycHg7XG4gICAgICAgIGhlaWdodDogMzJweDtcbiAgICAgICAgcGFkZGluZzogMDtcbiAgICAgICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICAgICAgYmFja2dyb3VuZDogdmFyKC0tbGlnaHQpO1xuICAgICAgICBjb2xvcjogdmFyKC0tZGFyayk7XG4gICAgICAgIGJvcmRlci1yYWRpdXM6IDRweDtcbiAgICAgICAgY3Vyc29yOiBwb2ludGVyO1xuICAgICAgICBmb250LXNpemU6IDE2cHg7XG4gICAgICAgIGZvbnQtZmFtaWx5OiB2YXIoLS1ib2R5Rm9udCk7XG4gICAgICAgIHRyYW5zaXRpb246IGFsbCAwLjJzIGVhc2U7XG5cbiAgICAgICAgJjpob3ZlciB7XG4gICAgICAgICAgYmFja2dyb3VuZDogdmFyKC0tbGlnaHRncmF5KTtcbiAgICAgICAgfVxuXG4gICAgICAgICY6YWN0aXZlIHtcbiAgICAgICAgICB0cmFuc2Zvcm06IHRyYW5zbGF0ZVkoMXB4KTtcbiAgICAgICAgfVxuXG4gICAgICAgIC8vIFN0eWxlIHRoZSByZXNldCBidXR0b24gZGlmZmVyZW50bHlcbiAgICAgICAgJjpudGgtY2hpbGQoMikge1xuICAgICAgICAgIHdpZHRoOiBhdXRvO1xuICAgICAgICAgIHBhZGRpbmc6IDAgMTJweDtcbiAgICAgICAgICBmb250LXNpemU6IDE0cHg7XG4gICAgICAgIH1cbiAgICAgIH1cbiAgICB9XG4gIH1cbn1cbiJdfQ== */</style><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="./prescript.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("./static/contentIndex.json").then(data => data.json())</script><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://rofilho.github.io/redes1/index.xml"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://rofilho.github.io/redes1/Aula-04---Camada-Fisica-e-Enlace-og-image.webp"/><meta property="og:image:url" content="https://rofilho.github.io/redes1/Aula-04---Camada-Fisica-e-Enlace-og-image.webp"/><meta name="twitter:image" content="https://rofilho.github.io/redes1/Aula-04---Camada-Fisica-e-Enlace-og-image.webp"/><meta property="og:image:type" content="image/.webp"/></head><body data-slug="Aula-04---Camada-Fisica-e-Enlace"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"></div><div class="center"><div class="page-header"><header><h2 class="page-title"><a href="." class="page-title__link"><img src="https://uniube.br/img/landing/logo_azul.svg" alt="Uniube" class="page-title__logo page-title__logo--light"/><img src="https://uniube.br/img/landing/logo_branca.svg" alt="Uniube" class="page-title__logo page-title__logo--dark"/><span class="page-title__text">🌐 Redes de Computadores I</span></a></h2><div class="search"><button class="search-button"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>Pesquisar</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="Pesquisar por algo" placeholder="Pesquisar por algo"/><div class="search-layout" data-preview="true"></div></div></div></div><button class="darkmode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="Tema escuro"><title>Tema escuro</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="Tema claro"><title>Tema claro</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></header><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="./">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>🌐 🔌 Aula 04: Camada Física, Camada de Enlace e Ethernet</a></div></nav><nav class="lesson-nav" aria-label="Navegação entre aulas"><div class="lesson-nav__slot"></div><div class="lesson-nav__slot lesson-nav__slot--right"><a href="/Aula-07---Camada-de-Transporte-TCP-UDP-Portas-e-Three-Way-Handshake" class="nav-pill nav-pill--next" data-spa="true"><div class="nav-pill__icon">📖</div><div class="nav-pill__body"><span class="nav-pill__label">Próxima →</span><span class="nav-pill__title">🌐 🟢 Aula 07: Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake</span></div></a></div></nav><h1 class="article-title">🌐 🔌 Aula 04: Camada Física, Camada de Enlace e Ethernet</h1><p show-comma="true" class="content-meta"><time datetime="2026-04-19T16:04:47.000Z">19 de abr. de 2026</time><span>Leitura de 17 min</span></p></div></div><article class="popover-hint"><h1 id="-aula-04-camada-física-camada-de-enlace-e-ethernet">🔌 Aula 04: Camada Física, Camada de Enlace e Ethernet<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-aula-04-camada-física-camada-de-enlace-e-ethernet" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<blockquote>
+<p><strong>Disciplina:</strong> Redes de Computadores I (Cód. 49325) | <strong>Curso:</strong> Sistemas de Informação, Uniube <strong>Semana 3</strong> | 02/03/2026 | Prof. Romualdo Mathias Filho</p>
+</blockquote>
+<hr/>
+<h2 id="-0-objetivo-da-aula"><strong>🎯 0. Objetivo da Aula</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-0-objetivo-da-aula" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Ao final desta aula, o aluno deve ser capaz de:</p>
+<ul>
+<li><strong>Descrever</strong> as funções da Camada Física (camada 1) e da Camada de Enlace (camada 2) do modelo OSI</li>
+<li><strong>Explicar</strong> o que é um endereço MAC e como ele difere de um endereço IP</li>
+<li><strong>Analisar</strong> a estrutura de um quadro Ethernet (IEEE 802.3) e identificar cada campo</li>
+<li><strong>Comparar</strong> os mecanismos de controle de acesso ao meio CSMA/CD e CSMA/CA</li>
+<li><strong>Descrever</strong> o funcionamento de um switch e sua tabela de endereços MAC</li>
+</ul>
+<hr/>
+<h2 id="-1-recapitulação"><strong>🔄 1. Recapitulação</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-1-recapitulação" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th><strong>Aula</strong></th><th><strong>Conceito</strong></th><th><strong>Definição</strong></th></tr></thead><tbody><tr><td>02</td><td>Rede de computadores</td><td>Conjunto de dispositivos autônomos interconectados que compartilham dados e recursos</td></tr><tr><td>02</td><td>Classificação (LAN/MAN/WAN)</td><td>Redes categorizadas por abrangência geográfica</td></tr><tr><td>02</td><td>Protocolos</td><td>Regras que governam formato, ordem e ações na troca de mensagens</td></tr><tr><td>03</td><td>Topologia física</td><td>Arranjo real dos cabos e dispositivos no espaço</td></tr><tr><td>03</td><td>Topologia lógica</td><td>Caminho que os dados percorrem entre os nós</td></tr><tr><td>03</td><td>Meios de transmissão</td><td>Guiados (par trançado, coaxial, fibra) e não guiados (Wi-Fi, Bluetooth, satélite)</td></tr></tbody></table></div>
+<blockquote>
+<p><strong>Conexão:</strong> nas Aulas 02 e 03 estudamos <strong>o que</strong> compõe uma rede, <strong>como</strong> ela é organizada (topologias) e <strong>por onde</strong> os dados trafegam (meios). Hoje vamos descer um nível e entender <strong>como os bits se transformam em quadros inteligentes</strong> que sabem chegar ao destino correto dentro de uma rede local. Estamos entrando nas duas primeiras camadas do modelo OSI.</p>
+</blockquote>
+<hr/>
+<h2 id="️-2-contextualização-onde-estamos-no-modelo-osi"><strong>🏗️ 2. Contextualização: Onde Estamos no Modelo OSI?</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#️-2-contextualização-onde-estamos-no-modelo-osi" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>Definição:</strong> O modelo OSI (Open Systems Interconnection), padronizado pela ISO em 1984, divide a comunicação em rede em <strong>7 camadas</strong>, cada uma com responsabilidades distintas (Tanenbaum, Cap. 1, Seção 1.4). Hoje focaremos nas duas camadas inferiores:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th><strong>Camada</strong></th><th><strong>Nome</strong></th><th><strong>Unidade de Dados</strong></th><th><strong>Função Principal</strong></th></tr></thead><tbody><tr><td>7</td><td>Aplicação</td><td>Mensagem</td><td>Interface com o usuário (HTTP, DNS, SMTP)</td></tr><tr><td>6</td><td>Apresentação</td><td>Mensagem</td><td>Formatação, criptografia, compressão</td></tr><tr><td>5</td><td>Sessão</td><td>Mensagem</td><td>Controle de sessões e diálogos</td></tr><tr><td>4</td><td>Transporte</td><td>Segmento</td><td>Entrega fim a fim, confiabilidade (TCP, UDP)</td></tr><tr><td>3</td><td>Rede</td><td>Pacote</td><td>Endereçamento lógico e roteamento (IP)</td></tr><tr><td><strong>2</strong></td><td><strong>Enlace de Dados</strong></td><td><strong>Quadro (Frame)</strong></td><td><strong>Entrega nó a nó, controle de erros, endereço MAC</strong></td></tr><tr><td><strong>1</strong></td><td><strong>Física</strong></td><td><strong>Bit</strong></td><td><strong>Transmissão bruta de bits pelo meio físico</strong></td></tr></tbody></table></div>
+<p><img src="./assets/08_camadas_fisico_enlace_1773621857854.png" width="auto" height="auto" alt/></p>
+<p><img src="./assets/image-17.png" width="auto" height="auto" alt/></p>
+<p>Modelo OSI com 7 camadas empilhadas, camadas 1 (Física) e 2 (Enlace) destacadas e expandidas com ícones de bits, quadros, MAC address e switch.</p>
+<blockquote>
+<p><strong>Analogia:</strong> Pense no modelo OSI como o processo de enviar uma carta. A camada 7 (Aplicação) é você escrevendo a carta. A camada 3 (Rede) é o CEP que indica a cidade destino. A <strong>camada 2 (Enlace)</strong> é o nome na caixa de correio do prédio, que identifica a pessoa exata naquele endereço. A <strong>camada 1 (Física)</strong> é o caminhão, o avião ou a moto que transporta fisicamente a carta.</p>
+</blockquote>
+<hr/>
+<h2 id="-3-camada-física-camada-1"><strong>⚡ 3. Camada Física (Camada 1)</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-3-camada-física-camada-1" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>Definição:</strong> A camada física (Tanenbaum, Cap. 2, Seção 2.1) é responsável pela transmissão de <strong>bits brutos</strong> (0s e 1s) através do meio de comunicação. Ela define as especificações elétricas, mecânicas, funcionais e procedimentais para ativar e manter a conexão física entre dispositivos.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th><strong>Característica</strong></th><th><strong>Detalhe</strong></th></tr></thead><tbody><tr><td><strong>Unidade de dados</strong></td><td>Bit (0 ou 1)</td></tr><tr><td><strong>O que define</strong></td><td>Como os bits são representados no meio (tensão, luz, frequência)</td></tr><tr><td><strong>Especificações elétricas</strong></td><td>Níveis de tensão (ex: +5V = 1, 0V = 0 em TTL), modulação</td></tr><tr><td><strong>Especificações mecânicas</strong></td><td>Formato do conector (RJ-45, LC, BNC), pinagem dos cabos</td></tr><tr><td><strong>Especificações funcionais</strong></td><td>Significado de cada pino (ex: pinos 1,2 = TX; pinos 3,6 = RX no RJ-45)</td></tr><tr><td><strong>Codificação</strong></td><td>Manchester, 4B/5B, 8B/10B, PAM-4 (como bits são codificados no sinal)</td></tr><tr><td><strong>Sinalização</strong></td><td>Banda base (Ethernet) ou banda larga (TV a cabo)</td></tr><tr><td><strong>Taxa de dados</strong></td><td>Medida em bps: 100 Mbps, 1 Gbps, 10 Gbps, etc.</td></tr></tbody></table></div>
+<h3 id="-exemplos-reais-no-cotidiano"><strong>💡 Exemplos Reais no Cotidiano</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-exemplos-reais-no-cotidiano" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li><strong>Cabo Ethernet CAT6:</strong> transmite sinais elétricos codificados como variações de tensão nos pares de cobre</li>
+<li><strong>Fibra óptica:</strong> transmite pulsos de luz (LED ou laser) pelo núcleo de vidro, representando 0s e 1s</li>
+<li><strong>Wi-Fi:</strong> ondas de rádio moduladas (OFDM) carregam os bits entre o Access Point e o dispositivo</li>
+<li><strong>Conector RJ-45:</strong> a especificação mecânica define 8 pinos organizados nos padrões T568A ou T568B</li>
+</ul>
+<h3 id="-padrões-de-cabeamento-ethernet"><strong>📌 Padrões de Cabeamento Ethernet</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-padrões-de-cabeamento-ethernet" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th><strong>Padrão</strong></th><th><strong>Velocidade</strong></th><th><strong>Meio</strong></th><th><strong>Distância</strong></th><th><strong>Nome Comum</strong></th></tr></thead><tbody><tr><td>10BASE-T</td><td>10 Mbps</td><td>Par trançado CAT3+</td><td>100 m</td><td>Ethernet</td></tr><tr><td>100BASE-TX</td><td>100 Mbps</td><td>Par trançado CAT5+</td><td>100 m</td><td>Fast Ethernet</td></tr><tr><td>1000BASE-T</td><td>1 Gbps</td><td>Par trançado CAT5e+</td><td>100 m</td><td>Gigabit Ethernet</td></tr><tr><td>10GBASE-T</td><td>10 Gbps</td><td>Par trançado CAT6a</td><td>100 m</td><td>10 Gigabit Ethernet</td></tr><tr><td>1000BASE-SX</td><td>1 Gbps</td><td>Fibra multimodo</td><td>550 m</td><td>Gigabit Ethernet (fibra)</td></tr><tr><td>10GBASE-LR</td><td>10 Gbps</td><td>Fibra monomodo</td><td>10 km</td><td>10GbE Long Reach</td></tr></tbody></table></div>
+<blockquote>
+<p><strong>Analogia:</strong> A camada física é como a infraestrutura de transporte: a estrada (meio), o tipo de veículo (sinalização), a largura da pista (taxa de dados) e as regras de como os veículos se movem (codificação). Ela não se preocupa com o que está sendo transportado, apenas com a entrega bruta do sinal.</p>
+</blockquote>
+<hr/>
+<h2 id="-4-camada-de-enlace-de-dados-camada-2"><strong>🔗 4. Camada de Enlace de Dados (Camada 2)</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-4-camada-de-enlace-de-dados-camada-2" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>Definição:</strong> A camada de enlace (Tanenbaum, Cap. 3, Seção 3.1) transforma o serviço “bruto” da camada física em uma <strong>comunicação confiável entre nós adjacentes</strong>. Ela organiza os bits em <strong>quadros (frames)</strong>, adiciona endereçamento local (MAC) e implementa detecção de erros.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th><strong>Característica</strong></th><th><strong>Detalhe</strong></th></tr></thead><tbody><tr><td><strong>Unidade de dados</strong></td><td>Quadro (frame)</td></tr><tr><td><strong>Endereçamento</strong></td><td>Endereço MAC (Media Access Control), 48 bits</td></tr><tr><td><strong>Enquadramento</strong></td><td>Organiza bits em quadros com delimitadores de início/fim</td></tr><tr><td><strong>Controle de erros</strong></td><td>CRC (Cyclic Redundancy Check) para detectar erros de transmissão</td></tr><tr><td><strong>Controle de acesso ao meio</strong></td><td>Define quem pode transmitir e quando (CSMA/CD, CSMA/CA, Token)</td></tr><tr><td><strong>Controle de fluxo</strong></td><td>Evita que um transmissor rápido sobrecarregue um receptor lento</td></tr><tr><td><strong>Subcamadas (IEEE)</strong></td><td>LLC (Logical Link Control, 802.2) e MAC (Media Access Control, 802.3/802.11)</td></tr></tbody></table></div>
+<h3 id="-exemplos-reais-no-cotidiano-1"><strong>💡 Exemplos Reais no Cotidiano</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-exemplos-reais-no-cotidiano-1" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li><strong>Switch Ethernet:</strong> opera na camada 2, encaminhando quadros com base no endereço MAC de destino</li>
+<li><strong>Placa de rede (NIC):</strong> implementa a camada 2, encapsulando dados em quadros Ethernet e verificando CRC</li>
+<li><strong>Wi-Fi (802.11):</strong> usa a camada de enlace para gerenciar o acesso ao meio sem fio via CSMA/CA</li>
+<li><strong>Erro detectado:</strong> quando um quadro chega corrompido, o CRC falha e o quadro é descartado silenciosamente</li>
+</ul>
+<h3 id="-subcamadas-da-camada-2-padrão-ieee"><strong>📌 Subcamadas da Camada 2 (Padrão IEEE)</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-subcamadas-da-camada-2-padrão-ieee" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th><strong>Subcamada</strong></th><th><strong>Padrão</strong></th><th><strong>Função</strong></th></tr></thead><tbody><tr><td><strong>LLC</strong> (Logical Link Control)</td><td>IEEE 802.2</td><td>Multiplexação de protocolos (identificar se o quadro carrega IPv4, IPv6, ARP), controle de fluxo</td></tr><tr><td><strong>MAC</strong> (Media Access Control)</td><td>IEEE 802.3 (Ethernet), 802.11 (Wi-Fi)</td><td>Endereçamento físico (MAC), enquadramento, controle de acesso ao meio</td></tr></tbody></table></div>
+<blockquote>
+<p><strong>Analogia:</strong> Se a camada física é o caminhão de entrega, a camada de enlace é o <strong>despachante do armazém local</strong>. Ele embala os produtos em caixas (enquadramento), coloca a etiqueta com o endereço do vizinho (MAC de destino), confere se a caixa chegou intacta (CRC) e organiza a fila de despacho para não haver colisão na doca (controle de acesso ao meio).</p>
+</blockquote>
+<hr/>
+<h2 id="️-5-endereço-mac-media-access-control"><strong>🏷️ 5. Endereço MAC (Media Access Control)</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#️-5-endereço-mac-media-access-control" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>Definição:</strong> O endereço MAC (Kurose, Cap. 6, Seção 6.4) é um identificador único de <strong>48 bits</strong> atribuído à interface de rede (NIC) pelo fabricante. É gravado na ROM da placa de rede e usado pela camada 2 para identificar origem e destino dentro da rede local.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th><strong>Característica</strong></th><th><strong>Detalhe</strong></th></tr></thead><tbody><tr><td><strong>Tamanho</strong></td><td>48 bits (6 bytes)</td></tr><tr><td><strong>Formato</strong></td><td>Hexadecimal separado por ”:” ou ”-” (ex: <code>AA:BB:CC:DD:EE:FF</code>)</td></tr><tr><td><strong>Primeiros 3 bytes</strong></td><td>OUI (Organizationally Unique Identifier): identifica o fabricante</td></tr><tr><td><strong>Últimos 3 bytes</strong></td><td>Identificador do dispositivo (atribuído pelo fabricante)</td></tr><tr><td><strong>Endereço Broadcast</strong></td><td><code>FF:FF:FF:FF:FF:FF</code> (enviado para todos os nós da rede local)</td></tr><tr><td><strong>Escopo</strong></td><td>Local: válido apenas dentro do domínio de broadcast (rede local)</td></tr><tr><td><strong>Diferença do IP</strong></td><td>MAC é físico/fixo (camada 2); IP é lógico/mutável (camada 3)</td></tr></tbody></table></div>
+<p><img src="./assets/11_endereco_mac_1773621892620.png" width="auto" height="auto" alt/></p>
+<p>Endereço MAC “AA:BB:CC:DD:EE:FF” com destaque visual: primeiros 3 bytes = OUI (fabricante) em ciano, últimos 3 bytes = ID do dispositivo em roxo. Exemplos de OUI de Apple, Intel e Cisco.</p>
+<h3 id="-exemplos-reais-no-cotidiano-2"><strong>💡 Exemplos Reais no Cotidiano</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-exemplos-reais-no-cotidiano-2" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li><strong>Filtragem MAC no roteador:</strong> alguns roteadores domésticos permitem restringir o acesso Wi-Fi a uma lista de MACs autorizados (embora contornável via MAC spoofing)</li>
+<li><strong>Identificação do fabricante:</strong> o OUI <code>00:50:56</code> identifica uma interface VMware, <code>AC:DE:48</code> identifica Apple, <code>00:1B:21</code> identifica Intel</li>
+<li><strong>Comando para descobrir:</strong> no Windows, <code>ipconfig /all</code> exibe o “Endereço Físico” (MAC); no Linux, <code>ip link show</code></li>
+</ul>
+<h3 id="-mac-vs-ip-tabela-comparativa"><strong>📌 MAC vs. IP: Tabela Comparativa</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-mac-vs-ip-tabela-comparativa" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th><strong>Aspecto</strong></th><th><strong>Endereço MAC</strong></th><th><strong>Endereço IP</strong></th></tr></thead><tbody><tr><td><strong>Camada OSI</strong></td><td>2 (Enlace)</td><td>3 (Rede)</td></tr><tr><td><strong>Tamanho</strong></td><td>48 bits (6 bytes)</td><td>32 bits (IPv4) ou 128 bits (IPv6)</td></tr><tr><td><strong>Formato</strong></td><td>Hexadecimal (<code>AA:BB:CC:DD:EE:FF</code>)</td><td>Decimal pontuado (<code>192.168.1.10</code>)</td></tr><tr><td><strong>Atribuição</strong></td><td>Fabricante (gravado na NIC)</td><td>Administrador ou DHCP (configurável)</td></tr><tr><td><strong>Escopo</strong></td><td>Rede local (domínio de broadcast)</td><td>Global (roteável entre redes)</td></tr><tr><td><strong>Mutabilidade</strong></td><td>Fixo (mas pode ser alterado via software)</td><td>Dinâmico (muda conforme a rede)</td></tr><tr><td><strong>Analogia</strong></td><td>CPF (identidade única da placa de rede)</td><td>Endereço residencial (pode mudar ao se mudar)</td></tr></tbody></table></div>
+<blockquote>
+<p><strong>Analogia:</strong> O endereço MAC é como o CPF de uma pessoa: único, atribuído de fábrica (nascimento) e não muda quando ela se muda. O endereço IP é como o endereço residencial: depende de onde a pessoa está morando e pode mudar quando ela se muda para outra rede.</p>
+</blockquote>
+<hr/>
+<h2 id="-6-o-padrão-ethernet-ieee-8023"><strong>📦 6. O Padrão Ethernet (IEEE 802.3)</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-6-o-padrão-ethernet-ieee-8023" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>Definição:</strong> Ethernet (Kurose, Cap. 6, Seção 6.4) é a tecnologia dominante para redes locais (LANs) desde os anos 1980. Padronizada pelo IEEE como 802.3, ela define o formato do quadro, o esquema de endereçamento (MAC) e o mecanismo de acesso ao meio (originalmente CSMA/CD).</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th><strong>Característica</strong></th><th><strong>Detalhe</strong></th></tr></thead><tbody><tr><td><strong>Origem</strong></td><td>Criada na Xerox PARC por Robert Metcalfe em 1973</td></tr><tr><td><strong>Padronização</strong></td><td>IEEE 802.3 (1983); múltiplas evoluções até 802.3bs (400 Gbps)</td></tr><tr><td><strong>Velocidades</strong></td><td>10 Mbps → 100 Mbps → 1 Gbps → 10 Gbps → 25/40/100/400 Gbps</td></tr><tr><td><strong>Topologia original</strong></td><td>Barramento (cabo coaxial) com CSMA/CD</td></tr><tr><td><strong>Topologia atual</strong></td><td>Estrela (switch) com full-duplex (sem colisões)</td></tr><tr><td><strong>Meio físico</strong></td><td>Par trançado (mais comum), fibra óptica, coaxial (obsoleto)</td></tr><tr><td><strong>Conectores</strong></td><td>RJ-45 (par trançado), LC/SC (fibra)</td></tr></tbody></table></div>
+<hr/>
+<h3 id="-61-estrutura-do-quadro-ethernet"><strong>📐 6.1 Estrutura do Quadro Ethernet</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-61-estrutura-do-quadro-ethernet" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>Definição:</strong> O quadro Ethernet (Tanenbaum, Cap. 4, Seção 4.3) é a unidade de dados da camada 2. Ele encapsula os dados da camada superior (pacote IP) e adiciona cabeçalho e trailer para entrega local.</p>
+<p><img src="./assets/09_quadro_ethernet_1773621868846.png" width="auto" height="auto" alt/></p>
+<p>Barra horizontal dividida em seções coloridas mostrando cada campo do quadro Ethernet com tamanhos em bytes.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th><strong>Campo</strong></th><th><strong>Tamanho</strong></th><th><strong>Função</strong></th></tr></thead><tbody><tr><td><strong>Preâmbulo</strong></td><td>7 bytes</td><td>Sequência de bits alternados (10101010…) para sincronizar os relógios do transmissor e receptor</td></tr><tr><td><strong>SFD</strong> (Start Frame Delimiter)</td><td>1 byte</td><td>Marca o início efetivo do quadro (<code>10101011</code>)</td></tr><tr><td><strong>MAC Destino</strong></td><td>6 bytes</td><td>Endereço MAC do dispositivo de destino</td></tr><tr><td><strong>MAC Origem</strong></td><td>6 bytes</td><td>Endereço MAC do dispositivo de origem</td></tr><tr><td><strong>Tipo/Tamanho</strong> (EtherType)</td><td>2 bytes</td><td>Identifica o protocolo encapsulado (<code>0x0800</code> = IPv4, <code>0x0806</code> = ARP, <code>0x86DD</code> = IPv6)</td></tr><tr><td><strong>Dados</strong> (Payload)</td><td>46 a 1500 bytes</td><td>Conteúdo útil: pacote IP, quadro ARP, etc.</td></tr><tr><td><strong>FCS</strong> (Frame Check Sequence)</td><td>4 bytes</td><td>CRC-32 para detecção de erros de transmissão</td></tr></tbody></table></div>
+<h3 id="-observações-importantes"><strong>📌 Observações Importantes</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-observações-importantes" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li><strong>MTU (Maximum Transmission Unit):</strong> o payload máximo de 1500 bytes define o MTU padrão Ethernet. Pacotes IP maiores precisam ser fragmentados</li>
+<li><strong>Tamanho mínimo:</strong> 64 bytes (sem preâmbulo/SFD). Se o payload for menor que 46 bytes, são adicionados bytes de preenchimento (padding)</li>
+<li><strong>Jumbo Frames:</strong> alguns ambientes (data centers) usam quadros com payload de até 9000 bytes para aumentar a eficiência</li>
+</ul>
+<blockquote>
+<p><strong>Analogia:</strong> O quadro Ethernet é como um envelope padronizado dos Correios. O preâmbulo/SFD é a marca d’água que identifica como “envelope oficial”. O MAC de destino é o destinatário, o MAC de origem é o remetente, o EtherType indica o tipo de conteúdo (carta, documento, foto), o payload é o conteúdo em si, e o FCS é um código de verificação que garante que o envelope não foi adulterado no caminho.</p>
+</blockquote>
+<hr/>
+<h2 id="-7-controle-de-acesso-ao-meio-csmacd-e-csmaca"><strong>🚦 7. Controle de Acesso ao Meio: CSMA/CD e CSMA/CA</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-7-controle-de-acesso-ao-meio-csmacd-e-csmaca" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="-71-csmacd-carrier-sense-multiple-access-with-collision-detection"><strong>🔵 7.1 CSMA/CD (Carrier Sense Multiple Access with Collision Detection)</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-71-csmacd-carrier-sense-multiple-access-with-collision-detection" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>Definição:</strong> O CSMA/CD (Tanenbaum, Cap. 4, Seção 4.3) é o mecanismo de acesso ao meio originalmente usado pelo Ethernet em redes half-duplex (barramento ou hubs). Ele permite que múltiplos dispositivos compartilhem o mesmo meio, detectando e tratando colisões.</p>
+<p><img src="./assets/10_csma_cd_1773621880861.png" width="auto" height="auto" alt/></p>
+<p>Fluxograma do algoritmo CSMA/CD: escutar canal → canal livre? → transmitir → colisão? → jam signal → espera aleatória (backoff) → repetir.</p>
+<p><strong>Funcionamento passo a passo:</strong></p>
+<ol>
+<li><strong>Escutar (Carrier Sense):</strong> antes de transmitir, o dispositivo verifica se o meio está livre</li>
+<li><strong>Transmitir:</strong> se o canal estiver livre, inicia a transmissão</li>
+<li><strong>Detectar colisão (Collision Detection):</strong> se dois dispositivos transmitirem simultaneamente, ambos detectam a colisão</li>
+<li><strong>Jam Signal:</strong> sinal de 32 bits enviado para garantir que todos os nós saibam da colisão</li>
+<li><strong>Backoff exponencial:</strong> os dispositivos aguardam um tempo aleatório (fórmula: 0 a 2ⁿ-1 slots, onde n = número de tentativas) antes de retransmitir</li>
+<li><strong>Retransmitir:</strong> após o tempo de espera, volta ao passo 1</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th><strong>Característica</strong></th><th><strong>Detalhe</strong></th></tr></thead><tbody><tr><td><strong>Tecnologia</strong></td><td>Ethernet half-duplex (hubs, barramento)</td></tr><tr><td><strong>Tipo</strong></td><td>Detecção de colisão após transmissão</td></tr><tr><td><strong>Eficiência</strong></td><td>Degrada com muitos nós e alto tráfego</td></tr><tr><td><strong>Status atual</strong></td><td>Obsoleto em LANs modernas (switches full-duplex eliminam colisões)</td></tr></tbody></table></div>
+<hr/>
+<h3 id="-72-csmaca-carrier-sense-multiple-access-with-collision-avoidance"><strong>🟢 7.2 CSMA/CA (Carrier Sense Multiple Access with Collision Avoidance)</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-72-csmaca-carrier-sense-multiple-access-with-collision-avoidance" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>Definição:</strong> O CSMA/CA (Tanenbaum, Cap. 4, Seção 4.4) é usado em redes sem fio (IEEE 802.11). Em redes wireless, detectar colisões durante a transmissão é impraticável (problema do terminal oculto), então o mecanismo busca <strong>evitar</strong> colisões em vez de detectá-las.</p>
+<p><strong>Funcionamento passo a passo:</strong></p>
+<ol>
+<li><strong>Escutar (Carrier Sense):</strong> o dispositivo verifica se o meio wireless está livre</li>
+<li><strong>IFS (Interframe Space):</strong> se o canal estiver livre, aguarda um intervalo de tempo antes de transmitir</li>
+<li><strong>RTS/CTS (opcional):</strong> envia um pedido de reserva (Request to Send) e aguarda confirmação (Clear to Send)</li>
+<li><strong>Transmitir:</strong> envia o quadro</li>
+<li><strong>ACK:</strong> o receptor envia um quadro de confirmação (acknowledgment). Se não receber ACK, assume que houve colisão e retransmite</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th><strong>Característica</strong></th><th><strong>Detalhe</strong></th></tr></thead><tbody><tr><td><strong>Tecnologia</strong></td><td>Wi-Fi (IEEE 802.11)</td></tr><tr><td><strong>Tipo</strong></td><td>Prevenção de colisão antes da transmissão</td></tr><tr><td><strong>Mecanismo extra</strong></td><td>RTS/CTS para resolver o problema do terminal oculto</td></tr><tr><td><strong>ACK obrigatório</strong></td><td>Sim, pois não é possível detectar colisão durante a transmissão</td></tr></tbody></table></div>
+<hr/>
+<h3 id="-csmacd-vs-csmaca-comparação"><strong>📌 CSMA/CD vs. CSMA/CA: Comparação</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-csmacd-vs-csmaca-comparação" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th><strong>Aspecto</strong></th><th><strong>CSMA/CD</strong></th><th><strong>CSMA/CA</strong></th></tr></thead><tbody><tr><td><strong>Meio</strong></td><td>Cabeado (Ethernet half-duplex)</td><td>Sem fio (Wi-Fi)</td></tr><tr><td><strong>Estratégia</strong></td><td>Detecta a colisão e retransmite</td><td>Evita a colisão antes de transmitir</td></tr><tr><td><strong>Confirmação (ACK)</strong></td><td>Não usa ACK na camada 2</td><td>Usa ACK obrigatório</td></tr><tr><td><strong>Problema resolvido</strong></td><td>Múltiplos acessos ao meio compartilhado</td><td>Terminal oculto em wireless</td></tr><tr><td><strong>Eficiência em carga alta</strong></td><td>Degrada significativamente</td><td>Degrada, mas com mais controle</td></tr><tr><td><strong>Status atual</strong></td><td>Obsoleto (switches full-duplex)</td><td>Ativo em todas as redes Wi-Fi</td></tr></tbody></table></div>
+<blockquote>
+<p><strong>Analogia:</strong> CSMA/CD é como uma conversa em grupo onde todos falam quando acham que há silêncio. Se dois falam ao mesmo tempo (colisão), ambos param e esperam um tempo aleatório antes de tentar novamente. CSMA/CA é como levantar a mão antes de falar: você sinaliza que quer falar (RTS), espera a autorização (CTS) e, após falar, espera a confirmação de que foi ouvido (ACK).</p>
+</blockquote>
+<hr/>
+<h2 id="-8-o-switch-e-a-tabela-de-endereços-mac"><strong>🔀 8. O Switch e a Tabela de Endereços MAC</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-8-o-switch-e-a-tabela-de-endereços-mac" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>Definição:</strong> O switch Ethernet (Kurose, Cap. 6, Seção 6.4) é um dispositivo de camada 2 que encaminha quadros de forma inteligente, usando uma <strong>tabela de endereços MAC</strong> (também chamada tabela CAM) para direcionar cada quadro apenas à porta onde está o dispositivo de destino.</p>
+<p><img src="./assets/12_switch_tabela_mac_1773621904574.png" width="auto" height="auto" alt/></p>
+<p>Switch com 4 portas numeradas, cada uma conectada a um dispositivo (PC-A, PC-B, PC-C, Servidor). Abaixo, tabela MAC mostrando a associação porta → endereço MAC. Seta mostrando quadro de PC-A encaminhado apenas para a porta do Servidor.</p>
+<h3 id="-como-o-switch-aprende-e-encaminha"><strong>📌 Como o Switch Aprende e Encaminha</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-como-o-switch-aprende-e-encaminha" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th><strong>Etapa</strong></th><th><strong>Ação</strong></th><th><strong>Descrição</strong></th></tr></thead><tbody><tr><td>1</td><td><strong>Receber quadro</strong></td><td>O switch recebe um quadro na porta X</td></tr><tr><td>2</td><td><strong>Aprender</strong></td><td>Registra o MAC de <strong>origem</strong> do quadro associado à porta X na tabela MAC</td></tr><tr><td>3</td><td><strong>Consultar tabela</strong></td><td>Procura o MAC de <strong>destino</strong> na tabela</td></tr><tr><td>4a</td><td><strong>Encaminhar (unicast)</strong></td><td>Se encontrar o MAC de destino, envia o quadro <strong>apenas</strong> pela porta correspondente</td></tr><tr><td>4b</td><td><strong>Inundar (flooding)</strong></td><td>Se <strong>não</strong> encontrar o MAC de destino, envia o quadro por <strong>todas</strong> as portas (exceto a de origem)</td></tr><tr><td>5</td><td><strong>Envelhecimento</strong></td><td>Entradas na tabela MAC expiram após um tempo (padrão: 300 segundos) se não forem renovadas</td></tr></tbody></table></div>
+<h3 id="-exemplo-passo-a-passo"><strong>📌 Exemplo Passo a Passo</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-exemplo-passo-a-passo" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Considere um switch com 4 portas e tabela MAC inicialmente vazia:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th><strong>Passo</strong></th><th><strong>Evento</strong></th><th><strong>Tabela MAC Após</strong></th></tr></thead><tbody><tr><td>1</td><td>PC-A (porta 1) envia quadro para PC-C</td><td>Porta 1 → MAC-A</td></tr><tr><td>2</td><td>Switch não conhece MAC-C: <strong>flooding</strong> para portas 2, 3 e 4</td><td>Porta 1 → MAC-A</td></tr><tr><td>3</td><td>PC-C (porta 3) responde para PC-A</td><td>Porta 1 → MAC-A, Porta 3 → MAC-C</td></tr><tr><td>4</td><td>Switch conhece MAC-A: encaminha <strong>apenas</strong> para porta 1</td><td>Porta 1 → MAC-A, Porta 3 → MAC-C</td></tr><tr><td>5</td><td>PC-B (porta 2) envia para PC-C</td><td>Porta 1 → MAC-A, Porta 2 → MAC-B, Porta 3 → MAC-C</td></tr><tr><td>6</td><td>Switch conhece MAC-C: encaminha <strong>apenas</strong> para porta 3</td><td>Sem alteração</td></tr></tbody></table></div>
+<h3 id="-exemplos-reais-no-cotidiano-3"><strong>💡 Exemplos Reais no Cotidiano</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-exemplos-reais-no-cotidiano-3" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li><strong>Switch gerenciável:</strong> administradores podem visualizar a tabela MAC via CLI com comandos como <code>show mac address-table</code> (Cisco IOS)</li>
+<li><strong>Segurança (Port Security):</strong> switches corporativos podem limitar o número de MACs por porta, prevenindo ataques de MAC flooding</li>
+<li><strong>VLANs:</strong> switches gerenciáveis segmentam a rede em VLANs, criando domínios de broadcast separados na camada 2</li>
+</ul>
+<h3 id="-hub-vs-switch-comparação"><strong>📌 Hub vs. Switch: Comparação</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-hub-vs-switch-comparação" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th><strong>Aspecto</strong></th><th><strong>Hub</strong></th><th><strong>Switch</strong></th></tr></thead><tbody><tr><td><strong>Camada OSI</strong></td><td>1 (Física)</td><td>2 (Enlace)</td></tr><tr><td><strong>Encaminhamento</strong></td><td>Replica para todas as portas</td><td>Encaminha apenas para a porta de destino</td></tr><tr><td><strong>Colisões</strong></td><td>Todas as portas compartilham o domínio de colisão</td><td>Cada porta é um domínio de colisão separado</td></tr><tr><td><strong>Tabela MAC</strong></td><td>Não possui</td><td>Aprende e consulta automaticamente</td></tr><tr><td><strong>Modo de operação</strong></td><td>Half-duplex (CSMA/CD ativo)</td><td>Full-duplex (sem colisões)</td></tr><tr><td><strong>Status</strong></td><td>Obsoleto</td><td>Padrão em todas as LANs modernas</td></tr></tbody></table></div>
+<blockquote>
+<p><strong>Analogia:</strong> Um hub é como um megafone em uma sala: quando um fala, todos ouvem, mesmo quem não é o destinatário. Um switch é como um telefonista de um hotel: ele sabe o ramal de cada quarto (tabela MAC) e conecta a ligação diretamente ao destinatário correto, sem incomodar os outros hóspedes.</p>
+</blockquote>
+<hr/>
+<h2 id="️-9-comparação-estrutural-camada-1-vs-camada-2"><strong>⚖️ 9. Comparação Estrutural: Camada 1 vs. Camada 2</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#️-9-comparação-estrutural-camada-1-vs-camada-2" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th><strong>Critério</strong></th><th><strong>Camada 1 (Física)</strong></th><th><strong>Camada 2 (Enlace)</strong></th></tr></thead><tbody><tr><td><strong>Unidade de dados</strong></td><td>Bit</td><td>Quadro (frame)</td></tr><tr><td><strong>Endereçamento</strong></td><td>Nenhum</td><td>Endereço MAC (48 bits)</td></tr><tr><td><strong>Função principal</strong></td><td>Transmissão bruta de bits pelo meio</td><td>Entrega confiável entre nós adjacentes</td></tr><tr><td><strong>Detecção de erros</strong></td><td>Nenhuma</td><td>CRC-32 (FCS)</td></tr><tr><td><strong>Dispositivo típico</strong></td><td>Repetidor, hub, cabo, conector</td><td>Switch, bridge, placa de rede (NIC)</td></tr><tr><td><strong>Exemplo de padrão</strong></td><td>1000BASE-T, 10GBASE-LR</td><td>IEEE 802.3 (Ethernet), IEEE 802.11 (Wi-Fi)</td></tr><tr><td><strong>Preocupação</strong></td><td>Sinal, voltagem, frequência, modulação</td><td>Quadros, MAC, controle de acesso, controle de erros</td></tr></tbody></table></div>
+<hr/>
+<h2 id="-10-tendências-contemporâneas"><strong>🔮 10. Tendências Contemporâneas</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-10-tendências-contemporâneas" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th><strong>Tendência</strong></th><th><strong>Descrição</strong></th><th><strong>Impacto</strong></th></tr></thead><tbody><tr><td><strong>Ethernet 800GbE (IEEE 802.3df)</strong></td><td>Próximo padrão Ethernet para 800 Gbps e 1,6 Tbps em data centers</td><td>Reduz a necessidade de agregação de enlaces, simplificando a topologia</td></tr><tr><td><strong>TSN (Time-Sensitive Networking)</strong></td><td>Extensão do Ethernet (IEEE 802.1) para tráfego em tempo real com latência garantida</td><td>Viabiliza Ethernet em automação industrial e veículos autônomos, substituindo redes proprietárias</td></tr><tr><td><strong>Wi-Fi 7 (802.11be) e CSMA/CA evoluído</strong></td><td>MLO (Multi-Link Operation): transmissão simultânea em múltiplas frequências</td><td>Reduz latência e aumenta confiabilidade do acesso ao meio sem fio</td></tr><tr><td><strong>MACsec (IEEE 802.1AE)</strong></td><td>Criptografia nativa na camada 2 (enlace) para redes Ethernet</td><td>Proteção contra interceptação e adulteração de quadros na rede local</td></tr><tr><td><strong>Smart NICs / DPUs</strong></td><td>Placas de rede com processadores dedicados que executam funções de camada 2 e acima em hardware</td><td>Descarregam o processamento de rede da CPU do servidor, aumentando performance em data centers</td></tr></tbody></table></div>
+<hr/>
+<h2 id="-11-resumo-estrutural"><strong>📋 11. Resumo Estrutural</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-11-resumo-estrutural" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th><strong>Conceito</strong></th><th><strong>Definição em Uma Frase</strong></th></tr></thead><tbody><tr><td><strong>Camada Física (1)</strong></td><td>Responsável pela transmissão bruta de bits pelo meio de comunicação</td></tr><tr><td><strong>Camada de Enlace (2)</strong></td><td>Organiza bits em quadros, adiciona endereçamento MAC e detecta erros</td></tr><tr><td><strong>Endereço MAC</strong></td><td>Identificador único de 48 bits da interface de rede, atribuído pelo fabricante</td></tr><tr><td><strong>OUI</strong></td><td>Primeiros 3 bytes do MAC que identificam o fabricante da placa de rede</td></tr><tr><td><strong>Quadro Ethernet</strong></td><td>Unidade de dados da camada 2 com preâmbulo, MACs, EtherType, payload e FCS</td></tr><tr><td><strong>MTU</strong></td><td>Tamanho máximo do payload Ethernet: 1500 bytes (padrão)</td></tr><tr><td><strong>CSMA/CD</strong></td><td>Acesso ao meio com detecção de colisão, usado em Ethernet half-duplex (obsoleto)</td></tr><tr><td><strong>CSMA/CA</strong></td><td>Acesso ao meio com prevenção de colisão, usado em redes Wi-Fi</td></tr><tr><td><strong>Switch</strong></td><td>Dispositivo de camada 2 que encaminha quadros usando tabela de endereços MAC</td></tr><tr><td><strong>Flooding</strong></td><td>Encaminhamento para todas as portas quando o MAC de destino é desconhecido</td></tr><tr><td><strong>Full-duplex</strong></td><td>Modo de operação onde transmissão e recepção ocorrem simultaneamente, eliminando colisões</td></tr></tbody></table></div>
+<hr/>
+<h2 id="-12-atividade-prática-pbl"><strong>🧩 12. Atividade Prática (PBL)</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-12-atividade-prática-pbl" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="-cenário-diagnóstico-de-rede-no-escritório"><strong>📌 Cenário: Diagnóstico de Rede no Escritório</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-cenário-diagnóstico-de-rede-no-escritório" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Você é o técnico de TI de um escritório com 8 computadores conectados a um switch de 16 portas. O gerente relata os seguintes problemas:</p>
+<p><strong>Problema 1:</strong> O PC-05 não consegue acessar a impressora de rede, mas acessa a internet normalmente.</p>
+<p><strong>Problema 2:</strong> Ao conectar um hub de 4 portas na porta 12 do switch (para expandir a rede), os usuários desse hub reclamam de lentidão e desconexões intermitentes.</p>
+<p><strong>Problema 3:</strong> O estagiário pergunta: “Se o endereço MAC é único e fixo, por que precisamos de endereço IP?”</p>
+<p><strong>Tarefas:</strong></p>
+<ol>
+<li><strong>Analise o Problema 1:</strong> O que pode causar a falha de comunicação entre PC-05 e a impressora, mas não com a internet? Considere camadas 1 e 2 no diagnóstico</li>
+<li><strong>Explique o Problema 2:</strong> Por que o hub causa lentidão? Relacione com domínios de colisão, CSMA/CD e full-duplex vs. half-duplex</li>
+<li><strong>Responda ao estagiário (Problema 3):</strong> Elabore uma explicação técnica, usando a analogia CPF vs. endereço residencial e o conceito de roteamento entre redes</li>
+<li><strong>Simule a tabela MAC:</strong> Considere que o switch acabou de ser ligado (tabela vazia). PC-01 (porta 1) envia um quadro para PC-08 (porta 8), que responde. Em seguida, PC-03 (porta 3) envia para PC-01. Descreva, quadro a quadro, como a tabela MAC evolui</li>
+<li><strong>Comando prático:</strong> Execute <code>ipconfig /all</code> (Windows) ou <code>ip link show</code> (Linux) no seu computador e identifique o endereço MAC da sua placa de rede. Pesquise o fabricante usando o OUI em <a href="https://macvendors.com/" class="external">macvendors.com<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+</ol>
+<hr/>
+<h2 id="-13-desafio-sala-de-aula-invertida"><strong>🚀 13. Desafio (Sala de Aula Invertida)</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-13-desafio-sala-de-aula-invertida" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>Para a próxima aula (Semana 4: Modelo OSI vs. TCP/IP, Jornada do Pacote):</strong></p>
+<ol>
+<li>Leia sobre as <strong>7 camadas do modelo OSI</strong> e as <strong>4 camadas do modelo TCP/IP</strong>, e crie uma tabela comparativa entre os dois modelos</li>
+<li>Pesquise: qual é a diferença entre <strong>encapsulamento</strong> e <strong>desencapsulamento</strong> de dados? Descreva o que acontece com os dados à medida que descem do nível 7 (Aplicação) ao nível 1 (Física) e vice-versa</li>
+<li>Investigue o protocolo <strong>ARP (Address Resolution Protocol)</strong>: qual é sua função e como ele conecta a camada 2 (MAC) à camada 3 (IP)?</li>
+<li>Experimento: execute <code>arp -a</code> no Prompt de Comando e analise o resultado. Quais endereços MAC e IP aparecem? O que é a entrada de broadcast?</li>
+</ol>
+<blockquote>
+<p><strong>Dica:</strong> consulte Tanenbaum, Cap. 1 (Seção 1.4: Modelos de Referência) e Kurose, Cap. 1 (Seção 1.5: Camadas de Protocolo e Modelos de Serviço).</p>
+</blockquote>
+<hr/>
+<h2 id="-14-referências-bibliográficas"><strong>📚 14. Referências Bibliográficas</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-14-referências-bibliográficas" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="-referências-obrigatórias"><strong>📖 Referências Obrigatórias</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-referências-obrigatórias" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th><strong>Autor</strong></th><th><strong>Obra</strong></th><th><strong>Capítulo/Seção Utilizada</strong></th></tr></thead><tbody><tr><td>TANENBAUM, A. S.; FEAMSTER, N.; WETHERALL, D. J.</td><td>Redes de Computadores. 6. ed. Pearson, 2021</td><td>Cap. 2 (Seção 2.1: Camada Física), Cap. 3 (Seção 3.1: Camada de Enlace), Cap. 4 (Seções 4.3: Ethernet, 4.4: 802.11)</td></tr><tr><td>KUROSE, J. F.</td><td>Redes de Computadores e a Internet. 8. ed. Pearson, 2021</td><td>Cap. 6: A Camada de Enlace e Redes Locais (Seções 6.1 a 6.4)</td></tr><tr><td>LACERDA, P. S. P. et al.</td><td>Projeto de Redes de Computadores. Sagah, 2021</td><td>Cap. 3: Cabeamento estruturado e padrões Ethernet</td></tr></tbody></table></div>
+<h3 id="-referências-complementares"><strong>📖 Referências Complementares</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-referências-complementares" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th><strong>Autor</strong></th><th><strong>Obra</strong></th><th><strong>Relevância</strong></th></tr></thead><tbody><tr><td>MAITINO NETO, R. et al.</td><td>Sistemas Operacionais de Redes Abertas. Sagah, 2020</td><td>Interfaces de rede e drivers na camada de enlace (Cap. 4)</td></tr><tr><td>ROHLING, L. J.</td><td>Segurança de Redes de Computadores. Contentus, 2020</td><td>Ataques na camada 2: MAC flooding, ARP spoofing, VLAN hopping (Cap. 3)</td></tr></tbody></table></div>
+<h3 id="-links-úteis"><strong>🔗 Links Úteis</strong><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-links-úteis" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th><strong>Recurso</strong></th><th><strong>Descrição</strong></th><th><strong>Link</strong></th></tr></thead><tbody><tr><td>IEEE 802.3 Standards</td><td>Documentação oficial dos padrões Ethernet</td><td><a href="https://www.ieee802.org/3/" class="external">ieee802.org/3<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td>MAC Address Lookup</td><td>Consulta de fabricante pelo OUI do endereço MAC</td><td><a href="https://macvendors.com/" class="external">macvendors.com<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td>Cisco Networking Academy</td><td>Cursos de fundamentos de redes e switching</td><td><a href="https://www.netacad.com/" class="external">netacad.com<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td>Wireshark</td><td>Analisador de protocolos, permite capturar e inspecionar quadros Ethernet ao vivo</td><td><a href="https://www.wireshark.org/" class="external">wireshark.org<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr><tr><td>Submarinecablemap</td><td>Mapa dos cabos submarinos (infraestrutura física da internet global)</td><td><a href="https://www.submarinecablemap.com/" class="external">submarinecablemap.com<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></td></tr></tbody></table></div></article><hr/><div class="page-footer"></div></div><div class="right sidebar"></div><footer class="footer "><div class="footer__brand"><img src="https://uniube.br/img/landing/logo_azul.svg" alt="Universidade de Uberaba" class="footer__logo footer__logo--light"/><img src="https://uniube.br/img/landing/logo_branca.svg" alt="Universidade de Uberaba" class="footer__logo footer__logo--dark"/><div class="footer__info"><span class="footer__name">Prof. Romualdo Filho</span><a class="footer__email" href="mailto:romualdo.filho@uniube.br">romualdo.filho@uniube.br</a></div></div><ul class="footer__links"><li><a href="https://uniube.br" target="_blank" rel="noopener noreferrer">Mural Uniube</a></li></ul></footer></div></div></body><script type="application/javascript" data-persist="true">function n(){let t=this.parentElement;t.classList.toggle("is-collapsed");let e=t.getElementsByClassName("callout-content")[0];if(!e)return;let l=t.classList.contains("is-collapsed");e.style.gridTemplateRows=l?"0fr":"1fr"}function c(){let t=document.getElementsByClassName("callout is-collapsible");for(let e of t){let l=e.getElementsByClassName("callout-title")[0],s=e.getElementsByClassName("callout-content")[0];if(!l||!s)continue;l.addEventListener("click",n),window.addCleanup(()=>l.removeEventListener("click",n));let o=e.classList.contains("is-collapsed");s.style.gridTemplateRows=o?"0fr":"1fr"}}document.addEventListener("nav",c);
+</script><script type="module" data-persist="true">function E(a,e){if(!a)return;function t(o){o.target===this&&(o.preventDefault(),o.stopPropagation(),e())}function n(o){o.key.startsWith("Esc")&&(o.preventDefault(),e())}a?.addEventListener("click",t),window.addCleanup(()=>a?.removeEventListener("click",t)),document.addEventListener("keydown",n),window.addCleanup(()=>document.removeEventListener("keydown",n))}function f(a){for(;a.firstChild;)a.removeChild(a.firstChild)}var m=class{constructor(e,t){this.container=e;this.content=t;this.setupEventListeners(),this.setupNavigationControls(),this.resetTransform()}isDragging=!1;startPan={x:0,y:0};currentPan={x:0,y:0};scale=1;MIN_SCALE=.5;MAX_SCALE=3;cleanups=[];setupEventListeners(){let e=this.onMouseDown.bind(this),t=this.onMouseMove.bind(this),n=this.onMouseUp.bind(this),o=this.onTouchStart.bind(this),r=this.onTouchMove.bind(this),i=this.onTouchEnd.bind(this),s=this.resetTransform.bind(this);this.container.addEventListener("mousedown",e),document.addEventListener("mousemove",t),document.addEventListener("mouseup",n),this.container.addEventListener("touchstart",o,{passive:!1}),document.addEventListener("touchmove",r,{passive:!1}),document.addEventListener("touchend",i),window.addEventListener("resize",s),this.cleanups.push(()=>this.container.removeEventListener("mousedown",e),()=>document.removeEventListener("mousemove",t),()=>document.removeEventListener("mouseup",n),()=>this.container.removeEventListener("touchstart",o),()=>document.removeEventListener("touchmove",r),()=>document.removeEventListener("touchend",i),()=>window.removeEventListener("resize",s))}cleanup(){for(let e of this.cleanups)e()}setupNavigationControls(){let e=document.createElement("div");e.className="mermaid-controls";let t=this.createButton("+",()=>this.zoom(.1)),n=this.createButton("-",()=>this.zoom(-.1)),o=this.createButton("Reset",()=>this.resetTransform());e.appendChild(n),e.appendChild(o),e.appendChild(t),this.container.appendChild(e)}createButton(e,t){let n=document.createElement("button");return n.textContent=e,n.className="mermaid-control-button",n.addEventListener("click",t),window.addCleanup(()=>n.removeEventListener("click",t)),n}onMouseDown(e){e.button===0&&(this.isDragging=!0,this.startPan={x:e.clientX-this.currentPan.x,y:e.clientY-this.currentPan.y},this.container.style.cursor="grabbing")}onMouseMove(e){this.isDragging&&(e.preventDefault(),this.currentPan={x:e.clientX-this.startPan.x,y:e.clientY-this.startPan.y},this.updateTransform())}onMouseUp(){this.isDragging=!1,this.container.style.cursor="grab"}onTouchStart(e){if(e.touches.length!==1)return;this.isDragging=!0;let t=e.touches[0];this.startPan={x:t.clientX-this.currentPan.x,y:t.clientY-this.currentPan.y}}onTouchMove(e){if(!this.isDragging||e.touches.length!==1)return;e.preventDefault();let t=e.touches[0];this.currentPan={x:t.clientX-this.startPan.x,y:t.clientY-this.startPan.y},this.updateTransform()}onTouchEnd(){this.isDragging=!1}zoom(e){let t=Math.min(Math.max(this.scale+e,this.MIN_SCALE),this.MAX_SCALE),n=this.content.getBoundingClientRect(),o=n.width/2,r=n.height/2,i=t-this.scale;this.currentPan.x-=o*i,this.currentPan.y-=r*i,this.scale=t,this.updateTransform()}updateTransform(){this.content.style.transform=`translate(${this.currentPan.x}px, ${this.currentPan.y}px) scale(${this.scale})`}resetTransform(){let t=this.content.querySelector("svg").getBoundingClientRect(),n=t.width/this.scale,o=t.height/this.scale;this.scale=1,this.currentPan={x:(this.container.clientWidth-n)/2,y:(this.container.clientHeight-o)/2},this.updateTransform()}},T=["--secondary","--tertiary","--gray","--light","--lightgray","--highlight","--dark","--darkgray","--codeFont"],y;document.addEventListener("nav",async()=>{let e=document.querySelector(".center").querySelectorAll("code.mermaid");if(e.length===0)return;y||=await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs");let t=y.default,n=new WeakMap;for(let r of e)n.set(r,r.innerText);async function o(){for(let s of e){s.removeAttribute("data-processed");let c=n.get(s);c&&(s.innerHTML=c)}let r=T.reduce((s,c)=>(s[c]=window.getComputedStyle(document.documentElement).getPropertyValue(c),s),{}),i=document.documentElement.getAttribute("saved-theme")==="dark";t.initialize({startOnLoad:!1,securityLevel:"loose",theme:i?"dark":"base",themeVariables:{fontFamily:r["--codeFont"],primaryColor:r["--light"],primaryTextColor:r["--darkgray"],primaryBorderColor:r["--tertiary"],lineColor:r["--darkgray"],secondaryColor:r["--secondary"],tertiaryColor:r["--tertiary"],clusterBkg:r["--light"],edgeLabelBackground:r["--highlight"]}}),await t.run({nodes:e})}await o(),document.addEventListener("themechange",o),window.addCleanup(()=>document.removeEventListener("themechange",o));for(let r=0;r<e.length;r++){let v=function(){let g=l.querySelector("#mermaid-space"),h=l.querySelector(".mermaid-content");if(!h)return;f(h);let w=i.querySelector("svg").cloneNode(!0);h.appendChild(w),l.classList.add("active"),g.style.cursor="grab",u=new m(g,h)},M=function(){l.classList.remove("active"),u?.cleanup(),u=null},i=e[r],s=i.parentElement,c=s.querySelector(".clipboard-button"),d=s.querySelector(".expand-button"),p=window.getComputedStyle(c),L=c.offsetWidth+parseFloat(p.marginLeft||"0")+parseFloat(p.marginRight||"0");d.style.right=`calc(${L}px + 0.3rem)`,s.prepend(d);let l=s.querySelector("#mermaid-container");if(!l)return;let u=null;d.addEventListener("click",v),E(l,M),window.addCleanup(()=>{u?.cleanup(),d.removeEventListener("click",v)})}});
+</script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="./postscript.js" type="module" data-persist="true"></script></html>

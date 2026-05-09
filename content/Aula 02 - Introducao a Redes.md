@@ -1,3 +1,7 @@
+﻿---
+title: "🌐 Aula  – Introdução a Redes de Computadores"
+---
+
 # Aula 02: Introdução a Redes de Computadores
 
 ## Objetivo da Aula

@@ -1,3 +1,7 @@
+﻿---
+title: "🌐 Aula  – Plano de Aulas e Organização da Disciplina"
+---
+
 # Aula 01: Plano de Aulas e Organização da Disciplina
 
 ---

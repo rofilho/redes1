@@ -1,3 +1,7 @@
+﻿---
+title: "🌐 🔌 Aula 04: Camada Física, Camada de Enlace e Ethernet"
+---
+
 # 🔌 Aula 04: Camada Física, Camada de Enlace e Ethernet
 
 > **Disciplina:** Redes de Computadores I (Cód. 49325) | **Curso:** Sistemas de Informação, Uniube **Semana 3** | 02/03/2026 | Prof. Romualdo Mathias Filho
