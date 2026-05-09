@@ -1,35 +1,233 @@
----
+﻿---
 title: "🌐 Redes de Computadores I"
+cssclasses:
+  - dashboard-layout
 ---
 
-# 🌐 Redes de Computadores I
+<style>
+/* ── Oculta elementos padrão do Quartz nesta página ── */
+.sidebar, .page-header, .article-title, .content-meta, footer,
+.lesson-nav { display: none !important; }
 
-**Disciplina:** Redes de Computadores I
-**Professor:** Romualdo Mathias Filho
+/* ── Reset total de largura ── */
+html, body, #quartz-root, #quartz-body, .page, .center, .center-content, article {
+  display: block !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow-x: hidden;
+}
 
----
+/* ── Container principal ── */
+.dashboard-container {
+  font-family: 'Outfit', sans-serif;
+  background-color: #0f172a;
+  color: #f1f5f9;
+  padding: 2rem 5%;
+  min-height: 100vh;
+  box-sizing: border-box;
+  width: 100%;
+}
+:root[saved-theme="light"] .dashboard-container {
+  background-color: #f8fafc;
+  color: #1e293b;
+}
 
-Bem-vindo ao portal de estudos! Aqui você encontra os roteiros das aulas, materiais complementares e as referências completas da disciplina.
+/* ── Hero banner ── */
+.hero {
+  position: relative;
+  height: 350px;
+  display: flex;
+  align-items: center;
+  padding: 2rem 3rem;
+  background-image: linear-gradient(135deg, #0f172a 0%, #8b5cf6 150%);
+  background-size: cover;
+  background-position: center;
+  border-radius: 16px;
+  margin-bottom: 3rem;
+  color: white;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: url('https://uniube.br/assets/images/logo.png') no-repeat right 30px center;
+  background-size: contain;
+  opacity: 0.1;
+}
+.tag {
+  display: inline-block;
+  padding: 4px 12px;
+  background: rgba(255,255,255,0.1);
+  border: 1px solid rgba(255,255,255,0.2);
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+  margin-bottom: 12px;
+}
+.hero h1 { font-size: 38px; margin: 0 0 10px; line-height: 1.1; color: white !important; -webkit-text-fill-color: white !important; }
+.hero p  { font-size: 15px; color: #cbd5e1; max-width: 500px; margin-bottom: 20px; }
+.btn {
+  padding: 10px 24px;
+  font-size: 15px;
+  font-weight: 600;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  background: white;
+  color: #0f172a;
+}
+.btn:hover { background: #f1f5f9; transform: scale(1.05); }
 
----
+/* ── Linhas de cards (módulos) ── */
+.row-wrapper { margin-bottom: 2.5rem; }
+.row-title   { font-size: 20px; font-weight: 700; margin-bottom: 15px; margin-left: 5px; opacity: 0.9; }
+.row {
+  display: flex;
+  gap: 16px;
+  padding: 10px 5px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.row::-webkit-scrollbar { display: none; }
 
-## 📝 Aulas
+/* ── Cards de aulas ── */
+.card {
+  flex: 0 0 calc(100% / 4 - 15px);
+  min-width: 220px;
+  background: #1e293b;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(255,255,255,0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+:root[saved-theme="light"] .card { background: #f1f5f9; border-color: #e2e8f0; }
+.card:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 15px 30px rgba(0,0,0,0.15); border-color: #8b5cf6; }
 
-- [[Aula 01 - Plano de Aulas e Organizacao|Aula 01 — Plano de Aulas e Organização]]
-- [[Aula 02 - Introducao a Redes|Aula 02 — Introdução a Redes]]
-- [[Aula 03 - Topologias e Meios|Aula 03 — Topologias e Meios de Transmissão]]
-- [[Aula 04 - Camada Fisica e Enlace|Aula 04 — Camada Física e de Enlace]]
-- [[Aula 05 - Modelo OSI vs TCP IP|Aula 05 — Modelo OSI vs TCP IP]]
-- [[Aula 06 - Pratica Enderecamento IPv4 e Sub-redes Packet Tracer|Aula 06 — Prática Endereçamento IPv4 e Sub-redes no Packet Tracer]]
-- [[Aula 07 - Camada de Transporte TCP UDP Portas e Three-Way Handshake|Aula 07 — Camada de Transporte: TCP, UDP, Portas e Three-Way Handshake]]
+.card-thumb {
+  height: 120px;
+  background: #0f172a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 40px;
+  position: relative;
+  overflow: hidden;
+}
+:root[saved-theme="light"] .card-thumb { background: #e2e8f0; }
+.card-thumb::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #8b5cf640 0%, transparent 100%);
+}
+.card-progress-bar { position: absolute; bottom: 0; left: 0; height: 4px; background: rgba(0,0,0,0.2); width: 100%; }
+.card-progress      { height: 100%; background: #8b5cf6; }
 
----
+.card-content { padding: 15px; flex: 1; display: flex; flex-direction: column; }
+.card-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin: 0 0 8px;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  color: #f1f5f9;
+}
+:root[saved-theme="light"] .card-title { color: #1e293b; }
+.card-meta { font-size: 11px; color: #64748b; margin-top: auto; display: flex; justify-content: space-between; }
 
-## 📚 Referências Bibliográficas Base
+/* ── Responsivo ── */
+@media (max-width: 768px) {
+  .card { flex: 0 0 calc(50% - 15px); }
+  .hero { padding: 1.5rem; height: 300px; }
+  .hero h1 { font-size: 28px; }
+}
+@media (max-width: 480px) { .card { flex: 0 0 85%; } }
+</style>
 
-1. **KUROSE, J. F.; ROSS, K. W.** *Redes de Computadores e a Internet: uma abordagem top-down.* 6ª ed. São Paulo: Pearson, 2013.
-2. **TANENBAUM, A. S.** *Redes de Computadores.* 5ª ed. São Paulo: Pearson, 2011.
+<div class="dashboard-container">
 
----
+<div class="hero">
+  <div style="position: relative; z-index: 10;">
+    <span class="tag">▶ Continue Estudando</span>
+    <h1>🌐 Redes de Computadores I</h1>
+    <p>Topologias, protocolos, camada física até transporte.</p>
+    <a href="./Aula-07---Camada-de-Transporte-TCP-UDP-Portas-e-Three-Way-Handshake" class="btn" data-spa>Retomar: 🌐 🟢 Aula 07: Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake</a>
+  </div>
+</div>
 
-> 💡 **Dica:** Use a barra de busca (ícone 🔍) ou o **Grafo de Conexões** no canto inferior direito para navegar entre os tópicos.
+<div class="row-wrapper">
+  <div class="row-title">Conteúdo da Disciplina</div>
+  <div class="row">
+    <a href="./Aula-01---Plano-de-Aulas-e-Organizacao" class="card" data-spa>
+      <div class="card-thumb">🌐<div class="card-progress-bar"><div class="card-progress" style="width: 32%"></div></div></div>
+      <div class="card-content">
+        <div class="card-title">🌐 Aula  – Plano de Aulas e Organização da Disciplina</div>
+        <div class="card-meta"><span>Acessar Aula</span><span></span></div>
+      </div>
+    </a>
+    <a href="./Aula-02---Introducao-a-Redes" class="card" data-spa>
+      <div class="card-thumb">🌐<div class="card-progress-bar"><div class="card-progress" style="width: 28%"></div></div></div>
+      <div class="card-content">
+        <div class="card-title">🌐 Aula  – Introdução a Redes de Computadores</div>
+        <div class="card-meta"><span>Acessar Aula</span><span></span></div>
+      </div>
+    </a>
+    <a href="./Aula-03---Topologias-e-Meios" class="card" data-spa>
+      <div class="card-thumb">🌐<div class="card-progress-bar"><div class="card-progress" style="width: 62%"></div></div></div>
+      <div class="card-content">
+        <div class="card-title">🌐 Aula  – Topologias e Meios de Transmissão</div>
+        <div class="card-meta"><span>Acessar Aula</span><span></span></div>
+      </div>
+    </a>
+    <a href="./Aula-04---Camada-Fisica-e-Enlace" class="card" data-spa>
+      <div class="card-thumb">🌐<div class="card-progress-bar"><div class="card-progress" style="width: 64%"></div></div></div>
+      <div class="card-content">
+        <div class="card-title">🌐 🔌 Aula 04: Camada Física, Camada de Enlace e Ethernet</div>
+        <div class="card-meta"><span>Acessar Aula</span><span></span></div>
+      </div>
+    </a>
+    <a href="./Aula-05---Modelo-OSI-vs-TCP-IP" class="card" data-spa>
+      <div class="card-thumb">🌐<div class="card-progress-bar"><div class="card-progress" style="width: 52%"></div></div></div>
+      <div class="card-content">
+        <div class="card-title">🌐 Aula  – Modelo OSI vs. TCP/IP, ARP e Prática no Packet Tracer</div>
+        <div class="card-meta"><span>Acessar Aula</span><span></span></div>
+      </div>
+    </a>
+    <a href="./Aula-06---Pratica-Enderecamento-IPv4-e-Sub-redes-Packet-Tracer" class="card" data-spa>
+      <div class="card-thumb">🌐<div class="card-progress-bar"><div class="card-progress" style="width: 78%"></div></div></div>
+      <div class="card-content">
+        <div class="card-title">🌐 Aula  – Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer</div>
+        <div class="card-meta"><span>Acessar Aula</span><span></span></div>
+      </div>
+    </a>
+    <a href="./Aula-07---Camada-de-Transporte-TCP-UDP-Portas-e-Three-Way-Handshake" class="card" data-spa>
+      <div class="card-thumb">🌐<div class="card-progress-bar"><div class="card-progress" style="width: 79%"></div></div></div>
+      <div class="card-content">
+        <div class="card-title">🌐 🟢 Aula 07: Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake</div>
+        <div class="card-meta"><span>Acessar Aula</span><span></span></div>
+      </div>
+    </a>
+
+  </div>
+</div>
+
+</div>
