@@ -1,5 +1,5 @@
 ﻿---
-title: "🖥️ Aula - 06: 🌐 Aula  – Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer"
+title: "🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer"
 ---
 
 
@@ -367,6 +367,7 @@ Router# show ip route
 | NetworkChuck | Subnetting is simple | https://www.youtube.com/watch?v=ecCuyq-Wprc |
 | Cisco NetAcad | Packet Tracer — Getting Started | https://www.youtube.com/watch?v=BvnHh3pJdgs |
 | David Bombal | DHCP Explained | https://www.youtube.com/watch?v=e6-TaH5bkjo |
+
 
 
 

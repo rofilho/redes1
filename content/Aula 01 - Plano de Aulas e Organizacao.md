@@ -1,5 +1,5 @@
 ﻿---
-title: "🖥️ Aula - 01: 🌐 Aula  – Plano de Aulas e Organização da Disciplina"
+title: "🖥️ Aula - 01: Plano de Aulas e Organização da Disciplina"
 ---
 
 
@@ -173,6 +173,7 @@ Semana 20 – 29/06 – Encerramento e lançamento de notas
 3. SUSE LLC e Colaboradores. SUSE Linux Enterprise Desktop 15 SP6: guia de administração. Luxemburgo: SUSE S.A., 2023.
 4. TANENBAUM, Andrew S.; BOS, Herbert. Sistemas operacionais modernos. 5. ed. São Paulo: Pearson, 2024.
 5. TANENBAUM, Andrew S.; STEEN, Maarten Van. Sistemas distribuídos: princípios e paradigmas. 2. ed. São Paulo: Pearson Prentice Hall, 2007.
+
 
 
 
