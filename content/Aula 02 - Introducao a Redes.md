@@ -1,5 +1,5 @@
 ﻿---
-title: "🌐 Aula  – Introdução a Redes de Computadores"
+title: "Aula 02 - 🌐 Aula  – Introdução a Redes de Computadores"
 ---
 
 
@@ -97,4 +97,5 @@ Para reforçar o aprendizado, pesquise sobre a história da internet e como ela 
 - **Vídeo:** "Como funciona a Internet?" - YouTube
 
 Bons estudos e até a próxima aula!
+
 
