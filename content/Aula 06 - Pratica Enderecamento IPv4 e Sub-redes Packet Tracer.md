@@ -1,15 +1,15 @@
 ﻿---
-title: "Aula 06 - 🌐 Aula  – Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer"
+title: "🖥️ Aula - 06: 🌐 Aula  – Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer"
 ---
 
 
-# Aula 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
+# 🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
 
 > **Disciplina:** Redes de Computadores I (Cód. 49325) | **Curso:** Sistemas de Informação, Uniube | **Semana 5** | 22/04/2026 | Prof. Romualdo Mathias Filho
 
 ---
 
-## 🎯 0. Objetivo da Aula
+# 🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
 
 Ao final desta aula prática, o aluno deve ser capaz de:
 
@@ -21,7 +21,7 @@ Ao final desta aula prática, o aluno deve ser capaz de:
 
 ---
 
-## 🔄 1. Revisão Rápida (5 min)
+# 🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
 
 | Conceito (Aula 05) | Aplicação Hoje |
 |---|---|
@@ -35,7 +35,7 @@ Ao final desta aula prática, o aluno deve ser capaz de:
 
 ---
 
-## 📋 2. Pré-requisitos
+# 🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
 
 - [ ] Cisco Packet Tracer instalado (versão 8.x ou superior)
 - [ ] Conta na Cisco NetAcad para download: https://www.netacad.com/courses/packet-tracer
@@ -43,13 +43,13 @@ Ao final desta aula prática, o aluno deve ser capaz de:
 
 ---
 
-## 🔬 3. Exercícios Práticos
+# 🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
 
 ⏱️ **Tempo estimado total:** 90 minutos | Faça em ordem — cada exercício usa a topologia do anterior.
 
 ---
 
-### 📌 Exercício 1: Montando a Topologia Base
+# 🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
 
 **Objetivo:** Construir a rede que usaremos em todos os exercícios.
 
@@ -79,7 +79,7 @@ Rede A: 192.168.10.0/24        Rede B: 192.168.20.0/24
 
 ---
 
-### 📌 Exercício 2: Configurando IPs nos PCs (Rede A)
+# 🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
 
 **Objetivo:** Atribuir endereços IPv4 estáticos aos PCs da Rede A.
 
@@ -99,7 +99,7 @@ Rede A: 192.168.10.0/24        Rede B: 192.168.20.0/24
 
 ---
 
-### 📌 Exercício 3: Configurando IPs nos PCs (Rede B)
+# 🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
 
 **Objetivo:** Atribuir endereços IPv4 estáticos aos PCs da Rede B.
 
@@ -120,7 +120,7 @@ Rede A: 192.168.10.0/24        Rede B: 192.168.20.0/24
 
 ---
 
-### 📌 Exercício 4: Configurando as Interfaces do Roteador
+# 🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
 
 **Objetivo:** Ativar e endereçar as interfaces do roteador R0 via CLI.
 
@@ -152,7 +152,7 @@ Router# show ip interface brief
 
 ---
 
-### 📌 Exercício 5: Testando a Conectividade Entre Redes
+# 🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
 
 **Objetivo:** Verificar que o roteamento entre as duas redes está funcionando.
 
@@ -174,7 +174,7 @@ ping 192.168.20.11    → (PC3, rede diferente)
 
 ---
 
-### 📌 Exercício 6: Observando o ARP e o Roteamento no Modo Simulação
+# 🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
 
 **Objetivo:** Visualizar o que acontece "dentro" dos pacotes quando cruzam o roteador.
 
@@ -194,7 +194,7 @@ ping 192.168.20.11    → (PC3, rede diferente)
 
 ---
 
-### 📌 Exercício 7: Sub-redes com CIDR — Dividindo a Rede
+# 🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
 
 **Objetivo:** Criar uma nova sub-rede menor (/26) e verificar os limites de endereçamento.
 
@@ -218,7 +218,7 @@ ping 192.168.20.11    → (PC3, rede diferente)
 
 ---
 
-### 📌 Exercício 8: Configurando DHCP no Roteador
+# 🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
 
 **Objetivo:** Fazer o roteador distribuir IPs automaticamente para os PCs da Rede B.
 
@@ -245,7 +245,7 @@ Router(dhcp-config)# exit
 
 ---
 
-### 📌 Exercício 9: Rota Estática Manual
+# 🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
 
 **Objetivo:** Adicionar manualmente uma rota no roteador para uma rede que ele não conhece.
 
@@ -271,7 +271,7 @@ Router# show ip route
 
 ---
 
-### 📌 Exercício 10: Cenário de Troubleshooting
+# 🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
 
 **Objetivo:** Diagnosticar e corrigir falhas de conectividade em uma topologia com problemas propositais.
 
@@ -294,7 +294,7 @@ Router# show ip route
 
 ---
 
-## ⚠️ Troubleshooting Comum
+# 🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
 
 | Problema | Causa Provável | Solução |
 |---|---|---|
@@ -306,7 +306,7 @@ Router# show ip route
 
 ---
 
-## 📝 Entrega da Aula
+# 🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
 
 **Salve o arquivo `.pkt` com o nome:** `SeuNome_Aula06_Redes.pkt`
 
@@ -325,7 +325,7 @@ Router# show ip route
 
 ---
 
-## 📋 Resumo da Prática
+# 🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
 
 | O que fizemos | Comando/Ferramenta | Conceito Relacionado |
 |---|---|---|
@@ -341,9 +341,9 @@ Router# show ip route
 
 ---
 
-## 📚 Referências Bibliográficas
+# 🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
 
-### Referências Obrigatórias
+# 🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
 
 | Autor | Obra | Capítulo/Seção |
 |---|---|---|
@@ -351,7 +351,7 @@ Router# show ip route
 | KUROSE, J. F. | Redes de Computadores e a Internet. 8. ed. Pearson, 2021 | Cap. 4 (Seção 4.3: Endereçamento IPv4, CIDR, DHCP) |
 | CISCO NETWORKING ACADEMY | Curso CCNAv7: Introduction to Networks | Módulos 7–11: Endereçamento IP, Sub-redes, DHCP, Roteamento |
 
-### Links Úteis
+# 🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
 
 | Recurso | Link |
 |---|---|
@@ -360,13 +360,14 @@ Router# show ip route
 | Documentação DHCP Cisco IOS | https://www.cisco.com/c/en/us/td/docs/ios/12_4t/ip_addr/configuration/guide/htdhcpsvr.html |
 | RFC 1918 — IPs Privados | https://datatracker.ietf.org/doc/html/rfc1918 |
 
-### Vídeos de Apoio
+# 🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
 
 | Canal/Autor | Título | Link |
 |---|---|---|
 | NetworkChuck | Subnetting is simple | https://www.youtube.com/watch?v=ecCuyq-Wprc |
 | Cisco NetAcad | Packet Tracer — Getting Started | https://www.youtube.com/watch?v=BvnHh3pJdgs |
 | David Bombal | DHCP Explained | https://www.youtube.com/watch?v=e6-TaH5bkjo |
+
 
 
 

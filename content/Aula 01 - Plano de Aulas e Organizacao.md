@@ -1,9 +1,9 @@
 ﻿---
-title: "Aula 01 - 🌐 Aula  – Plano de Aulas e Organização da Disciplina"
+title: "🖥️ Aula - 01: 🌐 Aula  – Plano de Aulas e Organização da Disciplina"
 ---
 
 
-# Aula 01: Plano de Aulas e Organização da Disciplina
+# 🖥️ Aula - 01: Plano de Aulas e Organização da Disciplina
 
 ---
 
@@ -17,17 +17,17 @@ Carga horária não presencial: 12 h
 
 Docente: Romualdo Mathias Filho
 
-## Ementa
+# 🖥️ Aula - 01: Plano de Aulas e Organização da Disciplina
 
 A disciplina aborda conceitos básicos de redes de computadores, os modelos de referência OSI e TCP/IP e as bases do endereçamento IPv4/IPv6. Inclui construção e gerenciamento de cenários de rede no Cisco Packet Tracer, configuração de roteamento estático e comandos em roteadores Cisco. Também contempla serviços DNS e Web, redes P2P, redes sem fio e mobilidade, além da conexão com provedores de serviços de Internet (ISP).
 
-## Objetivos
+# 🖥️ Aula - 01: Plano de Aulas e Organização da Disciplina
 
-## Objetivo geral
+# 🖥️ Aula - 01: Plano de Aulas e Organização da Disciplina
 
 Reconhecer a organização hierárquica das principais arquiteturas de redes de computadores, OSI e TCP/IP, bem como os aspectos ligados aos seus protocolos.
 
-## Objetivos específicos
+# 🖥️ Aula - 01: Plano de Aulas e Organização da Disciplina
 
 - Identificar a organização hierárquica das arquiteturas OSI e TCP/IP.
 - Identificar protocolos de acesso ao meio e o ambiente mais adequado à aplicação de cada um.
@@ -36,47 +36,47 @@ Reconhecer a organização hierárquica das principais arquiteturas de redes de 
 - Aplicar conceitos de transporte, policiamento e endereçamento TCP/IP em diferentes tipos de redes, com destaque para a Internet.
 - Relacionar aspectos básicos de segurança e gerenciamento em redes de computadores.
 
-## Conteúdo programático
+# 🖥️ Aula - 01: Plano de Aulas e Organização da Disciplina
 
-## Unidade 1 – Fundamentos de redes
+# 🖥️ Aula - 01: Plano de Aulas e Organização da Disciplina
 
 - Conceitos básicos de redes de computadores
 - Componentes, tipos e conexões de rede
 - Fundamentos de endereçamento IP e roteamento
 
-## Unidade 2 – Arquiteturas OSI e TCP/IP
+# 🖥️ Aula - 01: Plano de Aulas e Organização da Disciplina
 
 - Modelos de referência OSI e TCP/IP
 - Protocolos de cada camada
 - Formas de endereçamento das redes e de seus componentes
 
-## Unidade 3 – Endereçamento IP
+# 🖥️ Aula - 01: Plano de Aulas e Organização da Disciplina
 
 - Classes de endereçamento IPv4
 - Redes privadas e públicas
 - CIDR e prefixos de rede
 - Funcionamento da Internet: IP e DNS
 
-## Unidade 4 – Simulação com Cisco Packet Tracer
+# 🖥️ Aula - 01: Plano de Aulas e Organização da Disciplina
 
 - Introdução ao Cisco Packet Tracer
 - Cenário simples: dois hosts e um switch
 - Cenário com duas redes interligadas por roteador e gateway padrão
 
-## Unidade 5 – Roteamento e CLI Cisco
+# 🖥️ Aula - 01: Plano de Aulas e Organização da Disciplina
 
 - Conceitos básicos de roteamento
 - Configuração de redes com múltiplos roteadores
 - Rotas estáticas em múltiplas redes com diferentes prefixos
 - Comandos de configuração em roteadores Cisco (CLI)
 
-## Unidade 6 – Serviços de rede
+# 🖥️ Aula - 01: Plano de Aulas e Organização da Disciplina
 
 - Servidores DNS
 - Servidores Web (HTTP/HTTPS)
 - Inserção de serviços em cenários de rede
 
-## Unidade 7 – Conectividade, Wireless e ISP
+# 🖥️ Aula - 01: Plano de Aulas e Organização da Disciplina
 
 - Clientes e servidores
 - Dispositivos de rede
@@ -84,13 +84,13 @@ Reconhecer a organização hierárquica das principais arquiteturas de redes de 
 - Redes sem fio (802.11) e mobilidade
 - Opções de conectividade com ISP e cenário com conexão a um provedor
 
-## Metodologia
+# 🖥️ Aula - 01: Plano de Aulas e Organização da Disciplina
 
 As aulas presenciais serão expositivas e dialogadas, com uso de metodologias ativas que colocam o estudante como protagonista do processo de aprendizagem. Serão realizadas atividades individuais e em grupo, como estudos de caso, trabalhos práticos em laboratório, seminários, projetos e dinâmicas, apoiadas pelo uso de simuladores como o Cisco Packet Tracer.
 
 A parte não presencial será desenvolvida no AVA Uniube On-line, com estudos autônomos, vídeos, materiais digitais e atividades orientadas, em modelo de sala de aula invertida e resolução de problemas.
 
-## Sistema de avaliação
+# 🖥️ Aula - 01: Plano de Aulas e Organização da Disciplina
 
 Pontuação total: 100 pontos.
 
@@ -116,7 +116,7 @@ Avaliação institucional
 
 As avaliações poderão ser aplicadas de forma escrita, prática em laboratório, estudos de caso e projetos, de acordo com os objetivos de aprendizagem do componente.
 
-## Cronograma (2026/1)
+# 🖥️ Aula - 01: Plano de Aulas e Organização da Disciplina
 
 Semana 1 – 16/02 – Plano de ensino e introdução às redes
 
@@ -158,20 +158,21 @@ Semana 19 – 22/06 – Avaliação N2
 
 Semana 20 – 29/06 – Encerramento e lançamento de notas
 
-## Referências
+# 🖥️ Aula - 01: Plano de Aulas e Organização da Disciplina
 
-## Bibliografia básica
+# 🖥️ Aula - 01: Plano de Aulas e Organização da Disciplina
 
 1. KUROSE, J. F. Redes de computadores e a internet: uma abordagem top-down. 8. ed. São Paulo: Pearson Education do Brasil, 2021.
 2. LACERDA, P. S. P.; SOARES, J. A.; LENZ, M. L. et al. Projeto de Redes de Computadores. Porto Alegre: Sagah, 2021.
 3. TANENBAUM, Andrew S.; FEAMSTER, Nicholas; WETHERALL, David J. Redes de Computadores. 6. ed. São Paulo: Pearson, 2021.
 
-## Bibliografia complementar
+# 🖥️ Aula - 01: Plano de Aulas e Organização da Disciplina
 
 1. MAITINO NETO, Roque et al. Sistemas operacionais de redes abertas. Porto Alegre: SAGAH, 2020.
 2. ROHLING, Luis José. Segurança de redes de computadores. Curitiba: Contentus, 2020.
 3. SUSE LLC e Colaboradores. SUSE Linux Enterprise Desktop 15 SP6: guia de administração. Luxemburgo: SUSE S.A., 2023.
 4. TANENBAUM, Andrew S.; BOS, Herbert. Sistemas operacionais modernos. 5. ed. São Paulo: Pearson, 2024.
 5. TANENBAUM, Andrew S.; STEEN, Maarten Van. Sistemas distribuídos: princípios e paradigmas. 2. ed. São Paulo: Pearson Prentice Hall, 2007.
+
 
 

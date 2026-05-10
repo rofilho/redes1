@@ -1,19 +1,19 @@
 ﻿---
-title: "Aula 02 - 🌐 Aula  – Introdução a Redes de Computadores"
+title: "🖥️ Aula - 02: 🌐 Aula  – Introdução a Redes de Computadores"
 ---
 
 
-# Aula 02: Introdução a Redes de Computadores
+# 🖥️ Aula - 02: Introdução a Redes de Computadores
 
-## Objetivo da Aula
+# 🖥️ Aula - 02: Introdução a Redes de Computadores
 
 Bem-vindos à disciplina de Redes de Computadores! Nesta primeira aula, vamos entender o que são redes de computadores, por que elas são importantes e como fazem parte do nosso dia a dia. Além disso, vamos explorar os principais tipos de redes, os componentes que as compõem e um panorama sobre como os dados trafegam na internet.
 
-## O que é uma Rede de Computadores?
+# 🖥️ Aula - 02: Introdução a Redes de Computadores
 
 Uma rede de computadores é um conjunto de dispositivos interconectados que compartilham informações e recursos. Pense na internet: você acessa sites, faz chamadas de vídeo, joga online e baixa arquivos. Tudo isso acontece graças às redes. Mas não só a internet – redes também conectam computadores dentro de empresas, universidades e até mesmo na sua casa.
 
-### Exemplos de Redes no Cotidiano:
+# 🖥️ Aula - 02: Introdução a Redes de Computadores
 
 - **A rede Wi-Fi da sua casa** que conecta celulares, notebooks e Smart TVs.
 - **A rede de computadores de um banco**, que interliga terminais de autoatendimento e servidores.
@@ -22,7 +22,7 @@ Uma rede de computadores é um conjunto de dispositivos interconectados que comp
 
 ![[assets/image 1.png]]
 
-## Tipos de Redes
+# 🖥️ Aula - 02: Introdução a Redes de Computadores
 
 As redes podem ser classificadas de acordo com sua abrangência e propósito:
 
@@ -34,7 +34,7 @@ As redes podem ser classificadas de acordo com sua abrangência e propósito:
 
 ![[assets/image 2.png]]
 
-## Componentes Básicos de uma Rede
+# 🖥️ Aula - 02: Introdução a Redes de Computadores
 
 Para que uma rede funcione, são necessários alguns elementos essenciais:
 
@@ -42,7 +42,7 @@ Para que uma rede funcione, são necessários alguns elementos essenciais:
 - **Meios de Transmissão:** Cabos de rede (Ethernet), conexões Wi-Fi, fibra óptica.
 - **Protocolos de Comunicação:** Conjuntos de regras que garantem a comunicação eficiente entre os dispositivos, como TCP/IP e HTTP.
 
-### Como os Dispositivos se Comunicam?
+# 🖥️ Aula - 02: Introdução a Redes de Computadores
 
 Os dispositivos trocam informações usando protocolos de comunicação. O mais conhecido é o **Protocolo de Internet (IP)**, que permite que os dados sejam enviados de um ponto ao outro de forma organizada e confiável. Além dele, outros protocolos importantes incluem:
 
@@ -52,7 +52,7 @@ Os dispositivos trocam informações usando protocolos de comunicação. O mais 
 
 ![[assets/image 3.png]]
 
-### Experimento Prático
+# 🖥️ Aula - 02: Introdução a Redes de Computadores
 
 Para tornar esse conceito mais claro, vamos realizar um teste simples usando o comando `ping`.
 
@@ -62,7 +62,7 @@ Para tornar esse conceito mais claro, vamos realizar um teste simples usando o c
 
 ![[assets/image 4.png]]
 
-### Como os Dados Trafegam na Internet?
+# 🖥️ Aula - 02: Introdução a Redes de Computadores
 
 Quando você acessa um site, muitas coisas acontecem nos bastidores:
 
@@ -73,7 +73,7 @@ Quando você acessa um site, muitas coisas acontecem nos bastidores:
 
 ![[assets/image 5.png]]
 
-## Discussão
+# 🖥️ Aula - 02: Introdução a Redes de Computadores
 
 Agora que conhecemos os conceitos básicos, vamos discutir algumas questões:
 
@@ -81,7 +81,7 @@ Agora que conhecemos os conceitos básicos, vamos discutir algumas questões:
 2. Já enfrentaram problemas com conexão à internet? O que pode ter causado?
 3. Como vocês acham que redes empresariais diferem das redes domésticas?
 
-## Conclusão
+# 🖥️ Aula - 02: Introdução a Redes de Computadores
 
 Hoje exploramos os conceitos fundamentais das redes de computadores e sua importância. Nos próximos encontros, vamos aprofundar no funcionamento das redes, explorando os meios de transmissão e os dispositivos envolvidos na comunicação.
 
@@ -89,7 +89,7 @@ Para reforçar o aprendizado, pesquise sobre a história da internet e como ela 
 
 ---
 
-## Recursos para Estudo
+# 🖥️ Aula - 02: Introdução a Redes de Computadores
 
 - **Livro:** "Redes de Computadores" - Tanenbaum
 - **Cisco Networking Academy:** [https://www.netacad.com/](https://www.netacad.com/)
@@ -97,5 +97,6 @@ Para reforçar o aprendizado, pesquise sobre a história da internet e como ela 
 - **Vídeo:** "Como funciona a Internet?" - YouTube
 
 Bons estudos e até a próxima aula!
+
 
 

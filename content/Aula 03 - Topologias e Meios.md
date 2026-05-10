@@ -1,21 +1,21 @@
 ﻿---
-title: "Aula 03 - 🌐 Aula  – Topologias e Meios de Transmissão"
+title: "🖥️ Aula - 03: 🌐 Aula  – Topologias e Meios de Transmissão"
 ---
 
 
-# Aula 03:  Topologias e Meios de Transmissão
+# 🖥️ Aula - 03: Topologias e Meios de Transmissão
 
-## Objetivo da Aula
+# 🖥️ Aula - 03: Topologias e Meios de Transmissão
 
 Hoje vamos aprofundar nossos conhecimentos sobre como as redes são organizadas fisicamente e logicamente. Vamos estudar as topologias de redes e os diferentes meios de transmissão utilizados para interligar dispositivos, entendendo como essas escolhas impactam o desempenho e a segurança da comunicação.
 
-## O que são Topologias de Rede?
+# 🖥️ Aula - 03: Topologias e Meios de Transmissão
 
 A topologia de rede define como os dispositivos estão conectados entre si e como os dados trafegam pela rede. Podemos falar em topologia física (como os cabos e dispositivos estão realmente ligados) e topologia lógica (como os dados circulam).
 
 Diferentes topologias trazem vantagens e desvantagens em termos de desempenho, custo, facilidade de expansão e tolerância a falhas.
 
-### Tipos de Topologias de Rede
+# 🖥️ Aula - 03: Topologias e Meios de Transmissão
 
 1. **Topologia em Barramento (Bus)**
     
@@ -58,13 +58,13 @@ Diferentes topologias trazem vantagens e desvantagens em termos de desempenho, c
     ![[assets/image 10.png]]
     
 
-### Meios de Transmissão
+# 🖥️ Aula - 03: Topologias e Meios de Transmissão
 
 Os meios de transmissão determinam como os bits viajam na rede, podendo ser classificados em guiados (com fio) e não guiados (sem fio).
 
 A escolha do meio influencia diretamente a velocidade, o alcance, a imunidade a interferências, o custo da infraestrutura e até requisitos de segurança.
 
-### Meios Guiados
+# 🖥️ Aula - 03: Topologias e Meios de Transmissão
 
 1. **Par Trançado (Twisted Pair)**
     
@@ -100,7 +100,7 @@ A escolha do meio influencia diretamente a velocidade, o alcance, a imunidade a 
 
 ![[assets/image 16.png]]
 
-### Meios Não Guiados
+# 🖥️ Aula - 03: Topologias e Meios de Transmissão
 
 1. **Wi-Fi (Wireless LAN - WLAN)**
     
@@ -121,7 +121,7 @@ A escolha do meio influencia diretamente a velocidade, o alcance, a imunidade a 
     Eles são usados em provedores de acesso e enlaces ponto a ponto, mas tendem a ter maior latência, custo mais alto e dependência de condições climáticas, especialmente no caso de satélites.
     
 
-### **Comparação dos Meios de Transmissão**
+# 🖥️ Aula - 03: Topologias e Meios de Transmissão
 
 | Meio de Transmissão | Vantagens | Desvantagens |
 | --- | --- | --- |
@@ -132,7 +132,7 @@ A escolha do meio influencia diretamente a velocidade, o alcance, a imunidade a 
 | **Bluetooth** | Baixo consumo de energia, ideal para curtas distâncias. | Alcance muito limitado, velocidade inferior a outros meios. |
 | **Satélite** | Cobertura global, útil para áreas remotas sem infraestrutura terrestre. | Alta latência, custo elevado, dependência de condições climáticas. |
 
-## Experimento Prático
+# 🖥️ Aula - 03: Topologias e Meios de Transmissão
 
 Vamos medir a latência e velocidade da rede utilizando diferentes meios de transmissão:
 
@@ -140,7 +140,7 @@ Vamos medir a latência e velocidade da rede utilizando diferentes meios de tran
 - Utilização do comando `tracert` para visualizar o caminho dos pacotes na rede.
 - Análise de interferências em redes sem fio.
 
-### Discussão
+# 🖥️ Aula - 03: Topologias e Meios de Transmissão
 
 Agora que conhecemos as topologias e os meios de transmissão, vamos refletir:
 
@@ -148,7 +148,7 @@ Agora que conhecemos as topologias e os meios de transmissão, vamos refletir:
 2. Como escolher o melhor meio de transmissão para um ambiente específico?
 3. Como interferências podem afetar redes sem fio?
 
-## Conclusão
+# 🖥️ Aula - 03: Topologias e Meios de Transmissão
 
 Nesta aula, exploramos como as redes são estruturadas por meio de diferentes topologias e estudamos os principais meios de transmissão, tanto guiados quanto não guiados. Esses conceitos são fundamentais para projetar redes eficientes, escaláveis e confiáveis.
 
@@ -156,7 +156,7 @@ Como tarefa, pesquise sobre tecnologias emergentes de conectividade, como redes 
 
 ---
 
-## Recursos para Estudo
+# 🖥️ Aula - 03: Topologias e Meios de Transmissão
 
 - **Livro:** "Redes de Computadores" - Tanenbaum
 - **Cisco Networking Academy:** [https://www.netacad.com/](https://www.netacad.com/)
@@ -164,5 +164,6 @@ Como tarefa, pesquise sobre tecnologias emergentes de conectividade, como redes 
 - **Vídeo:** "Tipos de topologias de redes explicadas" - YouTube
 
 Bons estudos e até a próxima aula!
+
 
 
