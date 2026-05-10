@@ -2,6 +2,9 @@
 title: "🌐 🟢 Aula 07: Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake"
 ---
 
+
+![Capa](assets/capa_aula07.png)
+
 ---
 disciplina: Redes de Computadores I
 codigo: "49325"
@@ -425,3 +428,4 @@ Responda no caderno ou no Moodle:
 ---
 
 *Última atualização: 2026-04-29 | Status: publicado*
+

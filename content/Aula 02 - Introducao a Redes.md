@@ -2,6 +2,9 @@
 title: "🌐 Aula  – Introdução a Redes de Computadores"
 ---
 
+
+![Capa](assets/capa_aula02.png)
+
 # Aula 02: Introdução a Redes de Computadores
 
 ## Objetivo da Aula

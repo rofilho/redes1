@@ -2,6 +2,9 @@
 title: "🌐 Aula  – Modelo OSI vs. TCP/IP, ARP e Prática no Packet Tracer"
 ---
 
+
+![Capa](assets/capa_aula05.png)
+
 # Aula 05: Modelo OSI vs. TCP/IP, ARP e Prática no Packet Tracer
 
 > **Disciplina:** Redes de Computadores I (Cód. 49325) | **Curso:** Sistemas de Informação, Uniube | **Semana 4** | 09/03/2026 | Prof. Romualdo Mathias Filho

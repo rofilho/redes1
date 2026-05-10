@@ -2,6 +2,9 @@
 title: "🌐 Aula  – Plano de Aulas e Organização da Disciplina"
 ---
 
+
+![Capa](assets/capa_aula01.png)
+
 # Aula 01: Plano de Aulas e Organização da Disciplina
 
 ---

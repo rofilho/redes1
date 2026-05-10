@@ -2,6 +2,9 @@
 title: "🌐 Aula  – Topologias e Meios de Transmissão"
 ---
 
+
+![Capa](assets/capa_aula03.png)
+
 # Aula 03:  Topologias e Meios de Transmissão
 
 ## Objetivo da Aula
