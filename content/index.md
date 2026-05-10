@@ -173,49 +173,49 @@ html, body, #quartz-root, #quartz-body, .page, .center, .center-content, article
   <div class="row-title">Conteúdo da Disciplina</div>
   <div class="row">
     <a href="./Aula-01---Plano-de-Aulas-e-Organizacao" class="card" data-spa>
-      <div class="card-thumb">🌐<div class="card-progress-bar"><div class="card-progress" style="width: 32%"></div></div></div>
+      <div class="card-thumb" style="background-image: url('assets/capa_aula01.png'); background-size: cover; background-position: center;"><div class="card-progress-bar"><div class="card-progress" style="width: 32%"></div></div></div>
       <div class="card-content">
         <div class="card-title">🌐 Aula  – Plano de Aulas e Organização da Disciplina</div>
         <div class="card-meta"><span>Acessar Aula</span><span></span></div>
       </div>
     </a>
     <a href="./Aula-02---Introducao-a-Redes" class="card" data-spa>
-      <div class="card-thumb">🌐<div class="card-progress-bar"><div class="card-progress" style="width: 28%"></div></div></div>
+      <div class="card-thumb" style="background-image: url('assets/capa_aula02.png'); background-size: cover; background-position: center;"><div class="card-progress-bar"><div class="card-progress" style="width: 28%"></div></div></div>
       <div class="card-content">
         <div class="card-title">🌐 Aula  – Introdução a Redes de Computadores</div>
         <div class="card-meta"><span>Acessar Aula</span><span></span></div>
       </div>
     </a>
     <a href="./Aula-03---Topologias-e-Meios" class="card" data-spa>
-      <div class="card-thumb">🌐<div class="card-progress-bar"><div class="card-progress" style="width: 62%"></div></div></div>
+      <div class="card-thumb" style="background-image: url('assets/capa_aula03.png'); background-size: cover; background-position: center;"><div class="card-progress-bar"><div class="card-progress" style="width: 62%"></div></div></div>
       <div class="card-content">
         <div class="card-title">🌐 Aula  – Topologias e Meios de Transmissão</div>
         <div class="card-meta"><span>Acessar Aula</span><span></span></div>
       </div>
     </a>
     <a href="./Aula-04---Camada-Fisica-e-Enlace" class="card" data-spa>
-      <div class="card-thumb">🌐<div class="card-progress-bar"><div class="card-progress" style="width: 64%"></div></div></div>
+      <div class="card-thumb" style="background-image: url('assets/capa_aula04.png'); background-size: cover; background-position: center;"><div class="card-progress-bar"><div class="card-progress" style="width: 64%"></div></div></div>
       <div class="card-content">
         <div class="card-title">🌐 🔌 Aula 04: Camada Física, Camada de Enlace e Ethernet</div>
         <div class="card-meta"><span>Acessar Aula</span><span></span></div>
       </div>
     </a>
     <a href="./Aula-05---Modelo-OSI-vs-TCP-IP" class="card" data-spa>
-      <div class="card-thumb">🌐<div class="card-progress-bar"><div class="card-progress" style="width: 52%"></div></div></div>
+      <div class="card-thumb" style="background-image: url('assets/capa_aula05.png'); background-size: cover; background-position: center;"><div class="card-progress-bar"><div class="card-progress" style="width: 52%"></div></div></div>
       <div class="card-content">
         <div class="card-title">🌐 Aula  – Modelo OSI vs. TCP/IP, ARP e Prática no Packet Tracer</div>
         <div class="card-meta"><span>Acessar Aula</span><span></span></div>
       </div>
     </a>
     <a href="./Aula-06---Pratica-Enderecamento-IPv4-e-Sub-redes-Packet-Tracer" class="card" data-spa>
-      <div class="card-thumb">🌐<div class="card-progress-bar"><div class="card-progress" style="width: 78%"></div></div></div>
+      <div class="card-thumb" style="background-image: url('assets/capa_aula06.png'); background-size: cover; background-position: center;"><div class="card-progress-bar"><div class="card-progress" style="width: 78%"></div></div></div>
       <div class="card-content">
         <div class="card-title">🌐 Aula  – Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer</div>
         <div class="card-meta"><span>Acessar Aula</span><span></span></div>
       </div>
     </a>
     <a href="./Aula-07---Camada-de-Transporte-TCP-UDP-Portas-e-Three-Way-Handshake" class="card" data-spa>
-      <div class="card-thumb">🌐<div class="card-progress-bar"><div class="card-progress" style="width: 79%"></div></div></div>
+      <div class="card-thumb" style="background-image: url('assets/capa_aula07.png'); background-size: cover; background-position: center;"><div class="card-progress-bar"><div class="card-progress" style="width: 79%"></div></div></div>
       <div class="card-content">
         <div class="card-title">🌐 🟢 Aula 07: Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake</div>
         <div class="card-meta"><span>Acessar Aula</span><span></span></div>
@@ -226,4 +226,5 @@ html, body, #quartz-root, #quartz-body, .page, .center, .center-content, article
 </div>
 
 </div>
+
 
