@@ -3,8 +3,6 @@ title: "🌐 🔌 Aula 04: Camada Física, Camada de Enlace e Ethernet"
 ---
 
 
-![Capa](assets/capa_aula04.png)
-
 # 🔌 Aula 04: Camada Física, Camada de Enlace e Ethernet
 
 > **Disciplina:** Redes de Computadores I (Cód. 49325) | **Curso:** Sistemas de Informação, Uniube **Semana 3** | 02/03/2026 | Prof. Romualdo Mathias Filho
@@ -449,3 +447,4 @@ Você é o técnico de TI de um escritório com 8 computadores conectados a um s
 | Cisco Networking Academy | Cursos de fundamentos de redes e switching | [netacad.com](https://www.netacad.com/) |
 | Wireshark | Analisador de protocolos, permite capturar e inspecionar quadros Ethernet ao vivo | [wireshark.org](https://www.wireshark.org/) |
 | Submarinecablemap | Mapa dos cabos submarinos (infraestrutura física da internet global) | [submarinecablemap.com](https://www.submarinecablemap.com/) |
+

@@ -3,8 +3,6 @@ title: "🌐 Aula  – Topologias e Meios de Transmissão"
 ---
 
 
-![Capa](assets/capa_aula03.png)
-
 # Aula 03:  Topologias e Meios de Transmissão
 
 ## Objetivo da Aula
@@ -166,3 +164,4 @@ Como tarefa, pesquise sobre tecnologias emergentes de conectividade, como redes 
 - **Vídeo:** "Tipos de topologias de redes explicadas" - YouTube
 
 Bons estudos e até a próxima aula!
+

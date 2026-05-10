@@ -3,8 +3,6 @@ title: "🌐 Aula  – Prática — Endereçamento IPv4, Sub-redes e Roteamento 
 ---
 
 
-![Capa](assets/capa_aula06.png)
-
 # Aula 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
 
 > **Disciplina:** Redes de Computadores I (Cód. 49325) | **Curso:** Sistemas de Informação, Uniube | **Semana 5** | 22/04/2026 | Prof. Romualdo Mathias Filho
@@ -369,4 +367,5 @@ Router# show ip route
 | NetworkChuck | Subnetting is simple | https://www.youtube.com/watch?v=ecCuyq-Wprc |
 | Cisco NetAcad | Packet Tracer — Getting Started | https://www.youtube.com/watch?v=BvnHh3pJdgs |
 | David Bombal | DHCP Explained | https://www.youtube.com/watch?v=e6-TaH5bkjo |
+
 

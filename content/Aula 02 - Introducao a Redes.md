@@ -3,8 +3,6 @@ title: "🌐 Aula  – Introdução a Redes de Computadores"
 ---
 
 
-![Capa](assets/capa_aula02.png)
-
 # Aula 02: Introdução a Redes de Computadores
 
 ## Objetivo da Aula
@@ -99,3 +97,4 @@ Para reforçar o aprendizado, pesquise sobre a história da internet e como ela 
 - **Vídeo:** "Como funciona a Internet?" - YouTube
 
 Bons estudos e até a próxima aula!
+

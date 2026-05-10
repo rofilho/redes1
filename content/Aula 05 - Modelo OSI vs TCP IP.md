@@ -3,8 +3,6 @@ title: "🌐 Aula  – Modelo OSI vs. TCP/IP, ARP e Prática no Packet Tracer"
 ---
 
 
-![Capa](assets/capa_aula05.png)
-
 # Aula 05: Modelo OSI vs. TCP/IP, ARP e Prática no Packet Tracer
 
 > **Disciplina:** Redes de Computadores I (Cód. 49325) | **Curso:** Sistemas de Informação, Uniube | **Semana 4** | 09/03/2026 | Prof. Romualdo Mathias Filho
@@ -373,3 +371,4 @@ Relacione cada unidade de dados (PDU) com a camada OSI correspondente:
 - [Download Cisco Packet Tracer Oficial](https://www.netacad.com/courses/packet-tracer)
 - [RFC 826: Especificação oficial do ARP](https://datatracker.ietf.org/doc/html/rfc826)
 - [RFC 1918: Espaços de endereços privados IPv4](https://datatracker.ietf.org/doc/html/rfc1918)
+
