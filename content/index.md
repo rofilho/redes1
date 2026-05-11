@@ -1,4 +1,4 @@
-﻿---
+---
 title: "🌐 Redes de Computadores I"
 cssclasses:
   - dashboard-layout
@@ -165,7 +165,7 @@ html, body, #quartz-root, #quartz-body, .page, .center, .center-content, article
     <span class="tag">▶ Continue Estudando</span>
     <h1>🌐 Redes de Computadores I</h1>
     <p>Topologias, protocolos, camada física até transporte.</p>
-    <a href="./Aula-07---Camada-de-Transporte-TCP-UDP-Portas-e-Three-Way-Handshake" class="btn" data-spa>Retomar: 🌐 🟢 Aula 07: Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake</a>
+    <a href="./Aula-08---Protocolos-de-Aplicacao-HTTP-e-FTP" class="btn" data-spa>Retomar: 🌐 🟢 Aula 08: Protocolos de Aplicação — HTTP e FTP</a>
   </div>
 </div>
 
@@ -203,7 +203,7 @@ html, body, #quartz-root, #quartz-body, .page, .center, .center-content, article
     <a href="./Aula-05---Modelo-OSI-vs-TCP-IP" class="card" data-spa>
       <div class="card-thumb" style="background-image: url('assets/capa_aula05.png'); background-size: cover; background-position: center;"><div class="card-progress-bar"><div class="card-progress" style="width: 52%"></div></div></div>
       <div class="card-content">
-        <div class="card-title">🌐 Aula  – Modelo OSI vs. TCP/IP, ARP e Prática no Packet Tracer</div>
+        <div class="card-title">🌐 Aula  – Modelo OSI vs. TCP/IP, ARP e Prática no Packet Tracer</div>
         <div class="card-meta"><span>Acessar Aula</span><span></span></div>
       </div>
     </a>
@@ -221,10 +221,15 @@ html, body, #quartz-root, #quartz-body, .page, .center, .center-content, article
         <div class="card-meta"><span>Acessar Aula</span><span></span></div>
       </div>
     </a>
+    <a href="./Aula-08---Protocolos-de-Aplicacao-HTTP-e-FTP" class="card" data-spa>
+      <div class="card-thumb" style="background: linear-gradient(135deg, #0f172a 0%, #312e81 100%);"><div class="card-progress-bar"><div class="card-progress" style="width: 100%"></div></div></div>
+      <div class="card-content">
+        <div class="card-title">🌐 🟢 Aula 08: Protocolos de Aplicação — HTTP e FTP</div>
+        <div class="card-meta"><span>Acessar Aula</span><span></span></div>
+      </div>
+    </a>
 
   </div>
 </div>
 
 </div>
-
-
