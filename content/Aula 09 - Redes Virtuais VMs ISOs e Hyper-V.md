@@ -187,7 +187,7 @@ O switch privado cria uma rede onde **apenas as VMs conectadas a ele se comunica
 
 ### 3.4 — Default Switch (Bônus Hyper-V)
 
-O Windows cria automaticamente o **"Default Switch"** — um switch **Interno com NAT automático configurado**. As VMs conectadas a ele têm acesso à internet (via NAT do host) sem nenhuma configuração adicional. É o modo ideal para laboratório.
+O Windows cria automaticamente o **"Default Switch"** — um switch **Interno com NAT automático configurado**. As VMs conectadas a ele têm acesso à internet (via NAT do host) sem nenhuma configuração adicional. É o modo ideal para laboratório e instalação de SO.
 
 **Tabela Comparativa Completa:**
 
@@ -345,6 +345,39 @@ ssh aluno@192.168.100.10
 
 ---
 
+## 🧪 Exercício Avaliativo
+
+### Desafio — Segmentação de Rede Virtual
+
+**Objetivo:** Aplicar os conceitos de redes virtuais e endereçamento IP estático em um cenário de isolamento de rede.
+
+**Passos:**
+
+1. ✅ Crie a VM `SRV-UBUNTU-REDES` conforme o roteiro desta aula (com Default Switch)
+2. ✅ No Hyper-V, crie um **Switch Virtual Privado** chamado `Rede-Isolada-Redes`
+3. ✅ Adicione uma **segunda interface de rede** à VM, conectada ao switch `Rede-Isolada-Redes`
+4. ✅ Configure o IP estático `192.168.200.10/24` na nova interface via Netplan
+5. ✅ Verifique com `ip a` que a VM tem **duas interfaces**: uma com DHCP (internet) e outra com IP estático (rede isolada)
+6. ✅ No terminal da VM, execute:
+
+```bash
+# Mostrar tabela de roteamento
+ip route show
+
+# Listar todas as interfaces com seus IPs
+ip -4 addr show
+```
+
+7. ✅ Tire **prints** de cada etapa
+
+**Entrega:** Relatório em PDF contendo:
+- Print do Gerenciador do Hyper-V mostrando a VM e os switches criados
+- Print do `ip a` mostrando as duas interfaces configuradas
+- Print do `ip route show` mostrando a tabela de rotas
+- Uma explicação de **1 parágrafo** respondendo: *"Por que a VM consegue acessar a internet pela interface DHCP mas não pela interface do Switch Privado?"*
+
+---
+
 ## 📋 Resumo Estrutural
 
 | **Conceito** | **Definição em Uma Frase** |
@@ -411,7 +444,7 @@ ssh aluno@192.168.100.10
 **Enunciado:** Explique o conceito de NAT (Network Address Translation) e demonstre como o **Default Switch** do Hyper-V o implementa. Em seguida, compare esse funcionamento com o NAT do seu roteador doméstico.
 
 **Resposta esperada:**
-NAT é a técnica que permite que múltiplos dispositivos de uma rede privada compartilhem um único endereço IP público. O roteador/gateway mantém uma tabela de tradução: quando um pacote sai da rede interna, ele substitui o IP privado (ex: `192.168.1.x`) pelo IP público, registrando a associação. Quando a resposta volta, ele revertem o processo.
+NAT é a técnica que permite que múltiplos dispositivos de uma rede privada compartilhem um único endereço IP público. O roteador/gateway mantém uma tabela de tradução: quando um pacote sai da rede interna, ele substitui o IP privado (ex: `192.168.1.x`) pelo IP público, registrando a associação. Quando a resposta volta, ele reverte o processo.
 
 O Default Switch do Hyper-V implementa NAT exatamente da mesma forma: a VM tem um IP privado (ex: `172.x.x.x`), e o Hyper-V atua como um roteador NAT no Host, traduzindo para o IP real do Host ao acessar a internet. É funcionalmente idêntico ao roteador doméstico — a diferença é que o "roteador" aqui é um software no Windows, não um hardware dedicado.
 
@@ -431,10 +464,10 @@ O Default Switch do Hyper-V implementa NAT exatamente da mesma forma: a VM tem u
 ## 📚 Referências Bibliográficas e Citações
 
 - **TANENBAUM, Andrew S.** *Redes de Computadores*. 5ª ed. Pearson, 2011. **(Cap. 5 — Camada de Rede: NAT, pp. 450–455; Cap. 8 — Segurança de Redes, p. 767)**. Base conceitual para NAT e SSH.
+- **KUROSE, James F.; ROSS, Keith W.** *Redes de Computadores e a Internet: Uma Abordagem Top-Down*. 8ª ed. Pearson, 2021. **(Cap. 4 — Camada de Rede: O Plano de Dados, pp. 305–330; Cap. 6 — A Camada de Enlace e Redes Locais, pp. 440–478)**. Complementa a visão de switches, VLANs e encaminhamento.
 - **TANENBAUM, Andrew S.; WOODHULL, Albert S.** *Sistemas Operacionais: Projeto e Implementação*. 3ª ed. Bookman, 2008. **(Cap. 8 — Virtualização, pp. 487–512)**. Fundamentos de hypervisors Tipo 1 e Tipo 2.
-- **STALLINGS, William.** *Arquitetura e Organização de Computadores*. 11ª ed. Pearson, 2024. **(Cap. 3 — Barramentos e Interconexão, p. 68)**. Contexto de hardware para virtualização.
-- **Microsoft Learn.** *Hyper-V no Windows Server*. Disponível em: [https://learn.microsoft.com/pt-br/windows-server/virtualization/hyper-v/](https://learn.microsoft.com/pt-br/windows-server/virtualization/hyper-v/). Acesso em: Maio 2026.
-- **Canonical Ltd.** *Ubuntu Server 24.04 LTS — Installation Guide*. Disponível em: [https://ubuntu.com/server/docs](https://ubuntu.com/server/docs). Acesso em: Maio 2026.
+- **Microsoft Learn.** *Hyper-V no Windows Server — Tipos de Switch Virtual*. Disponível em: [https://learn.microsoft.com/pt-br/windows-server/virtualization/hyper-v/get-started/create-a-virtual-switch-for-hyper-v-virtual-machines](https://learn.microsoft.com/pt-br/windows-server/virtualization/hyper-v/get-started/create-a-virtual-switch-for-hyper-v-virtual-machines). Acesso em: Maio 2026.
+- **Canonical Ltd.** *Ubuntu Server 24.04 LTS — Netplan Configuration*. Disponível em: [https://netplan.io/reference](https://netplan.io/reference). Acesso em: Maio 2026.
 
 ---
 *Última atualização: 2026-05-18 | Status: publicado*
