@@ -53,9 +53,6 @@ Ao final desta aula, o aluno deve ser capaz de:
 | **1** | **Física** | **Bit** | **Transmissão bruta de bits pelo meio físico** |
 
 ![[assets/08_camadas_fisico_enlace_1773621857854.png]]
-
-![[assets/image 17.png]]
-
 Modelo OSI com 7 camadas empilhadas, camadas 1 (Física) e 2 (Enlace) destacadas e expandidas com ícones de bits, quadros, MAC address e switch.
 
 > **Analogia:** Pense no modelo OSI como o processo de enviar uma carta. A camada 7 (Aplicação) é você escrevendo a carta. A camada 3 (Rede) é o CEP que indica a cidade destino. A **camada 2 (Enlace)** é o nome na caixa de correio do prédio, que identifica a pessoa exata naquele endereço. A **camada 1 (Física)** é o caminhão, o avião ou a moto que transporta fisicamente a carta.

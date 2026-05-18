@@ -6,9 +6,6 @@ title: "🖥️ Aula - 01: Plano de Aulas e Organização da Disciplina"
 # 🖥️ Aula - 01: Plano de Aulas e Organização da Disciplina
 
 ---
-
-![[assets/image.png]]
-
 Carga horária total: 42 h
 
 Carga horária presencial: 30 h
