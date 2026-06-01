@@ -161,7 +161,7 @@ html, body, #quartz-root, #quartz-body, .page, .center, .center-content, article
     <span class="tag">▶ Continue Estudando</span>
     <h1>🌐 Redes de Computadores I</h1>
     <p>Topologias, protocolos, redes virtuais e Hyper-V.</p>
-    <a href="./Aula-09---Redes-Virtuais-VMs-ISOs-e-Hyper-V" class="btn" data-spa>Retomar: 🌐 🟢 Aula 09: Redes Virtuais — VMs, ISOs e Hyper-V</a>
+    <a href="./Aula-10-e-Aula-11---Enderecamento-IP-DHCP-e-Pratica-Wireshark" class="btn" data-spa>Retomar: 🌐 🟢 Aula 10 e Aula 11: Endereçamento IP, DHCP e Prática com Wireshark</a>
   </div>
 </div>
 
@@ -206,7 +206,7 @@ html, body, #quartz-root, #quartz-body, .page, .center, .center-content, article
     <a href="./Aula-06---Pratica-Enderecamento-IPv4-e-Sub-redes-Packet-Tracer" class="card" data-spa>
       <div class="card-thumb" style="background-image: url('assets/capa_aula06.png'); background-size: cover; background-position: center;"><div class="card-progress-bar"><div class="card-progress" style="width: 100%"></div></div></div>
       <div class="card-content">
-        <div class="card-title">🌐 Aula 06 – Endereçamento IPv4, Máscaras e Prática no Packet Tracer</div>
+        <div class="card-title">🌐 Aula 06 – Endereçamento IPv4, Sub-redes e Roteamento</div>
         <div class="card-meta"><span>Acessar Aula</span><span></span></div>
       </div>
     </a>
@@ -228,6 +228,13 @@ html, body, #quartz-root, #quartz-body, .page, .center, .center-content, article
       <div class="card-thumb" style="background-image: url('assets/capa_aula09.png'); background-size: cover; background-position: center;"><div class="card-progress-bar"><div class="card-progress" style="width: 100%"></div></div></div>
       <div class="card-content">
         <div class="card-title">🌐 Aula 09 – Redes Virtuais: VMs, ISOs e Hyper-V</div>
+        <div class="card-meta"><span>Acessar Aula</span><span></span></div>
+      </div>
+    </a>
+    <a href="./Aula-10-e-Aula-11---Enderecamento-IP-DHCP-e-Pratica-Wireshark" class="card" data-spa>
+      <div class="card-thumb" style="background-image: url('assets/capa_aula10.png'); background-size: cover; background-position: center;"><div class="card-progress-bar"><div class="card-progress" style="width: 100%"></div></div></div>
+      <div class="card-content">
+        <div class="card-title">🌐 Aula 10 e Aula 11 – Endereçamento IP, DHCP e Prática com Wireshark</div>
         <div class="card-meta"><span>Acessar Aula</span><span></span></div>
       </div>
     </a>

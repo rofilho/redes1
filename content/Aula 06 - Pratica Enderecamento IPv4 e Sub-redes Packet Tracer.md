@@ -1,208 +1,137 @@
----
-disciplina: Redes de Computadores I
-codigo: "RED-01"
-aula: 6
-titulo: "Endereçamento IPv4, Máscaras e Prática no Packet Tracer"
-tipo: pratica
-semana: 6
-data: 2026-03-23
-status: publicado
-tags:
-  - redes
-  - ipv4
-  - classes-ip
-  - mascaras-rede
-  - cidr
-  - sub-redes
-  - packet-tracer
-  - dhcp
-  - roteamento
-publicar: true
+﻿---
+title: "🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer"
 ---
 
-# 🟢 Aula 06: Endereçamento IPv4, Máscaras e Prática no Packet Tracer
 
-**Disciplina:** Redes de Computadores I (Cód. RED-01)  
-**Curso:** Engenharia / TI — Uniube  
-**Semana:** 6  
-**Professor:** Romualdo Mathias Filho  
-**Tipo:** 🔬 Teórico-Prática  
+# 🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
+
+> **Disciplina:** Redes de Computadores I (Cód. 49325) | **Curso:** Sistemas de Informação, Uniube | **Semana 5** | 22/04/2026 | Prof. Romualdo Mathias Filho
 
 ---
 
-> 💬 *"A compreensão teórica dos bits de um endereço IP e de suas máscaras é a fundação da engenharia de tráfego. A prática de laboratório em simulador é o que dá vida a essa teoria, transformando fórmulas matemáticas em conexões reais."*
+# 🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
+
+Ao final desta aula prática, o aluno deve ser capaz de:
+
+- **Configurar** endereços IPv4 estáticos em hosts e interfaces de roteador no Packet Tracer
+- **Calcular** sub-redes utilizando máscaras CIDR e verificar o resultado na prática
+- **Implementar** roteamento estático básico entre duas redes distintas
+- **Diagnosticar** problemas de conectividade utilizando `ping` e `tracert`
+- **Configurar** DHCP em um roteador Cisco para distribuição automática de IPs
 
 ---
 
-## 🎯 Objetivo da Aula
+# 🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
 
-Ao final desta aula, os alunos serão capazes de:
-- **Compreender** a estrutura lógica de 32 bits de um endereço IPv4, convertendo facilmente representações decimais pontuadas em binário.
-- **Diferenciar** a parte de rede (Network ID) e a parte de host (Host ID) em um endereço IP.
-- **Classificar** endereços IPv4 nas classes clássicas (A, B, C, D e E) e identificar os limites de cada faixa.
-- **Identificar** endereços IPs reservados de uso especial, tais como loopback, broadcast local, broadcast direcionado e faixas privadas da RFC 1918.
-- **Explicar** o funcionamento bit a bit de uma máscara de sub-rede utilizando a operação lógica AND.
-- **Calcular** sub-redes utilizando notação CIDR de prefixos e projetar planos com o método VLSM (Variable Length Subnet Mask).
-- **Montar e Configurar** computadores, switches e interfaces de roteadores Cisco (via CLI) com IPs estáticos e escopo DHCP dinâmico no Cisco Packet Tracer.
+| Conceito (Aula 05) | Aplicação Hoje |
+|---|---|
+| Endereço IP (Camada 3) | Configuraremos IPs estáticos em PCs e roteadores |
+| Máscara de sub-rede | Definiremos redes /24, /26 e /30 |
+| Gateway padrão | Cada host precisa de um gateway para sair da rede local |
+| ARP | Será disparado automaticamente ao fazermos ping |
+| Roteador = fronteira de redes | Conectaremos duas redes diferentes via roteador |
 
----
-
-## 🔄 Revisão Rápida (5 min)
-
-| **Conceito e Link de Origem** | **Conexão com a Aula de Hoje** |
-| :--- | :--- |
-| **[[Aula 03 - Topologias e Meios\|Aula 03 (Topologias)]]** | Vimos o hardware e as conexões físicas. Hoje, estruturaremos a topologia cabeada Ethernet no simulador. |
-| **[[Aula 04 - Camada Fisica e Enlace\|Aula 04 (Camada Física)]]** | Analisamos os switches da camada 2 e a tabela de endereços MAC. Hoje, interligaremos esses switches a um roteador de camada 3. |
-| **[[Aula 05 - Modelo OSI vs TCP IP\|Aula 05 (Modelo OSI vs. TCP/IP)]]** | Estudamos o fluxo de encapsulamento e a jornada lógica de um pacote IP. Hoje, faremos essa jornada física e inter-redes funcionar. |
+> **Contexto:** Na Aula 05 vimos como os pacotes viajam dentro de uma mesma rede. Hoje vamos cruzar fronteiras: dois grupos de máquinas em redes diferentes se comunicando via roteador.
 
 ---
 
-## 📌 1. A Estrutura do Endereço IPv4, Classes e IPs Reservados [Teoria ⏳ 15 min]
+# 🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
 
-O **Internet Protocol version 4 (IPv4)** é o protocolo padrão da Camada de Rede (Internet) responsável pelo endereçamento lógico e pelo roteamento de pacotes na rede mundial de computadores.
-
-### 1.1 — Representação Binária vs. Decimal Pontuado
-
-Um endereço IPv4 é uma sequência lógica de **32 bits** (sinais binários 0 e 1). Para facilitar a leitura humana, esses 32 bits são divididos em **quatro octetos** (grupos de 8 bits) separados por pontos. Esta notação é chamada de **Decimal Pontuado**.
-
-```mermaid
-graph TD
-    subgraph "Endereço IPv4 (32 bits)"
-        O1["1º Octeto (8 bits)\n192\n11000000"]:::oct
-        O2["2º Octeto (8 bits)\n168\n10101000"]:::oct
-        O3["3º Octeto (8 bits)\n10\n00001010"]:::oct
-        O4["4º Octeto (8 bits)\n1\n00000001"]:::oct
-    end
-    classDef oct fill:#1f2937,stroke:#4b5563,stroke-width:2px,color:#f3f4f6;
-```
-
-Cada bit em um octeto possui um peso posicional baseado em potências de 2, variando de $2^7$ (128) a $2^0$ (1). O valor decimal de cada octeto varia de **0 a 255**.
-
-### 1.2 — Divisão Hierárquica: Rede vs. Host
-
-Todo endereço IP é dividido logicamente em duas partes fundamentais:
-1. **Parte de Rede (Network ID):** Identifica a rede específica à qual o dispositivo pertence. Todos os dispositivos na mesma sub-rede física devem compartilhar a mesma identificação de rede.
-2. **Parte de Host (Host ID):** Identifica de forma única o dispositivo individual (computador, switch, interface do roteador, impressora) dentro daquela rede específica.
-
-### 1.3 — Classes Clássicas e IPs Especiais (RFC 1918)
-
-| Classe | Intervalo do 1º Octeto | Máscara Padrão | Quantidade de Sub-redes | Hosts por Rede | Uso Principal |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| **A** | `1.0.0.0` a `126.255.255.255` | `255.0.0.0` (/8) | 128 | ~16,7 Milhões | Organizações e Redes Globais |
-| **B** | `128.0.0.0` a `191.255.255.255` | `255.255.0.0` (/16) | 16.384 | 65.534 | Redes Corporativas Médias |
-| **C** | `192.0.0.0` a `223.255.255.255` | `255.255.255.0` (/24)| ~2 Milhões | 254 | Redes Domésticas e Pequenas |
-| **D** | `224.0.0.0` a `239.255.255.255` | Sem máscara padrão | - | Multicast | Transmissão de Grupo (Streaming/IPTV) |
-| **E** | `240.0.0.0` a `255.255.255.255` | Sem máscara padrão | - | Experimental | Reservado para Pesquisas IETF |
-
-*   **Loopback (Localhost) — `127.0.0.1`:** Usado para testes de loop de software local no próprio computador.
-*   **IPs Privados (RFC 1918):** De livre uso local, não são roteáveis na Internet pública, usados para estruturar redes locais:
-    *   **Classe A Privada:** `10.0.0.0` a `10.255.255.255`
-    *   **Classe B Privada:** `172.16.0.0` a `172.31.255.255`
-    *   **Classe C Privada:** `192.168.0.0` a `192.168.255.255`
-
-> [!TIP] 💡 Dica de Produção (Pro-Tip)
-> Em grandes corporações como a **Nubank** ou na nuvem de produção do **iFood**, os engenheiros estruturam seus data centers e ambientes de Cloud Computing (VPCs na AWS ou GCP) inteiros utilizando a faixa **Classe A Privada (`10.0.0.0/8`)**. Isso fornece milhões de IPs internos livres de conflitos de Internet. O acesso seguro de saída à Internet pública é feito através de **Gateways NAT (Network Address Translation)**, reduzindo custos de IPs públicos estáticos e ocultando a infraestrutura interna contra ataques externos direcionados.
+- [ ] Cisco Packet Tracer instalado (versão 8.x ou superior)
+- [ ] Conta na Cisco NetAcad para download: https://www.netacad.com/courses/packet-tracer
+- [ ] Aula 05 revisada (OSI, ARP, modo Simulation)
 
 ---
 
-## 📌 2. Máscaras de Rede, CIDR e Cálculo de Sub-redes [Teoria ⏳ 15 min]
+# 🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
 
-A máscara de sub-rede é o elemento crucial de 32 bits que **informa aos roteadores e hosts quais bits de um IP pertencem à rede e quais pertencem ao host**.
-
-### 2.1 — A Operação Lógica AND
-
-Dispositivos de rede realizam uma operação binária **AND (E lógico)** entre o endereço IP e a Máscara para extrair o endereço de rede correspondente. No AND, o resultado só é 1 se ambos os bits comparados forem 1:
-
-```markdown
-IP:       192.168.10.74   ->  11000000.10101000.00001010.01001010
-Máscara:  255.255.255.0   ->  11111111.11111111.11111111.00000000
--------------------------------------------------------------------
-Rede:     192.168.10.0    ->  11000000.10101000.00001010.00000000
-```
-
-### 2.2 — Notação CIDR e Fórmulas de Sub-rede
-
-A notação **CIDR** simplifica essa escrita utilizando uma barra (`/`) seguida pelo número de bits consecutivos que estão ativados (com o valor 1) na máscara (ex: `/24` = `255.255.255.0`, `/26` = `255.255.255.192`).
-Para projetar e calcular sub-redes, utilizamos duas fórmulas fundamentais:
-1.  **Quantidade Total de Hosts por Sub-rede:** $Hosts = 2^h - 2$ *(Onde $h$ é o número de bits de host).*
-2.  **Quantidade de Sub-redes Possíveis:** $Subredes = 2^s$ *(Onde $s$ representa o número de bits "emprestados" da máscara de rede padrão).*
-
-> [!WARNING] ⚠️ Gotcha de Infraestrutura
-> O erro mais comum de analistas juniores de infraestrutura é tentar interligar duas filiais de uma empresa cujas sub-redes locais usam o exato mesmo intervalo de IP Privado (ex: ambas usam `192.168.1.0/24 VPN`). Isso gera uma **colisão de rotas (overlap)**, impossibilitando que os roteadores saibam para qual ponta enviar os pacotes, pois as duas redes são logicamente idênticas.
+⏱️ **Tempo estimado total:** 90 minutos | Faça em ordem — cada exercício usa a topologia do anterior.
 
 ---
 
-## 📌 3. Laboratório Prático: Topologia e Endereçamento Estático [Hands-On ⏳ 30 min]
+# 🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
 
-Nesta seção prática, utilizaremos o software Cisco Packet Tracer para projetar uma topologia física local e configurar o endereçamento estático nas estações.
+**Objetivo:** Construir a rede que usaremos em todos os exercícios.
 
-### 3.1 — Exercício 1: Montagem da Topologia Física
-
-Construiremos a infraestrutura básica composta por dois segmentos físicos distintos que serão interligados fisicamente por um roteador central:
+**Topologia a montar:**
 
 ```
-  [PC0] ---+                             +--- [PC2]
-  [PC1] ---+--- [Switch0] --- [R0] ------+--- [PC3]
-                          (Roteador)
-
-  Rede A: 192.168.10.0/24         Rede B: 192.168.20.0/24
+[PC0] ---+                          +--- [PC2]
+[PC1] ---+--- [Switch0] --- [R0] ---+--- [PC3]
+                         (Roteador)
+                         
+Rede A: 192.168.10.0/24        Rede B: 192.168.20.0/24
 ```
 
-1. Abra o Cisco Packet Tracer.
-2. Adicione os seguintes equipamentos no workspace:
-   - **2x Switches** do modelo Cisco Catalyst **2960**.
-   - **1x Roteador** do modelo Cisco **2911** (ou ISR4331).
-   - **4x PCs** genéricos.
-3. Realize a interconexão utilizando **cabos de cobre direto (Straight-Through)**:
-   - `PC0 (Fa0)` para `Switch0 (Fa0/1)`
-   - `PC1 (Fa0)` para `Switch0 (Fa0/2)`
-   - `PC2 (Fa0)` para `Switch1 (Fa0/1)`
-   - `PC3 (Fa0)` para `Switch1 (Fa0/2)`
-   - `Switch0 (Gig0/1)` para o roteador `R0 (Gig0/0)`
-   - `Switch1 (Gig0/1)` para o roteador `R0 (Gig0/1)`
-4. Salve o arquivo com o nome `Aula06_Laboratorio.pkt`.
+**Passos:**
+1. Abra o Packet Tracer → clique em **New** para criar um projeto em branco
+2. Na barra de equipamentos (baixo), selecione:
+   - **2x Switch** (categoria Switches → 2960)
+   - **1x Router** (categoria Routers → 2911)
+   - **4x PC** (categoria End Devices → PC)
+3. Conecte usando **cabos de cobre diretos (Straight-Through)**:
+   - PC0 → Switch0 (Fa0/1), PC1 → Switch0 (Fa0/2)
+   - PC2 → Switch1 (Fa0/1), PC3 → Switch1 (Fa0/2)
+   - Switch0 → R0 (Gig0/0), Switch1 → R0 (Gig0/1)
+4. Salve o arquivo como `Aula06_Redes.pkt`
 
-### 3.2 — Exercício 2: Endereçamento Estático da Rede A
-
-Configuraremos as estações pertencentes ao segmento **Rede A** utilizando endereços privados estáticos Classe C:
-
-| **Dispositivo** | **Endereço IP** | **Máscara de Sub-rede** | **Gateway Padrão** |
-| :--- | :--- | :--- | :--- |
-| **PC0** | `192.168.10.10` | `255.255.255.0` | `192.168.10.1` |
-| **PC1** | `192.168.10.11` | `255.255.255.0` | `192.168.10.1` |
-
-1. Clique no **PC0** -> aba **Desktop** -> menu **IP Configuration**.
-2. Marque a opção **Static** e insira os dados de IP, máscara e gateway descritos na tabela acima.
-3. Repita o procedimento no **PC1**.
-4. Abra o Command Prompt do PC0 e teste a conectividade com seu vizinho executando: `ping 192.168.10.11`. O ping deve ter sucesso completo.
-
-### 3.3 — Exercício 3: Endereçamento Estático da Rede B
-
-Configuraremos as estações do segmento **Rede B**:
-
-| **Dispositivo** | **Endereço IP** | **Máscara de Sub-rede** | **Gateway Padrão** |
-| :--- | :--- | :--- | :--- |
-| **PC2** | `192.168.20.10` | `255.255.255.0` | `192.168.20.1` |
-| **PC3** | `192.168.20.11` | `255.255.255.0` | `192.168.20.1` |
-
-1. Aplique os dados da tabela acima nas estações **PC2** e **PC3**.
-2. Valide o tráfego local entre eles executando ping do PC2 para o PC3 (`ping 192.168.20.11`).
-3. Tente pingar do PC2 para o PC0 (`ping 192.168.10.10`).
-   *Observe que o ping falhará ("Request timed out"), pois as interfaces do roteador que servem de gateway ainda não estão configuradas e ativas.*
+✅ **Checkpoint:** Todos os dispositivos visíveis na tela, conectados por linhas vermelhas (interfaces ainda desligadas — normal por enquanto).
 
 ---
 
-## 📌 4. Laboratório Prático: CLI Cisco, Roteamento e DHCP [Hands-On ⏳ 60 min]
+# 🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
 
-Nesta etapa, ativaremos as portas do roteador `R0` como gateway das sub-redes e ativaremos os serviços dinâmicos na CLI.
+**Objetivo:** Atribuir endereços IPv4 estáticos aos PCs da Rede A.
 
-### 4.1 — Exercício 4: Ativação das Interfaces do Roteador (CLI)
+**Endereçamento da Rede A (192.168.10.0/24):**
 
-1. Clique no roteador **R0** -> selecione a aba **CLI**.
-2. Responda `no` se for questionado sobre iniciar o assistente. Pressione ENTER.
-3. Configure os IPs de gateway nas interfaces GigabitEthernet do roteador Cisco IOS:
+| Dispositivo | IP | Máscara | Gateway |
+|---|---|---|---|
+| PC0 | 192.168.10.10 | 255.255.255.0 | 192.168.10.1 |
+| PC1 | 192.168.10.11 | 255.255.255.0 | 192.168.10.1 |
 
-```ios
+**Passos (repita para PC0 e PC1):**
+1. Clique duas vezes no **PC0** → aba **Desktop** → **IP Configuration**
+2. Selecione **Static** e preencha: IP Address, Subnet Mask e Default Gateway
+3. Feche a janela e repita para PC1
+
+✅ **Checkpoint:** Clique em PC0 → Desktop → Command Prompt → `ipconfig`. Você deve ver o IP `192.168.10.10` configurado.
+
+---
+
+# 🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
+
+**Objetivo:** Atribuir endereços IPv4 estáticos aos PCs da Rede B.
+
+**Endereçamento da Rede B (192.168.20.0/24):**
+
+| Dispositivo | IP | Máscara | Gateway |
+|---|---|---|---|
+| PC2 | 192.168.20.10 | 255.255.255.0 | 192.168.20.1 |
+| PC3 | 192.168.20.11 | 255.255.255.0 | 192.168.20.1 |
+
+**Passos:** Igual ao Exercício 2, mas com os IPs da tabela acima.
+
+**Teste rápido:**
+- PC2 → Command Prompt → `ping 192.168.20.11`
+- Deve funcionar (mesma rede). Tente `ping 192.168.10.10` — deve falhar (rede diferente, sem roteador configurado ainda).
+
+✅ **Checkpoint:** Ping entre PC2 e PC3 funciona. Ping entre PC0 e PC2 falha (`Request timed out`).
+
+---
+
+# 🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
+
+**Objetivo:** Ativar e endereçar as interfaces do roteador R0 via CLI.
+
+💡 **Explicação:** O roteador é a "fronteira" entre as duas redes. Cada interface dele recebe o IP do gateway de cada rede. Sem isso, os pacotes não sabem como cruzar de uma rede para outra.
+
+**Passos:**
+1. Clique duas vezes no **R0** → aba **CLI**
+2. Pressione **ENTER** até ver o prompt `Router>`
+3. Digite os comandos abaixo exatamente como mostrado:
+
+```
 Router> enable
 Router# configure terminal
 Router(config)# interface GigabitEthernet0/0
@@ -214,51 +143,91 @@ Router(config)# interface GigabitEthernet0/1
 Router(config-if)# ip address 192.168.20.1 255.255.255.0
 Router(config-if)# no shutdown
 Router(config-if)# exit
+
 Router(config)# exit
 Router# show ip interface brief
 ```
 
-*Verifique se o status físico e lógico de ambas interfaces GigabitEthernet consta como "up".*
+✅ **Checkpoint:** O comando `show ip interface brief` deve mostrar ambas as interfaces com **Status: up** e **Protocol: up** (em verde na tabela). As linhas de conexão no diagrama devem ficar verdes.
 
-### 4.2 — Exercício 5: Roteamento Fim a Fim e Rastreamento de Saltos
+---
 
-1. Acesse o terminal do **PC0**.
-2. Execute o comando para testar a comunicação com a rede remota: `ping 192.168.20.10`.
-   *O primeiro ou segundo ping pode falhar temporariamente devido ao ARP local, os disparos seguintes retornarão sucesso.*
-3. Execute o rastreamento do caminho percorrido pelo pacote: `tracert 192.168.20.10`
-   *Observe os dois saltos descritos: o gateway local (interface do roteador `192.168.10.1`) e o host de destino final.*
+# 🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
 
-### 4.3 — Exercício 6: Sub-redes com Máscara CIDR
+**Objetivo:** Verificar que o roteamento entre as duas redes está funcionando.
 
-Fragmentaremos o bloco `172.16.0.0` com máscara `/26` (máscara decimal `255.255.255.192`) para criar uma nova sub-rede local de no máximo 60 hosts:
+**Passos:**
+1. PC0 → Desktop → Command Prompt
+2. Execute os seguintes pings e anote os resultados:
 
-| **Sub-rede** | **CIDR** | **Endereço de Rede** | **IP Primeiro Host** | **IP Último Host** | **Broadcast** |
-| :--- | :--- | :--- | :--- | :--- | :--- |
-| Sub-rede 0 | `/26` | `172.16.0.0` | `172.16.0.1` | `172.16.0.62` | `172.16.0.63` |
-| Sub-rede 1 | `/26` | `172.16.0.64` | `172.16.0.65` | `172.16.0.126` | `172.16.0.127` |
-
-1. Adicione um novo **PC4** e um terceiro switch **Switch2** à topologia do laboratório.
-2. Conecte o PC4 ao Switch2 e ligue-o à interface `GigabitEthernet0/2` do roteador `R0`.
-3. Configure o PC4 estaticamente com os seguintes parâmetros calculados da Sub-rede 0:
-   *   IP: `172.16.0.10`
-   *   Máscara: `255.255.255.192`
-   *   Gateway: `172.16.0.1`
-4. Configure a interface `Gig0/2` do roteador com o IP correspondente ao gateway:
-```ios
-Router(config)# interface GigabitEthernet0/2
-Router(config-if)# ip address 172.16.0.1 255.255.255.192
-Router(config-if)# no shutdown
-Router(config-if)# exit
 ```
-5. Teste a comunicação do PC4 com o PC0 executando: `ping 192.168.10.10`.
+ping 192.168.10.11    → (PC1, mesma rede)
+ping 192.168.10.1     → (Gateway, interface do roteador)
+ping 192.168.20.1     → (Outra interface do roteador)
+ping 192.168.20.10    → (PC2, rede diferente)
+ping 192.168.20.11    → (PC3, rede diferente)
+```
 
-### 4.4 — Exercício 7: Configuração de DHCP Dinâmico no Cisco IOS
+3. Execute também `tracert 192.168.20.10` e observe os saltos.
 
-Configuraremos o roteador `R0` como servidor DHCP para alocação automática de endereços na Rede B.
+✅ **Checkpoint:** Todos os pings devem ter sucesso. O `tracert` deve mostrar **2 saltos**: primeiro o gateway `192.168.10.1` (roteador), depois o destino `192.168.20.10`.
 
-1. Acesse o roteador **R0** -> aba **CLI**.
-2. Entre em modo de configuração global e monte as regras de escopo DHCP:
-```ios
+---
+
+# 🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
+
+**Objetivo:** Visualizar o que acontece "dentro" dos pacotes quando cruzam o roteador.
+
+**Passos:**
+1. No canto inferior direito, mude de **Realtime** para **Simulation**
+2. Clique em **Edit Filters** → marque apenas `ARP` e `ICMP`
+3. No PC0, execute `ping 192.168.20.10`
+4. Use **Capture/Forward** (botão ▶) passo a passo
+5. Observe e responda:
+   - Para quem é o ARP Request inicial do PC0? (IP alvo)
+   - O que muda no cabeçalho **Ethernet (Layer 2)** quando o pacote passa pelo roteador?
+   - O que **não** muda no cabeçalho **IP (Layer 3)**?
+
+💡 **Explicação:** O roteador recebe o quadro Ethernet, **remove** o cabeçalho da camada 2, lê o IP destino (camada 3), e **reencapsula** o pacote em um novo quadro Ethernet com o MAC da interface de saída — por isso o MAC muda a cada salto, mas o IP destino permanece o mesmo.
+
+✅ **Checkpoint:** No painel PDU Information, você deve ver o `Dest IP` sempre igual a `192.168.20.10`, mas o `Dest MAC` mudando antes e depois do roteador.
+
+---
+
+# 🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
+
+**Objetivo:** Criar uma nova sub-rede menor (/26) e verificar os limites de endereçamento.
+
+**Cenário:** O administrador precisa criar uma rede de gerenciamento com no máximo 60 hosts, usando o bloco `172.16.0.0`.
+
+**Cálculo (faça junto):**
+
+| Máscara | CIDR | Hosts utilizáveis | Rede | Broadcast |
+|---|---|---|---|---|
+| 255.255.255.0 | /24 | 254 | 172.16.0.0 | 172.16.0.255 |
+| 255.255.255.192 | /26 | 62 | 172.16.0.0 | 172.16.0.63 |
+| 255.255.255.192 | /26 | 62 | 172.16.0.64 | 172.16.0.127 |
+
+**Passos no Packet Tracer:**
+1. Adicione um novo **PC4** e um **Switch2** à topologia existente
+2. Conecte PC4 ao Switch2
+3. Configure PC4 com: IP `172.16.0.10`, Máscara `255.255.255.192`, Gateway `172.16.0.1`
+4. Tente fazer ping de PC4 para PC0 (`192.168.10.10`) — vai falhar. Por quê?
+
+✅ **Checkpoint:** O ping falha porque PC4 está em uma rede completamente diferente e não há rota configurada. Anote a explicação com suas palavras.
+
+---
+
+# 🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
+
+**Objetivo:** Fazer o roteador distribuir IPs automaticamente para os PCs da Rede B.
+
+💡 **Explicação:** Em vez de configurar IP manualmente em cada PC, o DHCP permite que o roteador assuma esse papel — como um "balcão de distribuição" de endereços IP.
+
+**Passos:**
+1. Clique no R0 → CLI e configure o DHCP:
+
+```
 Router# configure terminal
 Router(config)# ip dhcp excluded-address 192.168.20.1 192.168.20.9
 Router(config)# ip dhcp pool REDE-B
@@ -267,92 +236,139 @@ Router(dhcp-config)# default-router 192.168.20.1
 Router(dhcp-config)# dns-server 8.8.8.8
 Router(dhcp-config)# exit
 ```
-3. Acesse a configuração de IP do **PC2** e do **PC3** e altere a opção de **Static** para **DHCP**.
-4. Valide a alocação dinâmica. A tela deve exibir a mensagem *"DHCP request successful"* e os campos de IP serão preenchidos automaticamente.
 
-### 4.5 — Exercício 8: Roteamento Estático Manual
+2. Agora vá em PC2 → Desktop → IP Configuration → selecione **DHCP**
+3. Aguarde alguns segundos — o PC deve receber um IP automaticamente (a partir de 192.168.20.10)
+4. Verifique com `ipconfig` no Command Prompt do PC2
 
-Quando um roteador precisa enviar pacotes para redes remotas que não estão diretamente conectadas às suas interfaces físicas:
-```ios
+✅ **Checkpoint:** PC2 recebe IP `192.168.20.10` (ou o próximo disponível), máscara `255.255.255.0`, gateway `192.168.20.1` e DNS `8.8.8.8` automaticamente.
+
+---
+
+# 🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
+
+**Objetivo:** Adicionar manualmente uma rota no roteador para uma rede que ele não conhece.
+
+**Cenário:** Suponha que existe uma terceira rede `10.0.0.0/24` acessível via um segundo roteador cujo IP na nossa rede é `192.168.10.254`.
+
+**Passos:**
+1. R0 → CLI:
+
+```
+Router# configure terminal
 Router(config)# ip route 10.0.0.0 255.255.255.0 192.168.10.254
 Router(config)# exit
 Router# show ip route
 ```
-*Na tabela de roteamento exibida pelo comando show ip route, rotas marcadas com C indicam conexões diretas, e rotas marcadas com S indicam rotas estáticas adicionadas manualmente.*
+
+2. Observe o output do `show ip route`. Identifique:
+   - As rotas marcadas com **C** (Connected — redes diretamente conectadas)
+   - A rota marcada com **S** (Static — que acabamos de adicionar)
+
+3. Tente pingar `10.0.0.1` a partir do PC0. Vai falhar — por quê? (Dica: o `192.168.10.254` não existe de fato na nossa topologia.)
+
+✅ **Checkpoint:** O comando `show ip route` exibe as rotas C e S corretamente. O aluno entende a diferença entre rotas diretamente conectadas e rotas estáticas.
 
 ---
 
-## 📋 Resumo Estrutural
+# 🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
 
-| **Conceito/Comando** | **Definição em Uma Frase** |
-| :--- | :--- |
-| **Endereço IP** | Identificador lógico de 32 bits da camada de rede. |
-| **Máscara de Rede** | Estrutura de 32 bits que separa a parte de rede da parte de host via AND binário. |
-| **CIDR** | Notação compacta que indica o número de bits de rede na máscara utilizando uma barra (ex: `/24` = `255.255.255.0`). |
-| **Gateway Padrão** | IP de interface de rede do roteador local encarregado de escoar o tráfego para redes externas. |
-| **no shutdown** | Comando fundamental da CLI Cisco utilizado para ativar fisicamente a interface de rede do roteador. |
-| **ip dhcp pool** | Comando que inicializa a configuração de um escopo de distribuição de IPs em roteadores. |
-| **show ip route** | Comando de CLI privilegiado do Cisco IOS que exibe a tabela de roteamento ativa do equipamento. |
-| **tracert** | Utilitário de diagnóstico que mapeia a latência e o caminho lógico através de roteadores até o host final. |
+**Objetivo:** Diagnosticar e corrigir falhas de conectividade em uma topologia com problemas propositais.
 
----
+**O professor vai introduzir os seguintes "problemas" na rede — sua missão é identificar e corrigir cada um:**
 
-%%
-## ❓ Banco de Questões
+| # | Sintoma | Possível Causa | Comando de Diagnóstico |
+|---|---|---|---|
+| A | PC0 não pinga PC1 (mesma rede) | IP incorreto ou máscara errada | `ipconfig` no PC0 |
+| B | PC0 pinga o gateway mas não pinga PC2 | Interface do roteador desligada | `show ip interface brief` no R0 |
+| C | PC2 recebeu IP via DHCP mas não tem gateway | Pool DHCP sem `default-router` | `ipconfig` + checar config DHCP |
+| D | Nenhum pacote sai do Switch0 | Cabo errado (Crossover no lugar de Straight-Through) | Inspecionar visualmente as conexões |
 
-> 🔒 *Seção exclusiva do professor — não publicada para os alunos no Quartz.*
+**Passos:**
+1. Identifique qual problema está ocorrendo usando os comandos de diagnóstico
+2. Corrija o problema na topologia ou na CLI
+3. Verifique com `ping` end-to-end que a conectividade foi restaurada
+4. Documente: qual era o problema, como você identificou, e o que fez para corrigir
 
-### Questão 1 (Múltipla Escolha — Nível: Intermediário)
-
-**Enunciado:** Uma equipe de engenharia do **Nubank** está configurando um novo cluster de microsserviços na nuvem corporativa (AWS VPC). Eles criaram uma sub-rede privada utilizando a faixa de IP `10.50.20.0` com a máscara CIDR `/23`. Para configurar as interfaces de rede dos servidores virtuais, o arquiteto precisa saber: qual o endereço de rede, qual o endereço de broadcast e quantos IPs utilizáveis (hosts) estão disponíveis para atribuição nessa sub-rede?
-
-- [ ] A) Rede: `10.50.20.0`; Broadcast: `10.50.20.255`; Hosts: 254 utilizáveis.
-- [ ] B) Rede: `10.50.20.0`; Broadcast: `10.50.21.255`; Hosts: 512 utilizáveis.
-- [x] C) Rede: `10.50.20.0`; Broadcast: `10.50.21.255`; Hosts: 510 utilizáveis. ✅
-- [ ] D) Rede: `10.50.0.0`; Broadcast: `10.50.255.255`; Hosts: 65.534 utilizáveis.
-
-**Justificativa:** A máscara `/23` possui 23 bits de rede e 9 bits de host ($32 - 23 = 9$). O número total de hosts é dado por $2^9 - 2 = 512 - 2 = 510$ hosts utilizáveis. Como `/23` representa uma máscara `255.255.248.0` (ou neste caso `255.255.254.0` na classe B/A), as redes saltam de 2 em 2 no terceiro octeto. A rede em questão inicia em `10.50.20.0` e termina em `10.50.21.255`. O endereço de rede é `10.50.20.0` e o de broadcast é o último IP do bloco (`10.50.21.255`).
+✅ **Checkpoint Final:** Ping de PC0 para PC3 funcionando com sucesso após todas as correções. `tracert` mostra o caminho completo em 2 saltos.
 
 ---
 
-### Questão 2 (Múltipla Escolha — Nível: Intermediário)
+# 🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
 
-**Enunciado:** Durante o processo de auditoria de segurança da infraestrutura de TI do portal **Mercado Livre**, constatou-se que um comutador virtual de distribuição automática (DHCP) configurado no roteador Cisco de gateway local (`192.168.20.1`) estava alocando IPs sem especificar a diretiva `default-router`. O que acontecerá com o tráfego dos computadores que adquirem IP dinamicamente através deste servidor DHCP?
-
-- [ ] A) Os computadores não conseguirão receber IP e ficarão bloqueados em modo estático temporário.
-- [ ] B) Os computadores obterão IPs válidos e conseguirão navegar em sites externos, mas não conseguirão pingar vizinhos locais.
-- [x] C) Os computadores receberão IP e máscara válidos e se comunicarão normalmente na mesma rede local física, mas falharão ao tentar enviar pacotes para fora da sub-rede local (como acessar a Rede A ou a Internet). ✅
-- [ ] D) O roteador gerará um loop lógico de broadcast, travando as interfaces do switch associado.
-
-**Justificativa:** A ausência do comando `default-router` nas configurações do pool DHCP faz com que as estações recebam IP e máscara de sub-rede, mas permaneçam com o campo "Default Gateway" em branco (zerado). Sem gateway padrão configurado, os hosts sabem resolver IPs locais via ARP de Camada 2, mas o sistema operacional descarta imediatamente qualquer pacote cujo IP de destino pertença a outra rede lógica, por não possuir a interface do roteador mapeada como gateway de saída.
-
----
-
-### Questão 3 (Dissertativa — Nível: Avançado)
-
-**Enunciado:** Ao cruzar um roteador corporativo (gateway de Camada 3) em direção a servidores externos de produção do **iFood** na nuvem da AWS, os cabeçalhos das Unidades de Dados de Protocolo (PDUs) de um pacote IP sofrem alterações fundamentais para viabilizar o tráfego ao longo de saltos físicos distintos. Explique detalhadamente o que acontece com os campos de endereçamento de origem e destino contidos no **Cabeçalho IP (Camada 3)** e no **Cabeçalho Ethernet (Camada 2)** no momento em que um frame de dados originado no PC0 atravessa a interface física do roteador em direção a um servidor web remoto.
-
-**Resposta esperada:**
-- **Cabeçalho IP (Camada 3) — Endereços IP de Origem e Destino:** Os endereços IP de origem e destino final permanecem estáticos (inalterados) durante toda a viagem lógica fim a fim (salvo aplicação de NAT), pois servem para identificar logicamente o remetente original e o destinatário final do tráfego de forma unívoca na rede mundial.
-- **Cabeçalho Ethernet (Camada 2) — Endereços MAC de Origem e Destino:** Os endereços MAC de origem e destino são reescritos e substituídos pelo roteador a cada novo salto físico (salto a salto). Na rede local de origem, o frame gerado possui o MAC de origem do PC0 e o MAC de destino da interface física do roteador local (gateway). Ao receber o frame, o roteador abre o quadro (desencapsulamento), analisa o cabeçalho IP e decide a interface de saída correspondente. Ele então gera um cabeçalho de Camada 2 inteiramente novo, configurando seu próprio MAC de saída como origem física, e o MAC do próximo roteador/dispositivo no caminho (próximo salto) como destino físico, repetindo esse processo em cada roteador da rota física até que o quadro atinja o destino final.
-
----
-%%
+| Problema | Causa Provável | Solução |
+|---|---|---|
+| Interface do roteador fica vermelha | `no shutdown` não foi executado | Entre na interface e execute `no shutdown` |
+| Ping falha com "Destination host unreachable" | Gateway padrão errado no PC | Verificar se o gateway é o IP da interface do roteador |
+| Ping falha com "Request timed out" | Hosts em redes diferentes sem roteamento | Verificar se o roteador tem as duas interfaces UP |
+| DHCP não entrega IP | Pool não configurado ou interface incorreta | Verificar `show ip dhcp pool` e `show ip dhcp binding` |
+| Cabo ligado mas interface vermelha | Tipo de cabo errado | Trocar por Straight-Through (PC→Switch) ou Crossover (Switch→Switch direto sem MDIX) |
 
 ---
 
-## 📄 Artigo de Aprofundamento
+# 🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
 
-- [Dynamic Host Configuration Protocol (DHCP) Basics — Cisco](https://www.cisco.com/c/en/us/support/docs/ip/dynamic-address-allocation-resolution/13722-dhcp-basics.html)
-> *Resumo prático: Artigo de suporte técnico descrevendo o funcionamento da alocação de IPs privados e depuração de roteadores Cisco IOS agindo como servidores DHCP.*
+**Salve o arquivo `.pkt` com o nome:** `SeuNome_Aula06_Redes.pkt`
+
+**Itens obrigatórios no arquivo final:**
+1. Topologia completa com PC0, PC1, PC2, PC3, Switch0, Switch1, R0
+2. Todos os PCs com IPs configurados (PC0 e PC1 estáticos, PC2 e PC3 via DHCP)
+3. Roteador com ambas as interfaces UP e DHCP configurado
+4. Rota estática para `10.0.0.0/24` visível no `show ip route`
+5. Print ou anotação das respostas do Exercício 10 (Troubleshooting)
+
+**Critérios de avaliação:**
+1. Conectividade end-to-end: ping de PC0 → PC3 funcionando
+2. DHCP operacional na Rede B
+3. Tabela de rotas correta no roteador
+4. Documentação do troubleshooting (Ex. 10)
 
 ---
 
-## 📚 Referências Bibliográficas
+# 🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
 
-- **TANENBAUM, Andrew S.; FEAMSTER, Nicholas; WETHERALL, David J.** *Redes de Computadores*. 6. ed. São Paulo: Pearson, 2021. **(Capítulo 5: A Camada de Rede — pp. 310–335)**.
-- **KUROSE, James F.; ROSS, Keith W.** *Redes de computadores e a internet: uma abordagem top-down*. 8. ed. São Paulo: Pearson Education do Brasil, 2021. **(Capítulo 4: A Camada de Rede: Plano de Dados — pp. 220–245)**.
-- **CISCO NETWORKING ACADEMY.** *Curso CCNA v7: Introdução às Redes (ITN)*. Cisco Press, 2020. **(Módulo 11: Endereçamento IPv4; Módulo 13: Divisão de Redes IP em Sub-redes)**.
+| O que fizemos | Comando/Ferramenta | Conceito Relacionado |
+|---|---|---|
+| Montamos topologia com 2 redes | Packet Tracer | Segmentação de redes |
+| Configuramos IPs estáticos | Desktop → IP Configuration | Endereçamento IPv4 |
+| Ativamos interfaces do roteador | `no shutdown` | Camada 3 — Roteamento |
+| Verificamos conectividade | `ping`, `tracert` | ICMP, TTL, saltos |
+| Observamos ARP e roteamento | Modo Simulation | Encapsulamento por camadas |
+| Criamos sub-rede /26 | Cálculo CIDR | Subnetting |
+| Configuramos DHCP | `ip dhcp pool` | Alocação dinâmica de IPs |
+| Adicionamos rota estática | `ip route` | Tabela de roteamento |
+| Diagnosticamos falhas | `show ip interface brief` | Troubleshooting de redes |
 
 ---
-*Última atualização: 2026-06-01 | Status: publicado*
+
+# 🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
+
+# 🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
+
+| Autor | Obra | Capítulo/Seção |
+|---|---|---|
+| TANENBAUM, A. S.; FEAMSTER, N.; WETHERALL, D. J. | Redes de Computadores. 6. ed. Pearson, 2021 | Cap. 5 — Camada de Rede: Endereçamento IPv4 e Sub-redes |
+| KUROSE, J. F. | Redes de Computadores e a Internet. 8. ed. Pearson, 2021 | Cap. 4 (Seção 4.3: Endereçamento IPv4, CIDR, DHCP) |
+| CISCO NETWORKING ACADEMY | Curso CCNAv7: Introduction to Networks | Módulos 7–11: Endereçamento IP, Sub-redes, DHCP, Roteamento |
+
+# 🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
+
+| Recurso | Link |
+|---|---|
+| Download Cisco Packet Tracer | https://www.netacad.com/courses/packet-tracer |
+| Calculadora de Sub-redes Online | https://www.subnet-calculator.com/ |
+| Documentação DHCP Cisco IOS | https://www.cisco.com/c/en/us/td/docs/ios/12_4t/ip_addr/configuration/guide/htdhcpsvr.html |
+| RFC 1918 — IPs Privados | https://datatracker.ietf.org/doc/html/rfc1918 |
+
+# 🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer
+
+| Canal/Autor | Título | Link |
+|---|---|---|
+| NetworkChuck | Subnetting is simple | https://www.youtube.com/watch?v=ecCuyq-Wprc |
+| Cisco NetAcad | Packet Tracer — Getting Started | https://www.youtube.com/watch?v=BvnHh3pJdgs |
+| David Bombal | DHCP Explained | https://www.youtube.com/watch?v=e6-TaH5bkjo |
+
+
+
+
+
