@@ -124,7 +124,7 @@ A máscara de sub-rede é o elemento crucial de 32 bits que **informa aos rotead
 
 Dispositivos de rede realizam uma operação binária **AND (E lógico)** entre o endereço IP e a Máscara para extrair o endereço de rede correspondente. No AND, o resultado só é 1 se ambos os bits comparados forem 1:
 
-```markdown
+```text
 IP:       192.168.10.74   ->  11000000.10101000.00001010.01001010
 Máscara:  255.255.255.0   ->  11111111.11111111.11111111.00000000
 -------------------------------------------------------------------
@@ -352,17 +352,22 @@ Neste laboratório prático real, utilizaremos a ferramenta **Wireshark** instal
 1. Abra o **Wireshark**.
 2. Dê um duplo clique sobre a sua interface de rede ativa (ex: **Wi-Fi** ou **Ethernet**) para iniciar a captura de pacotes em tempo real.
 3. No campo de filtros de visualização no topo da janela, digite **`bootp`** (protocolo base do DHCP) ou **`dhcp`** e pressione **Enter**. A tela ficará inicialmente vazia, aguardando tráfego do protocolo.
-4. Para forçar a geração de tráfego DHCP pelo seu sistema operacional, abra o **Prompt de Comando (CMD) como Administrador** ou o Terminal (Linux/macOS) e execute:
-   - **No Windows:**
-     ```cmd
-     ipconfig /release
-     ipconfig /renew
-     ```
-   - **No Linux/macOS:**
-     ```bash
-     sudo dhclient -r
-     sudo dhclient
-     ```
+4. Para forçar a geração de tráfego DHCP pelo seu sistema operacional, abra o **Prompt de Comando (CMD) como Administrador** ou o Terminal (Linux/macOS) e execute.
+
+**No Windows:**
+
+```cmd
+ipconfig /release
+ipconfig /renew
+```
+
+**No Linux/macOS:**
+
+```bash
+sudo dhclient -r
+sudo dhclient
+```
+
 5. Observe que a captura do Wireshark começará a exibir a sequência de pacotes DORA. Assim que a rede restabelecer a conexão, clique no botão vermelho **Stop (Parar)** no canto superior esquerdo do Wireshark para paralisar a captura.
 
 ### 7.2 — Roteiro de Análise de Pacotes e Cabeçalhos
