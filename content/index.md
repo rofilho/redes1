@@ -206,7 +206,7 @@ html, body, #quartz-root, #quartz-body, .page, .center, .center-content, article
     <a href="./Aula-06---Pratica-Enderecamento-IPv4-e-Sub-redes-Packet-Tracer" class="card" data-spa>
       <div class="card-thumb" style="background-image: url('assets/capa_aula06.png'); background-size: cover; background-position: center;"><div class="card-progress-bar"><div class="card-progress" style="width: 100%"></div></div></div>
       <div class="card-content">
-        <div class="card-title">🌐 Aula 06 – Endereçamento IPv4, Sub-redes e Roteamento</div>
+        <div class="card-title">🌐 Aula 06 – Endereçamento IPv4, Máscaras e Prática no Packet Tracer</div>
         <div class="card-meta"><span>Acessar Aula</span><span></span></div>
       </div>
     </a>
