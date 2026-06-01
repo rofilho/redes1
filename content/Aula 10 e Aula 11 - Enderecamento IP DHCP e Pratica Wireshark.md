@@ -70,7 +70,7 @@ Ao final desta aula, os alunos serão capazes de:
 
 ## 📌 1. A Estrutura do Endereço IPv4, Classes e IPs Reservados [Teoria ⏳ 15 min]
 
-O **Internet Protocol version 4 (IPv4)** é o protocolo padrão da Camada de Rede (Internet) responsible pelo endereçamento lógico e pelo roteamento de pacotes na rede mundial de computadores.
+O **Internet Protocol version 4 (IPv4)** é o protocolo padrão da Camada de Rede (Internet) responsável pelo endereçamento lógico e pelo roteamento de pacotes na rede mundial de computadores.
 
 ### 1.1 — Representação Binária vs. Decimal Pontuado
 
@@ -79,10 +79,10 @@ Um endereço IPv4 é uma sequência lógica de **32 bits** (sinais binários 0 e
 ```mermaid
 graph TD
     subgraph "Endereço IPv4 (32 bits)"
-        O1["1º Octeto (8 bits)\n192\n11000000"]:::oct
-        O2["2º Octeto (8 bits)\n168\n10101000"]:::oct
-        O3["3º Octeto (8 bits)\n10\n00001010"]:::oct
-        O4["4º Octeto (8 bits)\n1\n00000001"]:::oct
+        O1["1º Octeto (8 bits)<br/>192<br/>11000000"]:::oct
+        O2["2º Octeto (8 bits)<br/>168<br/>10101000"]:::oct
+        O3["3º Octeto (8 bits)<br/>10<br/>00001010"]:::oct
+        O4["4º Octeto (8 bits)<br/>1<br/>00000001"]:::oct
     end
     classDef oct fill:#1f2937,stroke:#4b5563,stroke-width:2px,color:#f3f4f6;
 ```
@@ -384,14 +384,14 @@ Abaixo está o roteiro de auditoria das estruturas de dados capturadas:
 +-------------------------------------------------------------+
 ```
 
-1. **Auditoria do Pacote DHCP Discover (1º Octeto):**
+1. **Auditoria do Pacote DHCP Discover (1º Pacote):**
    - Selecione a primeira mensagem da captura (**DHCP Discover**).
    - Abra a seção **Ethernet II** (Camada 2): Identifique o endereço de destino (Destination) constando como **`ff:ff:ff:ff:ff:ff`** (Broadcast físico total).
    - Abra a seção **Internet Protocol Version 4** (Camada 3): Identifique que a origem (Source) consta como **`0.0.0.0`** (por não possuir IP válido no boot) e o destino (Destination) consta como **`255.255.255.255`** (Broadcast lógico total).
    - Abra a seção **User Datagram Protocol** (Camada 4): Verifique a porta de origem (Source Port) como **`68`** e a porta de destino (Destination Port) como **`67`**.
    - Abra a seção **Bootstrap Protocol (DHCP)**: Localize a opção **`Option: (53) DHCP Message Type`** e verifique que seu tipo interno está classificado como **`Discover (1)`**.
 
-2. **Auditoria do Pacote DHCP Offer (2º Octeto):**
+2. **Auditoria do Pacote DHCP Offer (2º Pacote):**
    - Selecione a segunda mensagem da captura (**DHCP Offer**).
    - Na seção IP, note que o remetente (Source) agora é o IP físico do seu Servidor DHCP/Gateway (ex: `192.168.1.1` ou `192.168.20.1`) e a porta de origem UDP é a **`67`** (com destino na **`68`**).
    - Na seção **Bootstrap Protocol**, expanda as informações e localize o campo **`Your (client) IP address`** (identificado em algumas versões como `yiaddr`). Este é o endereço IP oficial que o servidor está reservando e oferecendo à sua máquina.
