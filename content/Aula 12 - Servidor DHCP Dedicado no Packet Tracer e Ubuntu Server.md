@@ -30,13 +30,13 @@ publicar: true
 ---
 
 > [!INFO] 🎯 Visão Geral da Aula & Recursos
-> **Aprenda a implantar e auditar serviços DHCP tanto em ambientes de simulação profissional quanto em servidores de produção reais.** Nesta aula, configuraremos um servidor DHCP dedicado em uma rede local no Cisco Packet Tracer e avançaremos para a instalação, configuração e fixação de IPs em um servidor real rodando Ubuntu Server 22.04 LTS com o `isc-dhcp-server`, monitorando e auditando o processo de alocação dinâmica DORA por meio de captura de pacotes no Wireshark.
+> **Aprenda como o DHCP funciona por dentro e coloque um servidor real para funcionar — do simulador até o Ubuntu Server — monitorando cada mensagem com o Wireshark no Windows.** Nesta aula você entenderá a teoria completa do protocolo DHCP (campos dos pacotes, lease time, renovação), configurará um servidor dedicado no Packet Tracer, instalará o `isc-dhcp-server` no Ubuntu Server 22.04 LTS e auditará cada etapa do ciclo DORA usando o Wireshark diretamente no Windows.
 > 
 > * **O que você vai dominar:**
->   - Simular um servidor DHCP dedicado (Server-PT) distribuindo IPs dinâmicos a múltiplos segmentos locais no Cisco Packet Tracer.
->   - Fixar endereços IP estáticos no Linux utilizando arquivos de especificação YAML do `netplan`.
+>   - Explicar o funcionamento interno do DHCP: campos Bootstrap, opções DHCP, lease time e renovação de lease.
+>   - Simular um servidor DHCP dedicado (Server-PT) no Cisco Packet Tracer.
 >   - Instalar e configurar o daemon `isc-dhcp-server` no Ubuntu Server 22.04 LTS.
->   - Capturar e analisar o ciclo DORA no Wireshark, auditando campos de Camada 2, 3 e 4.
+>   - Monitorar e interpretar o ciclo DORA em tempo real no Wireshark no Windows.
 > * **Pré-requisitos:** [[Aula 10 e Aula 11 - Enderecamento IP DHCP e Pratica Wireshark|Aula 10/11 (Conceitos DHCP e DORA)]].
 > * **📂 Recursos Adicionais para Download:**
 >   - [[../../40_Recursos/cheatsheet_dhcp_linux.pdf|Cheatsheet de Configuração do DHCP Server no Debian/Ubuntu (PDF)]]
@@ -47,11 +47,10 @@ publicar: true
 ## 🎯 Objetivo da Aula
 
 Ao final desta aula, os alunos serão capazes de:
+- **Explicar** o funcionamento interno do protocolo DHCP, incluindo os campos do pacote Bootstrap, as opções DHCP, o lease time e o mecanismo de renovação.
 - **Configurar** o serviço DHCP em um servidor dedicado no Cisco Packet Tracer para alocação automática de IPs.
-- **Fixar** endereços IPv4 no Ubuntu Server através da configuração de rede estruturada no utilitário Netplan.
-- **Instalar** e gerenciar o pacote daemon `isc-dhcp-server` no Ubuntu Server para distribuição de escopos dinâmicos.
-- **Verificar** o status e os logs de concessões ativas do servidor DHCP real para fins de troubleshooting e auditoria.
-- **Auditar** o fluxo DORA no Wireshark mapeando cabeçalhos Ethernet, IP, UDP e Bootstrap.
+- **Instalar** e gerenciar o daemon `isc-dhcp-server` no Ubuntu Server 22.04 LTS para distribuição de escopos dinâmicos.
+- **Monitorar** e interpretar o ciclo DORA completo no Wireshark instalado em um cliente Windows, identificando cada campo relevante dos pacotes.
 
 ---
 
@@ -150,13 +149,94 @@ Router(config-if)# exit
 
 ---
 
-## 📌 2. Implantação de Servidor DHCP no Ubuntu Server [Hands-On ⏳ 25 min]
+## 📌 2. Como o DHCP Funciona por Dentro — Teoria Completa [Teoria ⏳ 15 min]
+
+O **Dynamic Host Configuration Protocol (DHCP)** é um protocolo da **Camada de Aplicação** (porta UDP **67** no servidor / **68** no cliente) que automatiza a configuração de rede em hosts. Sem ele, todo computador precisaria de IP, máscara, gateway e DNS configurados manualmente.
+
+### 2.1 — O Ciclo DORA em Detalhes
+
+Quando um computador Windows liga ou clica em "Obter IP automaticamente", ele executa exatamente estas 4 etapas:
+
+```mermaid
+sequenceDiagram
+    autonumber
+    actor C as 💻 Cliente Windows
+    actor S as 🖥️ Servidor DHCP
+    C->>S: DHCP DISCOVER (Broadcast)
+    Note over C,S: Src IP: 0.0.0.0 | Dst IP: 255.255.255.255<br/>Src MAC: AA:BB:CC:DD:EE:FF | Dst MAC: FF:FF:FF:FF:FF:FF<br/>UDP Src Port: 68 → Dst Port: 67
+    S->>C: DHCP OFFER (Unicast/Broadcast)
+    Note over C,S: Servidor reserva 192.168.1.10 para o MAC do cliente<br/>Inclui: IP oferecido, máscara, gateway, DNS, lease time
+    C->>S: DHCP REQUEST (Broadcast)
+    Note over C,S: Cliente confirma que aceita a oferta<br/>Broadcast para avisar outros servidores DHCP
+    S->>C: DHCP ACK (Unicast/Broadcast)
+    Note over C,S: Confirmação oficial — IP válido por lease time<br/>Cliente grava as configurações na interface de rede
+```
+
+#### 📦 Etapa 1 — DISCOVER: "Tem algum servidor DHCP aí?"
+- O cliente ainda **não tem IP**, então usa `0.0.0.0` como origem.
+- Envia um **broadcast** para `255.255.255.255` — todos na rede recebem.
+- O payload Bootstrap inclui o **MAC do cliente** no campo `chaddr` para que o servidor saiba a quem responder.
+- Porta UDP: origem **68** → destino **67**.
+
+#### 📦 Etapa 2 — OFFER: "Tenho um IP para você!"
+- O servidor **reserva** temporariamente um IP do pool (ex: `192.168.1.10`).
+- Responde com o IP oferecido, máscara, gateway, DNS e o **lease time** (tempo de validade, ex: 600 segundos).
+- O campo `yiaddr` (*Your IP Address*) traz o IP proposto para o cliente.
+
+#### 📦 Etapa 3 — REQUEST: "Aceito! Quero esse IP."
+- Mesmo após receber a Offer, o cliente ainda usa **broadcast** — para avisar **todos** os servidores DHCP da rede que ele escolheu aquele servidor específico.
+- Outros servidores que fizeram ofertas cancelam suas reservas e devolvem os IPs ao pool.
+- O campo `Option 50` (Requested IP Address) contém o IP aceito.
+
+#### 📦 Etapa 4 — ACK: "Confirmado! IP é seu."
+- O servidor confirma definitivamente a concessão e **grava o lease** em seu banco de dados (arquivo `dhcpd.leases` no Linux).
+- O cliente Windows configura a interface de rede com o IP, máscara, gateway e DNS recebidos.
+- O timer de **renovação** começa: por padrão, após metade do lease time, o cliente tenta renovar silenciosamente (sem precisar refazer o ciclo DORA completo).
+
+---
+
+### 2.2 — Campos Internos do Pacote Bootstrap (o que o Wireshark vai mostrar)
+
+| Campo | Nome Técnico | O que representa |
+| :--- | :--- | :--- |
+| `op` | Operation Code | 1 = Boot Request (cliente) / 2 = Boot Reply (servidor) |
+| `chaddr` | Client Hardware Address | MAC do cliente (48 bits) |
+| `xid` | Transaction ID | Número aleatório que amarra Discover→Offer→Request→ACK |
+| `yiaddr` | Your IP Address | IP oferecido/confirmado ao cliente (preenchido pelo servidor) |
+| `siaddr` | Server IP Address | IP do servidor DHCP que faz a oferta |
+| `giaddr` | Gateway IP Address | IP do DHCP Relay Agent (quando existe roteamento entre VLANs) |
+| `Option 53` | DHCP Message Type | Tipo da mensagem: 1=Discover, 2=Offer, 3=Request, 5=ACK |
+| `Option 51` | IP Address Lease Time | Tempo de validade em segundos (ex: 600 = 10 min) |
+| `Option 3` | Router | Gateway padrão que o cliente deve usar |
+| `Option 6` | DNS Servers | Servidores DNS fornecidos ao cliente |
+
+> [!NOTE] 💼 Pergunta de Entrevista
+> **Por que o DHCP REQUEST ainda usa broadcast, mesmo depois de o cliente já ter recebido uma Offer?**
+>
+> **Resposta Esperada:** Porque em redes reais pode haver **múltiplos servidores DHCP** respondendo com ofertas simultâneas. O cliente escolhe apenas uma oferta (geralmente a mais rápida), mas os outros servidores não sabem disso. Ao enviar o REQUEST em broadcast, o cliente notifica publicamente qual servidor foi escolhido — permitindo que os demais cancelem suas reservas e devolvam os IPs ao pool. Se o REQUEST fosse Unicast direto ao servidor escolhido, os outros ficariam com IPs presos indefinidamente.
+
+---
+
+### 🧠 Checkpoint: Teste seu Conhecimento!
+
+<details>
+<summary><b>🔍 Exercício Rápido: Um cliente Windows recebe o IP 192.168.1.15 com lease time de 600 segundos. Quando ele vai tentar renovar o IP pela primeira vez e como faz isso?</b></summary>
+<blockquote>
+
+**Resposta Correta:** Após **300 segundos** (metade do lease time = T/2), o cliente Windows envia automaticamente um pacote **DHCP Request em Unicast** diretamente ao servidor que concedeu o IP (sem fazer um novo Discover broadcast). Se o servidor confirmar com um ACK, o lease é renovado por mais 600 segundos. Se não responder até 7/8 do tempo (525s), o cliente tenta um segundo REQUEST em broadcast. Somente se não receber resposta até o fim do lease é que ele precisa reiniciar o ciclo DORA completo do zero.
+
+</blockquote>
+</details>
+
+---
+
+## 📌 3. Implantação de Servidor DHCP no Ubuntu Server [Hands-On ⏳ 25 min]
 
 Para simular um cenário real de datacenter, instalaremos e configuraremos um servidor de DHCP corporativo em uma máquina virtual rodando **Ubuntu Server 22.04 LTS**.
 
 ### ⚙️ Topologia do Ambiente Virtual:
 - **VM 1: Servidor DHCP** (Ubuntu Server com duas placas de rede: `eth0` em modo Bridge/NAT para acesso à Internet e `eth1` em modo Rede Interna para servir os clientes).
-- **VM 2: Cliente** (Qualquer SO configurado na mesma Rede Interna virtual).
+- **VM 2: Cliente Windows** (Windows 10/11 configurado na mesma Rede Interna virtual com IP automático — DHCP).
 
 ---
 
@@ -279,13 +359,18 @@ sudo systemctl status isc-dhcp-server
 
 ---
 
-### 🚀 Passo 7: Testar a Alocação com VM Cliente
-1. Acesse uma VM configurada na mesma rede interna virtual (Switch Virtual).
-2. Configure a placa de rede da VM cliente para obter endereço IP dinamicamente (DHCP).
-3. No console do cliente, force a renovação e verifique se obteve o IP com os comandos:
-   - **No Linux Cliente:** `sudo dhclient -v` seguido de `ip a`.
-   - **No Windows Cliente:** `ipconfig /renew` seguido de `ipconfig`.
-4. No Servidor Ubuntu DHCP, você pode monitorar em tempo real quem alugou IPs visualizando o arquivo de concessões:
+### 🚀 Passo 7: Testar a Alocação com o Cliente Windows
+1. Acesse a **VM com Windows** configurada na mesma rede interna virtual.
+2. Confirme que a placa de rede está configurada para **Obter endereço IP automaticamente**:
+   - Painel de Controle → Central de Rede → Alterar configurações do adaptador → clicar com botão direito na placa → Propriedades → IPv4 → marcar "Obter automaticamente".
+3. Abra o **Prompt de Comando como Administrador** e force a renovação:
+```cmd
+ipconfig /release
+ipconfig /renew
+ipconfig
+```
+4. Verifique se o IP recebido está dentro do range configurado (`192.168.1.10` a `192.168.1.100`).
+5. No servidor Ubuntu, confirme o lease ativo do cliente Windows:
 ```bash
 cat /var/lib/dhcp/dhcpd.leases
 ```
@@ -295,93 +380,146 @@ cat /var/lib/dhcp/dhcpd.leases
 
 ---
 
-## 📌 3. Instalação do Wireshark e Monitoramento Passo a Passo [Hands-On ⏳ 15 min]
+## 📌 4. Monitorando o DHCP no Wireshark (Windows — Passo a Passo Completo) [Hands-On ⏳ 20 min]
 
-Para entender a jornada exata dos dados na rede física, utilizaremos a ferramenta de análise de pacotes **Wireshark** para monitorar e decodificar cada uma das 4 etapas do ciclo **DORA**.
-
-```
-    [CLIENTE]                                                  [SERVIDOR]
-    (0.0.0.0)                                               (192.168.1.1)
-        |                                                         |
-        | ------ DHCP DISCOVER (Src: 0.0.0.0, Dst: 255.255.255.255) ----> | (Broadcast L3)
-        | <----- DHCP OFFER (Src: 192.168.1.1, Dst: 192.168.1.10) ------- | (Unicast/Bcast)
-        | ------ DHCP REQUEST (Src: 0.0.0.0, Dst: 255.255.255.255) -----> | (Broadcast L3)
-        | <----- DHCP ACK (Src: 192.168.1.1, Dst: 192.168.1.10) --------- | (Unicast/Bcast)
-        v                                                         v
-```
-
-### 🔧 Roteiro Prático de Instalação e Captura:
-
-1. **Instale o Wireshark na máquina de testes (Cliente):**
-   - **No Windows:** Baixe e execute o instalador padrão do site oficial ou use o instalador de pacotes:
-```cmd
-winget install Wireshark.Wireshark
-```
-   - **No Ubuntu Desktop:** Instale via terminal:
-```bash
-sudo apt update && sudo apt install wireshark -y
-```
-2. **Inicie a Captura de Pacotes:**
-   - Abra o Wireshark como administrador (no Linux, rode `sudo wireshark`).
-   - Destaque e dê um duplo clique na sua interface de rede conectada à rede de testes (ex: `eth1` ou `Ethernet`).
-   - No campo de filtro na barra superior, digite **`bootp`** (filtro nativo do Wireshark que engloba tráfego DHCP) e aperte **Enter**.
-3. **Força a Transmissão de Tráfego DHCP:**
-   - Abra o terminal do cliente de rede e envie comandos para liberar e readquirir o IP:
-   - **No Windows:**
-```cmd
-ipconfig /release
-ipconfig /renew
-```
-   - **No Linux:**
-```bash
-sudo dhclient -r
-sudo dhclient
-```
-4. **Analise o Passo a Passo (O Fluxo DORA Decodificado):**
-
-#### A. Passo 1 — DHCP Discover (Descoberta):
-- Selecione o primeiro pacote da lista (DHCP Discover).
-- Expanda a seção **Ethernet II** e observe o MAC de destino: `ff:ff:ff:ff:ff:ff` (Broadcast Físico).
-- Expanda a seção **Internet Protocol Version 4**:
-  - **Source (Origem):** `0.0.0.0` (O cliente ainda não tem IP configurado).
-  - **Destination (Destino):** `255.255.255.255` (Broadcast Lógico).
-- Expanda a seção **User Datagram Protocol (UDP)**:
-  - **Source Port:** `68` (Porta do Cliente DHCP).
-  - **Destination Port:** `67` (Porta do Servidor DHCP).
-- Expanda a seção **Bootstrap Protocol (DHCP)** e vá até **DHCP Message Type**: `Discover (1)`.
-
-#### B. Passo 2 — DHCP Offer (Oferta):
-- Selecione o segundo pacote capturado.
-- Verifique que a origem IP mudou para `192.168.1.1` (IP do servidor DHCP) e o destino IP é o IP que está sendo oferecido ao cliente.
-- Expanda a seção **Bootstrap Protocol**:
-  - Localize o campo **Your (client) IP address (yiaddr)**: `192.168.1.10` (Este é o endereço reservado que está sendo proposto).
-
-#### C. Passo 3 — DHCP Request (Solicitação):
-- Note que o terceiro pacote também é um **Broadcast** (`Dst: 255.255.255.255`).
-- *Por que broadcast se a oferta já foi feita?* O cliente envia em broadcast para informar a **todos os servidores DHCP** da rede local que aceitou a oferta do Servidor X, permitindo que outros servidores DHCP eventuais cancelem suas ofertas reservadas e liberem esses IPs de volta aos seus pools.
-- Expanda a seção **Bootstrap Protocol** $\rightarrow$ **DHCP Option (50) Requested IP Address**: `192.168.1.10`.
-
-#### D. Passo 4 — DHCP ACK (Confirmação):
-- Selecione o último pacote.
-- O servidor confirma a concessão enviando o pacote final contendo a máscara, gateway e DNS definidos, gravando o lease permanentemente.
-
-> [!TIP] 💡 Dica de Produção (Pro-Tip)
-> Em infraestruturas corporativas, a vulnerabilidade mais comum em ambientes locais é a introdução acidental de um **Rogue DHCP Server** (servidor DHCP clandestino). Isso ocorre quando um funcionário traz de casa um roteador Wi-Fi doméstico e o pluga incorretamente na rede do escritório (usando a porta LAN em vez da WAN). O roteador começa a responder mais rápido que o servidor oficial aos broadcasts DHCP locais, entregando ranges de IPs incorretos e paralisando as estações de trabalho. Para prevenir isso, os engenheiros de infraestrutura ativam a funcionalidade de **DHCP Snooping** nos Switches de acesso, que bloqueia mensagens do tipo DHCP Offer/ACK em todas as portas físicas, exceto nas portas previamente configuradas como "Confiáveis" (Trusted Ports), conectadas aos servidores de produção oficiais.
+Agora você vai ver o protocolo DHCP **ao vivo**, pacote por pacote, no Wireshark instalado no seu computador Windows. Cada mensagem do ciclo DORA vai aparecer na tela em tempo real.
 
 ---
+
+### 🔧 Passo 1: Instalar o Wireshark no Windows
+
+1. Acesse [https://www.wireshark.org/download.html](https://www.wireshark.org/download.html) e baixe o instalador **Windows x64 Installer**.
+2. Execute o instalador. Durante a instalação:
+   - ✅ Marque a opção **Install Npcap** (driver necessário para captura de pacotes no Windows).
+   - ✅ Mantenha as opções padrão e conclua a instalação.
+3. Após instalar, **feche e reabra o Wireshark como Administrador** (clique com botão direito → *Executar como administrador*). Sem privilégio de administrador, o Wireshark não consegue acessar as interfaces de rede.
+
+---
+
+### 🔧 Passo 2: Iniciar a Captura na Interface Correta
+
+1. Na tela inicial do Wireshark, você verá a **lista de interfaces de rede** disponíveis com um gráfico de atividade ao lado de cada uma.
+2. Identifique a interface ativa da sua rede (geralmente **Ethernet** ou **Wi-Fi**) — ela será a que tem mais atividade no gráfico.
+3. **Dê um duplo clique** na interface para iniciar a captura. A tela de captura abrirá e começará a exibir pacotes em tempo real.
+4. No campo de filtro na barra superior, digite:
+```text
+bootp
+```
+5. Pressione **Enter**. A lista ficará vazia — isso é normal. Estamos esperando tráfego DHCP chegar.
+
+> [!TIP] 💡 Por que o filtro é `bootp` e não `dhcp`?
+> O DHCP é uma evolução do protocolo anterior chamado BOOTP (*Bootstrap Protocol*). O Wireshark identifica internamente o tráfego DHCP sob a categoria `bootp`. Em versões mais recentes do Wireshark, o filtro `dhcp` também funciona. Use `bootp` para garantir compatibilidade.
+
+---
+
+### 🔧 Passo 3: Forçar o Ciclo DORA Completo no Windows
+
+1. **Abra um segundo Prompt de Comando como Administrador** (sem fechar o Wireshark).
+2. Execute os dois comandos abaixo em sequência:
+```cmd
+ipconfig /release
+```
+   - Este comando faz o Windows **devolver** o IP atual ao servidor DHCP, enviando um pacote **DHCP Release**. A interface de rede fica temporariamente sem IP.
+```cmd
+ipconfig /renew
+```
+   - Este comando força o Windows a **solicitar um novo IP**, iniciando o ciclo DORA completo: Discover → Offer → Request → ACK.
+3. Aguarde alguns segundos. O `ipconfig /renew` encerrará quando o IP for recebido.
+4. Volte ao Wireshark. Você deverá ver **4 pacotes DHCP** aparecendo na lista (Discover, Offer, Request, ACK).
+
+---
+
+### 🔧 Passo 4: Analisando Cada Pacote do Ciclo DORA
+
+Clique em cada pacote e expanda as seções no painel inferior do Wireshark para inspecionar os campos internos:
+
+#### 🔵 Pacote 1 — DHCP Discover
+| Seção no Wireshark | Campo | O que verificar |
+| :--- | :--- | :--- |
+| **Ethernet II** | Destination | `ff:ff:ff:ff:ff:ff` — Broadcast físico total |
+| **Ethernet II** | Source | MAC do seu computador Windows |
+| **Internet Protocol v4** | Source | `0.0.0.0` — cliente sem IP ainda |
+| **Internet Protocol v4** | Destination | `255.255.255.255` — Broadcast lógico |
+| **UDP** | Source Port | `68` (cliente DHCP) |
+| **UDP** | Destination Port | `67` (servidor DHCP) |
+| **Bootstrap Protocol** | Message type | `Boot Request (1)` |
+| **Bootstrap Protocol** | Client MAC address (`chaddr`) | MAC do seu computador |
+| **Bootstrap Protocol** | Transaction ID (`xid`) | Número aleatório — amarra os 4 pacotes DORA |
+| **DHCP Option 53** | DHCP Message Type | `Discover (1)` |
+
+#### 🟡 Pacote 2 — DHCP Offer
+| Seção no Wireshark | Campo | O que verificar |
+| :--- | :--- | :--- |
+| **Internet Protocol v4** | Source | IP do servidor DHCP (ex: `192.168.1.1`) |
+| **Bootstrap Protocol** | Your (client) IP address (`yiaddr`) | IP sendo oferecido (ex: `192.168.1.10`) |
+| **Bootstrap Protocol** | Transaction ID (`xid`) | **Mesmo número** do Discover — confirma que é a resposta |
+| **DHCP Option 53** | DHCP Message Type | `Offer (2)` |
+| **DHCP Option 51** | IP Address Lease Time | Tempo de validade em segundos (ex: `600`) |
+| **DHCP Option 3** | Router | Gateway padrão oferecido (ex: `192.168.1.1`) |
+| **DHCP Option 6** | Domain Name Server | DNS oferecido (ex: `8.8.8.8`) |
+
+#### 🟠 Pacote 3 — DHCP Request
+| Seção no Wireshark | Campo | O que verificar |
+| :--- | :--- | :--- |
+| **Internet Protocol v4** | Destination | `255.255.255.255` — ainda **Broadcast** (avisa todos os servidores) |
+| **DHCP Option 53** | DHCP Message Type | `Request (3)` |
+| **DHCP Option 50** | Requested IP Address | IP que o cliente está aceitando (ex: `192.168.1.10`) |
+| **DHCP Option 54** | DHCP Server Identifier | IP do servidor escolhido (ex: `192.168.1.1`) |
+
+#### 🟢 Pacote 4 — DHCP ACK
+| Seção no Wireshark | Campo | O que verificar |
+| :--- | :--- | :--- |
+| **Bootstrap Protocol** | Your (client) IP address (`yiaddr`) | IP confirmado definitivamente |
+| **DHCP Option 53** | DHCP Message Type | `ACK (5)` |
+| **DHCP Option 51** | IP Address Lease Time | Lease time confirmado |
+| **DHCP Option 58** | Renewal Time Value (T1) | Tempo para primeira tentativa de renovação (metade do lease) |
+| **DHCP Option 59** | Rebinding Time Value (T2) | Tempo para segunda tentativa de renovação (7/8 do lease) |
+
+---
+
+### 🔧 Passo 5: Verificar o IP Recebido no Windows
+
+Após o `ipconfig /renew` completar, execute no Prompt de Comando:
+```cmd
+ipconfig /all
+```
+
+Observe os campos:
+- **Endereço IPv4**: IP concedido pelo servidor DHCP.
+- **Máscara de Sub-rede**: Máscara distribuída pelo servidor.
+- **Gateway Padrão**: Gateway informado na Option 3.
+- **Servidores DNS**: DNS informado na Option 6.
+- **Servidor DHCP**: IP do servidor que concedeu o lease.
+- **Concessão obtida / Concessão expira**: Timestamps do lease ativo.
+
+---
+
+### 🔧 Passo 6: Salvar a Captura para Análise Posterior
+
+1. No Wireshark, clique em **File → Save As**.
+2. Salve como `captura_dhcp_aula12.pcap`.
+3. Arquivos `.pcap` podem ser abertos novamente no Wireshark a qualquer momento para revisão, sem precisar estar conectado à rede.
+
+> [!TIP] 💡 Dica de Produção (Pro-Tip)
+> Em infraestruturas corporativas, a vulnerabilidade mais comum em redes locais é o **Rogue DHCP Server** (servidor DHCP clandestino) — geralmente um roteador doméstico que alguém conectou à porta LAN errada. Ele começa a responder aos broadcasts DHCP mais rápido que o servidor oficial, distribuindo IPs e gateways incorretos para toda a rede. Para detectar isso no Wireshark, use o filtro `bootp.option.dhcp == 2` — ele mostra apenas mensagens do tipo DHCP Offer. Se aparecerem **dois IPs de origem diferentes** respondendo com Offers, há um servidor clandestino na rede.
+
 
 ## 📋 Resumo Estrutural
 
 | **Conceito / Comando** | **Definição e Aplicação Prática em Uma Frase** |
 | :--- | :--- |
-| **Server-PT (Packet Tracer)** | Nó simulador que emula múltiplos serviços de rede dedicados (DHCP, DNS, HTTP) em um único servidor físico. |
-| **Netplan** | Utilitário de configuração de rede moderno do Ubuntu que lê especificações YAML para gerenciar interfaces. |
-| **netplan apply** | Comando executado no console Linux para carregar e aplicar as alterações feitas no arquivo YAML do Netplan. |
-| **isc-dhcp-server** | Pacote daemon que implementa o serviço de DHCP no ambiente Linux Debian/Ubuntu. |
-| **dhcpd.conf** | Arquivo principal de configuração onde são definidos parâmetros globais, sub-redes e ranges de distribuição DHCP. |
-| **default-lease-time** | Tempo limite padrão (em segundos) que um endereço IP concedido pertence ao cliente antes de necessitar renovação. |
-| **dhcpd.leases** | Arquivo de banco de dados do servidor que registra a relação ativa de IPs alocados e seus respectivos MAC addresses. |
-| **Filter `bootp`** | Expressão de filtragem utilizada no Wireshark para isolar pacotes Bootstrap/DHCP do tráfego geral da interface. |
+| **DORA** | Sigla para as 4 etapas do ciclo DHCP: *Discover, Offer, Request, ACK*. |
+| **`chaddr`** | Campo Bootstrap que carrega o MAC do cliente — permite ao servidor saber a quem ofertar o IP. |
+| **`yiaddr`** | Campo Bootstrap *Your IP Address* — preenchido pelo servidor com o IP ofertado/confirmado ao cliente. |
+| **`xid`** | Transaction ID — número aleatório que amarra os 4 pacotes DORA de uma mesma negociação. |
+| **Option 53** | Opção DHCP que define o tipo da mensagem (Discover, Offer, Request, ACK). |
+| **Option 51** | Opção DHCP que define o *lease time* (tempo de validade do IP em segundos). |
+| **`ipconfig /release`** | Comando Windows que devolve o IP ao servidor DHCP e remove a configuração da interface. |
+| **`ipconfig /renew`** | Comando Windows que força o ciclo DORA completo para obter novo IP do servidor. |
+| **`ipconfig /all`** | Comando Windows que exibe IP, gateway, DNS, servidor DHCP e timestamps de lease. |
+| **Filtro `bootp`** | Expressão de filtragem no Wireshark para isolar tráfego DHCP da interface capturada. |
+| **`isc-dhcp-server`** | Daemon Linux que implementa o serviço DHCP no Ubuntu Server. |
+| **`dhcpd.leases`** | Arquivo de banco de dados do servidor Linux que registra os leases ativos (IP ↔ MAC). |
 
 ---
 
