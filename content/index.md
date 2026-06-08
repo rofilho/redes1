@@ -161,7 +161,7 @@ html, body, #quartz-root, #quartz-body, .page, .center, .center-content, article
     <span class="tag">▶ Continue Estudando</span>
     <h1>🌐 Redes de Computadores I</h1>
     <p>Topologias, protocolos, redes virtuais e Hyper-V.</p>
-    <a href="./Aula-10-e-Aula-11---Enderecamento-IP-DHCP-e-Pratica-Wireshark" class="btn" data-spa>Retomar: 🌐 🟢 Aula 10 e Aula 11: Endereçamento IP, DHCP e Prática com Wireshark</a>
+    <a href="./Aula-12---Servidor-DHCP-Dedicado-no-Packet-Tracer-e-Ubuntu-Server" class="btn" data-spa>Retomar: 🌐 🟢 Aula 12: Servidor DHCP Dedicado no Packet Tracer e Ubuntu Server</a>
   </div>
 </div>
 
@@ -235,6 +235,13 @@ html, body, #quartz-root, #quartz-body, .page, .center, .center-content, article
       <div class="card-thumb" style="background-image: url('assets/capa_aula10.png'); background-size: cover; background-position: center;"><div class="card-progress-bar"><div class="card-progress" style="width: 100%"></div></div></div>
       <div class="card-content">
         <div class="card-title">🌐 Aula 10 e Aula 11 – Endereçamento IP, DHCP e Prática com Wireshark</div>
+        <div class="card-meta"><span>Acessar Aula</span><span></span></div>
+      </div>
+    </a>
+    <a href="./Aula-12---Servidor-DHCP-Dedicado-no-Packet-Tracer-e-Ubuntu-Server" class="card" data-spa>
+      <div class="card-thumb" style="background-image: url('assets/capa_aula12.png'); background-size: cover; background-position: center;"><div class="card-progress-bar"><div class="card-progress" style="width: 100%"></div></div></div>
+      <div class="card-content">
+        <div class="card-title">🌐 Aula 12 – Servidor DHCP Dedicado no Packet Tracer e Ubuntu Server</div>
         <div class="card-meta"><span>Acessar Aula</span><span></span></div>
       </div>
     </a>
