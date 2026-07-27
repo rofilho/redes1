@@ -1,6 +1,6 @@
 ---
 disciplina: Redes de Computadores I
-codigo: "RED-01"
+codigo: "49304"
 aula: 12
 titulo: "Servidor DHCP Dedicado no Packet Tracer e Ubuntu Server"
 tipo: teorica-pratica
@@ -20,7 +20,7 @@ publicar: true
 
 # 🟢 Aula 12: Servidor DHCP Dedicado no Packet Tracer e Ubuntu Server
 
-**Disciplina:** Redes de Computadores I (Cód. RED-01)  
+**Disciplina:** Redes de Computadores I (Cód. 49304)  
 **Curso:** Engenharia / TI — Uniube  
 **Semana:** 12 | 08/06/2026  
 **Professor:** Romualdo Mathias Filho  
