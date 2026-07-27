@@ -172,7 +172,7 @@ As avaliações podem ser escritas, práticas no laboratório, estudos de caso o
 > Faça a conta na tabela: **15 pontos de atividades + 15 do Uniube+ = 30 dos 100 pontos** que dependem de **entregar**, não de acertar. Quem acerta 40 pontos de prova e entrega tudo fecha com 70; quem acerta os mesmos 40 e não entrega nada fecha com 40 — na faixa da recuperação, mas sem direito a ela, porque um dos requisitos é não estar com o Uniube+/AVA zerado.
 
 > [!WARNING] ⚠️ Os 15 pontos de atividade ainda não estão detalhados
-> A distribuição acima é oficial e não muda. **Quais** atividades de laboratório e PBL valem os 5 pontos da N1 e os 10 da N2 — quantas, em que semanas, com que critério — eu ainda estou fechando, e publico aqui até a **S03**. Nenhuma atividade valendo ponto será cobrada sem estar anunciada nesta página com pelo menos duas semanas de antecedência.
+> A distribuição acima é oficial e não muda. **Quais** atividades de laboratório e PBL (aprendizagem baseada em problemas) valem os 5 pontos da N1 e os 10 da N2 — quantas, em que semanas, com que critério — eu ainda estou fechando, e publico aqui até a **S03**. Nenhuma atividade valendo ponto será cobrada sem estar anunciada nesta página com pelo menos duas semanas de antecedência.
 
 ### 3.2 Se você ficar abaixo: as duas segundas chances
 

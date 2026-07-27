@@ -30,7 +30,7 @@ Esta é a primeira aula, então o "até aqui" não é matéria — é a sua expe
 <details>
 <summary>De 100 pontos numa disciplina da Uniube, quantos você acha que dá para garantir sem acertar uma única questão de prova?</summary>
 
-**Trinta.** 15 pontos de atividades (laboratório/PBL) + 15 do Uniube+ **não são prova** — são entregas ao longo do semestre, e quem entrega no prazo pega a maior parte deles. A conta completa está no [plano da disciplina](./Plano-de-Ensino-e-Contrato).
+**Trinta.** 15 pontos de atividades (laboratório e PBL — aprendizagem baseada em problemas) + 15 do Uniube+ **não são prova** — são entregas ao longo do semestre, e quem entrega no prazo pega a maior parte deles. A conta completa está no [plano da disciplina](./Plano-de-Ensino-e-Contrato).
 
 </details>
 
@@ -177,7 +177,7 @@ A regra completa — tabelas, requisitos, datas — está no [Tópico 3 do plano
 1. **Aprovação = ≥ 60 pontos E ≥ 75% de frequência.** As duas juntas; nota alta não compensa falta.
 2. **Os 100 pontos:** N1 = 35 (25 prova + 5 atividades + 5 Uniube+) · N2 = 50 (30 + 10 + 10) · Institucional = 15. **70 pontos são prova; 30 são entrega.**
 3. **Faltou à prova?** SAE no AVA em **até 3 dias úteis**, atestado anexado no SAE — **não na minha mão**. Segunda chamada de 14 a 16/12.
-4. **Ficou entre 40 e 59?** Recuperação — se todas as provas foram feitas e o Uniube+ não está zerado. Ela **zera as notas da N1 e da N2 (55 pontos) e vale por elas**, e a nota final **trava em 60**.
+4. **Ficou entre 40 e 59?** Recuperação — se todas as provas foram feitas e o Uniube+ não está zerado. Ela **zera as notas das duas provas — 25 + 30 = 55 pontos — e vale por elas**, e a nota final **trava em 60**.
 5. **Datas que não mudam:** notas da N1 até 12/10 · notas da N2 até 18/12 · encerramento 19/12.
 
 > [!WARNING] ⚠️ O prazo de 3 dias úteis é institucional
@@ -198,14 +198,14 @@ Regra que o professor decreta, o aluno obedece. Regra que a turma escreve, a tur
 <div class="au-slot-h"><b>Interativo</b> · votação em sala · 10 min</div>
 <div class="au-slot-c">
 
-**Votação dos acordos.** Cada proposta acima vai a voto: **manter, mudar ou cortar** — e fica aberto o campo para **acrescentar** um acordo que ninguém propôs.
+**Votação dos acordos.** Proposta a proposta, mão levantada: **manter, mudar ou cortar.** Fica aberto o campo para **acrescentar** um acordo que ninguém propôs.
 
-Os acordos que passarem da maioria entram na versão final, e o **[Plano de Ensino e Contrato](./Plano-de-Ensino-e-Contrato) é atualizado** com o texto votado. O contrato não fica no quadro; fica publicado.
+Os acordos que passarem por **maioria simples da sala presente** entram na versão final, e o **[Plano de Ensino e Contrato](./Plano-de-Ensino-e-Contrato) é atualizado** com o texto votado. O contrato não fica no quadro; fica publicado.
 
-A votação é da turma, não minha: eu não desempato.
+Mão levantada é aberta: todo mundo vê como você votou. A votação é da turma, não minha: eu não desempato.
 
 </div>
-<p class="au-slot-b"><b>Plano B:</b> sem internet ou sem projetor, a votação é por <b>mão levantada</b>, uma proposta de cada vez. O acordo extra vai em meia folha de papel, recolhida na saída. Sem depender de rede — o que é apropriado para uma aula de redes.</p>
+<p class="au-slot-b"><b>O acordo que ninguém quiser propor em voz alta</b> vai em meia folha de papel, recolhida na saída — e vale o mesmo na apuração. Nada disto depende de rede nem de projetor, o que é apropriado para uma aula de redes.</p>
 </div>
 
 ---

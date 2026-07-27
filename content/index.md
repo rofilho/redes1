@@ -161,7 +161,7 @@ html, body, #quartz-root, #quartz-body, .page, .center, .center-content, article
     <span class="tag">▶ Continue Estudando</span>
     <h1>🌐 Redes de Computadores I</h1>
     <p>Topologias, protocolos, redes virtuais e Hyper-V.</p>
-    <a href="./Aula-12---Servidor-DHCP-Dedicado-no-Packet-Tracer-e-Ubuntu-Server" class="btn" data-spa>Retomar: 🌐 🟢 Aula 12: Servidor DHCP Dedicado no Packet Tracer e Ubuntu Server</a>
+    <a href="./Aula-01---Plano-de-Aulas-e-Organizacao" class="btn" data-spa>Começar: 🌐 Aula 01 — Plano de Aulas e Organização</a>
   </div>
 </div>
 
@@ -231,7 +231,7 @@ html, body, #quartz-root, #quartz-body, .page, .center, .center-content, article
       </div>
     </a>
     <a href="./Aula-08---Protocolos-de-Aplicacao-HTTP-e-FTP" class="card" data-spa>
-      <div class="card-thumb" style="background-image: url('assets/capa_aula08.png'); background-size: cover; background-position: center;"><div class="card-progress-bar"><div class="card-progress" style="width: 100%"></div></div></div>
+      <div class="card-thumb"><div class="card-progress-bar"><div class="card-progress" style="width: 100%"></div></div></div>
       <div class="card-content">
         <div class="card-title">🌐 Aula 08 – Protocolos de Aplicação: HTTP e FTP</div>
         <div class="card-meta"><span>Acessar Aula</span><span></span></div>
@@ -252,7 +252,7 @@ html, body, #quartz-root, #quartz-body, .page, .center, .center-content, article
       </div>
     </a>
     <a href="./Aula-12---Servidor-DHCP-Dedicado-no-Packet-Tracer-e-Ubuntu-Server" class="card" data-spa>
-      <div class="card-thumb" style="background-image: url('assets/capa_aula12.png'); background-size: cover; background-position: center;"><div class="card-progress-bar"><div class="card-progress" style="width: 100%"></div></div></div>
+      <div class="card-thumb"><div class="card-progress-bar"><div class="card-progress" style="width: 100%"></div></div></div>
       <div class="card-content">
         <div class="card-title">🌐 Aula 12 – Servidor DHCP Dedicado no Packet Tracer e Ubuntu Server</div>
         <div class="card-meta"><span>Acessar Aula</span><span></span></div>
