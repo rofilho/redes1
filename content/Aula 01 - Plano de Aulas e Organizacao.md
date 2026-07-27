@@ -30,14 +30,14 @@ Esta é a primeira aula, então o "até aqui" não é matéria — é a sua expe
 <details>
 <summary>De 100 pontos numa disciplina da Uniube, quantos você acha que dá para garantir sem acertar uma única questão de prova?</summary>
 
-**Trinta.** 15 pontos de atividades (laboratório/PBL) + 15 do Uniube+ dependem só de **entregar**, não de acertar. É o trecho mais barato do semestre — e o mais abandonado. A conta completa está no [plano da disciplina](./Plano-de-Ensino-e-Contrato).
+**Trinta.** 15 pontos de atividades (laboratório/PBL) + 15 do Uniube+ dependem só de **entregar**, não de acertar. A conta completa está no [plano da disciplina](./Plano-de-Ensino-e-Contrato).
 
 </details>
 
 <details>
 <summary>Você faltou a uma prova com atestado médico. Entregar o atestado ao professor resolve?</summary>
 
-**Não — e é a maneira mais comum de perder a segunda chamada achando que resolveu.** O caminho é abrir um **SAE no AVA em até 3 dias úteis**, com o atestado anexado. Quem analisa é a coordenação; o professor não pode nem receber o documento. Passou o prazo, indefere.
+**Não.** Pela norma institucional, o caminho é abrir um **SAE no AVA em até 3 dias úteis**, com o atestado anexado. Quem analisa é a coordenação; o professor não pode nem receber o documento. Passou o prazo, indefere.
 
 </details>
 
@@ -57,7 +57,7 @@ A ideia: **a rede tem camadas**, e cada uma pode falhar sozinha. A velocidade co
 > **O que você leva desta aula**
 > - Onde os **100 pontos** são ganhos — e os 30 que não dependem de prova.
 > - As datas que travam o semestre: provas, segunda chamada, recuperação.
-> - O prazo de **3 dias úteis** do SAE, que é o que mais reprova gente.
+> - O prazo de **3 dias úteis** do SAE para a segunda chamada.
 > - As **regras de sala**, votadas — não decretadas.
 >
 > **📂 Recursos**
@@ -180,7 +180,7 @@ A regra completa — tabelas, requisitos, datas — está no [Tópico 3 do plano
 4. **Ficou entre 40 e 59?** Recuperação — se todas as provas foram feitas e o Uniube+ não está zerado. Ela **zera as provas** e a nota final **trava em 60**.
 5. **Datas que não mudam:** notas da N1 até 12/10 · notas da N2 até 18/12 · encerramento 19/12.
 
-> [!WARNING] ⚠️ O prazo de 3 dias úteis é o que mais reprova gente
+> [!WARNING] ⚠️ O prazo de 3 dias úteis é institucional
 > Não é regra minha, é institucional — e o curso indefere fora do prazo. Se você guardar uma única coisa desta aula, que seja esta: **atestado vai no SAE, em 3 dias úteis.**
 
 ---

@@ -169,14 +169,7 @@ As avaliações podem ser aplicadas de forma escrita, prática em laboratório, 
 **A Avaliação Institucional (15 pts)** não é minha: é uma prova aplicada pela universidade, comum a todos os componentes, com data definida pela instituição. Ela entra direto na sua nota final desta disciplina. **A data ainda não foi divulgada** — quando sair, anuncio no AVA e atualizo esta página.
 
 > [!IMPORTANT] 🎯 Trinta pontos não dependem de prova
-> **Carlos e Diego acertaram exatamente as mesmas questões.** Nas duas provas, 40 dos 55 pontos possíveis; na Institucional, 8 de 15 cada um. A única diferença: Carlos entregou todas as atividades e todo o Uniube+; Diego não entregou nada disso.
->
-> - Carlos: 40 + 8 + 15 + 15 = **78** — passa com folga
-> - Diego: 40 + 8 + 0 + 0 = **48** — reprova
->
-> Pior: os 48 pontos colocam Diego na faixa da recuperação, mas ele pode **nem ter direito a ela** — um dos requisitos é não estar com o Uniube+/AVA zerado.
->
-> **30 dos 100 pontos não dependem de você acertar prova nenhuma. Dependem só de você entregar.** É o trecho mais barato do semestre e o mais abandonado.
+> Faça a conta na tabela: **15 pontos de atividades + 15 do Uniube+ = 30 dos 100 pontos** que dependem de **entregar**, não de acertar. Quem acerta 40 pontos de prova e entrega tudo fecha com 70+; quem acerta os mesmos 40 e não entrega nada fecha com 48 — e pode nem ter direito à recuperação, porque um dos requisitos é não estar com o Uniube+/AVA zerado.
 
 > [!WARNING] ⚠️ Os 15 pontos de atividade ainda não estão detalhados
 > A distribuição acima é oficial e não muda. **Quais** atividades de laboratório e PBL valem os 5 pontos da N1 e os 10 da N2 — quantas, em que semanas, com que critério — eu ainda estou fechando, e publico aqui até a **S03**. Nenhuma atividade valendo ponto será cobrada sem estar anunciada nesta página com pelo menos duas semanas de antecedência.
@@ -195,10 +188,10 @@ São mecanismos diferentes, com regras diferentes — e o prazo de um deles é d
 
 **Os três requisitos da recuperação — valem juntos:** ter feito **todas** as provas do semestre; estar entre **40 e 59** pontos; e **não** estar com as notas de AVA/Uniube+ zeradas. Faltando um, não há recuperação.
 
-> [!WARNING] ⚠️ O prazo de 3 dias úteis é o que mais reprova gente
-> Faltou à prova? **Abra o SAE no AVA em até 3 dias úteis.** Passou disso, o curso indefere — o prazo não é meu, é institucional.
+> [!WARNING] ⚠️ O prazo de 3 dias úteis é institucional
+> Faltou à prova? **Abra o SAE no AVA em até 3 dias úteis.** Passado o prazo, o curso indefere — o prazo não é meu, é da norma institucional.
 >
-> **Não me entregue atestado**, nem em papel nem por e-mail: eu não posso recebê-lo. O atestado é anexado ao SAE e quem analisa é a coordenação. Entregar o documento na mão é a maneira mais comum de perder o prazo achando que resolveu.
+> **Não me entregue atestado**, nem em papel nem por e-mail: pela norma, o atestado é anexado ao SAE e quem analisa é a coordenação. Documento entregue na mão não conta como pedido.
 
 > [!NOTE] 📐 Como a recuperação recompõe a nota
 > A recuperação **troca, não soma.** Ela vale o total das duas provas e substitui as notas delas, que são zeradas. Quem foi **bem nas provas e mal nas atividades** não se beneficia — jogaria fora justamente a parte boa. E, como o teto é 60, ninguém sai da recuperação com mais do que o mínimo de aprovação.
