@@ -21,7 +21,7 @@ publicar: true
 # 🌐 Aula 09: Redes Virtuais — VMs, ISOs e Hyper-V
 
 **Disciplina:** Redes de Computadores I
-**Curso:** Inteligência Artificial e Ciência de Dados — Uniube
+**Curso:** Sistemas de Informação — Uniube
 **Semana:** 9
 **Professor:** Romualdo Mathias Filho
 **Tipo:** 🔬 Teórica + Prática (Laboratório)

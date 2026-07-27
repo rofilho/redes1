@@ -21,7 +21,7 @@ publicar: true
 # 🟢 Aula 12: Servidor DHCP Dedicado no Packet Tracer e Ubuntu Server
 
 **Disciplina:** Redes de Computadores I (Cód. 49304)  
-**Curso:** Engenharia / TI — Uniube  
+**Curso:** Sistemas de Informação — Uniube  
 **Semana:** 12 | 08/06/2026  
 **Professor:** Romualdo Mathias Filho  
 **Tipo:** 🔬 Teórico-Prática (Unificada)  

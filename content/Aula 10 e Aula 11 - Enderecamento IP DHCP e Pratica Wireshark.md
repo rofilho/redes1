@@ -22,7 +22,7 @@ publicar: true
 # 🟢 Aula 10 e Aula 11: Endereçamento IP, DHCP e Prática com Wireshark
 
 **Disciplina:** Redes de Computadores I (Cód. 49304)  
-**Curso:** Engenharia / TI — Uniube  
+**Curso:** Sistemas de Informação — Uniube  
 **Semana:** 10  
 **Professor:** Romualdo Mathias Filho  
 **Tipo:** 🔬 Teórico-Prática (Unificada)  
