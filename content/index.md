@@ -166,12 +166,25 @@ html, body, #quartz-root, #quartz-body, .page, .center, .center-content, article
 </div>
 
 <div class="row-wrapper">
+  <div class="row-title">Documentos da Disciplina</div>
+  <div class="row">
+    <a href="./Plano-de-Ensino-e-Contrato" class="card" data-spa>
+      <div class="card-thumb">📘<div class="card-progress-bar"><div class="card-progress" style="width: 100%"></div></div></div>
+      <div class="card-content">
+        <div class="card-title">📘 Plano de Ensino e Contrato — a referência do semestre</div>
+        <div class="card-meta"><span>Consultar</span><span></span></div>
+      </div>
+    </a>
+  </div>
+</div>
+
+<div class="row-wrapper">
   <div class="row-title">Conteúdo da Disciplina</div>
   <div class="row">
     <a href="./Aula-01---Plano-de-Aulas-e-Organizacao" class="card" data-spa>
       <div class="card-thumb" style="background-image: url('assets/capa_aula01.png'); background-size: cover; background-position: center;"><div class="card-progress-bar"><div class="card-progress" style="width: 100%"></div></div></div>
       <div class="card-content">
-        <div class="card-title">🌐 Aula 01 – Plano de Aulas e Organização da Disciplina</div>
+        <div class="card-title">🌐 Aula 01 – Apresentação e Contrato da Disciplina</div>
         <div class="card-meta"><span>Acessar Aula</span><span></span></div>
       </div>
     </a>

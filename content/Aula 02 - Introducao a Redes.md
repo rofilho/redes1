@@ -4,7 +4,7 @@ title: "🖥️ Aula - 02: Introdução a Redes de Computadores"
 
 # 🖥️ Aula - 02: Introdução a Redes de Computadores
 
-Bem-vindos à disciplina de Redes de Computadores! Nesta primeira aula, vamos entender o que são redes de computadores, por que elas são importantes e como fazem parte do nosso dia a dia. Além disso, vamos explorar os principais tipos de redes, os componentes que as compõem e um panorama sobre como os dados trafegam na internet.
+O contrato foi assinado na Aula 01 — aqui o conteúdo começa. Nesta aula, vamos entender o que são redes de computadores, por que elas são importantes e como fazem parte do nosso dia a dia. Além disso, vamos explorar os principais tipos de redes, os componentes que as compõem e um panorama sobre como os dados trafegam na internet.
 
 Uma rede de computadores é um conjunto de dispositivos interconectados que compartilham informações e recursos. Pense na internet: você acessa sites, faz chamadas de vídeo, joga online e baixa arquivos. Tudo isso acontece graças às redes. Mas não só a internet – redes também conectam computadores dentro de empresas, universidades e até mesmo na sua casa.
 
