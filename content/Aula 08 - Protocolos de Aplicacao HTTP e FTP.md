@@ -18,11 +18,11 @@ publicar: true
 
 # 🌐 Aula 08: Protocolos de Aplicação (HTTP e FTP) e Simulação de Rede
 
-**Disciplina:** Redes de Computadores I (Cód. 49325)
-**Curso:** Sistemas de Informação — Uniube
-**Semana:** 8
-**Professor:** Romualdo Mathias Filho
-**Tipo:** 🔄 Teórico-Prática
+**Disciplina:** Redes de Computadores I (Cód. 49325)<br>
+**Curso:** Sistemas de Informação — Uniube<br>
+**Semana:** 8<br>
+**Professor:** Romualdo Mathias Filho<br>
+**Tipo:** 🔄 Teórico-Prática<br>
 **Tópicos:** Camada de Aplicação, HTTP, FTP, Pacotes de Rede, Cabecalho IP, Simulação no Packet Tracer.
 
 ---

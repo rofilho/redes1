@@ -24,11 +24,11 @@ publicar: true
 
 # 🖥️ Aula - 07: Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake
 
-**Disciplina:** Redes de Computadores I (Cód. 49325)
-**Curso:** Sistemas de Informação — Uniube
-**Semana:** 7 | Quarta-feira
-**Professor:** Romualdo Mathias Filho
-**Tipo:** 📘 Teórica
+**Disciplina:** Redes de Computadores I (Cód. 49325)<br>
+**Curso:** Sistemas de Informação — Uniube<br>
+**Semana:** 7 | Quarta-feira<br>
+**Professor:** Romualdo Mathias Filho<br>
+**Tipo:** 📘 Teórica<br>
 **Tópicos:** Camada de Transporte, TCP, UDP, Three-Way Handshake, Portas, Multiplexação, Controle de Fluxo
 
 ---
@@ -389,7 +389,3 @@ Responda no caderno ou no Moodle:
 ---
 
 *Última atualização: 2026-04-29 | Status: publicado*
-
-
-
-

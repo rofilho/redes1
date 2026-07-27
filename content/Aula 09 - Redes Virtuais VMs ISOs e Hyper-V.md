@@ -20,11 +20,11 @@ publicar: true
 
 # 🌐 Aula 09: Redes Virtuais — VMs, ISOs e Hyper-V
 
-**Disciplina:** Redes de Computadores I
-**Curso:** Sistemas de Informação — Uniube
-**Semana:** 9
-**Professor:** Romualdo Mathias Filho
-**Tipo:** 🔬 Teórica + Prática (Laboratório)
+**Disciplina:** Redes de Computadores I<br>
+**Curso:** Sistemas de Informação — Uniube<br>
+**Semana:** 9<br>
+**Professor:** Romualdo Mathias Filho<br>
+**Tipo:** 🔬 Teórica + Prática (Laboratório)<br>
 **Tópicos:** Virtualização, Hypervisor, Virtual Switches (Externo/Interno/Privado), NAT, Bridging, ISOs, Segmentação de Rede Virtual.
 
 ---
