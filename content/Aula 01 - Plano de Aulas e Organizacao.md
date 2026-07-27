@@ -74,7 +74,7 @@ O plano de ensino conta **30 horas-aula presenciais**. Hora-aula não é hora de
 | :-- | :--- | :--- |
 | 0–5 | Entrada, chamada, apresentações | — |
 | 5–14 | **Nosso caminho até aqui** — as três perguntas sobre como o jogo funciona | bloco de abertura |
-| 14–30 | **A disciplina em 15 minutos** — o que Redes I cobre e o mapa do semestre | Tópico 1 |
+| 14–30 | **A disciplina em 16 minutos** — o que Redes I cobre e o mapa do semestre | Tópico 1 |
 | 30–33 | Pausa procedural — comparar anotações com o colega | — |
 | 33–48 | **Nota, prazos e segundas chances** — os 100 pontos, SAE, recuperação | Tópico 2 |
 | 48–58 | **Regras de sala** — propostas e votação | Slot interativo |
@@ -103,7 +103,7 @@ Cinco termos que vão decidir a sua nota e que quase ninguém lê a tempo:
 
 ---
 
-## 📌 1. A disciplina em 15 minutos [Exposição dialogada ⏳ 16 min + 3 de pausa]
+## 📌 1. A disciplina em 16 minutos [Exposição dialogada ⏳ 16 min + 3 de pausa]
 
 Não vou ler o plano de ensino em voz alta — ele está publicado, íntegro, no [Plano de Ensino e Contrato](./Plano-de-Ensino-e-Contrato). O que cabe aqui é o **mapa**: o que a disciplina cobre, em que ordem, e por quê.
 
@@ -177,7 +177,7 @@ A regra completa — tabelas, requisitos, datas — está no [Tópico 3 do plano
 1. **Aprovação = ≥ 60 pontos E ≥ 75% de frequência.** As duas juntas; nota alta não compensa falta.
 2. **Os 100 pontos:** N1 = 35 (25 prova + 5 atividades + 5 Uniube+) · N2 = 50 (30 + 10 + 10) · Institucional = 15. **70 pontos são prova; 30 são entrega.**
 3. **Faltou à prova?** SAE no AVA em **até 3 dias úteis**, atestado anexado no SAE — **não na minha mão**. Segunda chamada de 14 a 16/12.
-4. **Ficou entre 40 e 59?** Recuperação — se todas as provas foram feitas e o Uniube+ não está zerado. Ela **zera as provas** e a nota final **trava em 60**.
+4. **Ficou entre 40 e 59?** Recuperação — se todas as provas foram feitas e o Uniube+ não está zerado. Ela **zera as notas da N1 e da N2 (55 pontos) e vale por elas**, e a nota final **trava em 60**.
 5. **Datas que não mudam:** notas da N1 até 12/10 · notas da N2 até 18/12 · encerramento 19/12.
 
 > [!WARNING] ⚠️ O prazo de 3 dias úteis é institucional
@@ -250,14 +250,19 @@ Toda aula termina do mesmo jeito: duas perguntas anônimas, sem nota. O que voc�
 </div>
 
 <div class="au-refs">
-<b>Referências desta aula</b>
+<b>De onde vem o que eu disse hoje</b>
 
-Esta aula é administrativa: o que ela afirma vem de dois documentos, não de livro.
+Esta aula é administrativa: quase nada dela sai de livro. Vale você saber o que é documento e o que sou eu falando.
 
-- UNIVERSIDADE DE UBERABA. **Avaliações de Segunda Chamada e Recuperação de Aprendizagem — Cursos: Engenharias, Gestão e Tecnologia da Informação, 2026/2.** Campus Uberlândia, 2026. <span class="au-pag">seç. 1 — aprovação; seç. 4 — segunda chamada, prazo de 3 dias úteis pelo SAE e aplicação de 14 a 16/12; seç. 5 — recuperação, os três requisitos, o zeramento das provas e o teto de 60</span> — **fonte do Tópico 2.**
-- UNIVERSIDADE DE UBERABA. **Plano de Ensino — 49304 Redes de Computadores I, curso 160 Sistemas de Informação.** Uberlândia, 2026. <span class="au-pag">p. 1 — quadro de carga horária e ementa; p. 3 — conteúdo programático; p. 4 — quadro de distribuição da pontuação semestral</span> — **fonte do Tópico 1 e da distribuição de pontos.**
+**Documento, e você pode pedir para ver:**
 
-Em qualquer divergência entre esta página e esses documentos, **valem os documentos**. A reprodução íntegra dos dois — ementa, objetivos, calendário completo e bibliografia — está no [Plano de Ensino e Contrato](./Plano-de-Ensino-e-Contrato).
+- UNIVERSIDADE DE UBERABA. **Plano de Ensino — 49304 Redes de Computadores I, curso 160 Sistemas de Informação.** Uberlândia, 2026. <span class="au-pag">p. 1 — carga horária e ementa; p. 3 — conteúdo programático; p. 4 — distribuição da pontuação semestral</span> — é dele que saem a ementa, o conteúdo e os 100 pontos.
+
+**Eu explicando, e onde você confere:**
+
+As regras de **aprovação, segunda chamada e recuperação** são as que a coordenação definiu para os cursos de Engenharias, Gestão e Tecnologia da Informação neste semestre. Eu as trago para cá porque decidem nota e prazo, e porque ninguém lê norma por conta própria em julho. **O texto que vale é o do AVA.**
+
+**Divergiu do AVA? Vale o AVA — e me avise, no início da aula ou pelo AVA, que eu corrijo esta página no mesmo dia.** O detalhamento está no [Plano de Ensino e Contrato](./Plano-de-Ensino-e-Contrato).
 
 </div>
 
@@ -269,7 +274,7 @@ Em qualquer divergência entre esta página e esses documentos, **valem os docum
 
 ---
 
-*Última atualização: 27/07/2026 · Regras de nota, segunda chamada e recuperação seguem o documento institucional 2026/2; carga e pontuação seguem o plano de ensino do componente 49304. Dia da semana e sala aguardam o Horário de Aulas — ver o aviso no orçamento de minutos.*
+*Última atualização: 27/07/2026 · Regras de nota, segunda chamada e recuperação são as da coordenação para 2026/2 — o texto oficial está no AVA. Carga e pontuação seguem o plano de ensino do componente 49304. Dia da semana e sala aguardam o Horário de Aulas — ver o aviso no orçamento de minutos.*
 
 **◀ [Voltar ao índice da disciplina](./)**
 

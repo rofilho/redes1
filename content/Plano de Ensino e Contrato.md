@@ -194,7 +194,7 @@ São mecanismos diferentes, com regras diferentes — e o prazo de um deles é d
 > **Não me entregue atestado**, nem em papel nem por e-mail: pela norma, o atestado é anexado ao SAE e quem analisa é a coordenação. Documento entregue na mão não conta como pedido.
 
 > [!NOTE] 📐 Como a recuperação recompõe a nota
-> A recuperação **troca, não soma.** Ela vale o total das duas provas e substitui as notas delas, que são zeradas. Quem foi **bem nas provas e mal nas atividades** não se beneficia — jogaria fora justamente a parte boa. E, como o teto é 60, ninguém sai da recuperação com mais do que o mínimo de aprovação.
+> A recuperação **troca, não soma.** Ela vale o total das duas provas — **25 + 30 = 55 pontos** — e substitui as notas delas, que são zeradas. Os 15 da Avaliação Institucional não entram nessa troca. Quem foi **bem nas provas e mal nas atividades** não se beneficia — jogaria fora justamente a parte boa. E, como o teto é 60, ninguém sai da recuperação com mais do que o mínimo de aprovação.
 
 ---
 
@@ -237,13 +237,19 @@ Regra que o professor decreta, o aluno obedece. Regra que a turma escreve, a tur
 ---
 
 <div class="au-refs">
-<b>Fontes desta página</b>
+<b>De onde vem cada coisa desta página</b>
 
-Esta é uma página administrativa: o que ela afirma vem de documentos institucionais, não de livro. Em qualquer divergência entre esta página e esses documentos, **valem os documentos**.
+Esta é uma página administrativa, e você tem o direito de saber o que aqui é documento e o que sou eu organizando o semestre para vocês.
 
-- UNIVERSIDADE DE UBERABA. **Avaliações de Segunda Chamada e Recuperação de Aprendizagem — Cursos: Engenharias, Gestão e Tecnologia da Informação, 2026/2.** Campus Uberlândia, 2026. <span class="au-pag">seç. 1 — aprovação (≥ 60 pontos e 75% de frequência); seç. 2 — distribuição dos 100 pontos; seç. 3 — datas travadas do semestre, incluindo os prazos de lançamento (12/10 e 18/12) e o encerramento em 19/12; seç. 4 — segunda chamada, prazo de 3 dias úteis pelo SAE e aplicação de 14 a 16/12; seç. 5 — recuperação, os três requisitos, o zeramento das provas e o teto de 60</span> — **fonte de tudo que está no Tópico 3.**
-- UNIVERSIDADE DE UBERABA. **Plano de Ensino — 49304 Redes de Computadores I, curso 160 Sistemas de Informação.** Uberlândia, 2026. <span class="au-pag">p. 1 — quadro de carga horária (presencial: teórica 0, prática 30; não presencial: teórica 12) e ementa; p. 2 — objetivos geral e específicos, metodologia; p. 3 — conteúdo programático, tópicos 1 a 11; p. 4 — quadro de distribuição da pontuação semestral; p. 5 — bibliografias básica e complementar</span> — **fonte do Tópico 1 e da tabela de pontos do Tópico 3.**
-- UNIVERSIDADE DE UBERABA. **Calendário Acadêmico 2026.** Uberlândia, 2026. <span class="au-pag">datas de início e fim do semestre, feriados e sábados letivos</span> — **fonte das datas do Tópico 2.** A distribuição do conteúdo pelas 20 semanas é planejamento meu sobre esse calendário, não parte dele; o Horário de Aulas, que define dia e sala, ainda não saiu.
+**1. Documento oficial, e você pode pedir para ver** — é a base do Tópico 1 e da tabela de pontos:
+
+- UNIVERSIDADE DE UBERABA. **Plano de Ensino — 49304 Redes de Computadores I, curso 160 Sistemas de Informação.** Uberlândia, 2026. <span class="au-pag">p. 1 — carga horária (presencial: teórica 0, prática 30; não presencial: teórica 12) e ementa; p. 2 — objetivos e metodologia; p. 3 — conteúdo programático, tópicos 1 a 11; p. 4 — distribuição da pontuação semestral; p. 5 — bibliografias</span>
+
+**2. Eu explicando a norma da casa** — todo o Tópico 3. As regras de aprovação, segunda chamada e recuperação são as que a coordenação definiu para Engenharias, Gestão e Tecnologia da Informação em 2026/2. Elas não são minhas e eu não posso mudá-las; trago para cá porque decidem nota e prazo, e porque norma não se lê sozinha. **O texto que vale é o publicado no AVA.**
+
+**3. Eu organizando o semestre** — o Tópico 2. As datas travadas (janelas de prova, feriados, lançamento de notas, encerramento) não são minhas: são do calendário da universidade, e o AVA é onde elas ficam publicadas. **Qual assunto cai em qual semana é decisão minha**, e pode mudar se o semestre atrasar — quando mudar, eu aviso aqui e no AVA. Dia da semana e sala dependem do Horário de Aulas, que ainda não saiu.
+
+> **Achou divergência entre esta página e o AVA? Vale o AVA — e me avise, no início da aula ou pelo AVA, que eu corrijo aqui no mesmo dia.** Perguntar não custa nada e evita perder prazo por causa de um erro meu.
 
 <details>
 <summary>📚 Bibliografia do componente (referências normalizadas)</summary>
@@ -270,7 +276,7 @@ São as obras do componente, para o semestre inteiro. **A localização precisa 
 
 ---
 
-*Última atualização: 27/07/2026 · Regras de nota, segunda chamada e recuperação seguem o documento institucional 2026/2; ementa, conteúdo e pontuação seguem o plano de ensino do componente 49304. Dia da semana e sala aguardam o Horário de Aulas.*
+*Última atualização: 27/07/2026 · Regras de nota, segunda chamada e recuperação são as da coordenação para 2026/2 — o texto oficial está no AVA. Ementa, conteúdo e pontuação seguem o plano de ensino do componente 49304. Dia da semana e sala aguardam o Horário de Aulas.*
 
 **◀ [Voltar ao índice da disciplina](./)**
 
