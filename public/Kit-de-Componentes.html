@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr"><head><title>Kit de Componentes da Plataforma | Prof. Romualdo</title><meta charset="utf-8"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space Grotesk:wght@400;700&amp;family=Inter:ital,wght@0,400;0,600;1,400;1,600&amp;family=JetBrains Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="🌐 Redes de Computadores I"/><meta property="og:title" content="Kit de Componentes da Plataforma | Prof. Romualdo"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Kit de Componentes da Plataforma | Prof. Romualdo"/><meta name="twitter:description" content="Kit de Componentes Esta página é o guia vivo da plataforma: cada bloco que uma aula pode ter aparece aqui, renderizado, com o markup ao lado."/><meta property="og:description" content="Kit de Componentes Esta página é o guia vivo da plataforma: cada bloco que uma aula pode ter aparece aqui, renderizado, com o markup ao lado."/><meta property="og:image:alt" content="Kit de Componentes Esta página é o guia vivo da plataforma: cada bloco que uma aula pode ter aparece aqui, renderizado, com o markup ao lado."/><meta property="twitter:domain" content="rofilho.github.io/redes1"/><meta property="og:url" content="https://rofilho.github.io/redes1/Kit-de-Componentes"/><meta property="twitter:url" content="https://rofilho.github.io/redes1/Kit-de-Componentes"/><link rel="icon" href="./static/icon.png"/><meta name="description" content="Kit de Componentes Esta página é o guia vivo da plataforma: cada bloco que uma aula pode ter aparece aqui, renderizado, com o markup ao lado."/><meta name="generator" content="Quartz"/><link href="./index.css" rel="stylesheet" type="text/css" data-persist="true"/><style>.expand-button {
+  position: absolute;
+  display: flex;
+  float: right;
+  padding: 0.4rem;
+  margin: 0.3rem;
+  right: 0;
+  color: var(--gray);
+  border-color: var(--dark);
+  background-color: var(--light);
+  border: 1px solid;
+  border-radius: 5px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.expand-button > svg {
+  fill: var(--light);
+  filter: contrast(0.3);
+}
+.expand-button:hover {
+  cursor: pointer;
+  border-color: var(--secondary);
+}
+.expand-button:focus {
+  outline: 0;
+}
+
+pre:hover > .expand-button {
+  opacity: 1;
+  transition: 0.2s;
+}
+
+#mermaid-container {
+  position: fixed;
+  contain: layout;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+}
+#mermaid-container.active {
+  display: inline-block;
+}
+#mermaid-container > #mermaid-space {
+  border: 1px solid var(--lightgray);
+  background-color: var(--light);
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80vh;
+  width: 80vw;
+  overflow: hidden;
+}
+#mermaid-container > #mermaid-space > .mermaid-content {
+  position: relative;
+  transform-origin: 0 0;
+  transition: transform 0.1s ease;
+  overflow: visible;
+  min-height: 200px;
+  min-width: 200px;
+}
+#mermaid-container > #mermaid-space > .mermaid-content pre {
+  margin: 0;
+  border: none;
+}
+#mermaid-container > #mermaid-space > .mermaid-content svg {
+  max-width: none;
+  height: auto;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--lightgray);
+  background: var(--light);
+  color: var(--dark);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: var(--bodyFont);
+  transition: all 0.2s ease;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:hover {
+  background: var(--lightgray);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:active {
+  transform: translateY(1px);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:nth-child(2) {
+  width: auto;
+  padding: 0 12px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiQzpcXFF1YXJ0el9Qb3J0YWlzXFxyZWRlczFcXHF1YXJ0elxcY29tcG9uZW50c1xcc3R5bGVzIiwic291cmNlcyI6WyJtZXJtYWlkLmlubGluZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFHRjtFQUNFOzs7QUFLRjtFQUNFO0VBQ0E7OztBQUlKO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFOztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7O0FBR0Y7RUFDRTs7QUFJRjtFQUNFO0VBQ0E7RUFDQSIsInNvdXJjZXNDb250ZW50IjpbIi5leHBhbmQtYnV0dG9uIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbG9hdDogcmlnaHQ7XG4gIHBhZGRpbmc6IDAuNHJlbTtcbiAgbWFyZ2luOiAwLjNyZW07XG4gIHJpZ2h0OiAwOyAvLyBOT1RFOiByaWdodCB3aWxsIGJlIHNldCBpbiBtZXJtYWlkLmlubGluZS50c1xuICBjb2xvcjogdmFyKC0tZ3JheSk7XG4gIGJvcmRlci1jb2xvcjogdmFyKC0tZGFyayk7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWxpZ2h0KTtcbiAgYm9yZGVyOiAxcHggc29saWQ7XG4gIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgb3BhY2l0eTogMDtcbiAgdHJhbnNpdGlvbjogMC4ycztcblxuICAmID4gc3ZnIHtcbiAgICBmaWxsOiB2YXIoLS1saWdodCk7XG4gICAgZmlsdGVyOiBjb250cmFzdCgwLjMpO1xuICB9XG5cbiAgJjpob3ZlciB7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICAgIGJvcmRlci1jb2xvcjogdmFyKC0tc2Vjb25kYXJ5KTtcbiAgfVxuXG4gICY6Zm9jdXMge1xuICAgIG91dGxpbmU6IDA7XG4gIH1cbn1cblxucHJlIHtcbiAgJjpob3ZlciA+IC5leHBhbmQtYnV0dG9uIHtcbiAgICBvcGFjaXR5OiAxO1xuICAgIHRyYW5zaXRpb246IDAuMnM7XG4gIH1cbn1cblxuI21lcm1haWQtY29udGFpbmVyIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICBjb250YWluOiBsYXlvdXQ7XG4gIHotaW5kZXg6IDk5OTtcbiAgbGVmdDogMDtcbiAgdG9wOiAwO1xuICB3aWR0aDogMTAwdnc7XG4gIGhlaWdodDogMTAwdmg7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIGRpc3BsYXk6IG5vbmU7XG4gIGJhY2tkcm9wLWZpbHRlcjogYmx1cig0cHgpO1xuICBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDAuNSk7XG5cbiAgJi5hY3RpdmUge1xuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgfVxuXG4gICYgPiAjbWVybWFpZC1zcGFjZSB7XG4gICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1saWdodCk7XG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB0b3A6IDUwJTtcbiAgICBsZWZ0OiA1MCU7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XG4gICAgaGVpZ2h0OiA4MHZoO1xuICAgIHdpZHRoOiA4MHZ3O1xuICAgIG92ZXJmbG93OiBoaWRkZW47XG5cbiAgICAmID4gLm1lcm1haWQtY29udGVudCB7XG4gICAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gICAgICB0cmFuc2Zvcm0tb3JpZ2luOiAwIDA7XG4gICAgICB0cmFuc2l0aW9uOiB0cmFuc2Zvcm0gMC4xcyBlYXNlO1xuICAgICAgb3ZlcmZsb3c6IHZpc2libGU7XG4gICAgICBtaW4taGVpZ2h0OiAyMDBweDtcbiAgICAgIG1pbi13aWR0aDogMjAwcHg7XG5cbiAgICAgIHByZSB7XG4gICAgICAgIG1hcmdpbjogMDtcbiAgICAgICAgYm9yZGVyOiBub25lO1xuICAgICAgfVxuXG4gICAgICBzdmcge1xuICAgICAgICBtYXgtd2lkdGg6IG5vbmU7XG4gICAgICAgIGhlaWdodDogYXV0bztcbiAgICAgIH1cbiAgICB9XG5cbiAgICAmID4gLm1lcm1haWQtY29udHJvbHMge1xuICAgICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgICAgYm90dG9tOiAyMHB4O1xuICAgICAgcmlnaHQ6IDIwcHg7XG4gICAgICBkaXNwbGF5OiBmbGV4O1xuICAgICAgZ2FwOiA4cHg7XG4gICAgICBwYWRkaW5nOiA4cHg7XG4gICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodCk7XG4gICAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgYm9yZGVyLXJhZGl1czogNnB4O1xuICAgICAgYm94LXNoYWRvdzogMCAycHggNHB4IHJnYmEoMCwgMCwgMCwgMC4xKTtcbiAgICAgIHotaW5kZXg6IDI7XG5cbiAgICAgIC5tZXJtYWlkLWNvbnRyb2wtYnV0dG9uIHtcbiAgICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgICAgICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gICAgICAgIHdpZHRoOiAzMnB4O1xuICAgICAgICBoZWlnaHQ6IDMycHg7XG4gICAgICAgIHBhZGRpbmc6IDA7XG4gICAgICAgIGJvcmRlcjogMXB4IHNvbGlkIHZhcigtLWxpZ2h0Z3JheSk7XG4gICAgICAgIGJhY2tncm91bmQ6IHZhcigtLWxpZ2h0KTtcbiAgICAgICAgY29sb3I6IHZhcigtLWRhcmspO1xuICAgICAgICBib3JkZXItcmFkaXVzOiA0cHg7XG4gICAgICAgIGN1cnNvcjogcG9pbnRlcjtcbiAgICAgICAgZm9udC1zaXplOiAxNnB4O1xuICAgICAgICBmb250LWZhbWlseTogdmFyKC0tYm9keUZvbnQpO1xuICAgICAgICB0cmFuc2l0aW9uOiBhbGwgMC4ycyBlYXNlO1xuXG4gICAgICAgICY6aG92ZXIge1xuICAgICAgICAgIGJhY2tncm91bmQ6IHZhcigtLWxpZ2h0Z3JheSk7XG4gICAgICAgIH1cblxuICAgICAgICAmOmFjdGl2ZSB7XG4gICAgICAgICAgdHJhbnNmb3JtOiB0cmFuc2xhdGVZKDFweCk7XG4gICAgICAgIH1cblxuICAgICAgICAvLyBTdHlsZSB0aGUgcmVzZXQgYnV0dG9uIGRpZmZlcmVudGx5XG4gICAgICAgICY6bnRoLWNoaWxkKDIpIHtcbiAgICAgICAgICB3aWR0aDogYXV0bztcbiAgICAgICAgICBwYWRkaW5nOiAwIDEycHg7XG4gICAgICAgICAgZm9udC1zaXplOiAxNHB4O1xuICAgICAgICB9XG4gICAgICB9XG4gICAgfVxuICB9XG59XG4iXX0= */</style><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="./prescript.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("./static/contentIndex.json").then(data => data.json())</script><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://rofilho.github.io/redes1/index.xml"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://rofilho.github.io/redes1/Kit-de-Componentes-og-image.webp"/><meta property="og:image:url" content="https://rofilho.github.io/redes1/Kit-de-Componentes-og-image.webp"/><meta name="twitter:image" content="https://rofilho.github.io/redes1/Kit-de-Componentes-og-image.webp"/><meta property="og:image:type" content="image/.webp"/></head><body data-slug="Kit-de-Componentes"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"></div><div class="center"><div class="page-header"><header><h2 class="page-title"><a href="." class="page-title__link"><img src="https://uniube.br/img/landing/logo_azul.svg" alt="Uniube" class="page-title__logo page-title__logo--light"/><img src="https://uniube.br/img/landing/logo_branca.svg" alt="Uniube" class="page-title__logo page-title__logo--dark"/><span class="page-title__text">🌐 Redes de Computadores I</span></a></h2><div class="search"><button class="search-button"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>Pesquisar</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="Pesquisar por algo" placeholder="Pesquisar por algo"/><div class="search-layout" data-preview="true"></div></div></div></div><button class="darkmode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="Tema escuro"><title>Tema escuro</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="Tema claro"><title>Tema claro</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></header><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="./">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>Kit de Componentes da Plataforma</a></div></nav><nav class="lesson-nav" aria-label="Navegação entre aulas"><div class="lesson-nav__slot"><a href="./Aula-07---Camada-de-Transporte-TCP-UDP-Portas-e-Three-Way-Handshake" class="nav-pill nav-pill--prev" data-spa="true"><div class="nav-pill__icon">📖</div><div class="nav-pill__body"><span class="nav-pill__label">← Anterior</span><span class="nav-pill__title">🖥️ Aula - 07: Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake</span></div></a></div><div class="lesson-nav__slot lesson-nav__slot--right"></div></nav><h1 class="article-title">Kit de Componentes da Plataforma</h1><p show-comma="true" class="content-meta"><time datetime="2026-07-26T21:14:05.435Z">26 de jul. de 2026</time><span>Leitura de 6 min</span></p><ul class="tags"><li><a href="./tags/plataforma" class="internal tag-link">plataforma</a></li><li><a href="./tags/design-system" class="internal tag-link">design-system</a></li></ul></div></div><article class="popover-hint"><div class="au-leitura" data-aula="kit">
+<h1 id="kit-de-componentes">Kit de Componentes<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#kit-de-componentes" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p>Esta página é o <strong>guia vivo</strong> da plataforma: cada bloco que uma aula pode ter aparece aqui, renderizado, com o markup ao lado. Quem escreve aula — pessoa ou agente — escolhe da lista abaixo em vez de inventar marcação.</p>
+<blockquote class="callout info" data-callout="info">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>🎯 Como usar </p></div>
+                  
+                </div>
+<div class="callout-content">
+<p>Todo o conteúdo da aula vive dentro de <code>&lt;div class=&quot;au-leitura&quot; data-aula=&quot;sNN&quot;></code>. Os blocos são independentes: usar só os que a aula pede. A ordem canônica está no <code>_Template_Aula.md</code>.</p>
+</div>
+</blockquote>
+<hr/>
+<h2 id="1-nosso-caminho-até-aqui">1. Nosso caminho até aqui<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#1-nosso-caminho-até-aqui" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><strong>Abre toda aula.</strong> É o único bloco obrigatório em 100% delas.</p>
+<div class="au-caminho">
+<b>Nosso caminho até aqui</b>
+<p>Responda <strong>antes</strong> de abrir. Se errar, você acabou de descobrir o que revisar hoje.</p>
+<details>
+<summary>Na Aula 02, o switch aprendeu o endereço MAC de um host. Como?</summary>
+<p>Olhando o <strong>MAC de origem</strong> do primeiro quadro que chegou naquela porta. O switch nunca “pergunta” — ele aprende observando o que passa, e guarda o par porta ↔ MAC na tabela.</p>
+</details>
+<details>
+<summary>Se o MAC de destino não está na tabela, o que o switch faz?</summary>
+<p>Faz <strong>flooding</strong>: replica o quadro em todas as portas do mesmo domínio de broadcast, menos a de origem. É por isso que um domínio grande demais degrada a rede inteira — e é exatamente o problema que a VLAN resolve.</p>
+</details>
+</div>
+<blockquote class="callout note" data-callout="note">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>Por que perguntas e não um resumo </p></div>
+                  
+                </div>
+<div class="callout-content">
+<p>Recap passivo é quase inerte. Prática de recuperação em sala rende <strong>g = 0,50</strong> (Yang et al., 2021; Rowland, 2014) e <strong>g = 0,74</strong> quando espaçada (Latimier et al., 2021). O ganho vem do esforço de lembrar — se a resposta já está na tela, não há esforço. <strong>Nunca</strong> escrever este bloco como parágrafo pronto.</p>
+</div>
+</blockquote>
+<hr/>
+<h2 id="2-antes-de-começar-pré-treinamento">2. Antes de começar (pré-treinamento)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#2-antes-de-começar-pré-treinamento" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Os termos <strong>antes</strong> do conteúdo pesado, nunca depois (<em>d</em> = 0,75).</p>
+<aside class="au-antes">
+<b class="au-nota-t">Antes de começar</b>
+<p><strong>Domínio de broadcast</strong> — o conjunto de portas que recebe um quadro de broadcast. Um switch sem VLAN é um domínio só.</p>
+<p><strong>Tronco (trunk)</strong> — enlace que carrega várias VLANs, identificando cada quadro com uma etiqueta 802.1Q.</p>
+</aside>
+<hr/>
+<h2 id="3-figura--legenda">3. Figura + legenda<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#3-figura--legenda" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Desenho nasce no <strong>Excalidraw</strong> e entra como <code>.svg</code>. A legenda fica <strong>colada</strong> na figura — nunca em rodapé (contiguidade espacial, <em>g</em> = 0,74).</p>
+<figure class="au-fig">
+<img src="./assets/exemplo_dominio_broadcast.svg" alt="Um switch com quatro hosts, todos no mesmo domínio de broadcast"/>
+<figcaption class="au-legenda">Sem VLAN, o broadcast do PC-A chega em todo mundo. A VLAN é o corte que transforma um domínio em dois.</figcaption>
+</figure>
+<hr/>
+<h2 id="4-aposte-antes-de-ver">4. Aposte antes de ver<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#4-aposte-antes-de-ver" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p><em>Predict-then-reveal</em>. Custa zero e força decisão real antes da resposta.</p>
+<details class="au-aposta">
+<summary>Antes de rolar: o PC-A (VLAN 10) consegue pingar o PC-B (VLAN 20) no mesmo switch?</summary>
+<p><strong>Não.</strong> Mesmo switch, mas domínios de broadcast diferentes. Para conversar precisa de roteamento entre VLANs — que é a aula da semana que vem.</p>
+</details>
+<hr/>
+<h2 id="5-slot-interativo">5. Slot interativo<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#5-slot-interativo" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>A moldura onde entra a ferramenta. O slot existe sempre; a ferramenta é opcional. <strong>Todo slot declara o plano B</strong> — a aula não pode depender da internet do campus.</p>
+<div class="au-slot">
+<div class="au-slot-h"><b>Interativo</b> · Vevox · 3 min</div>
+<div class="au-slot-c">
+<p>Abra <strong>vevox.app</strong> e entre com o ID da sessão que está no projetor. Duas perguntas de múltipla escolha sobre domínio de broadcast — anônimo, sem cadastro.</p>
+</div>
+<p class="au-slot-b"><b>Plano B:</b> se a rede cair, as mesmas duas perguntas vão na mão com os cartões Plickers. Mesmo conteúdo, mesmo tempo.</p>
+</div>
+<blockquote class="callout tip" data-callout="tip">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>O que pode entrar no slot </p></div>
+                  
+                </div>
+<div class="callout-content">
+<p><strong>H5P</strong> via <code>h5p-standalone</code> — roda sem servidor, direto no site estático · <strong>Vevox</strong> ou <strong>Plickers</strong> para votação em sala · <code>&lt;iframe></code> de simulador · widget próprio em HTML/CSS puro (ver a seção 6, logo abaixo).</p>
+</div>
+</blockquote>
+<hr/>
+<h2 id="6-seletor-de-camada-interativo-sem-js">6. Seletor de camada (interativo sem JS)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#6-seletor-de-camada-interativo-sem-js" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>O componente-assinatura. Isola uma camada do desenho com radio button — funciona no celular, no teclado, e imprime com tudo visível.</p>
+<figure class="au-fig au-switch" role="group" aria-label="Seletor de VLAN">
+<input type="radio" name="kitvlan" id="kv-all" checked/>
+<input type="radio" name="kitvlan" id="kv-10"/>
+<input type="radio" name="kitvlan" id="kv-20"/>
+<div class="au-switch-lbl">
+<label for="kv-all">TODAS</label>
+<label for="kv-10">VLAN 10</label>
+<label for="kv-20">VLAN 20</label>
+</div>
+<svg class="au-camadas" viewBox="0 0 420 160" role="img" aria-label="Switch com hosts em duas VLANs">
+<rect x="150" y="10" width="120" height="34" rx="6" fill="none" stroke="#8a8f98" stroke-width="2"></rect>
+<text x="210" y="32" text-anchor="middle" font-size="13" fill="#8a8f98" font-family="monospace">SW-ACESSO-01</text>
+<g class="c1">
+<line x1="180" y1="44" x2="90" y2="100" stroke="#2778c4" stroke-width="2"></line>
+<rect x="40" y="100" width="100" height="30" rx="5" fill="none" stroke="#2778c4" stroke-width="2"></rect>
+<text x="90" y="120" text-anchor="middle" font-size="12" fill="#2778c4" font-family="monospace">PC-A · VLAN 10</text>
+</g>
+<g class="c2">
+<line x1="240" y1="44" x2="330" y2="100" stroke="#00aa9f" stroke-width="2"></line>
+<rect x="280" y="100" width="100" height="30" rx="5" fill="none" stroke="#00aa9f" stroke-width="2"></rect>
+<text x="330" y="120" text-anchor="middle" font-size="12" fill="#00aa9f" font-family="monospace">PC-B · VLAN 20</text>
+</g>
+</svg>
+<figcaption class="au-legenda">Isole uma VLAN: o que some da tela é exatamente o que some do domínio de broadcast.</figcaption>
+</figure>
+<hr/>
+<h2 id="7-terminal">7. Terminal<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#7-terminal" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Config real, com prompt. Uma linha marcada por bloco — a que o texto ao lado explica.</p>
+<div class="au-term">
+<div class="au-term-h"><b>SW-ACESSO-01</b> <span>· config</span></div>
+<div class="au-term-b"><span class="cm">! porta do PC-ADM-1</span>
+<span class="ps">SW-ACESSO-01(config)#</span> <span class="kw">interface</span> Fa0/1
+<span class="mark"><span class="ps">SW-ACESSO-01(config-if)#</span> <span class="kw">switchport access vlan</span> <span class="vl">10</span></span></div>
+</div>
+<hr/>
+<h2 id="8-callouts">8. Callouts<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#8-callouts" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Três, e só três: Pro-Tip, Gotcha e Pergunta de Entrevista.</p>
+<blockquote class="callout tip" data-callout="tip">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>💡 Dica de produção </p></div>
+                  
+                </div>
+<div class="callout-content">
+<p>Em rede de campus real, VLAN de voz e de dados vão na mesma porta — o telefone faz switch interno e etiqueta o próprio tráfego.</p>
+</div>
+</blockquote>
+<blockquote class="callout warning" data-callout="warning">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>⚠️ Gotcha </p></div>
+                  
+                </div>
+<div class="callout-content">
+<p>Um <code>switchport mode dynamic</code> esquecido negocia tronco sozinho. É assim que um host acaba enxergando VLAN que não deveria.</p>
+</div>
+</blockquote>
+<blockquote class="callout note" data-callout="note">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>💼 Pergunta de entrevista </p></div>
+                  
+                </div>
+<div class="callout-content">
+<p><em>“Por que segmentar em VLANs se o roteador já separa as redes?”</em> — Porque a VLAN corta o <strong>domínio de broadcast</strong> na camada 2, antes de o tráfego chegar ao roteador. Sem ela, o broadcast de um setor consome banda e CPU de todos os outros.</p>
+</div>
+</blockquote>
+<hr/>
+<h2 id="9-exercício-prático">9. Exercício prático<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#9-exercício-prático" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Só do que foi visto <strong>no dia</strong>. Numerado porque é roteiro de execução — aqui a ordem carrega informação.</p>
+<div class="au-pratica">
+<b>Prática — 20 min, em duplas</b>
+<ol>
+<li>Abra o arquivo <code>lab03_vlans.pkt</code> no Packet Tracer.</li>
+<li>Crie a <strong>VLAN 10</strong> (nome <code>ADM</code>) e a <strong>VLAN 20</strong> (nome <code>LAB</code>) no <code>SW-ACESSO-01</code>.</li>
+<li>Coloque <code>Fa0/1</code> e <code>Fa0/2</code> na VLAN 10; <code>Fa0/3</code> e <code>Fa0/4</code> na VLAN 20.</li>
+<li>Teste: <code>ping</code> de PC-A para PC-B. Anote o resultado <strong>antes</strong> de tentar consertar.</li>
+</ol>
+<p class="au-pronto"><b>Critério de pronto:</b> <code>show vlan brief</code> mostra as quatro portas nas VLANs certas, e o ping entre VLANs falha. <b>Falhar aqui é o resultado correto</b> — é o que abre a próxima aula.</p>
+</div>
+<hr/>
+<h2 id="10-resumo">10. Resumo<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#10-resumo" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Cheatsheet de consulta. Denso de propósito.</p>
+<div class="au-resumo">
+<b>Resumo da aula</b>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th>Comando / conceito</th><th>Para que serve</th></tr></thead><tbody><tr><td><code>vlan 10</code> + <code>name ADM</code></td><td>cria a VLAN e dá nome legível</td></tr><tr><td><code>switchport access vlan 10</code></td><td>põe <strong>uma</strong> porta na VLAN</td></tr><tr><td><code>show vlan brief</code></td><td>confere o mapa porta ↔ VLAN</td></tr><tr><td>Domínio de broadcast</td><td>o que a VLAN corta — a razão de tudo isto existir</td></tr></tbody></table></div>
+</div>
+<hr/>
+<h2 id="11-podcast-da-aula">11. Podcast da aula<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#11-podcast-da-aula" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Gerado no Gemini Notebook (ex-NotebookLM) a partir do documento-fonte. Bloco discreto: é apoio de revisão, não a aula.</p>
+<div class="au-podcast">
+<p><b>🎧 Resumo em áudio — 8 min</b></p>
+<p>Conversa de dois locutores sobre os pontos da aula. Serve para ouvir no trajeto. <b>Gerado por IA</b> a partir do material da disciplina — se divergir da aula, a aula vence.</p>
+<audio controls preload="none" src="./assets/audio/aula03_resumo.m4a"></audio>
+</div>
+<hr/>
+<h2 id="12-reflexão">12. Reflexão<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#12-reflexão" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Pergunta aberta de saída, <strong>sem resposta na página</strong>. É o que o aluno leva no ônibus.</p>
+<div class="au-reflexao">
+<b>Para pensar até a próxima aula</b>
+<p>Se a VLAN resolve o domínio de broadcast, por que as redes ainda caem por causa de broadcast? O que a VLAN <i>não</i> protege?</p>
+</div>
+<hr/>
+<h2 id="13-referências">13. Referências<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#13-referências" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Autor, obra, editora, ano <strong>e página</strong>. A página é obrigatória.</p>
+<div class="au-refs">
+<b>Referências desta aula</b>
+<ul>
+<li>KUROSE, J. F.; ROSS, K. W. <strong>Redes de Computadores e a Internet: uma abordagem top-down.</strong> 8. ed. São Paulo: Pearson, 2021. <span class="au-pag">cap. 6, p. 468–479</span></li>
+<li>TANENBAUM, A. S.; FEAMSTER, N.; WETHERALL, D. <strong>Redes de Computadores.</strong> 6. ed. Porto Alegre: Bookman, 2021. <span class="au-pag">cap. 4, p. 302–311</span></li>
+<li>IEEE. <strong>802.1Q-2022 — Bridges and Bridged Networks.</strong> IEEE Standards Association, 2022. <span class="au-pag">seç. 5.5</span></li>
+</ul>
+</div>
+<hr/>
+<h2 id="14-próxima-aula">14. Próxima aula<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#14-próxima-aula" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Uma frase que abre laço. Não é índice do que vem.</p>
+<div class="au-proxima">
+<b>Na próxima aula</b>
+<p>Hoje você cortou a rede em duas e elas pararam de se falar — de propósito. Na próxima, elas voltam a conversar sem perder o isolamento: <b>roteamento entre VLANs</b>. E vai bastar uma interface.</p>
+</div>
+</div></article><hr/><div class="page-footer"></div></div><div class="right sidebar"></div><footer class="footer "><div class="footer__brand"><img src="https://uniube.br/img/landing/logo_azul.svg" alt="Universidade de Uberaba" class="footer__logo footer__logo--light"/><img src="https://uniube.br/img/landing/logo_branca.svg" alt="Universidade de Uberaba" class="footer__logo footer__logo--dark"/><div class="footer__info"><span class="footer__name">Prof. Romualdo Filho</span><a class="footer__email" href="mailto:romualdo.filho@uniube.br">romualdo.filho@uniube.br</a></div></div><ul class="footer__links"><li><a href="https://uniube.br" target="_blank" rel="noopener noreferrer">Mural Uniube</a></li></ul></footer></div></div></body><script type="application/javascript" data-persist="true">function n(){let t=this.parentElement;t.classList.toggle("is-collapsed");let e=t.getElementsByClassName("callout-content")[0];if(!e)return;let l=t.classList.contains("is-collapsed");e.style.gridTemplateRows=l?"0fr":"1fr"}function c(){let t=document.getElementsByClassName("callout is-collapsible");for(let e of t){let l=e.getElementsByClassName("callout-title")[0],s=e.getElementsByClassName("callout-content")[0];if(!l||!s)continue;l.addEventListener("click",n),window.addCleanup(()=>l.removeEventListener("click",n));let o=e.classList.contains("is-collapsed");s.style.gridTemplateRows=o?"0fr":"1fr"}}document.addEventListener("nav",c);
+</script><script type="module" data-persist="true">function E(a,e){if(!a)return;function t(o){o.target===this&&(o.preventDefault(),o.stopPropagation(),e())}function n(o){o.key.startsWith("Esc")&&(o.preventDefault(),e())}a?.addEventListener("click",t),window.addCleanup(()=>a?.removeEventListener("click",t)),document.addEventListener("keydown",n),window.addCleanup(()=>document.removeEventListener("keydown",n))}function f(a){for(;a.firstChild;)a.removeChild(a.firstChild)}var m=class{constructor(e,t){this.container=e;this.content=t;this.setupEventListeners(),this.setupNavigationControls(),this.resetTransform()}isDragging=!1;startPan={x:0,y:0};currentPan={x:0,y:0};scale=1;MIN_SCALE=.5;MAX_SCALE=3;cleanups=[];setupEventListeners(){let e=this.onMouseDown.bind(this),t=this.onMouseMove.bind(this),n=this.onMouseUp.bind(this),o=this.onTouchStart.bind(this),r=this.onTouchMove.bind(this),i=this.onTouchEnd.bind(this),s=this.resetTransform.bind(this);this.container.addEventListener("mousedown",e),document.addEventListener("mousemove",t),document.addEventListener("mouseup",n),this.container.addEventListener("touchstart",o,{passive:!1}),document.addEventListener("touchmove",r,{passive:!1}),document.addEventListener("touchend",i),window.addEventListener("resize",s),this.cleanups.push(()=>this.container.removeEventListener("mousedown",e),()=>document.removeEventListener("mousemove",t),()=>document.removeEventListener("mouseup",n),()=>this.container.removeEventListener("touchstart",o),()=>document.removeEventListener("touchmove",r),()=>document.removeEventListener("touchend",i),()=>window.removeEventListener("resize",s))}cleanup(){for(let e of this.cleanups)e()}setupNavigationControls(){let e=document.createElement("div");e.className="mermaid-controls";let t=this.createButton("+",()=>this.zoom(.1)),n=this.createButton("-",()=>this.zoom(-.1)),o=this.createButton("Reset",()=>this.resetTransform());e.appendChild(n),e.appendChild(o),e.appendChild(t),this.container.appendChild(e)}createButton(e,t){let n=document.createElement("button");return n.textContent=e,n.className="mermaid-control-button",n.addEventListener("click",t),window.addCleanup(()=>n.removeEventListener("click",t)),n}onMouseDown(e){e.button===0&&(this.isDragging=!0,this.startPan={x:e.clientX-this.currentPan.x,y:e.clientY-this.currentPan.y},this.container.style.cursor="grabbing")}onMouseMove(e){this.isDragging&&(e.preventDefault(),this.currentPan={x:e.clientX-this.startPan.x,y:e.clientY-this.startPan.y},this.updateTransform())}onMouseUp(){this.isDragging=!1,this.container.style.cursor="grab"}onTouchStart(e){if(e.touches.length!==1)return;this.isDragging=!0;let t=e.touches[0];this.startPan={x:t.clientX-this.currentPan.x,y:t.clientY-this.currentPan.y}}onTouchMove(e){if(!this.isDragging||e.touches.length!==1)return;e.preventDefault();let t=e.touches[0];this.currentPan={x:t.clientX-this.startPan.x,y:t.clientY-this.startPan.y},this.updateTransform()}onTouchEnd(){this.isDragging=!1}zoom(e){let t=Math.min(Math.max(this.scale+e,this.MIN_SCALE),this.MAX_SCALE),n=this.content.getBoundingClientRect(),o=n.width/2,r=n.height/2,i=t-this.scale;this.currentPan.x-=o*i,this.currentPan.y-=r*i,this.scale=t,this.updateTransform()}updateTransform(){this.content.style.transform=`translate(${this.currentPan.x}px, ${this.currentPan.y}px) scale(${this.scale})`}resetTransform(){let t=this.content.querySelector("svg").getBoundingClientRect(),n=t.width/this.scale,o=t.height/this.scale;this.scale=1,this.currentPan={x:(this.container.clientWidth-n)/2,y:(this.container.clientHeight-o)/2},this.updateTransform()}},T=["--secondary","--tertiary","--gray","--light","--lightgray","--highlight","--dark","--darkgray","--codeFont"],y;document.addEventListener("nav",async()=>{let e=document.querySelector(".center").querySelectorAll("code.mermaid");if(e.length===0)return;y||=await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs");let t=y.default,n=new WeakMap;for(let r of e)n.set(r,r.innerText);async function o(){for(let s of e){s.removeAttribute("data-processed");let c=n.get(s);c&&(s.innerHTML=c)}let r=T.reduce((s,c)=>(s[c]=window.getComputedStyle(document.documentElement).getPropertyValue(c),s),{}),i=document.documentElement.getAttribute("saved-theme")==="dark";t.initialize({startOnLoad:!1,securityLevel:"loose",theme:i?"dark":"base",themeVariables:{fontFamily:r["--codeFont"],primaryColor:r["--light"],primaryTextColor:r["--darkgray"],primaryBorderColor:r["--tertiary"],lineColor:r["--darkgray"],secondaryColor:r["--secondary"],tertiaryColor:r["--tertiary"],clusterBkg:r["--light"],edgeLabelBackground:r["--highlight"]}}),await t.run({nodes:e})}await o(),document.addEventListener("themechange",o),window.addCleanup(()=>document.removeEventListener("themechange",o));for(let r=0;r<e.length;r++){let v=function(){let g=l.querySelector("#mermaid-space"),h=l.querySelector(".mermaid-content");if(!h)return;f(h);let w=i.querySelector("svg").cloneNode(!0);h.appendChild(w),l.classList.add("active"),g.style.cursor="grab",u=new m(g,h)},M=function(){l.classList.remove("active"),u?.cleanup(),u=null},i=e[r],s=i.parentElement,c=s.querySelector(".clipboard-button"),d=s.querySelector(".expand-button"),p=window.getComputedStyle(c),L=c.offsetWidth+parseFloat(p.marginLeft||"0")+parseFloat(p.marginRight||"0");d.style.right=`calc(${L}px + 0.3rem)`,s.prepend(d);let l=s.querySelector("#mermaid-container");if(!l)return;let u=null;d.addEventListener("click",v),E(l,M),window.addCleanup(()=>{u?.cleanup(),d.removeEventListener("click",v)})}});
+</script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="./postscript.js" type="module" data-persist="true"></script></html>

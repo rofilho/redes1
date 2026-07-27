@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr"><head><title>Aula 10 e Aula 11 - Enderecamento IP DHCP e Pratica Wireshark | Prof. Romualdo</title><meta charset="utf-8"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space Grotesk:wght@400;700&amp;family=Inter:ital,wght@0,400;0,600;1,400;1,600&amp;family=JetBrains Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="🌐 Redes de Computadores I"/><meta property="og:title" content="Aula 10 e Aula 11 - Enderecamento IP DHCP e Pratica Wireshark | Prof. Romualdo"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Aula 10 e Aula 11 - Enderecamento IP DHCP e Pratica Wireshark | Prof. Romualdo"/><meta name="twitter:description" content="🟢 Aula 10 e Aula 11: Endereçamento IP, DHCP e Prática com Wireshark Disciplina: Redes de Computadores I (Cód."/><meta property="og:description" content="🟢 Aula 10 e Aula 11: Endereçamento IP, DHCP e Prática com Wireshark Disciplina: Redes de Computadores I (Cód."/><meta property="og:image:alt" content="🟢 Aula 10 e Aula 11: Endereçamento IP, DHCP e Prática com Wireshark Disciplina: Redes de Computadores I (Cód."/><meta property="twitter:domain" content="rofilho.github.io/redes1"/><meta property="og:url" content="https://rofilho.github.io/redes1/Aula-10-e-Aula-11---Enderecamento-IP-DHCP-e-Pratica-Wireshark"/><meta property="twitter:url" content="https://rofilho.github.io/redes1/Aula-10-e-Aula-11---Enderecamento-IP-DHCP-e-Pratica-Wireshark"/><link rel="icon" href="./static/icon.png"/><meta name="description" content="🟢 Aula 10 e Aula 11: Endereçamento IP, DHCP e Prática com Wireshark Disciplina: Redes de Computadores I (Cód."/><meta name="generator" content="Quartz"/><link href="./index.css" rel="stylesheet" type="text/css" data-persist="true"/><style>.expand-button {
+  position: absolute;
+  display: flex;
+  float: right;
+  padding: 0.4rem;
+  margin: 0.3rem;
+  right: 0;
+  color: var(--gray);
+  border-color: var(--dark);
+  background-color: var(--light);
+  border: 1px solid;
+  border-radius: 5px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.expand-button > svg {
+  fill: var(--light);
+  filter: contrast(0.3);
+}
+.expand-button:hover {
+  cursor: pointer;
+  border-color: var(--secondary);
+}
+.expand-button:focus {
+  outline: 0;
+}
+
+pre:hover > .expand-button {
+  opacity: 1;
+  transition: 0.2s;
+}
+
+#mermaid-container {
+  position: fixed;
+  contain: layout;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+}
+#mermaid-container.active {
+  display: inline-block;
+}
+#mermaid-container > #mermaid-space {
+  border: 1px solid var(--lightgray);
+  background-color: var(--light);
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80vh;
+  width: 80vw;
+  overflow: hidden;
+}
+#mermaid-container > #mermaid-space > .mermaid-content {
+  position: relative;
+  transform-origin: 0 0;
+  transition: transform 0.1s ease;
+  overflow: visible;
+  min-height: 200px;
+  min-width: 200px;
+}
+#mermaid-container > #mermaid-space > .mermaid-content pre {
+  margin: 0;
+  border: none;
+}
+#mermaid-container > #mermaid-space > .mermaid-content svg {
+  max-width: none;
+  height: auto;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--lightgray);
+  background: var(--light);
+  color: var(--dark);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: var(--bodyFont);
+  transition: all 0.2s ease;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:hover {
+  background: var(--lightgray);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:active {
+  transform: translateY(1px);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:nth-child(2) {
+  width: auto;
+  padding: 0 12px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiQzpcXFF1YXJ0el9Qb3J0YWlzXFxyZWRlczFcXHF1YXJ0elxcY29tcG9uZW50c1xcc3R5bGVzIiwic291cmNlcyI6WyJtZXJtYWlkLmlubGluZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFHRjtFQUNFOzs7QUFLRjtFQUNFO0VBQ0E7OztBQUlKO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFOztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7O0FBR0Y7RUFDRTs7QUFJRjtFQUNFO0VBQ0E7RUFDQSIsInNvdXJjZXNDb250ZW50IjpbIi5leHBhbmQtYnV0dG9uIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbG9hdDogcmlnaHQ7XG4gIHBhZGRpbmc6IDAuNHJlbTtcbiAgbWFyZ2luOiAwLjNyZW07XG4gIHJpZ2h0OiAwOyAvLyBOT1RFOiByaWdodCB3aWxsIGJlIHNldCBpbiBtZXJtYWlkLmlubGluZS50c1xuICBjb2xvcjogdmFyKC0tZ3JheSk7XG4gIGJvcmRlci1jb2xvcjogdmFyKC0tZGFyayk7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWxpZ2h0KTtcbiAgYm9yZGVyOiAxcHggc29saWQ7XG4gIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgb3BhY2l0eTogMDtcbiAgdHJhbnNpdGlvbjogMC4ycztcblxuICAmID4gc3ZnIHtcbiAgICBmaWxsOiB2YXIoLS1saWdodCk7XG4gICAgZmlsdGVyOiBjb250cmFzdCgwLjMpO1xuICB9XG5cbiAgJjpob3ZlciB7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICAgIGJvcmRlci1jb2xvcjogdmFyKC0tc2Vjb25kYXJ5KTtcbiAgfVxuXG4gICY6Zm9jdXMge1xuICAgIG91dGxpbmU6IDA7XG4gIH1cbn1cblxucHJlIHtcbiAgJjpob3ZlciA+IC5leHBhbmQtYnV0dG9uIHtcbiAgICBvcGFjaXR5OiAxO1xuICAgIHRyYW5zaXRpb246IDAuMnM7XG4gIH1cbn1cblxuI21lcm1haWQtY29udGFpbmVyIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICBjb250YWluOiBsYXlvdXQ7XG4gIHotaW5kZXg6IDk5OTtcbiAgbGVmdDogMDtcbiAgdG9wOiAwO1xuICB3aWR0aDogMTAwdnc7XG4gIGhlaWdodDogMTAwdmg7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIGRpc3BsYXk6IG5vbmU7XG4gIGJhY2tkcm9wLWZpbHRlcjogYmx1cig0cHgpO1xuICBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDAuNSk7XG5cbiAgJi5hY3RpdmUge1xuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgfVxuXG4gICYgPiAjbWVybWFpZC1zcGFjZSB7XG4gICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1saWdodCk7XG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB0b3A6IDUwJTtcbiAgICBsZWZ0OiA1MCU7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XG4gICAgaGVpZ2h0OiA4MHZoO1xuICAgIHdpZHRoOiA4MHZ3O1xuICAgIG92ZXJmbG93OiBoaWRkZW47XG5cbiAgICAmID4gLm1lcm1haWQtY29udGVudCB7XG4gICAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gICAgICB0cmFuc2Zvcm0tb3JpZ2luOiAwIDA7XG4gICAgICB0cmFuc2l0aW9uOiB0cmFuc2Zvcm0gMC4xcyBlYXNlO1xuICAgICAgb3ZlcmZsb3c6IHZpc2libGU7XG4gICAgICBtaW4taGVpZ2h0OiAyMDBweDtcbiAgICAgIG1pbi13aWR0aDogMjAwcHg7XG5cbiAgICAgIHByZSB7XG4gICAgICAgIG1hcmdpbjogMDtcbiAgICAgICAgYm9yZGVyOiBub25lO1xuICAgICAgfVxuXG4gICAgICBzdmcge1xuICAgICAgICBtYXgtd2lkdGg6IG5vbmU7XG4gICAgICAgIGhlaWdodDogYXV0bztcbiAgICAgIH1cbiAgICB9XG5cbiAgICAmID4gLm1lcm1haWQtY29udHJvbHMge1xuICAgICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgICAgYm90dG9tOiAyMHB4O1xuICAgICAgcmlnaHQ6IDIwcHg7XG4gICAgICBkaXNwbGF5OiBmbGV4O1xuICAgICAgZ2FwOiA4cHg7XG4gICAgICBwYWRkaW5nOiA4cHg7XG4gICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodCk7XG4gICAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgYm9yZGVyLXJhZGl1czogNnB4O1xuICAgICAgYm94LXNoYWRvdzogMCAycHggNHB4IHJnYmEoMCwgMCwgMCwgMC4xKTtcbiAgICAgIHotaW5kZXg6IDI7XG5cbiAgICAgIC5tZXJtYWlkLWNvbnRyb2wtYnV0dG9uIHtcbiAgICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgICAgICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gICAgICAgIHdpZHRoOiAzMnB4O1xuICAgICAgICBoZWlnaHQ6IDMycHg7XG4gICAgICAgIHBhZGRpbmc6IDA7XG4gICAgICAgIGJvcmRlcjogMXB4IHNvbGlkIHZhcigtLWxpZ2h0Z3JheSk7XG4gICAgICAgIGJhY2tncm91bmQ6IHZhcigtLWxpZ2h0KTtcbiAgICAgICAgY29sb3I6IHZhcigtLWRhcmspO1xuICAgICAgICBib3JkZXItcmFkaXVzOiA0cHg7XG4gICAgICAgIGN1cnNvcjogcG9pbnRlcjtcbiAgICAgICAgZm9udC1zaXplOiAxNnB4O1xuICAgICAgICBmb250LWZhbWlseTogdmFyKC0tYm9keUZvbnQpO1xuICAgICAgICB0cmFuc2l0aW9uOiBhbGwgMC4ycyBlYXNlO1xuXG4gICAgICAgICY6aG92ZXIge1xuICAgICAgICAgIGJhY2tncm91bmQ6IHZhcigtLWxpZ2h0Z3JheSk7XG4gICAgICAgIH1cblxuICAgICAgICAmOmFjdGl2ZSB7XG4gICAgICAgICAgdHJhbnNmb3JtOiB0cmFuc2xhdGVZKDFweCk7XG4gICAgICAgIH1cblxuICAgICAgICAvLyBTdHlsZSB0aGUgcmVzZXQgYnV0dG9uIGRpZmZlcmVudGx5XG4gICAgICAgICY6bnRoLWNoaWxkKDIpIHtcbiAgICAgICAgICB3aWR0aDogYXV0bztcbiAgICAgICAgICBwYWRkaW5nOiAwIDEycHg7XG4gICAgICAgICAgZm9udC1zaXplOiAxNHB4O1xuICAgICAgICB9XG4gICAgICB9XG4gICAgfVxuICB9XG59XG4iXX0= */</style><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="./prescript.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("./static/contentIndex.json").then(data => data.json())</script><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://rofilho.github.io/redes1/index.xml"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://rofilho.github.io/redes1/Aula-10-e-Aula-11---Enderecamento-IP-DHCP-e-Pratica-Wireshark-og-image.webp"/><meta property="og:image:url" content="https://rofilho.github.io/redes1/Aula-10-e-Aula-11---Enderecamento-IP-DHCP-e-Pratica-Wireshark-og-image.webp"/><meta name="twitter:image" content="https://rofilho.github.io/redes1/Aula-10-e-Aula-11---Enderecamento-IP-DHCP-e-Pratica-Wireshark-og-image.webp"/><meta property="og:image:type" content="image/.webp"/></head><body data-slug="Aula-10-e-Aula-11---Enderecamento-IP-DHCP-e-Pratica-Wireshark"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"></div><div class="center"><div class="page-header"><header><h2 class="page-title"><a href="." class="page-title__link"><img src="https://uniube.br/img/landing/logo_azul.svg" alt="Uniube" class="page-title__logo page-title__logo--light"/><img src="https://uniube.br/img/landing/logo_branca.svg" alt="Uniube" class="page-title__logo page-title__logo--dark"/><span class="page-title__text">🌐 Redes de Computadores I</span></a></h2><div class="search"><button class="search-button"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>Pesquisar</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="Pesquisar por algo" placeholder="Pesquisar por algo"/><div class="search-layout" data-preview="true"></div></div></div></div><button class="darkmode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="Tema escuro"><title>Tema escuro</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="Tema claro"><title>Tema claro</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></header><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="./">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>Aula 10 e Aula 11   Enderecamento IP DHCP e Pratica Wireshark</a></div></nav><nav class="lesson-nav" aria-label="Navegação entre aulas"><div class="lesson-nav__slot"><a href="./Aula-09---Redes-Virtuais-VMs-ISOs-e-Hyper-V" class="nav-pill nav-pill--prev" data-spa="true"><div class="nav-pill__icon">📖</div><div class="nav-pill__body"><span class="nav-pill__label">← Anterior</span><span class="nav-pill__num">Aula 09</span><span class="nav-pill__title">Redes Virtuais VMs ISOs e Hyper-V</span></div></a></div><div class="lesson-nav__slot lesson-nav__slot--right"><a href="./Aula-12---Servidor-DHCP-Dedicado-no-Packet-Tracer-e-Ubuntu-Server" class="nav-pill nav-pill--next" data-spa="true"><div class="nav-pill__icon">📖</div><div class="nav-pill__body"><span class="nav-pill__label">Próxima →</span><span class="nav-pill__num">Aula 12</span><span class="nav-pill__title">Servidor DHCP Dedicado no Packet Tracer e Ubuntu Server</span></div></a></div></nav><h1 class="article-title">Aula 10 e Aula 11 - Enderecamento IP DHCP e Pratica Wireshark</h1><p show-comma="true" class="content-meta"><time datetime="2026-06-01T22:15:12.000Z">01 de jun. de 2026</time><span>Leitura de 17 min</span></p><ul class="tags"><li><a href="./tags/redes" class="internal tag-link">redes</a></li><li><a href="./tags/ipv4" class="internal tag-link">ipv4</a></li><li><a href="./tags/ipv6" class="internal tag-link">ipv6</a></li><li><a href="./tags/packet-tracer" class="internal tag-link">packet-tracer</a></li><li><a href="./tags/dhcp" class="internal tag-link">dhcp</a></li><li><a href="./tags/wireshark" class="internal tag-link">wireshark</a></li><li><a href="./tags/sub-redes" class="internal tag-link">sub-redes</a></li><li><a href="./tags/rfc-1918" class="internal tag-link">rfc-1918</a></li></ul></div></div><article class="popover-hint"><h1 id="-aula-10-e-aula-11-endereçamento-ip-dhcp-e-prática-com-wireshark">🟢 Aula 10 e Aula 11: Endereçamento IP, DHCP e Prática com Wireshark<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-aula-10-e-aula-11-endereçamento-ip-dhcp-e-prática-com-wireshark" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p><strong>Disciplina:</strong> Redes de Computadores I (Cód. RED-01)<br/>
+<strong>Curso:</strong> Engenharia / TI — Uniube<br/>
+<strong>Semana:</strong> 10<br/>
+<strong>Professor:</strong> Romualdo Mathias Filho<br/>
+<strong>Tipo:</strong> 🔬 Teórico-Prática (Unificada)</p>
+<hr/>
+<blockquote class="callout info" data-callout="info">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>🎯 Visão Geral da Aula &amp; Recursos </p></div>
+                  
+                </div>
+<div class="callout-content">
+<p>Esta aula unificada monumental consolida os pilares práticos e teóricos do endereçamento lógico. Você dominará a matemática do IPv4, a arquitetura moderna de 128 bits do IPv6, a montagem de infraestruturas locais de roteamento no Packet Tracer, o protocolo de alocação de IPs dinâmicos DHCP (DORA) e a auditoria de pacotes de dados reais em nível de bits utilizando o Wireshark.</p>
+<p><strong>O que você vai dominar:</strong></p>
+<ul>
+<li>A estrutura de 32 bits do IPv4, operação binária AND e cálculo de sub-redes CIDR.</li>
+<li>A estrutura de 128 bits do IPv6, representação hexadecimal e simplificações de escrita.</li>
+<li>Montagem física e configuração de rotas e gateways de Camada 3 Cisco IOS CLI.</li>
+<li>O protocolo DHCP e o processo de alocação DORA (<em>Discover, Offer, Request, Acknowledge</em>).</li>
+<li>Roteiro prático de captura, filtragem e inspeção detalhada de cabeçalhos no Wireshark.</li>
+</ul>
+<p><strong>📂 Recursos para Download e Estudo:</strong></p>
+<ul>
+<li>Calculadora de Sub-redes IPv4/IPv6: <a href="https://www.subnet-calculator.com/" class="external">https://www.subnet-calculator.com<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li>Wireshark (Capturador de Pacotes): <a href="https://www.wireshark.org/download.html" class="external">https://www.wireshark.org/download.html<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li>Laboratório Prático Conectado (Packet Tracer): <a href="./Aula-06---Pratica-Enderecamento-IPv4-e-Sub-redes-Packet-Tracer" class="internal alias" data-slug="Aula-06---Pratica-Enderecamento-IPv4-e-Sub-redes-Packet-Tracer">Aula 06 (Prática Packet Tracer)</a></li>
+</ul>
+</div>
+</blockquote>
+<hr/>
+<h2 id="-objetivo-da-aula">🎯 Objetivo da Aula<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-objetivo-da-aula" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Ao final desta aula, os alunos serão capazes de:</p>
+<ul>
+<li><strong>Compreender</strong> e realizar conversões binário-decimal no IPv4 e simplificações de escrita hexadecimal no IPv6.</li>
+<li><strong>Calcular</strong> planos de endereçamento com máscara CIDR para divisão de sub-redes lógicas.</li>
+<li><strong>Configurar</strong> fisicamente switches e interfaces de roteadores Cisco via CLI no simulador Cisco Packet Tracer.</li>
+<li><strong>Explicar</strong> o funcionamento do protocolo DHCP e o processo de alocação dinâmica DORA.</li>
+<li><strong>Capturar</strong> o tráfego de rede local com o Wireshark, forçando renovações de IPs via terminal.</li>
+<li><strong>Analisar</strong> frames e pacotes DHCP Discover e Offer no Wireshark, identificando portas UDP 67/68, MACs/IPs de broadcast e cabeçalhos.</li>
+</ul>
+<hr/>
+<h2 id="-revisão-rápida-5-min">🔄 Revisão Rápida (5 min)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-revisão-rápida-5-min" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th style="text-align:left;"><strong>Conceito e Link de Origem</strong></th><th style="text-align:left;"><strong>Conexão com a Aula de Hoje</strong></th></tr></thead><tbody><tr><td style="text-align:left;"><strong><a href="./Aula-04---Camada-Fisica-e-Enlace" class="internal alias" data-slug="Aula-04---Camada-Fisica-e-Enlace">Aula 04 (Camada Enlace)</a></strong></td><td style="text-align:left;">Estudamos switches e a tabela de endereços físicos MAC (48 bits). Hoje, subiremos para a Camada 3 e veremos o endereçamento lógico IP (32 bits e 128 bits).</td></tr><tr><td style="text-align:left;"><strong><a href="./Aula-05---Modelo-OSI-vs-TCP-IP" class="internal alias" data-slug="Aula-05---Modelo-OSI-vs-TCP-IP">Aula 05 (Modelo OSI vs. TCP-IP)</a></strong></td><td style="text-align:left;">Analisamos a estrutura do cabeçalho IP e a jornada do pacote de dados. Hoje, entraremos a fundo nos campos de IP de origem e destino daquele cabeçalho.</td></tr><tr><td style="text-align:left;"><strong><a href="./Aula-06---Pratica-Enderecamento-IPv4-e-Sub-redes-Packet-Tracer" class="internal alias" data-slug="Aula-06---Pratica-Enderecamento-IPv4-e-Sub-redes-Packet-Tracer">Aula 06 (Prática Packet Tracer)</a></strong></td><td style="text-align:left;">Montamos e configuramos fisicamente uma topologia interligada por roteadores Cisco. Hoje, consolidaremos a teoria e a prática desta interconexão de forma monumental.</td></tr></tbody></table></div>
+<hr/>
+<h2 id="-1-a-estrutura-do-endereço-ipv4-classes-e-ips-reservados-teoria--15-min">📌 1. A Estrutura do Endereço IPv4, Classes e IPs Reservados [Teoria ⏳ 15 min]<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-1-a-estrutura-do-endereço-ipv4-classes-e-ips-reservados-teoria--15-min" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>O <strong>Internet Protocol version 4 (IPv4)</strong> é o protocolo padrão da Camada de Rede (Internet) responsável pelo endereçamento lógico e pelo roteamento de pacotes na rede mundial de computadores.</p>
+<h3 id="11--representação-binária-vs-decimal-pontuado">1.1 — Representação Binária vs. Decimal Pontuado<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#11--representação-binária-vs-decimal-pontuado" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Um endereço IPv4 é uma sequência lógica de <strong>32 bits</strong> (sinais binários 0 e 1). Para facilitar a leitura humana, esses 32 bits são divididos em <strong>quatro octetos</strong> (grupos de 8 bits) separados por pontos. Esta notação é chamada de <strong>Decimal Pontuado</strong>.</p>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;graph TD\n    subgraph \&quot;Endereço IPv4 (32 bits)\&quot;\n        O1[\&quot;1º Octeto (8 bits)&lt;br/>192&lt;br/>11000000\&quot;]:::oct\n        O2[\&quot;2º Octeto (8 bits)&lt;br/>168&lt;br/>10101000\&quot;]:::oct\n        O3[\&quot;3º Octeto (8 bits)&lt;br/>10&lt;br/>00001010\&quot;]:::oct\n        O4[\&quot;4º Octeto (8 bits)&lt;br/>1&lt;br/>00000001\&quot;]:::oct\n    end\n    classDef oct fill:#1f2937,stroke:#4b5563,stroke-width:2px,color:#f3f4f6;&quot;">graph TD
+    subgraph &quot;Endereço IPv4 (32 bits)&quot;
+        O1[&quot;1º Octeto (8 bits)&lt;br/>192&lt;br/>11000000&quot;]:::oct
+        O2[&quot;2º Octeto (8 bits)&lt;br/>168&lt;br/>10101000&quot;]:::oct
+        O3[&quot;3º Octeto (8 bits)&lt;br/>10&lt;br/>00001010&quot;]:::oct
+        O4[&quot;4º Octeto (8 bits)&lt;br/>1&lt;br/>00000001&quot;]:::oct
+    end
+    classDef oct fill:#1f2937,stroke:#4b5563,stroke-width:2px,color:#f3f4f6;
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+<p>Cada bit em um octeto possui um peso posicional baseado em potências de 2, variando de <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">7</span></span></span></span></span></span></span></span></span></span></span> (128) a <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">0</span></span></span></span></span></span></span></span></span></span></span> (1). O valor decimal de cada octeto varia de <strong>0 a 255</strong>.</p>
+<h3 id="12--divisão-hierárquica-rede-vs-host">1.2 — Divisão Hierárquica: Rede vs. Host<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#12--divisão-hierárquica-rede-vs-host" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Todo endereço IP é dividido logicamente em duas partes fundamentais:</p>
+<ol>
+<li><strong>Parte de Rede (Network ID):</strong> Identifica a rede específica à qual o dispositivo pertence. Todos os dispositivos na mesma sub-rede física devem compartilhar a mesma identificação de rede.</li>
+<li><strong>Parte de Host (Host ID):</strong> Identifica de forma única o dispositivo individual (computador, switch, interface do roteador, impressora) dentro daquela rede específica.</li>
+</ol>
+<h3 id="13--classes-clássicas-e-ips-especiais-rfc-1918">1.3 — Classes Clássicas e IPs Especiais (RFC 1918)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#13--classes-clássicas-e-ips-especiais-rfc-1918" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th style="text-align:left;">Classe</th><th style="text-align:left;">Intervalo do 1º Octeto</th><th style="text-align:left;">Máscara Padrão</th><th style="text-align:left;">Quantidade de Sub-redes</th><th style="text-align:left;">Hosts por Rede</th><th style="text-align:left;">Uso Principal</th></tr></thead><tbody><tr><td style="text-align:left;"><strong>A</strong></td><td style="text-align:left;"><code>1.0.0.0</code> a <code>126.255.255.255</code></td><td style="text-align:left;"><code>255.0.0.0</code> (/8)</td><td style="text-align:left;">128</td><td style="text-align:left;">~16,7 Milhões</td><td style="text-align:left;">Organizações e Redes Globais</td></tr><tr><td style="text-align:left;"><strong>B</strong></td><td style="text-align:left;"><code>128.0.0.0</code> a <code>191.255.255.255</code></td><td style="text-align:left;"><code>255.255.0.0</code> (/16)</td><td style="text-align:left;">16.384</td><td style="text-align:left;">65.534</td><td style="text-align:left;">Redes Corporativas Médias</td></tr><tr><td style="text-align:left;"><strong>C</strong></td><td style="text-align:left;"><code>192.0.0.0</code> a <code>223.255.255.255</code></td><td style="text-align:left;"><code>255.255.255.0</code> (/24)</td><td style="text-align:left;">~2 Milhões</td><td style="text-align:left;">254</td><td style="text-align:left;">Redes Domésticas e Pequenas</td></tr><tr><td style="text-align:left;"><strong>D</strong></td><td style="text-align:left;"><code>224.0.0.0</code> a <code>239.255.255.255</code></td><td style="text-align:left;">Sem máscara padrão</td><td style="text-align:left;">-</td><td style="text-align:left;">Multicast</td><td style="text-align:left;">Transmissão de Grupo (Streaming/IPTV)</td></tr><tr><td style="text-align:left;"><strong>E</strong></td><td style="text-align:left;"><code>240.0.0.0</code> a <code>255.255.255.255</code></td><td style="text-align:left;">Sem máscara padrão</td><td style="text-align:left;">-</td><td style="text-align:left;">Experimental</td><td style="text-align:left;">Reservado para Pesquisas IETF</td></tr></tbody></table></div>
+<ul>
+<li><strong>Loopback (Localhost) — <code>127.0.0.1</code>:</strong> Usado para testes de loop de software local no próprio computador.</li>
+<li><strong>IPs Privados (RFC 1918):</strong> De livre uso local, não são roteáveis na Internet pública, usados para estruturar redes locais:
+<ul>
+<li><strong>Classe A Privada:</strong> <code>10.0.0.0</code> a <code>10.255.255.255</code></li>
+<li><strong>Classe B Privada:</strong> <code>172.16.0.0</code> a <code>172.31.255.255</code></li>
+<li><strong>Classe C Privada:</strong> <code>192.168.0.0</code> a <code>192.168.255.255</code></li>
+</ul>
+</li>
+</ul>
+<blockquote class="callout tip" data-callout="tip">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>💡 Dica de Produção (Pro-Tip) </p></div>
+                  
+                </div>
+<div class="callout-content">
+<p>Em grandes corporações como a <strong>Nubank</strong> ou na nuvem de produção do <strong>iFood</strong>, os engenheiros estruturam seus data centers e ambientes de Cloud Computing (VPCs na AWS ou GCP) inteiros utilizando a faixa <strong>Classe A Privada (<code>10.0.0.0/8</code>)</strong>. Isso fornece milhões de IPs internos livres de conflitos de Internet. O acesso seguro de saída à Internet pública é feito através de <strong>Gateways NAT (Network Address Translation)</strong>, reduzindo custos de IPs públicos estáticos e ocultando a infraestrutura interna contra ataques externos direcionados.</p>
+</div>
+</blockquote>
+<hr/>
+<h2 id="-2-máscaras-de-rede-cidr-e-cálculo-de-sub-redes-teoria--15-min">📌 2. Máscaras de Rede, CIDR e Cálculo de Sub-redes [Teoria ⏳ 15 min]<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-2-máscaras-de-rede-cidr-e-cálculo-de-sub-redes-teoria--15-min" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>A máscara de sub-rede é o elemento crucial de 32 bits que <strong>informa aos roteadores e hosts quais bits de um IP pertencem à rede e quais pertencem ao host</strong>.</p>
+<h3 id="21--a-operação-lógica-and">2.1 — A Operação Lógica AND<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#21--a-operação-lógica-and" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Dispositivos de rede realizam uma operação binária <strong>AND (E lógico)</strong> entre o endereço IP e a Máscara para extrair o endereço de rede correspondente. No AND, o resultado só é 1 se ambos os bits comparados forem 1:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="github-light github-dark"><code data-language="text" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>IP:       192.168.10.74   ->  11000000.10101000.00001010.01001010</span></span>
+<span data-line><span>Máscara:  255.255.255.0   ->  11111111.11111111.11111111.00000000</span></span>
+<span data-line><span>-------------------------------------------------------------------</span></span>
+<span data-line><span>Rede:     192.168.10.0    ->  11000000.10101000.00001010.00000000</span></span></code></pre></figure>
+<h3 id="22--notação-cidr-e-fórmulas-de-sub-rede">2.2 — Notação CIDR e Fórmulas de Sub-rede<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#22--notação-cidr-e-fórmulas-de-sub-rede" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>A notação <strong>CIDR (Classless Inter-Domain Routing)</strong> simplifica essa escrita utilizando uma barra (<code>/</code>) seguida pelo número de bits consecutivos que estão ativados na máscara (ex: <code>/24</code> = <code>255.255.255.0</code>, <code>/26</code> = <code>255.255.255.192</code>).
+Para projetar e calcular sub-redes, utilizamos duas fórmulas fundamentais:</p>
+<ol>
+<li><strong>Quantidade Total de Hosts por Sub-rede:</strong> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6833em;"></span><span class="mord mathnormal">Hos</span><span class="mord mathnormal">t</span><span class="mord mathnormal">s</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.9324em;vertical-align:-0.0833em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8491em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">h</span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.6444em;"></span><span class="mord">2</span></span></span></span> <em>(Onde <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal">h</span></span></span></span> é o número de bits de host no octeto final).</em></li>
+<li><strong>Quantidade de Sub-redes Possíveis:</strong> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.6944em;"></span><span class="mord mathnormal" style="margin-right:0.05764em;">S</span><span class="mord mathnormal">u</span><span class="mord mathnormal">b</span><span class="mord mathnormal">re</span><span class="mord mathnormal">d</span><span class="mord mathnormal">es</span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.6644em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.6644em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathnormal mtight">s</span></span></span></span></span></span></span></span></span></span></span> <em>(Onde <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.4306em;"></span><span class="mord mathnormal">s</span></span></span></span> representa o número de bits “emprestados” da máscara de rede padrão).</em></li>
+</ol>
+<blockquote class="callout warning" data-callout="warning">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>⚠️ Gotcha de Infraestrutura </p></div>
+                  
+                </div>
+<div class="callout-content">
+<p>O erro mais comum de analistas juniores de infraestrutura é tentar interligar duas filiais de uma empresa cujas sub-redes locais usam o exato mesmo intervalo de IP Privado (ex: ambas usam <code>192.168.1.0/24</code>). Isso gera uma <strong>colisão de rotas (overlap)</strong>, impossibilitando que os roteadores saibam para qual ponta enviar os pacotes, pois as duas redes são logicamente idênticas.</p>
+</div>
+</blockquote>
+<hr/>
+<h2 id="-3-laboratório-prático-topologia-física-e-endereçamento-estático-hands-on--30-min">📌 3. Laboratório Prático: Topologia Física e Endereçamento Estático [Hands-On ⏳ 30 min]<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-3-laboratório-prático-topologia-física-e-endereçamento-estático-hands-on--30-min" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Nesta seção prática, utilizaremos o software Cisco Packet Tracer para projetar uma topologia física local e configurar o endereçamento estático nas estações.</p>
+<h3 id="31--exercício-1-montagem-da-topologia-física">3.1 — Exercício 1: Montagem da Topologia Física<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#31--exercício-1-montagem-da-topologia-física" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Construiremos a infraestrutura básica composta por dois segmentos físicos distintos que serão interligados fisicamente por um roteador central:</p>
+<pre><code>  [PC0] ---+                             +--- [PC2]
+  [PC1] ---+--- [Switch0] --- [R0] ------+--- [PC3]
+                          (Roteador)
+
+  Rede A: 192.168.10.0/24         Rede B: 192.168.20.0/24
+</code></pre>
+<ol>
+<li>Abra o Cisco Packet Tracer.</li>
+<li>Adicione os seguintes equipamentos no workspace:
+<ul>
+<li><strong>2x Switches</strong> do modelo Cisco Catalyst <strong>2960</strong>.</li>
+<li><strong>1x Roteador</strong> do modelo Cisco <strong>2911</strong> (ou ISR4331).</li>
+<li><strong>4x PCs</strong> genéricos.</li>
+</ul>
+</li>
+<li>Realize a interconexão utilizando <strong>cabos de cobre direto (Straight-Through)</strong>:
+<ul>
+<li><code>PC0 (Fa0)</code> para <code>Switch0 (Fa0/1)</code></li>
+<li><code>PC1 (Fa0)</code> para <code>Switch0 (Fa0/2)</code></li>
+<li><code>PC2 (Fa0)</code> para <code>Switch1 (Fa0/1)</code></li>
+<li><code>PC3 (Fa0)</code> para <code>Switch1 (Fa0/2)</code></li>
+<li><code>Switch0 (Gig0/1)</code> para o roteador <code>R0 (Gig0/0)</code></li>
+<li><code>Switch1 (Gig0/1)</code> para o roteador <code>R0 (Gig0/1)</code></li>
+</ul>
+</li>
+<li>Salve o arquivo com o nome <code>Aula10_Laboratorio.pkt</code>.</li>
+</ol>
+<h3 id="32--exercício-2-endereçamento-estático-da-rede-a">3.2 — Exercício 2: Endereçamento Estático da Rede A<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#32--exercício-2-endereçamento-estático-da-rede-a" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Configuraremos as estações pertencentes ao segmento <strong>Rede A</strong> utilizando endereços privados estáticos Classe C:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th style="text-align:left;"><strong>Dispositivo</strong></th><th style="text-align:left;"><strong>Endereço IP</strong></th><th style="text-align:left;"><strong>Máscara de Sub-rede</strong></th><th style="text-align:left;"><strong>Gateway Padrão</strong></th></tr></thead><tbody><tr><td style="text-align:left;"><strong>PC0</strong></td><td style="text-align:left;"><code>192.168.10.10</code></td><td style="text-align:left;"><code>255.255.255.0</code></td><td style="text-align:left;"><code>192.168.10.1</code></td></tr><tr><td style="text-align:left;"><strong>PC1</strong></td><td style="text-align:left;"><code>192.168.10.11</code></td><td style="text-align:left;"><code>255.255.255.0</code></td><td style="text-align:left;"><code>192.168.10.1</code></td></tr></tbody></table></div>
+<ol>
+<li>Clique no <strong>PC0</strong> <span>→</span> aba <strong>Desktop</strong> <span>→</span> menu <strong>IP Configuration</strong>.</li>
+<li>Marque a opção <strong>Static</strong> e insira os dados de IP, máscara e gateway descritos na tabela acima.</li>
+<li>Repita o procedimento no <strong>PC1</strong>.</li>
+<li>Abra o Command Prompt do PC0 e teste a conectividade com seu vizinho executando: <code>ping 192.168.10.11</code>. O ping deve ter sucesso completo.</li>
+</ol>
+<h3 id="33--exercício-3-endereçamento-estático-da-rede-b">3.3 — Exercício 3: Endereçamento Estático da Rede B<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#33--exercício-3-endereçamento-estático-da-rede-b" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Configuraremos as estações do segmento <strong>Rede B</strong>:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th style="text-align:left;"><strong>Dispositivo</strong></th><th style="text-align:left;"><strong>Endereço IP</strong></th><th style="text-align:left;"><strong>Máscara de Sub-rede</strong></th><th style="text-align:left;"><strong>Gateway Padrão</strong></th></tr></thead><tbody><tr><td style="text-align:left;"><strong>PC2</strong></td><td style="text-align:left;"><code>192.168.20.10</code></td><td style="text-align:left;"><code>255.255.255.0</code></td><td style="text-align:left;"><code>192.168.20.1</code></td></tr><tr><td style="text-align:left;"><strong>PC3</strong></td><td style="text-align:left;"><code>192.168.20.11</code></td><td style="text-align:left;"><code>255.255.255.0</code></td><td style="text-align:left;"><code>192.168.20.1</code></td></tr></tbody></table></div>
+<ol>
+<li>Aplique os dados da tabela acima nas estações <strong>PC2</strong> e <strong>PC3</strong>.</li>
+<li>Valide o tráfego local entre eles executando ping do PC2 para o PC3 (<code>ping 192.168.20.11</code>).</li>
+<li>Tente pingar do PC2 para o PC0 (<code>ping 192.168.10.10</code>).
+<em>Observe que o ping falhará (“Request timed out”), pois as interfaces do roteador que servem de gateway ainda não estão configuradas e ativas.</em></li>
+</ol>
+<hr/>
+<h2 id="-4-introdução-ao-ipv6-estrutura-representação-e-simplificação-teoria--15-min">📌 4. Introdução ao IPv6: Estrutura, Representação e Simplificação [Teoria ⏳ 15 min]<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-4-introdução-ao-ipv6-estrutura-representação-e-simplificação-teoria--15-min" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Com a explosão de dispositivos conectados à Internet (smartphones, IoT, servidores em nuvem), o espaço de endereçamento de <strong>32 bits do IPv4</strong> esgotou-se oficialmente. Para resolver este problema crônico, a IETF projetou o <strong>Internet Protocol version 6 (IPv6)</strong>.</p>
+<h3 id="41--estrutura-física-de-128-bits">4.1 — Estrutura Física de 128 Bits<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#41--estrutura-física-de-128-bits" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>O IPv6 utiliza endereços lógicos de <strong>128 bits</strong> de comprimento. Isso amplia o espaço de endereçamento para um número astronômico:</p>
+<ul>
+<li><span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">128</span></span></span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2778em;"></span><span class="mrel">≈</span><span class="mspace" style="margin-right:0.2778em;"></span></span><span class="base"><span class="strut" style="height:0.8389em;vertical-align:-0.1944em;"></span><span class="mord">3</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.1667em;"></span><span class="mord">4</span><span class="mspace" style="margin-right:0.2222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222em;"></span></span><span class="base"><span class="strut" style="height:0.8141em;"></span><span class="mord">1</span><span class="mord"><span class="mord">0</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mtight">38</span></span></span></span></span></span></span></span></span></span></span></span> endereços únicos (aproximadamente <strong>340 undecilhões</strong> de endereços).</li>
+<li>Na prática, isso fornece cerca de 50 octilhões de endereços para cada habitante do planeta, permitindo que cada dispositivo possua um IP público roteável global exclusivo, eliminando a dependência do NAT.</li>
+</ul>
+<h3 id="42--representação-hexadecimal-e-hextetos">4.2 — Representação Hexadecimal e Hextetos<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#42--representação-hexadecimal-e-hextetos" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Para simplificar a escrita de uma cadeia binária tão longa, o IPv6 é escrito em <strong>Hexadecimal</strong> (base 16: números de <code>0</code> a <code>9</code> e letras de <code>a</code> a <code>f</code>).
+Os 128 bits são agrupados em <strong>8 blocos de 16 bits</strong> (chamados de <strong>hextetos</strong>), separados por dois-pontos (<code>:</code>).</p>
+<ul>
+<li><em>Exemplo de endereço IPv6 completo:</em>
+<code>2001:0db8:85a3:0000:0000:8a2e:0370:7334</code></li>
+</ul>
+<h3 id="43--regras-oficiais-de-simplificação-ietf-rfc-5952">4.3 — Regras Oficiais de Simplificação IETF (RFC 5952)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#43--regras-oficiais-de-simplificação-ietf-rfc-5952" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Escrever ou digitar 32 caracteres hexadecimais é propenso a erros. Por isso, a IETF estabeleceu duas regras de simplificação:</p>
+<ol>
+<li><strong>Regra 1: Omissão de Zeros à Esquerda:</strong> Em qualquer hexteto, os zeros que iniciam o grupo à esquerda podem ser omitidos. Zeros à direita não podem ser removidos.
+<ul>
+<li><em>Exemplo:</em> <code>0db8</code> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.3669em;"></span><span class="mrel">→</span></span></span></span> <code>db8</code> | <code>0000</code> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.3669em;"></span><span class="mrel">→</span></span></span></span> <code>0</code> | <code>0bff</code> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.3669em;"></span><span class="mrel">→</span></span></span></span> <code>bff</code></li>
+</ul>
+</li>
+<li><strong>Regra 2: Compressão de Zeros Duplos (<code>::</code>):</strong> Sequências consecutivas de hextetos compostos apenas por zeros podem ser totalmente substituídas por dois-pontos duplos (<code>::</code>).
+<ul>
+<li><em>Gotcha Importante:</em> Esta regra <strong>SÓ pode ser aplicada UMA ÚNICA VEZ</strong> no endereço inteiro. Se aplicada mais de uma vez, seria impossível para a pilha de rede saber exatamente quantos zeros pertencem a cada lado.</li>
+<li><em>Caso existam sequências de tamanhos diferentes:</em> Comprime-se a maior sequência de zeros. Se tiverem o mesmo tamanho, comprime-se a sequência mais à esquerda.</li>
+</ul>
+</li>
+</ol>
+<h4 id="-demonstração-passo-a-passo-de-simplificação">📈 Demonstração Passo a Passo de Simplificação:<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-demonstração-passo-a-passo-de-simplificação" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<ul>
+<li><strong>Endereço Completo:</strong> <code>2001:0db8:0000:0000:0000:0000:1428:57ab</code></li>
+<li><strong>Passo 1 (Omitir zeros à esquerda):</strong> <code>2001:db8:0:0:0:0:1428:57ab</code></li>
+<li><strong>Passo 2 (Comprimir zeros consecutivos):</strong> <code>2001:db8::1428:57ab</code> (Representação simplificada padrão).</li>
+</ul>
+<hr/>
+<h3 id="-checkpoint-teste-seu-conhecimento-ipv6">🧠 Checkpoint: Teste seu Conhecimento (IPv6)!<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-checkpoint-teste-seu-conhecimento-ipv6" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<details>
+<summary><b>🔍 Exercício Rápido: Aplique as regras de simplificação oficiais da IETF (RFC 5952) para obter a representação mais curta possível do endereço IPv6 a seguir: 2001:0000:0000:00ab:0000:0000:0000:01ff</b></summary>
+<blockquote>
+<p><strong>Resposta Correta:</strong> <code>2001:0:0:ab::1ff</code></p>
+<ul>
+<li><strong>Passo 1 (Remover zeros à esquerda):</strong> <code>2001:0:0:ab:0:0:0:1ff</code></li>
+<li><strong>Passo 2 (Compressão dos zeros consecutivos):</strong> Temos uma sequência de dois hextetos zerados no início (<code>:0:0:</code>) e outra sequência de três hextetos zerados no final (<code>:0:0:0:</code>). Para obter a representação mais curta possível, a IETF exige que a maior sequência seja comprimida. Portanto, comprimimos a sequência de três zeros da direita:
+<code>2001:0:0:ab::1ff</code></li>
+</ul>
+<p><em>(Nota: se as duas sequências fossem de mesmo tamanho, comprimiríamos a mais à esquerda, mas aqui a da direita é mais longa).</em></p>
+</blockquote>
+</details>
+<hr/>
+<h2 id="-5-o-protocolo-dhcp-e-o-processo-de-alocação-dora-teoria--15-min">📌 5. O Protocolo DHCP e o Processo de Alocação DORA [Teoria ⏳ 15 min]<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-5-o-protocolo-dhcp-e-o-processo-de-alocação-dora-teoria--15-min" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>O <strong>Dynamic Host Configuration Protocol (DHCP)</strong> é o protocolo da camada de aplicação responsável por automatizar a alocação de endereços IPs, máscaras, gateways e servidores DNS para estações de trabalho de forma dinâmica e centralizada.</p>
+<h3 id="51--o-processo-dora-bit-a-bit">5.1 — O Processo DORA (Bit a Bit)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#51--o-processo-dora-bit-a-bit" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>O ciclo de concessão de um endereço IP pelo DHCP baseia-se em quatro mensagens de controle fundamentais trocadas sequencialmente, conhecidas como o acrônimo <strong>DORA</strong>:</p>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;sequenceDiagram\n    autonumber\n    actor Cliente as Cliente DHCP\n    actor Servidor as Servidor DHCP\n    \n    Cliente->>Servidor: 1. DISCOVER (Broadcast L2/L3)\n    Note over Cliente,Servidor: Origem: 0.0.0.0 | Destino: 255.255.255.255 | Portas UDP 68 -> 67\n    Servidor->>Cliente: 2. OFFER (Unicast/Broadcast)\n    Note over Cliente,Servidor: Contém IP oferecido, Máscara, Gateway, DNS e Tempo de Lease\n    Cliente->>Servidor: 3. REQUEST (Broadcast L2/L3)\n    Note over Cliente,Servidor: Solicita formalmente o IP oferecido, confirmando a todos os servidores\n    Servidor->>Cliente: 4. ACK (Unicast/Broadcast)\n    Note over Cliente,Servidor: Confirmação final da alocação e gravação na tabela de concessões&quot;">sequenceDiagram
+    autonumber
+    actor Cliente as Cliente DHCP
+    actor Servidor as Servidor DHCP
+    
+    Cliente->>Servidor: 1. DISCOVER (Broadcast L2/L3)
+    Note over Cliente,Servidor: Origem: 0.0.0.0 | Destino: 255.255.255.255 | Portas UDP 68 -> 67
+    Servidor->>Cliente: 2. OFFER (Unicast/Broadcast)
+    Note over Cliente,Servidor: Contém IP oferecido, Máscara, Gateway, DNS e Tempo de Lease
+    Cliente->>Servidor: 3. REQUEST (Broadcast L2/L3)
+    Note over Cliente,Servidor: Solicita formalmente o IP oferecido, confirmando a todos os servidores
+    Servidor->>Cliente: 4. ACK (Unicast/Broadcast)
+    Note over Cliente,Servidor: Confirmação final da alocação e gravação na tabela de concessões
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+<ol>
+<li><strong>D — Discover (Descoberta):</strong> O cliente inicializa sem IP (<code>0.0.0.0</code>) e envia um pacote de broadcast para localizar servidores DHCP ativos.
+<ul>
+<li><em>L2 Destination:</em> <code>ff:ff:ff:ff:ff:ff</code> (Broadcast Físico)</li>
+<li><em>L3 Destination:</em> <code>255.255.255.255</code> (Broadcast Lógico)</li>
+<li><em>Portas UDP:</em> Origem <code>68</code> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.3669em;"></span><span class="mrel">→</span></span></span></span> Destino <code>67</code></li>
+</ul>
+</li>
+<li><strong>O — Offer (Oferta):</strong> Os servidores DHCP ativos que recebem o Discover respondem oferecendo uma configuração IP disponível, gateway padrão, servidores DNS e tempo de concessão (<em>lease</em>).</li>
+<li><strong>R — Request (Solicitação):</strong> O cliente aceita a oferta enviando um broadcast de solicitação formal. Este pacote é enviado em broadcast para que todos os outros servidores DHCP saibam que a oferta daquele IP específico foi aceita, permitindo que liberem suas respectivas ofertas pendentes de volta ao pool.</li>
+<li><strong>A — Ack (Confirmação):</strong> O servidor DHCP selecionado responde com o pacote Acknowledge, confirmando a alocação, gravando a relação de IP/MAC do cliente em sua tabela interna de leases e disparando o timer de locação.</li>
+</ol>
+<hr/>
+<h2 id="-6-configuração-de-dhcp-dinâmico-em-roteadores-cisco-cli-hands-on--20-min">📌 6. Configuração de DHCP Dinâmico em Roteadores Cisco CLI [Hands-On ⏳ 20 min]<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-6-configuração-de-dhcp-dinâmico-em-roteadores-cisco-cli-hands-on--20-min" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Nesta etapa, ativaremos as portas do roteador <code>R0</code> como gateway das sub-redes e configuraremos os escopos de distribuição de IP dinâmico diretamente pela interface de linha de comando (CLI) do Cisco IOS.</p>
+<h3 id="61--exercício-4-ativação-das-interfaces-do-roteador-cli">6.1 — Exercício 4: Ativação das Interfaces do Roteador (CLI)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#61--exercício-4-ativação-das-interfaces-do-roteador-cli" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ol>
+<li>Clique no roteador <strong>R0</strong> <span>→</span> selecione a aba <strong>CLI</strong>.</li>
+<li>Configure os IPs de gateway nas interfaces GigabitEthernet do roteador:</li>
+</ol>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="ios" data-theme="github-light github-dark"><code data-language="ios" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>Router> enable</span></span>
+<span data-line><span>Router# configure terminal</span></span>
+<span data-line><span>Router(config)# interface GigabitEthernet0/0</span></span>
+<span data-line><span>Router(config-if)# ip address 192.168.10.1 255.255.255.0</span></span>
+<span data-line><span>Router(config-if)# no shutdown</span></span>
+<span data-line><span>Router(config-if)# exit</span></span>
+<span data-line> </span>
+<span data-line><span>Router(config)# interface GigabitEthernet0/1</span></span>
+<span data-line><span>Router(config-if)# ip address 192.168.20.1 255.255.255.0</span></span>
+<span data-line><span>Router(config-if)# no shutdown</span></span>
+<span data-line><span>Router(config-if)# exit</span></span>
+<span data-line><span>Router(config)# exit</span></span>
+<span data-line><span>Router# show ip interface brief</span></span></code></pre></figure>
+<p><em>Verifique se o status físico e lógico de ambas interfaces consta como “up”.</em></p>
+<h3 id="62--exercício-5-roteamento-fim-a-fim-e-rastreamento-de-saltos">6.2 — Exercício 5: Roteamento Fim a Fim e Rastreamento de Saltos<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#62--exercício-5-roteamento-fim-a-fim-e-rastreamento-de-saltos" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ol>
+<li>Acesse o terminal do <strong>PC0</strong>.</li>
+<li>Execute o comando para testar a comunicação com a rede remota: <code>ping 192.168.20.10</code>.</li>
+<li>Execute o rastreamento do caminho percorrido pelo pacote: <code>tracert 192.168.20.10</code>
+<em>Observe os dois saltos descritos: o gateway local (interface do roteador <code>192.168.10.1</code>) e o host de destino final.</em></li>
+</ol>
+<h3 id="63--exercício-6-configuração-de-dhcp-dinâmico-no-cisco-ios">6.3 — Exercício 6: Configuração de DHCP Dinâmico no Cisco IOS<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#63--exercício-6-configuração-de-dhcp-dinâmico-no-cisco-ios" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Configuraremos o roteador <code>R0</code> como servidor DHCP para alocação automática de endereços na Rede B.</p>
+<ol>
+<li>Acesse o roteador <strong>R0</strong> <span>→</span> aba <strong>CLI</strong>.</li>
+<li>Entre em modo de configuração global e monte as regras de escopo DHCP:</li>
+</ol>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="ios" data-theme="github-light github-dark"><code data-language="ios" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>Router# configure terminal</span></span>
+<span data-line><span>Router(config)# ip dhcp excluded-address 192.168.20.1 192.168.20.9</span></span>
+<span data-line><span>Router(config)# ip dhcp pool REDE-B</span></span>
+<span data-line><span>Router(dhcp-config)# network 192.168.20.0 255.255.255.0</span></span>
+<span data-line><span>Router(dhcp-config)# default-router 192.168.20.1</span></span>
+<span data-line><span>Router(dhcp-config)# dns-server 8.8.8.8</span></span>
+<span data-line><span>Router(dhcp-config)# exit</span></span></code></pre></figure>
+<p><em>Nota didática: O comando <code>ip dhcp excluded-address</code> é extremamente crítico para impedir que o DHCP distribua IPs que já foram fixados em elementos cruciais (como gateways, switches de gerência ou servidores locais).</em></p>
+<ol start="3">
+<li>Acesse a configuração de IP do <strong>PC2</strong> e do <strong>PC3</strong> no Packet Tracer e altere a opção de <strong>Static</strong> para <strong>DHCP</strong>.</li>
+<li>Valide a alocação dinâmica. A tela deve exibir a mensagem <em>“DHCP request successful”</em> e os campos de IP, máscara e gateway serão preenchidos automaticamente.</li>
+</ol>
+<hr/>
+<h2 id="-7-laboratório-prático-captura-e-análise-de-dhcp-no-wireshark-hands-on--20-min">📌 7. Laboratório Prático: Captura e Análise de DHCP no Wireshark [Hands-On ⏳ 20 min]<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-7-laboratório-prático-captura-e-análise-de-dhcp-no-wireshark-hands-on--20-min" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Neste laboratório prático real, utilizaremos a ferramenta <strong>Wireshark</strong> instalada no seu computador para capturar e auditar as estruturas internas e cabeçalhos das mensagens do protocolo DHCP trocadas pela sua interface de rede física.</p>
+<h3 id="71--roteiro-de-execução-de-captura-de-tráfego">7.1 — Roteiro de Execução de Captura de Tráfego<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#71--roteiro-de-execução-de-captura-de-tráfego" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ol>
+<li>Abra o <strong>Wireshark</strong>.</li>
+<li>Dê um duplo clique sobre a sua interface de rede ativa (ex: <strong>Wi-Fi</strong> ou <strong>Ethernet</strong>) para iniciar a captura de pacotes em tempo real.</li>
+<li>No campo de filtros de visualização no topo da janela, digite <strong><code>bootp</code></strong> (protocolo base do DHCP) ou <strong><code>dhcp</code></strong> e pressione <strong>Enter</strong>. A tela ficará inicialmente vazia, aguardando tráfego do protocolo.</li>
+<li>Para forçar a geração de tráfego DHCP pelo seu sistema operacional, abra o <strong>Prompt de Comando (CMD) como Administrador</strong> ou o Terminal (Linux/macOS) e execute.</li>
+</ol>
+<p><strong>No Windows:</strong></p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="cmd" data-theme="github-light github-dark"><code data-language="cmd" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">ipconfig /release</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">ipconfig /renew</span></span></code></pre></figure>
+<p><strong>No Linux/macOS:</strong></p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">sudo</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> dhclient</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> -r</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">sudo</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> dhclient</span></span></code></pre></figure>
+<ol start="5">
+<li>Observe que a captura do Wireshark começará a exibir a sequência de pacotes DORA. Assim que a rede restabelecer a conexão, clique no botão vermelho <strong>Stop (Parar)</strong> no canto superior esquerdo do Wireshark para paralisar a captura.</li>
+</ol>
+<h3 id="72--roteiro-de-análise-de-pacotes-e-cabeçalhos">7.2 — Roteiro de Análise de Pacotes e Cabeçalhos<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#72--roteiro-de-análise-de-pacotes-e-cabeçalhos" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Abaixo está o roteiro de auditoria das estruturas de dados capturadas:</p>
+<pre><code>+-------------------------------------------------------------+
+| WIRESHARK - DETALHES DE PACOTE (EXEMPLO DISCOVER)           |
++-------------------------------------------------------------+
+| [+] Frame 1: 342 bytes on wire                              |
+| [+] Ethernet II, Src: 3c:7c:3f:1a:2b:3c, Dst: ff:ff:ff:ff:f | &lt;- Broadcast L2
+| [+] Internet Protocol Version 4, Src: 0.0.0.0, Dst: 255.255 | &lt;- Broadcast L3
+| [+] User Datagram Protocol, Src Port: 68, Dst Port: 67      | &lt;- Portas DHCP
+| [-] Bootstrap Protocol (DHCP)                               |
+|   |-- Message type: Boot Request (1)                        |
+|   |-- Client MAC address: 3c:7c:3f:1a:2b:3c                 |
+|   [-] Option: (53) DHCP Message Type (Discover)             | &lt;- Option 53
++-------------------------------------------------------------+
+</code></pre>
+<ol>
+<li>
+<p><strong>Auditoria do Pacote DHCP Discover (1º Pacote):</strong></p>
+<ul>
+<li>Selecione a primeira mensagem da captura (<strong>DHCP Discover</strong>).</li>
+<li>Abra a seção <strong>Ethernet II</strong> (Camada 2): Identifique o endereço de destino (Destination) constando como <strong><code>ff:ff:ff:ff:ff:ff</code></strong> (Broadcast físico total).</li>
+<li>Abra a seção <strong>Internet Protocol Version 4</strong> (Camada 3): Identifique que a origem (Source) consta como <strong><code>0.0.0.0</code></strong> (por não possuir IP válido no boot) e o destino (Destination) consta como <strong><code>255.255.255.255</code></strong> (Broadcast lógico total).</li>
+<li>Abra a seção <strong>User Datagram Protocol</strong> (Camada 4): Verifique a porta de origem (Source Port) como <strong><code>68</code></strong> e a porta de destino (Destination Port) como <strong><code>67</code></strong>.</li>
+<li>Abra a seção <strong>Bootstrap Protocol (DHCP)</strong>: Localize a opção <strong><code>Option: (53) DHCP Message Type</code></strong> e verifique que seu tipo interno está classificado como <strong><code>Discover (1)</code></strong>.</li>
+</ul>
+</li>
+<li>
+<p><strong>Auditoria do Pacote DHCP Offer (2º Pacote):</strong></p>
+<ul>
+<li>Selecione a segunda mensagem da captura (<strong>DHCP Offer</strong>).</li>
+<li>Na seção IP, note que o remetente (Source) agora é o IP físico do seu Servidor DHCP/Gateway (ex: <code>192.168.1.1</code> ou <code>192.168.20.1</code>) e a porta de origem UDP é a <strong><code>67</code></strong> (com destino na <strong><code>68</code></strong>).</li>
+<li>Na seção <strong>Bootstrap Protocol</strong>, expanda as informações e localize o campo <strong><code>Your (client) IP address</code></strong> (identificado em algumas versões como <code>yiaddr</code>). Este é o endereço IP oficial que o servidor está reservando e oferecendo à sua máquina.</li>
+</ul>
+</li>
+</ol>
+<hr/>
+<h2 id="-resumo-estrutural">📋 Resumo Estrutural<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-resumo-estrutural" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th style="text-align:left;"><strong>Conceito/Notação/Comando</strong></th><th style="text-align:left;"><strong>Definição em Uma Frase</strong></th></tr></thead><tbody><tr><td style="text-align:left;"><strong>Endereço IPv4</strong></td><td style="text-align:left;">Identificador lógico de 32 bits da camada de rede estruturado em quatro octetos.</td></tr><tr><td style="text-align:left;"><strong>Máscara de Rede</strong></td><td style="text-align:left;">Estrutura de 32 bits que separa a porção de rede da porção de host através de uma operação lógica AND binária.</td></tr><tr><td style="text-align:left;"><strong>Notação CIDR</strong></td><td style="text-align:left;">Notação de prefixo que simplifica a escrita de máscaras pelo número de bits consecutivos ativos (ex: <code>/24</code> = <code>255.255.255.0</code>).</td></tr><tr><td style="text-align:left;"><strong>IPv6</strong></td><td style="text-align:left;">Protocolo de nova geração com endereçamento de 128 bits em hexadecimal estruturado em hextetos.</td></tr><tr><td style="text-align:left;"><strong>DHCP</strong></td><td style="text-align:left;">Protocolo PaaS da camada de aplicação encarregado de alocar IPs de forma automatizada e dinâmica na rede.</td></tr><tr><td style="text-align:left;"><strong>Processo DORA</strong></td><td style="text-align:left;">Sequência lógica de 4 mensagens de controle do DHCP (<em>Discover, Offer, Request, ACK</em>).</td></tr><tr><td style="text-align:left;"><strong>ip dhcp pool</strong></td><td style="text-align:left;">Comando de CLI Cisco IOS privilegiado que inicializa a configuração de um escopo de distribuição de IPs.</td></tr><tr><td style="text-align:left;"><strong>ipconfig /renew</strong></td><td style="text-align:left;">Comando executado no prompt Windows para forçar o envio de um DHCP Request visando adquirir IP dinâmico.</td></tr><tr><td style="text-align:left;"><strong>Filter <code>bootp</code></strong></td><td style="text-align:left;">Filtro de exibição nativo do Wireshark utilizado para isolar tráfego de controle e dados do protocolo DHCP.</td></tr></tbody></table></div>
+<hr/>
+<hr/>
+<h2 id="-artigo-de-aprofundamento">📄 Artigo de Aprofundamento<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-artigo-de-aprofundamento" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><a href="https://www.cisco.com/c/en/us/support/docs/ip/ipv6/115984-ipv6-transition-tech-00.html" class="external">IPv6 Transition Technologies — Cisco Systems<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+</ul>
+<blockquote>
+<p><em>Resumo prático: Artigo oficial da Cisco descrevendo os mecanismos de transição lógica entre infraestruturas legadas IPv4 e redes IPv6 modernas (dual-stack, tunelamento e tradução).</em></p>
+</blockquote>
+<hr/>
+<h2 id="-referências-bibliográficas">📚 Referências Bibliográficas<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-referências-bibliográficas" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><strong>TANENBAUM, Andrew S.; FEAMSTER, Nicholas; WETHERALL, David J.</strong> <em>Redes de Computadores</em>. 6. ed. São Paulo: Pearson, 2021. <strong>(Capítulo 5: A Camada de Rede — pp. 310–355)</strong>.</li>
+<li><strong>KUROSE, James F.; ROSS, Keith W.</strong> <em>Redes de computadores e a internet: uma abordagem top-down</em>. 8. ed. São Paulo: Pearson Education do Brasil, 2021. <strong>(Capítulo 4: A Camada de Rede: Plano de Dados — pp. 220–260)</strong>.</li>
+<li><strong>CISCO NETWORKING ACADEMY.</strong> <em>Curso CCNA v7: Introdução às Redes (ITN)</em>. Cisco Press, 2020. <strong>(Módulo 11: Endereçamento IPv4; Módulo 12: Endereçamento IPv6)</strong>.</li>
+</ul>
+<hr/>
+<p><em>Última atualização: 2026-06-01 | Status: publicado</em></p></article><hr/><div class="page-footer"></div></div><div class="right sidebar"></div><footer class="footer "><div class="footer__brand"><img src="https://uniube.br/img/landing/logo_azul.svg" alt="Universidade de Uberaba" class="footer__logo footer__logo--light"/><img src="https://uniube.br/img/landing/logo_branca.svg" alt="Universidade de Uberaba" class="footer__logo footer__logo--dark"/><div class="footer__info"><span class="footer__name">Prof. Romualdo Filho</span><a class="footer__email" href="mailto:romualdo.filho@uniube.br">romualdo.filho@uniube.br</a></div></div><ul class="footer__links"><li><a href="https://uniube.br" target="_blank" rel="noopener noreferrer">Mural Uniube</a></li></ul></footer></div></div></body><script type="application/javascript" data-persist="true">function n(){let t=this.parentElement;t.classList.toggle("is-collapsed");let e=t.getElementsByClassName("callout-content")[0];if(!e)return;let l=t.classList.contains("is-collapsed");e.style.gridTemplateRows=l?"0fr":"1fr"}function c(){let t=document.getElementsByClassName("callout is-collapsible");for(let e of t){let l=e.getElementsByClassName("callout-title")[0],s=e.getElementsByClassName("callout-content")[0];if(!l||!s)continue;l.addEventListener("click",n),window.addCleanup(()=>l.removeEventListener("click",n));let o=e.classList.contains("is-collapsed");s.style.gridTemplateRows=o?"0fr":"1fr"}}document.addEventListener("nav",c);
+</script><script type="module" data-persist="true">function E(a,e){if(!a)return;function t(o){o.target===this&&(o.preventDefault(),o.stopPropagation(),e())}function n(o){o.key.startsWith("Esc")&&(o.preventDefault(),e())}a?.addEventListener("click",t),window.addCleanup(()=>a?.removeEventListener("click",t)),document.addEventListener("keydown",n),window.addCleanup(()=>document.removeEventListener("keydown",n))}function f(a){for(;a.firstChild;)a.removeChild(a.firstChild)}var m=class{constructor(e,t){this.container=e;this.content=t;this.setupEventListeners(),this.setupNavigationControls(),this.resetTransform()}isDragging=!1;startPan={x:0,y:0};currentPan={x:0,y:0};scale=1;MIN_SCALE=.5;MAX_SCALE=3;cleanups=[];setupEventListeners(){let e=this.onMouseDown.bind(this),t=this.onMouseMove.bind(this),n=this.onMouseUp.bind(this),o=this.onTouchStart.bind(this),r=this.onTouchMove.bind(this),i=this.onTouchEnd.bind(this),s=this.resetTransform.bind(this);this.container.addEventListener("mousedown",e),document.addEventListener("mousemove",t),document.addEventListener("mouseup",n),this.container.addEventListener("touchstart",o,{passive:!1}),document.addEventListener("touchmove",r,{passive:!1}),document.addEventListener("touchend",i),window.addEventListener("resize",s),this.cleanups.push(()=>this.container.removeEventListener("mousedown",e),()=>document.removeEventListener("mousemove",t),()=>document.removeEventListener("mouseup",n),()=>this.container.removeEventListener("touchstart",o),()=>document.removeEventListener("touchmove",r),()=>document.removeEventListener("touchend",i),()=>window.removeEventListener("resize",s))}cleanup(){for(let e of this.cleanups)e()}setupNavigationControls(){let e=document.createElement("div");e.className="mermaid-controls";let t=this.createButton("+",()=>this.zoom(.1)),n=this.createButton("-",()=>this.zoom(-.1)),o=this.createButton("Reset",()=>this.resetTransform());e.appendChild(n),e.appendChild(o),e.appendChild(t),this.container.appendChild(e)}createButton(e,t){let n=document.createElement("button");return n.textContent=e,n.className="mermaid-control-button",n.addEventListener("click",t),window.addCleanup(()=>n.removeEventListener("click",t)),n}onMouseDown(e){e.button===0&&(this.isDragging=!0,this.startPan={x:e.clientX-this.currentPan.x,y:e.clientY-this.currentPan.y},this.container.style.cursor="grabbing")}onMouseMove(e){this.isDragging&&(e.preventDefault(),this.currentPan={x:e.clientX-this.startPan.x,y:e.clientY-this.startPan.y},this.updateTransform())}onMouseUp(){this.isDragging=!1,this.container.style.cursor="grab"}onTouchStart(e){if(e.touches.length!==1)return;this.isDragging=!0;let t=e.touches[0];this.startPan={x:t.clientX-this.currentPan.x,y:t.clientY-this.currentPan.y}}onTouchMove(e){if(!this.isDragging||e.touches.length!==1)return;e.preventDefault();let t=e.touches[0];this.currentPan={x:t.clientX-this.startPan.x,y:t.clientY-this.startPan.y},this.updateTransform()}onTouchEnd(){this.isDragging=!1}zoom(e){let t=Math.min(Math.max(this.scale+e,this.MIN_SCALE),this.MAX_SCALE),n=this.content.getBoundingClientRect(),o=n.width/2,r=n.height/2,i=t-this.scale;this.currentPan.x-=o*i,this.currentPan.y-=r*i,this.scale=t,this.updateTransform()}updateTransform(){this.content.style.transform=`translate(${this.currentPan.x}px, ${this.currentPan.y}px) scale(${this.scale})`}resetTransform(){let t=this.content.querySelector("svg").getBoundingClientRect(),n=t.width/this.scale,o=t.height/this.scale;this.scale=1,this.currentPan={x:(this.container.clientWidth-n)/2,y:(this.container.clientHeight-o)/2},this.updateTransform()}},T=["--secondary","--tertiary","--gray","--light","--lightgray","--highlight","--dark","--darkgray","--codeFont"],y;document.addEventListener("nav",async()=>{let e=document.querySelector(".center").querySelectorAll("code.mermaid");if(e.length===0)return;y||=await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs");let t=y.default,n=new WeakMap;for(let r of e)n.set(r,r.innerText);async function o(){for(let s of e){s.removeAttribute("data-processed");let c=n.get(s);c&&(s.innerHTML=c)}let r=T.reduce((s,c)=>(s[c]=window.getComputedStyle(document.documentElement).getPropertyValue(c),s),{}),i=document.documentElement.getAttribute("saved-theme")==="dark";t.initialize({startOnLoad:!1,securityLevel:"loose",theme:i?"dark":"base",themeVariables:{fontFamily:r["--codeFont"],primaryColor:r["--light"],primaryTextColor:r["--darkgray"],primaryBorderColor:r["--tertiary"],lineColor:r["--darkgray"],secondaryColor:r["--secondary"],tertiaryColor:r["--tertiary"],clusterBkg:r["--light"],edgeLabelBackground:r["--highlight"]}}),await t.run({nodes:e})}await o(),document.addEventListener("themechange",o),window.addCleanup(()=>document.removeEventListener("themechange",o));for(let r=0;r<e.length;r++){let v=function(){let g=l.querySelector("#mermaid-space"),h=l.querySelector(".mermaid-content");if(!h)return;f(h);let w=i.querySelector("svg").cloneNode(!0);h.appendChild(w),l.classList.add("active"),g.style.cursor="grab",u=new m(g,h)},M=function(){l.classList.remove("active"),u?.cleanup(),u=null},i=e[r],s=i.parentElement,c=s.querySelector(".clipboard-button"),d=s.querySelector(".expand-button"),p=window.getComputedStyle(c),L=c.offsetWidth+parseFloat(p.marginLeft||"0")+parseFloat(p.marginRight||"0");d.style.right=`calc(${L}px + 0.3rem)`,s.prepend(d);let l=s.querySelector("#mermaid-container");if(!l)return;let u=null;d.addEventListener("click",v),E(l,M),window.addCleanup(()=>{u?.cleanup(),d.removeEventListener("click",v)})}});
+</script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="./postscript.js" type="module" data-persist="true"></script></html>

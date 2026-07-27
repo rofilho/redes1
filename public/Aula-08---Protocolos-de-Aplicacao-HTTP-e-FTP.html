@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr"><head><title>Aula 08 - Protocolos de Aplicacao HTTP e FTP | Prof. Romualdo</title><meta charset="utf-8"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space Grotesk:wght@400;700&amp;family=Inter:ital,wght@0,400;0,600;1,400;1,600&amp;family=JetBrains Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="🌐 Redes de Computadores I"/><meta property="og:title" content="Aula 08 - Protocolos de Aplicacao HTTP e FTP | Prof. Romualdo"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Aula 08 - Protocolos de Aplicacao HTTP e FTP | Prof. Romualdo"/><meta name="twitter:description" content="🌐 Aula 08: Protocolos de Aplicação (HTTP e FTP) e Simulação de Rede Disciplina: Redes de Computadores I (Cód."/><meta property="og:description" content="🌐 Aula 08: Protocolos de Aplicação (HTTP e FTP) e Simulação de Rede Disciplina: Redes de Computadores I (Cód."/><meta property="og:image:alt" content="🌐 Aula 08: Protocolos de Aplicação (HTTP e FTP) e Simulação de Rede Disciplina: Redes de Computadores I (Cód."/><meta property="twitter:domain" content="rofilho.github.io/redes1"/><meta property="og:url" content="https://rofilho.github.io/redes1/Aula-08---Protocolos-de-Aplicacao-HTTP-e-FTP"/><meta property="twitter:url" content="https://rofilho.github.io/redes1/Aula-08---Protocolos-de-Aplicacao-HTTP-e-FTP"/><link rel="icon" href="./static/icon.png"/><meta name="description" content="🌐 Aula 08: Protocolos de Aplicação (HTTP e FTP) e Simulação de Rede Disciplina: Redes de Computadores I (Cód."/><meta name="generator" content="Quartz"/><link href="./index.css" rel="stylesheet" type="text/css" data-persist="true"/><style>.expand-button {
+  position: absolute;
+  display: flex;
+  float: right;
+  padding: 0.4rem;
+  margin: 0.3rem;
+  right: 0;
+  color: var(--gray);
+  border-color: var(--dark);
+  background-color: var(--light);
+  border: 1px solid;
+  border-radius: 5px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.expand-button > svg {
+  fill: var(--light);
+  filter: contrast(0.3);
+}
+.expand-button:hover {
+  cursor: pointer;
+  border-color: var(--secondary);
+}
+.expand-button:focus {
+  outline: 0;
+}
+
+pre:hover > .expand-button {
+  opacity: 1;
+  transition: 0.2s;
+}
+
+#mermaid-container {
+  position: fixed;
+  contain: layout;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+}
+#mermaid-container.active {
+  display: inline-block;
+}
+#mermaid-container > #mermaid-space {
+  border: 1px solid var(--lightgray);
+  background-color: var(--light);
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80vh;
+  width: 80vw;
+  overflow: hidden;
+}
+#mermaid-container > #mermaid-space > .mermaid-content {
+  position: relative;
+  transform-origin: 0 0;
+  transition: transform 0.1s ease;
+  overflow: visible;
+  min-height: 200px;
+  min-width: 200px;
+}
+#mermaid-container > #mermaid-space > .mermaid-content pre {
+  margin: 0;
+  border: none;
+}
+#mermaid-container > #mermaid-space > .mermaid-content svg {
+  max-width: none;
+  height: auto;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--lightgray);
+  background: var(--light);
+  color: var(--dark);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: var(--bodyFont);
+  transition: all 0.2s ease;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:hover {
+  background: var(--lightgray);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:active {
+  transform: translateY(1px);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:nth-child(2) {
+  width: auto;
+  padding: 0 12px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiQzpcXFF1YXJ0el9Qb3J0YWlzXFxyZWRlczFcXHF1YXJ0elxcY29tcG9uZW50c1xcc3R5bGVzIiwic291cmNlcyI6WyJtZXJtYWlkLmlubGluZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFHRjtFQUNFOzs7QUFLRjtFQUNFO0VBQ0E7OztBQUlKO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFOztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7O0FBR0Y7RUFDRTs7QUFJRjtFQUNFO0VBQ0E7RUFDQSIsInNvdXJjZXNDb250ZW50IjpbIi5leHBhbmQtYnV0dG9uIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbG9hdDogcmlnaHQ7XG4gIHBhZGRpbmc6IDAuNHJlbTtcbiAgbWFyZ2luOiAwLjNyZW07XG4gIHJpZ2h0OiAwOyAvLyBOT1RFOiByaWdodCB3aWxsIGJlIHNldCBpbiBtZXJtYWlkLmlubGluZS50c1xuICBjb2xvcjogdmFyKC0tZ3JheSk7XG4gIGJvcmRlci1jb2xvcjogdmFyKC0tZGFyayk7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWxpZ2h0KTtcbiAgYm9yZGVyOiAxcHggc29saWQ7XG4gIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgb3BhY2l0eTogMDtcbiAgdHJhbnNpdGlvbjogMC4ycztcblxuICAmID4gc3ZnIHtcbiAgICBmaWxsOiB2YXIoLS1saWdodCk7XG4gICAgZmlsdGVyOiBjb250cmFzdCgwLjMpO1xuICB9XG5cbiAgJjpob3ZlciB7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICAgIGJvcmRlci1jb2xvcjogdmFyKC0tc2Vjb25kYXJ5KTtcbiAgfVxuXG4gICY6Zm9jdXMge1xuICAgIG91dGxpbmU6IDA7XG4gIH1cbn1cblxucHJlIHtcbiAgJjpob3ZlciA+IC5leHBhbmQtYnV0dG9uIHtcbiAgICBvcGFjaXR5OiAxO1xuICAgIHRyYW5zaXRpb246IDAuMnM7XG4gIH1cbn1cblxuI21lcm1haWQtY29udGFpbmVyIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICBjb250YWluOiBsYXlvdXQ7XG4gIHotaW5kZXg6IDk5OTtcbiAgbGVmdDogMDtcbiAgdG9wOiAwO1xuICB3aWR0aDogMTAwdnc7XG4gIGhlaWdodDogMTAwdmg7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIGRpc3BsYXk6IG5vbmU7XG4gIGJhY2tkcm9wLWZpbHRlcjogYmx1cig0cHgpO1xuICBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDAuNSk7XG5cbiAgJi5hY3RpdmUge1xuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgfVxuXG4gICYgPiAjbWVybWFpZC1zcGFjZSB7XG4gICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1saWdodCk7XG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB0b3A6IDUwJTtcbiAgICBsZWZ0OiA1MCU7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XG4gICAgaGVpZ2h0OiA4MHZoO1xuICAgIHdpZHRoOiA4MHZ3O1xuICAgIG92ZXJmbG93OiBoaWRkZW47XG5cbiAgICAmID4gLm1lcm1haWQtY29udGVudCB7XG4gICAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gICAgICB0cmFuc2Zvcm0tb3JpZ2luOiAwIDA7XG4gICAgICB0cmFuc2l0aW9uOiB0cmFuc2Zvcm0gMC4xcyBlYXNlO1xuICAgICAgb3ZlcmZsb3c6IHZpc2libGU7XG4gICAgICBtaW4taGVpZ2h0OiAyMDBweDtcbiAgICAgIG1pbi13aWR0aDogMjAwcHg7XG5cbiAgICAgIHByZSB7XG4gICAgICAgIG1hcmdpbjogMDtcbiAgICAgICAgYm9yZGVyOiBub25lO1xuICAgICAgfVxuXG4gICAgICBzdmcge1xuICAgICAgICBtYXgtd2lkdGg6IG5vbmU7XG4gICAgICAgIGhlaWdodDogYXV0bztcbiAgICAgIH1cbiAgICB9XG5cbiAgICAmID4gLm1lcm1haWQtY29udHJvbHMge1xuICAgICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgICAgYm90dG9tOiAyMHB4O1xuICAgICAgcmlnaHQ6IDIwcHg7XG4gICAgICBkaXNwbGF5OiBmbGV4O1xuICAgICAgZ2FwOiA4cHg7XG4gICAgICBwYWRkaW5nOiA4cHg7XG4gICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodCk7XG4gICAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgYm9yZGVyLXJhZGl1czogNnB4O1xuICAgICAgYm94LXNoYWRvdzogMCAycHggNHB4IHJnYmEoMCwgMCwgMCwgMC4xKTtcbiAgICAgIHotaW5kZXg6IDI7XG5cbiAgICAgIC5tZXJtYWlkLWNvbnRyb2wtYnV0dG9uIHtcbiAgICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgICAgICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gICAgICAgIHdpZHRoOiAzMnB4O1xuICAgICAgICBoZWlnaHQ6IDMycHg7XG4gICAgICAgIHBhZGRpbmc6IDA7XG4gICAgICAgIGJvcmRlcjogMXB4IHNvbGlkIHZhcigtLWxpZ2h0Z3JheSk7XG4gICAgICAgIGJhY2tncm91bmQ6IHZhcigtLWxpZ2h0KTtcbiAgICAgICAgY29sb3I6IHZhcigtLWRhcmspO1xuICAgICAgICBib3JkZXItcmFkaXVzOiA0cHg7XG4gICAgICAgIGN1cnNvcjogcG9pbnRlcjtcbiAgICAgICAgZm9udC1zaXplOiAxNnB4O1xuICAgICAgICBmb250LWZhbWlseTogdmFyKC0tYm9keUZvbnQpO1xuICAgICAgICB0cmFuc2l0aW9uOiBhbGwgMC4ycyBlYXNlO1xuXG4gICAgICAgICY6aG92ZXIge1xuICAgICAgICAgIGJhY2tncm91bmQ6IHZhcigtLWxpZ2h0Z3JheSk7XG4gICAgICAgIH1cblxuICAgICAgICAmOmFjdGl2ZSB7XG4gICAgICAgICAgdHJhbnNmb3JtOiB0cmFuc2xhdGVZKDFweCk7XG4gICAgICAgIH1cblxuICAgICAgICAvLyBTdHlsZSB0aGUgcmVzZXQgYnV0dG9uIGRpZmZlcmVudGx5XG4gICAgICAgICY6bnRoLWNoaWxkKDIpIHtcbiAgICAgICAgICB3aWR0aDogYXV0bztcbiAgICAgICAgICBwYWRkaW5nOiAwIDEycHg7XG4gICAgICAgICAgZm9udC1zaXplOiAxNHB4O1xuICAgICAgICB9XG4gICAgICB9XG4gICAgfVxuICB9XG59XG4iXX0= */</style><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="./prescript.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("./static/contentIndex.json").then(data => data.json())</script><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://rofilho.github.io/redes1/index.xml"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://rofilho.github.io/redes1/Aula-08---Protocolos-de-Aplicacao-HTTP-e-FTP-og-image.webp"/><meta property="og:image:url" content="https://rofilho.github.io/redes1/Aula-08---Protocolos-de-Aplicacao-HTTP-e-FTP-og-image.webp"/><meta name="twitter:image" content="https://rofilho.github.io/redes1/Aula-08---Protocolos-de-Aplicacao-HTTP-e-FTP-og-image.webp"/><meta property="og:image:type" content="image/.webp"/></head><body data-slug="Aula-08---Protocolos-de-Aplicacao-HTTP-e-FTP"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"></div><div class="center"><div class="page-header"><header><h2 class="page-title"><a href="." class="page-title__link"><img src="https://uniube.br/img/landing/logo_azul.svg" alt="Uniube" class="page-title__logo page-title__logo--light"/><img src="https://uniube.br/img/landing/logo_branca.svg" alt="Uniube" class="page-title__logo page-title__logo--dark"/><span class="page-title__text">🌐 Redes de Computadores I</span></a></h2><div class="search"><button class="search-button"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>Pesquisar</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="Pesquisar por algo" placeholder="Pesquisar por algo"/><div class="search-layout" data-preview="true"></div></div></div></div><button class="darkmode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="Tema escuro"><title>Tema escuro</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="Tema claro"><title>Tema claro</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></header><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="./">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>Aula 08   Protocolos de Aplicacao HTTP e FTP</a></div></nav><nav class="lesson-nav" aria-label="Navegação entre aulas"><div class="lesson-nav__slot"><a href="./Aula-01---Plano-de-Aulas-e-Organizacao" class="nav-pill nav-pill--prev" data-spa="true"><div class="nav-pill__icon">📖</div><div class="nav-pill__body"><span class="nav-pill__label">← Anterior</span><span class="nav-pill__num">Aula 01</span><span class="nav-pill__title">Plano de Ensino e Organização da Disciplina</span></div></a></div><div class="lesson-nav__slot lesson-nav__slot--right"><a href="./Aula-09---Redes-Virtuais-VMs-ISOs-e-Hyper-V" class="nav-pill nav-pill--next" data-spa="true"><div class="nav-pill__icon">📖</div><div class="nav-pill__body"><span class="nav-pill__label">Próxima →</span><span class="nav-pill__num">Aula 09</span><span class="nav-pill__title">Redes Virtuais VMs ISOs e Hyper-V</span></div></a></div></nav><h1 class="article-title">Aula 08 - Protocolos de Aplicacao HTTP e FTP</h1><p show-comma="true" class="content-meta"><time datetime="2026-07-25T21:34:41.000Z">25 de jul. de 2026</time><span>Leitura de 6 min</span></p><ul class="tags"><li><a href="./tags/redes" class="internal tag-link">redes</a></li><li><a href="./tags/aplicacao" class="internal tag-link">aplicacao</a></li><li><a href="./tags/http" class="internal tag-link">http</a></li><li><a href="./tags/ftp" class="internal tag-link">ftp</a></li><li><a href="./tags/packet-tracer" class="internal tag-link">packet-tracer</a></li></ul></div></div><article class="popover-hint"><h1 id="-aula-08-protocolos-de-aplicação-http-e-ftp-e-simulação-de-rede">🌐 Aula 08: Protocolos de Aplicação (HTTP e FTP) e Simulação de Rede<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-aula-08-protocolos-de-aplicação-http-e-ftp-e-simulação-de-rede" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p><strong>Disciplina:</strong> Redes de Computadores I (Cód. 49325)
+<strong>Curso:</strong> Sistemas de Informação — Uniube
+<strong>Semana:</strong> 8
+<strong>Professor:</strong> Romualdo Mathias Filho
+<strong>Tipo:</strong> 🔄 Teórico-Prática
+<strong>Tópicos:</strong> Camada de Aplicação, HTTP, FTP, Pacotes de Rede, Cabecalho IP, Simulação no Packet Tracer.</p>
+<hr/>
+<blockquote>
+<p>💬 <em>“A internet é feita de cabos, luz e sinais de rádio, mas os usuários enxergam páginas web e arquivos. A mágica da tradução acontece na Camada de Aplicação.”</em></p>
+</blockquote>
+<hr/>
+<h2 id="-objetivo-da-aula">🎯 Objetivo da Aula<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-objetivo-da-aula" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Ao final desta aula, os alunos serão capazes de:</p>
+<ul>
+<li><strong>Explicar</strong> a estrutura fundamental de um pacote IP (Cabeçalho e Payload) e o que cada campo representa.</li>
+<li><strong>Entender</strong> o papel da Camada de Aplicação no topo das pilhas TCP/IP e OSI.</li>
+<li><strong>Diferenciar</strong> e compreender o funcionamento dos protocolos HTTP e FTP em um modelo Cliente-Servidor.</li>
+<li><strong>Configurar</strong> e testar simulações de servidores HTTP e FTP utilizando o Packet Tracer.</li>
+<li><strong>Compreender</strong> na prática, dentro de Máquinas Virtuais (Hyper-V), os fundamentos de um servidor Web básico.</li>
+</ul>
+<hr/>
+<h2 id="-revisão-rápida-5-min">🔄 Revisão Rápida (5 min)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-revisão-rápida-5-min" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th><strong>Conceito (Aula Anterior)</strong></th><th><strong>Conexão com hoje</strong></th></tr></thead><tbody><tr><td><strong>Camada de Transporte (TCP/UDP)</strong></td><td>Vimos como as portas 80 (HTTP) e 21 (FTP) dividem o tráfego usando TCP para entregar pacotes de forma confiável.</td></tr><tr><td><strong>IP e Roteamento</strong></td><td>O IP entrega ao servidor certo. O TCP garante que não falte nada. A Aplicação (hoje) processa e mostra o conteúdo para o usuário.</td></tr><tr><td><strong>Three-Way Handshake</strong></td><td>Antes do usuário ver a página Web (HTTP), os computadores realizam o Handshake (SYN, SYN-ACK, ACK). Hoje focaremos no que acontece <em>depois</em> do Handshake.</td></tr></tbody></table></div>
+<hr/>
+<h2 id="-1-a-estrutura-de-um-pacote-ip">📌 1. A Estrutura de um Pacote IP<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-1-a-estrutura-de-um-pacote-ip" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Antes de entender como as páginas trafegam na rede, precisamos revisitar o nível abaixo. Quando um arquivo viaja pela rede, ele é dividido em pequenos blocos de dados.</p>
+<p>Um <strong>Pacote de Rede (Datagrama IP)</strong> possui três partes principais:</p>
+<ol>
+<li><strong>Cabeçalho (Header):</strong> É o “envelope” que contém instruções de roteamento, IP de Origem, IP de Destino e metadados.</li>
+<li><strong>Dados (Payload):</strong> O “conteúdo da carta”. No nosso caso hoje, o HTML da página web ou o arquivo do FTP.</li>
+<li><strong>Trailer:</strong> Código de verificação para checar se o arquivo não sofreu corrupções no caminho de cabos de rede e roteadores.</li>
+</ol>
+<h3 id="dissecando-o-cabeçalho-ip">Dissecando o Cabeçalho IP<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#dissecando-o-cabeçalho-ip" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li><strong>Endereços de Origem e Destino:</strong> Os endereços IP de quem envia e quem recebe.</li>
+<li><strong>Protocolo:</strong> Indica o que vem na Camada de Transporte logo acima (06 = TCP, 17 = UDP).</li>
+<li><strong>Tempo de Vida (TTL - Time to Live):</strong> Um limitador que diminui em <code>1</code> a cada roteador passado. Quando chega a zero, o pacote é “destruído”, impedindo pacotes fantasma de ficarem eternamente rodando na rede por conta de loops infinitos.</li>
+<li><strong>Comprimento Total e Flags de Fragmentação:</strong> Informam o tamanho do envelope e ajudam a reordenar as peças do quebra-cabeça quando o pacote teve de ser quebrado em partes menores por limites das placas de rede.</li>
+</ul>
+<hr/>
+<h2 id="-2-camada-de-aplicação-onde-os-usuários-vivem">📌 2. Camada de Aplicação (Onde os usuários vivem)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-2-camada-de-aplicação-onde-os-usuários-vivem" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>A <strong>Camada de Aplicação</strong> é o elo direto entre a rede e os softwares que nós usamos. É aqui que moram os protocolos mais “famosos” do mundo.</p>
+<p><strong>Modelo Cliente-Servidor:</strong>
+Quase todos os protocolos da camada de aplicação usam esse formato. Um <strong>Cliente</strong> (ex: Seu navegador Chrome no celular) solicita dados. O <strong>Servidor</strong> (ex: Os datacenters do Google, ou da Uniube) armazena os recursos e envia a resposta.</p>
+<hr/>
+<h2 id="-3-protocolo-http-e-protocolo-ftp">📌 3. Protocolo HTTP e Protocolo FTP<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-3-protocolo-http-e-protocolo-ftp" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="-http-hypertext-transfer-protocol">🌍 HTTP (Hypertext Transfer Protocol)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-http-hypertext-transfer-protocol" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li><strong>O que faz:</strong> Transfere as páginas Web em formato HTML, bem como imagens, vídeos e scripts da página.</li>
+<li><strong>Porta:</strong> 80 (ou 443 para HTTPS, seguro).</li>
+<li><strong>Como funciona:</strong> O cliente manda requisições via “métodos”. O <code>GET</code> busca uma página. O <code>POST</code> envia dados do usuário de volta ao servidor (ex: clicar no botão “Entrar” com sua senha). O servidor processa e responde com o site.</li>
+</ul>
+<h3 id="-ftp-file-transfer-protocol">📁 FTP (File Transfer Protocol)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-ftp-file-transfer-protocol" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li><strong>O que faz:</strong> Sistema projetado exclusivamente para a gestão de grandes arquivos (download e upload).</li>
+<li><strong>Portas:</strong> Usa duas portas. A porta 21 serve só para <em>Controle</em> (enviar comandos, senhas, etc.). A porta 20 serve só para os <em>Dados</em> brutos, acelerando transferências pesadas.</li>
+<li><strong>Como funciona:</strong> Você loga no servidor e emite comandos como <code>PUT</code> para jogar um arquivo lá dentro, ou <code>GET</code> para puxar um arquivo do servidor.</li>
+</ul>
+<hr/>
+<h2 id="-4-mão-na-massa-simulação-de-rede-com-http-e-ftp">🔧 4. Mão na Massa: Simulação de Rede com HTTP e FTP<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-4-mão-na-massa-simulação-de-rede-com-http-e-ftp" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Nossa prática de hoje será estruturar um ambiente controlado. Primeiro vamos usar o <strong>Packet Tracer</strong> e depois falaremos sobre o Hyper-V.</p>
+<h3 id="etapa-1-ambiente-no-packet-tracer">Etapa 1: Ambiente no Packet Tracer<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#etapa-1-ambiente-no-packet-tracer" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ol>
+<li>Coloque um <strong>Switch Central</strong>.</li>
+<li>Conecte dois <strong>PCs</strong> e um <strong>Server (Servidor Genérico)</strong> ao Switch.</li>
+<li>Atribua IPs fixos a todos eles.
+<ul>
+<li>Server: <code>192.168.0.10</code> / Máscara: <code>255.255.255.0</code></li>
+<li>PC 1: <code>192.168.0.20</code></li>
+</ul>
+</li>
+<li>Vá aos “Services” do Servidor:
+<ul>
+<li><strong>HTTP:</strong> Clique em “On”. Edite o <code>index.html</code> e insira um texto: <code>&lt;h1>Bem Vindo ao Servidor Uniube!&lt;/h1></code>.</li>
+<li><strong>FTP:</strong> Clique em “On”. Crie um usuário <code>admin</code> e senha <code>1234</code> com as permissões completas (Write, Read, Delete, Rename, List).</li>
+</ul>
+</li>
+</ol>
+<p>✅ <strong>Checkpoint:</strong> Vá ao <em>Desktop</em> do PC 1, abra o <strong>Web Browser</strong>, digite <code>192.168.0.10</code> e pressione “Go”. A página criada deve aparecer na sua tela!</p>
+<h3 id="etapa-2-acessando-o-ftp">Etapa 2: Acessando o FTP<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#etapa-2-acessando-o-ftp" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ol>
+<li>Ainda no PC 1, abra o <strong>Command Prompt</strong> (Terminal).</li>
+<li>Digite: <code>ftp 192.168.0.10</code></li>
+<li>O servidor vai perguntar o username. Digite <code>admin</code>. Depois a senha <code>1234</code>.</li>
+<li>Digite <code>dir</code> e aperte enter. Você vai ver a listagem crua de todos os arquivos do servidor.</li>
+<li>Digite <code>quit</code> para sair.</li>
+</ol>
+<p>✅ <strong>Checkpoint:</strong> O comando <code>dir</code> executado dentro do servidor confirma o sucesso absoluto da configuração do FTP.</p>
+<hr/>
+<h2 id="-resumo-estrutural">📋 Resumo Estrutural<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-resumo-estrutural" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th><strong>Conceito</strong></th><th><strong>Definição em Uma Frase</strong></th></tr></thead><tbody><tr><td><strong>TTL (Time to Live)</strong></td><td>Campo do Pacote IP que mata o pacote se ele se perder para evitar congestionamento perpétuo.</td></tr><tr><td><strong>Camada de Aplicação</strong></td><td>Fornece serviços de rede diretamente às aplicações de software.</td></tr><tr><td><strong>Modelo Cliente-Servidor</strong></td><td>O computador do usuário (cliente) pede e o computador central (servidor) obedece.</td></tr><tr><td><strong>HTTP (Porta 80)</strong></td><td>O idioma universal dos navegadores web para puxar conteúdo.</td></tr><tr><td><strong>FTP (Porta 20/21)</strong></td><td>Ferramenta pura de transferência massiva de arquivos usando portas separadas para arquivos e ordens.</td></tr></tbody></table></div>
+<hr/>
+<h2 id="-exercício-avaliativo">📝 Exercício Avaliativo<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-exercício-avaliativo" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="-entrega-arquivo-pkt-packet-tracer">📌 Entrega: Arquivo <code>.pkt</code> (Packet Tracer)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-entrega-arquivo-pkt-packet-tracer" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Prazo: Até o final da aula no AVA / Moodle.</p>
+<p>Realize as seguintes tarefas no simulador e salve o seu arquivo <code>.pkt</code> com o seu nome:</p>
+<ol>
+<li><strong>Topologia:</strong> Crie a rede Cliente-Servidor vista em sala com os IPs da família <code>192.168.10.X</code>.</li>
+<li><strong>Serviços HTTP:</strong> Personalize o <code>index.html</code> colocando seu Nome e Registro de Aluno com um <code>&lt;p>Redes 1 - Aula 8&lt;/p></code>. Tire um print da sua tela testando via Web Browser e insira em um documento word/pdf anexado.</li>
+<li><strong>Serviços FTP:</strong> Acesse o serviço FTP e mova um arquivo da sua máquina virtual do cliente simulado para a máquina Servidora.</li>
+</ol>
+<p>Critérios de avaliação:</p>
+<ul>
+<li>Sucesso do ping.</li>
+<li>Nome visível no HTML.</li>
+<li>Login FTP criado.</li>
+</ul>
+<hr/>
+<h2 id="-artigo-de-aprofundamento">📄 Artigo de Aprofundamento<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-artigo-de-aprofundamento" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><a href="https://www.cloudflare.com/pt-br/learning/network-layer/what-is-ftp/" class="external">O que é FTP e HTTP? — Cloudflare (PT-BR)<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+</ul>
+<blockquote>
+<p><em>Resumo prático: Documentação rápida e acessível que explora as diferenças cruciais na construção da internet usando os protocolos de transferência FTP e o padrão HTTP, trazendo um foco mercadológico forte.</em></p>
+</blockquote>
+<hr/>
+<h2 id="-referências-bibliográficas">📚 Referências Bibliográficas<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-referências-bibliográficas" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li>KUROSE, J. F.; ROSS, K. W. <em>Redes de Computadores e a Internet</em>. 8. ed. Pearson, 2021. <strong>(Capítulo 2: Camada de Aplicação)</strong>.</li>
+<li>TANENBAUM, A. S.; FEAMSTER, N.; WETHERALL, D. J. <em>Redes de Computadores</em>. 6. ed. Pearson, 2021. <strong>(Capítulo 7: Camada de Aplicação)</strong>.</li>
+</ul>
+<hr/>
+<p><em>Última atualização: 2026-05-11 | Status: rascunho</em></p></article><hr/><div class="page-footer"></div></div><div class="right sidebar"></div><footer class="footer "><div class="footer__brand"><img src="https://uniube.br/img/landing/logo_azul.svg" alt="Universidade de Uberaba" class="footer__logo footer__logo--light"/><img src="https://uniube.br/img/landing/logo_branca.svg" alt="Universidade de Uberaba" class="footer__logo footer__logo--dark"/><div class="footer__info"><span class="footer__name">Prof. Romualdo Filho</span><a class="footer__email" href="mailto:romualdo.filho@uniube.br">romualdo.filho@uniube.br</a></div></div><ul class="footer__links"><li><a href="https://uniube.br" target="_blank" rel="noopener noreferrer">Mural Uniube</a></li></ul></footer></div></div></body><script type="application/javascript" data-persist="true">function n(){let t=this.parentElement;t.classList.toggle("is-collapsed");let e=t.getElementsByClassName("callout-content")[0];if(!e)return;let l=t.classList.contains("is-collapsed");e.style.gridTemplateRows=l?"0fr":"1fr"}function c(){let t=document.getElementsByClassName("callout is-collapsible");for(let e of t){let l=e.getElementsByClassName("callout-title")[0],s=e.getElementsByClassName("callout-content")[0];if(!l||!s)continue;l.addEventListener("click",n),window.addCleanup(()=>l.removeEventListener("click",n));let o=e.classList.contains("is-collapsed");s.style.gridTemplateRows=o?"0fr":"1fr"}}document.addEventListener("nav",c);
+</script><script type="module" data-persist="true">function E(a,e){if(!a)return;function t(o){o.target===this&&(o.preventDefault(),o.stopPropagation(),e())}function n(o){o.key.startsWith("Esc")&&(o.preventDefault(),e())}a?.addEventListener("click",t),window.addCleanup(()=>a?.removeEventListener("click",t)),document.addEventListener("keydown",n),window.addCleanup(()=>document.removeEventListener("keydown",n))}function f(a){for(;a.firstChild;)a.removeChild(a.firstChild)}var m=class{constructor(e,t){this.container=e;this.content=t;this.setupEventListeners(),this.setupNavigationControls(),this.resetTransform()}isDragging=!1;startPan={x:0,y:0};currentPan={x:0,y:0};scale=1;MIN_SCALE=.5;MAX_SCALE=3;cleanups=[];setupEventListeners(){let e=this.onMouseDown.bind(this),t=this.onMouseMove.bind(this),n=this.onMouseUp.bind(this),o=this.onTouchStart.bind(this),r=this.onTouchMove.bind(this),i=this.onTouchEnd.bind(this),s=this.resetTransform.bind(this);this.container.addEventListener("mousedown",e),document.addEventListener("mousemove",t),document.addEventListener("mouseup",n),this.container.addEventListener("touchstart",o,{passive:!1}),document.addEventListener("touchmove",r,{passive:!1}),document.addEventListener("touchend",i),window.addEventListener("resize",s),this.cleanups.push(()=>this.container.removeEventListener("mousedown",e),()=>document.removeEventListener("mousemove",t),()=>document.removeEventListener("mouseup",n),()=>this.container.removeEventListener("touchstart",o),()=>document.removeEventListener("touchmove",r),()=>document.removeEventListener("touchend",i),()=>window.removeEventListener("resize",s))}cleanup(){for(let e of this.cleanups)e()}setupNavigationControls(){let e=document.createElement("div");e.className="mermaid-controls";let t=this.createButton("+",()=>this.zoom(.1)),n=this.createButton("-",()=>this.zoom(-.1)),o=this.createButton("Reset",()=>this.resetTransform());e.appendChild(n),e.appendChild(o),e.appendChild(t),this.container.appendChild(e)}createButton(e,t){let n=document.createElement("button");return n.textContent=e,n.className="mermaid-control-button",n.addEventListener("click",t),window.addCleanup(()=>n.removeEventListener("click",t)),n}onMouseDown(e){e.button===0&&(this.isDragging=!0,this.startPan={x:e.clientX-this.currentPan.x,y:e.clientY-this.currentPan.y},this.container.style.cursor="grabbing")}onMouseMove(e){this.isDragging&&(e.preventDefault(),this.currentPan={x:e.clientX-this.startPan.x,y:e.clientY-this.startPan.y},this.updateTransform())}onMouseUp(){this.isDragging=!1,this.container.style.cursor="grab"}onTouchStart(e){if(e.touches.length!==1)return;this.isDragging=!0;let t=e.touches[0];this.startPan={x:t.clientX-this.currentPan.x,y:t.clientY-this.currentPan.y}}onTouchMove(e){if(!this.isDragging||e.touches.length!==1)return;e.preventDefault();let t=e.touches[0];this.currentPan={x:t.clientX-this.startPan.x,y:t.clientY-this.startPan.y},this.updateTransform()}onTouchEnd(){this.isDragging=!1}zoom(e){let t=Math.min(Math.max(this.scale+e,this.MIN_SCALE),this.MAX_SCALE),n=this.content.getBoundingClientRect(),o=n.width/2,r=n.height/2,i=t-this.scale;this.currentPan.x-=o*i,this.currentPan.y-=r*i,this.scale=t,this.updateTransform()}updateTransform(){this.content.style.transform=`translate(${this.currentPan.x}px, ${this.currentPan.y}px) scale(${this.scale})`}resetTransform(){let t=this.content.querySelector("svg").getBoundingClientRect(),n=t.width/this.scale,o=t.height/this.scale;this.scale=1,this.currentPan={x:(this.container.clientWidth-n)/2,y:(this.container.clientHeight-o)/2},this.updateTransform()}},T=["--secondary","--tertiary","--gray","--light","--lightgray","--highlight","--dark","--darkgray","--codeFont"],y;document.addEventListener("nav",async()=>{let e=document.querySelector(".center").querySelectorAll("code.mermaid");if(e.length===0)return;y||=await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs");let t=y.default,n=new WeakMap;for(let r of e)n.set(r,r.innerText);async function o(){for(let s of e){s.removeAttribute("data-processed");let c=n.get(s);c&&(s.innerHTML=c)}let r=T.reduce((s,c)=>(s[c]=window.getComputedStyle(document.documentElement).getPropertyValue(c),s),{}),i=document.documentElement.getAttribute("saved-theme")==="dark";t.initialize({startOnLoad:!1,securityLevel:"loose",theme:i?"dark":"base",themeVariables:{fontFamily:r["--codeFont"],primaryColor:r["--light"],primaryTextColor:r["--darkgray"],primaryBorderColor:r["--tertiary"],lineColor:r["--darkgray"],secondaryColor:r["--secondary"],tertiaryColor:r["--tertiary"],clusterBkg:r["--light"],edgeLabelBackground:r["--highlight"]}}),await t.run({nodes:e})}await o(),document.addEventListener("themechange",o),window.addCleanup(()=>document.removeEventListener("themechange",o));for(let r=0;r<e.length;r++){let v=function(){let g=l.querySelector("#mermaid-space"),h=l.querySelector(".mermaid-content");if(!h)return;f(h);let w=i.querySelector("svg").cloneNode(!0);h.appendChild(w),l.classList.add("active"),g.style.cursor="grab",u=new m(g,h)},M=function(){l.classList.remove("active"),u?.cleanup(),u=null},i=e[r],s=i.parentElement,c=s.querySelector(".clipboard-button"),d=s.querySelector(".expand-button"),p=window.getComputedStyle(c),L=c.offsetWidth+parseFloat(p.marginLeft||"0")+parseFloat(p.marginRight||"0");d.style.right=`calc(${L}px + 0.3rem)`,s.prepend(d);let l=s.querySelector("#mermaid-container");if(!l)return;let u=null;d.addEventListener("click",v),E(l,M),window.addCleanup(()=>{u?.cleanup(),d.removeEventListener("click",v)})}});
+</script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="./postscript.js" type="module" data-persist="true"></script></html>

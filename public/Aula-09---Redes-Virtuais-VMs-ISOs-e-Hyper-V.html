@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr"><head><title>Aula 09 - Redes Virtuais VMs ISOs e Hyper-V | Prof. Romualdo</title><meta charset="utf-8"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space Grotesk:wght@400;700&amp;family=Inter:ital,wght@0,400;0,600;1,400;1,600&amp;family=JetBrains Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="🌐 Redes de Computadores I"/><meta property="og:title" content="Aula 09 - Redes Virtuais VMs ISOs e Hyper-V | Prof. Romualdo"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Aula 09 - Redes Virtuais VMs ISOs e Hyper-V | Prof. Romualdo"/><meta name="twitter:description" content="🌐 Aula 09: Redes Virtuais — VMs, ISOs e Hyper-V Disciplina: Redes de Computadores I Curso: Inteligência Artificial e Ciência de Dados — Uniube Semana: 9 Professor: Romualdo Mathias Filho Tipo: 🔬 Teórica + Prática (Laboratório) Tópicos: Virtualização, Hypervisor, Virtual Switches (Externo/Interno/P..."/><meta property="og:description" content="🌐 Aula 09: Redes Virtuais — VMs, ISOs e Hyper-V Disciplina: Redes de Computadores I Curso: Inteligência Artificial e Ciência de Dados — Uniube Semana: 9 Professor: Romualdo Mathias Filho Tipo: 🔬 Teórica + Prática (Laboratório) Tópicos: Virtualização, Hypervisor, Virtual Switches (Externo/Interno/P..."/><meta property="og:image:alt" content="🌐 Aula 09: Redes Virtuais — VMs, ISOs e Hyper-V Disciplina: Redes de Computadores I Curso: Inteligência Artificial e Ciência de Dados — Uniube Semana: 9 Professor: Romualdo Mathias Filho Tipo: 🔬 Teórica + Prática (Laboratório) Tópicos: Virtualização, Hypervisor, Virtual Switches (Externo/Interno/P..."/><meta property="twitter:domain" content="rofilho.github.io/redes1"/><meta property="og:url" content="https://rofilho.github.io/redes1/Aula-09---Redes-Virtuais-VMs-ISOs-e-Hyper-V"/><meta property="twitter:url" content="https://rofilho.github.io/redes1/Aula-09---Redes-Virtuais-VMs-ISOs-e-Hyper-V"/><link rel="icon" href="./static/icon.png"/><meta name="description" content="🌐 Aula 09: Redes Virtuais — VMs, ISOs e Hyper-V Disciplina: Redes de Computadores I Curso: Inteligência Artificial e Ciência de Dados — Uniube Semana: 9 Professor: Romualdo Mathias Filho Tipo: 🔬 Teórica + Prática (Laboratório) Tópicos: Virtualização, Hypervisor, Virtual Switches (Externo/Interno/P..."/><meta name="generator" content="Quartz"/><link href="./index.css" rel="stylesheet" type="text/css" data-persist="true"/><style>.expand-button {
+  position: absolute;
+  display: flex;
+  float: right;
+  padding: 0.4rem;
+  margin: 0.3rem;
+  right: 0;
+  color: var(--gray);
+  border-color: var(--dark);
+  background-color: var(--light);
+  border: 1px solid;
+  border-radius: 5px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.expand-button > svg {
+  fill: var(--light);
+  filter: contrast(0.3);
+}
+.expand-button:hover {
+  cursor: pointer;
+  border-color: var(--secondary);
+}
+.expand-button:focus {
+  outline: 0;
+}
+
+pre:hover > .expand-button {
+  opacity: 1;
+  transition: 0.2s;
+}
+
+#mermaid-container {
+  position: fixed;
+  contain: layout;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+}
+#mermaid-container.active {
+  display: inline-block;
+}
+#mermaid-container > #mermaid-space {
+  border: 1px solid var(--lightgray);
+  background-color: var(--light);
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80vh;
+  width: 80vw;
+  overflow: hidden;
+}
+#mermaid-container > #mermaid-space > .mermaid-content {
+  position: relative;
+  transform-origin: 0 0;
+  transition: transform 0.1s ease;
+  overflow: visible;
+  min-height: 200px;
+  min-width: 200px;
+}
+#mermaid-container > #mermaid-space > .mermaid-content pre {
+  margin: 0;
+  border: none;
+}
+#mermaid-container > #mermaid-space > .mermaid-content svg {
+  max-width: none;
+  height: auto;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--lightgray);
+  background: var(--light);
+  color: var(--dark);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: var(--bodyFont);
+  transition: all 0.2s ease;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:hover {
+  background: var(--lightgray);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:active {
+  transform: translateY(1px);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:nth-child(2) {
+  width: auto;
+  padding: 0 12px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiQzpcXFF1YXJ0el9Qb3J0YWlzXFxyZWRlczFcXHF1YXJ0elxcY29tcG9uZW50c1xcc3R5bGVzIiwic291cmNlcyI6WyJtZXJtYWlkLmlubGluZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFHRjtFQUNFOzs7QUFLRjtFQUNFO0VBQ0E7OztBQUlKO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFOztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7O0FBR0Y7RUFDRTs7QUFJRjtFQUNFO0VBQ0E7RUFDQSIsInNvdXJjZXNDb250ZW50IjpbIi5leHBhbmQtYnV0dG9uIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbG9hdDogcmlnaHQ7XG4gIHBhZGRpbmc6IDAuNHJlbTtcbiAgbWFyZ2luOiAwLjNyZW07XG4gIHJpZ2h0OiAwOyAvLyBOT1RFOiByaWdodCB3aWxsIGJlIHNldCBpbiBtZXJtYWlkLmlubGluZS50c1xuICBjb2xvcjogdmFyKC0tZ3JheSk7XG4gIGJvcmRlci1jb2xvcjogdmFyKC0tZGFyayk7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWxpZ2h0KTtcbiAgYm9yZGVyOiAxcHggc29saWQ7XG4gIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgb3BhY2l0eTogMDtcbiAgdHJhbnNpdGlvbjogMC4ycztcblxuICAmID4gc3ZnIHtcbiAgICBmaWxsOiB2YXIoLS1saWdodCk7XG4gICAgZmlsdGVyOiBjb250cmFzdCgwLjMpO1xuICB9XG5cbiAgJjpob3ZlciB7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICAgIGJvcmRlci1jb2xvcjogdmFyKC0tc2Vjb25kYXJ5KTtcbiAgfVxuXG4gICY6Zm9jdXMge1xuICAgIG91dGxpbmU6IDA7XG4gIH1cbn1cblxucHJlIHtcbiAgJjpob3ZlciA+IC5leHBhbmQtYnV0dG9uIHtcbiAgICBvcGFjaXR5OiAxO1xuICAgIHRyYW5zaXRpb246IDAuMnM7XG4gIH1cbn1cblxuI21lcm1haWQtY29udGFpbmVyIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICBjb250YWluOiBsYXlvdXQ7XG4gIHotaW5kZXg6IDk5OTtcbiAgbGVmdDogMDtcbiAgdG9wOiAwO1xuICB3aWR0aDogMTAwdnc7XG4gIGhlaWdodDogMTAwdmg7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIGRpc3BsYXk6IG5vbmU7XG4gIGJhY2tkcm9wLWZpbHRlcjogYmx1cig0cHgpO1xuICBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDAuNSk7XG5cbiAgJi5hY3RpdmUge1xuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgfVxuXG4gICYgPiAjbWVybWFpZC1zcGFjZSB7XG4gICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1saWdodCk7XG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB0b3A6IDUwJTtcbiAgICBsZWZ0OiA1MCU7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XG4gICAgaGVpZ2h0OiA4MHZoO1xuICAgIHdpZHRoOiA4MHZ3O1xuICAgIG92ZXJmbG93OiBoaWRkZW47XG5cbiAgICAmID4gLm1lcm1haWQtY29udGVudCB7XG4gICAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gICAgICB0cmFuc2Zvcm0tb3JpZ2luOiAwIDA7XG4gICAgICB0cmFuc2l0aW9uOiB0cmFuc2Zvcm0gMC4xcyBlYXNlO1xuICAgICAgb3ZlcmZsb3c6IHZpc2libGU7XG4gICAgICBtaW4taGVpZ2h0OiAyMDBweDtcbiAgICAgIG1pbi13aWR0aDogMjAwcHg7XG5cbiAgICAgIHByZSB7XG4gICAgICAgIG1hcmdpbjogMDtcbiAgICAgICAgYm9yZGVyOiBub25lO1xuICAgICAgfVxuXG4gICAgICBzdmcge1xuICAgICAgICBtYXgtd2lkdGg6IG5vbmU7XG4gICAgICAgIGhlaWdodDogYXV0bztcbiAgICAgIH1cbiAgICB9XG5cbiAgICAmID4gLm1lcm1haWQtY29udHJvbHMge1xuICAgICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgICAgYm90dG9tOiAyMHB4O1xuICAgICAgcmlnaHQ6IDIwcHg7XG4gICAgICBkaXNwbGF5OiBmbGV4O1xuICAgICAgZ2FwOiA4cHg7XG4gICAgICBwYWRkaW5nOiA4cHg7XG4gICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodCk7XG4gICAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgYm9yZGVyLXJhZGl1czogNnB4O1xuICAgICAgYm94LXNoYWRvdzogMCAycHggNHB4IHJnYmEoMCwgMCwgMCwgMC4xKTtcbiAgICAgIHotaW5kZXg6IDI7XG5cbiAgICAgIC5tZXJtYWlkLWNvbnRyb2wtYnV0dG9uIHtcbiAgICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgICAgICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gICAgICAgIHdpZHRoOiAzMnB4O1xuICAgICAgICBoZWlnaHQ6IDMycHg7XG4gICAgICAgIHBhZGRpbmc6IDA7XG4gICAgICAgIGJvcmRlcjogMXB4IHNvbGlkIHZhcigtLWxpZ2h0Z3JheSk7XG4gICAgICAgIGJhY2tncm91bmQ6IHZhcigtLWxpZ2h0KTtcbiAgICAgICAgY29sb3I6IHZhcigtLWRhcmspO1xuICAgICAgICBib3JkZXItcmFkaXVzOiA0cHg7XG4gICAgICAgIGN1cnNvcjogcG9pbnRlcjtcbiAgICAgICAgZm9udC1zaXplOiAxNnB4O1xuICAgICAgICBmb250LWZhbWlseTogdmFyKC0tYm9keUZvbnQpO1xuICAgICAgICB0cmFuc2l0aW9uOiBhbGwgMC4ycyBlYXNlO1xuXG4gICAgICAgICY6aG92ZXIge1xuICAgICAgICAgIGJhY2tncm91bmQ6IHZhcigtLWxpZ2h0Z3JheSk7XG4gICAgICAgIH1cblxuICAgICAgICAmOmFjdGl2ZSB7XG4gICAgICAgICAgdHJhbnNmb3JtOiB0cmFuc2xhdGVZKDFweCk7XG4gICAgICAgIH1cblxuICAgICAgICAvLyBTdHlsZSB0aGUgcmVzZXQgYnV0dG9uIGRpZmZlcmVudGx5XG4gICAgICAgICY6bnRoLWNoaWxkKDIpIHtcbiAgICAgICAgICB3aWR0aDogYXV0bztcbiAgICAgICAgICBwYWRkaW5nOiAwIDEycHg7XG4gICAgICAgICAgZm9udC1zaXplOiAxNHB4O1xuICAgICAgICB9XG4gICAgICB9XG4gICAgfVxuICB9XG59XG4iXX0= */</style><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="./prescript.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("./static/contentIndex.json").then(data => data.json())</script><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://rofilho.github.io/redes1/index.xml"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://rofilho.github.io/redes1/Aula-09---Redes-Virtuais-VMs-ISOs-e-Hyper-V-og-image.webp"/><meta property="og:image:url" content="https://rofilho.github.io/redes1/Aula-09---Redes-Virtuais-VMs-ISOs-e-Hyper-V-og-image.webp"/><meta name="twitter:image" content="https://rofilho.github.io/redes1/Aula-09---Redes-Virtuais-VMs-ISOs-e-Hyper-V-og-image.webp"/><meta property="og:image:type" content="image/.webp"/></head><body data-slug="Aula-09---Redes-Virtuais-VMs-ISOs-e-Hyper-V"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"></div><div class="center"><div class="page-header"><header><h2 class="page-title"><a href="." class="page-title__link"><img src="https://uniube.br/img/landing/logo_azul.svg" alt="Uniube" class="page-title__logo page-title__logo--light"/><img src="https://uniube.br/img/landing/logo_branca.svg" alt="Uniube" class="page-title__logo page-title__logo--dark"/><span class="page-title__text">🌐 Redes de Computadores I</span></a></h2><div class="search"><button class="search-button"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>Pesquisar</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="Pesquisar por algo" placeholder="Pesquisar por algo"/><div class="search-layout" data-preview="true"></div></div></div></div><button class="darkmode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="Tema escuro"><title>Tema escuro</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="Tema claro"><title>Tema claro</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></header><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="./">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>Aula 09   Redes Virtuais VMs ISOs e Hyper V</a></div></nav><nav class="lesson-nav" aria-label="Navegação entre aulas"><div class="lesson-nav__slot"><a href="./Aula-08---Protocolos-de-Aplicacao-HTTP-e-FTP" class="nav-pill nav-pill--prev" data-spa="true"><div class="nav-pill__icon">📖</div><div class="nav-pill__body"><span class="nav-pill__label">← Anterior</span><span class="nav-pill__num">Aula 08</span><span class="nav-pill__title">Protocolos de Aplicacao HTTP e FTP</span></div></a></div><div class="lesson-nav__slot lesson-nav__slot--right"><a href="./Aula-10-e-Aula-11---Enderecamento-IP-DHCP-e-Pratica-Wireshark" class="nav-pill nav-pill--next" data-spa="true"><div class="nav-pill__icon">📖</div><div class="nav-pill__body"><span class="nav-pill__label">Próxima →</span><span class="nav-pill__num">Aula 10 e Aula 11</span><span class="nav-pill__title">Enderecamento IP DHCP e Pratica Wireshark</span></div></a></div></nav><h1 class="article-title">Aula 09 - Redes Virtuais VMs ISOs e Hyper-V</h1><p show-comma="true" class="content-meta"><time datetime="2026-05-18T21:34:52.000Z">18 de mai. de 2026</time><span>Leitura de 11 min</span></p><ul class="tags"><li><a href="./tags/redes" class="internal tag-link">redes</a></li><li><a href="./tags/hyper-v" class="internal tag-link">hyper-v</a></li><li><a href="./tags/virtualizacao" class="internal tag-link">virtualizacao</a></li><li><a href="./tags/vswitch" class="internal tag-link">vswitch</a></li><li><a href="./tags/nat" class="internal tag-link">nat</a></li><li><a href="./tags/segmentacao" class="internal tag-link">segmentacao</a></li><li><a href="./tags/vm" class="internal tag-link">vm</a></li></ul></div></div><article class="popover-hint"><h1 id="-aula-09-redes-virtuais--vms-isos-e-hyper-v">🌐 Aula 09: Redes Virtuais — VMs, ISOs e Hyper-V<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-aula-09-redes-virtuais--vms-isos-e-hyper-v" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p><strong>Disciplina:</strong> Redes de Computadores I
+<strong>Curso:</strong> Inteligência Artificial e Ciência de Dados — Uniube
+<strong>Semana:</strong> 9
+<strong>Professor:</strong> Romualdo Mathias Filho
+<strong>Tipo:</strong> 🔬 Teórica + Prática (Laboratório)
+<strong>Tópicos:</strong> Virtualização, Hypervisor, Virtual Switches (Externo/Interno/Privado), NAT, Bridging, ISOs, Segmentação de Rede Virtual.</p>
+<hr/>
+<blockquote>
+<p>💬 <em>“Redes virtuais não são uma simulação da realidade — elas são a realidade dos datacenters modernos. Toda cloud pública (AWS, Azure, GCP) é construída sobre exatamente os mesmos princípios que você aprenderá hoje.”</em></p>
+</blockquote>
+<hr/>
+<h2 id="-objetivo-da-aula">🎯 Objetivo da Aula<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-objetivo-da-aula" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Ao final desta aula, os alunos serão capazes de:</p>
+<ul>
+<li><strong>Compreender</strong> como a virtualização de redes permite criar infraestruturas completas de rede dentro de uma única máquina física.</li>
+<li><strong>Distinguir</strong> os três modos de rede virtual do Hyper-V (Externo, Interno, Privado) e mapeá-los aos conceitos de <strong>bridge, NAT e rede isolada</strong> já estudados na disciplina.</li>
+<li><strong>Criar e configurar</strong> uma Máquina Virtual (VM) com Ubuntu Server, conectando-a em rede com o host e com outras VMs.</li>
+<li><strong>Analisar</strong> como o tráfego de rede se comporta em cada tipo de switch virtual usando ferramentas práticas (<code>ping</code>, <code>ip a</code>, <code>netplan</code>).</li>
+</ul>
+<hr/>
+<h2 id="-revisão-rápida-5-min">🔄 Revisão Rápida (5 min)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-revisão-rápida-5-min" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th><strong>Conceito (Aulas Anteriores)</strong></th><th><strong>Conexão com hoje</strong></th></tr></thead><tbody><tr><td><strong>Endereçamento IPv4 e Subnetting</strong></td><td>Cada rede virtual do Hyper-V é uma sub-rede. Hoje vamos alocar endereços e configurar máscaras manualmente.</td></tr><tr><td><strong>Camada de Rede — Roteamento</strong></td><td>O Default Switch do Hyper-V implementa NAT na camada de rede — o mesmo conceito do seu roteador doméstico.</td></tr><tr><td><strong>Camada de Enlace — Switches</strong></td><td>Virtual Switches são abstrações de software dos switches Ethernet físicos que estudamos. As mesmas regras de encaminhamento se aplicam.</td></tr><tr><td><strong>Modelo OSI vs. TCP/IP</strong></td><td>Redes virtuais operam em todas as camadas: física (emulada), enlace (Virtual Switch), rede (IP + NAT), transporte (TCP/UDP) e aplicação (SSH, HTTP).</td></tr></tbody></table></div>
+<hr/>
+<h2 id="-1-por-que-virtualizar-redes">📌 1. Por que Virtualizar Redes?<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-1-por-que-virtualizar-redes" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Antes de criar uma rede virtual, precisamos entender <strong>por que ela existe</strong>.</p>
+<p>Em um datacenter tradicional, montar um laboratório de redes exige:</p>
+<ul>
+<li>Vários servidores físicos</li>
+<li>Switches e cabos Ethernet reais</li>
+<li>Horas de cabeamento e configuração</li>
+</ul>
+<p>Com virtualização, fazemos tudo isso dentro de <strong>uma única máquina</strong>. O resultado é idêntico do ponto de vista da rede — o protocolo TCP/IP não sabe (nem se importa) se está trafegando por um cabo de cobre ou por um barramento de software.</p>
+<blockquote>
+<p>💡 <strong>Conexão com o mercado:</strong> AWS EC2, Azure Virtual Machines e Google Cloud Compute Engine são todos baseados em hypervisors que implementam exatamente esses mesmos conceitos. Ao aprender Hyper-V hoje, você está aprendendo a base tecnológica de toda computação em nuvem.</p>
+</blockquote>
+<hr/>
+<h2 id="-2-conceitos-de-virtualização-de-rede">📌 2. Conceitos de Virtualização de Rede<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-2-conceitos-de-virtualização-de-rede" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="21--hypervisor-o-gerenciador-de-vms">2.1 — Hypervisor: o gerenciador de VMs<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#21--hypervisor-o-gerenciador-de-vms" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>O <strong>hypervisor</strong> é o software responsável por criar e gerenciar Máquinas Virtuais (VMs). Existem dois tipos:</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th><strong>Tipo</strong></th><th><strong>Onde roda</strong></th><th><strong>Exemplos</strong></th><th><strong>Desempenho</strong></th></tr></thead><tbody><tr><td><strong>Tipo 1 (Bare-Metal)</strong></td><td>Diretamente sobre o hardware</td><td>Hyper-V, VMware ESXi, KVM</td><td>⭐ Alto</td></tr><tr><td><strong>Tipo 2 (Hosted)</strong></td><td>Dentro de um SO hospedeiro</td><td>VirtualBox, VMware Workstation</td><td>Moderado</td></tr></tbody></table></div>
+<blockquote>
+<p>💡 <strong>Analogia:</strong> O Hyper-V Tipo 1 é o <strong>gerente de condomínio</strong> que controla o prédio inteiro (hardware). O VirtualBox Tipo 2 é um <strong>inquilino</strong> que subaluga um quarto do próprio apartamento — funciona, mas com mais overhead.</p>
+</blockquote>
+<p>O <strong>Microsoft Hyper-V</strong> é um hypervisor Tipo 1 nativo do Windows 10/11 Pro/Enterprise. Uma vez ativado, o próprio Windows passa a rodar como uma VM privilegiada sobre ele.</p>
+<hr/>
+<h3 id="22--o-que-é-uma-iso">2.2 — O que é uma ISO?<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#22--o-que-é-uma-iso" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Uma <strong>ISO</strong> é um arquivo de imagem de disco — uma cópia byte a byte de um CD/DVD ou mídia de instalação. Para instalar um sistema operacional em uma VM, usamos um arquivo <code>.iso</code> no lugar de uma mídia física.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th><strong>Aspecto</strong></th><th><strong>Mídia Física</strong></th><th><strong>Arquivo ISO</strong></th></tr></thead><tbody><tr><td>Velocidade de leitura</td><td>Limitada pelo hardware óptico</td><td>Limitada apenas pela RAM/disco do host</td></tr><tr><td>Distribuição</td><td>Física (correios, loja)</td><td>Download direto da internet</td></tr><tr><td>Reusabilidade</td><td>Uma cópia por vez</td><td>Infinitas VMs simultâneas</td></tr><tr><td>Armazenamento</td><td>CD/DVD (descartável)</td><td>Arquivo no disco</td></tr></tbody></table></div>
+<p><strong>Fontes oficiais de ISOs para laboratório:</strong></p>
+<ul>
+<li><strong>Ubuntu Server:</strong> <a href="https://ubuntu.com/download/server" class="external">ubuntu.com/download/server<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> → Versão <strong>24.04 LTS</strong></li>
+<li><strong>Debian:</strong> <a href="https://www.debian.org/distrib/" class="external">debian.org/distrib<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+<li><strong>Windows Server:</strong> <a href="https://www.microsoft.com/evalcenter" class="external">Microsoft Evaluation Center<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+</ul>
+<hr/>
+<h2 id="-3-tipos-de-switch-virtual-no-hyper-v">📌 3. Tipos de Switch Virtual no Hyper-V<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-3-tipos-de-switch-virtual-no-hyper-v" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Esta é a seção mais importante da aula. Os três tipos de Virtual Switch implementam conceitos fundamentais de redes que já estudamos.</p>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;graph TB\n    INTERNET[\&quot;🌐 Internet\&quot;]\n    ROTEADOR[\&quot;🔁 Roteador / Gateway\&quot;]\n    HOST[\&quot;💻 Máquina Host (Windows)\&quot;]\n    \n    subgraph EXTERNO[\&quot;Switch Externo — Modo Bridge\&quot;]\n        VM_EXT[\&quot;🖥️ VM com IP da LAN\\n(ex: 192.168.1.50)\&quot;]\n    end\n    \n    subgraph INTERNO[\&quot;Switch Interno — Modo NAT/Host-Only\&quot;]\n        VM_INT[\&quot;🖥️ VM com IP privado\\n(ex: 172.18.x.x)\&quot;]\n    end\n    \n    subgraph PRIVADO[\&quot;Switch Privado — Rede Isolada\&quot;]\n        VM_PRI1[\&quot;🖥️ VM-A\\n(192.168.100.10)\&quot;]\n        VM_PRI2[\&quot;🖥️ VM-B\\n(192.168.100.20)\&quot;]\n    end\n\n    INTERNET &lt;--> ROTEADOR\n    ROTEADOR &lt;--> HOST\n    HOST &lt;--> VM_EXT\n    ROTEADOR &lt;--> VM_EXT\n    HOST &lt;--> VM_INT\n    VM_INT -.NAT.-> INTERNET\n    VM_PRI1 &lt;--> VM_PRI2&quot;">graph TB
+    INTERNET[&quot;🌐 Internet&quot;]
+    ROTEADOR[&quot;🔁 Roteador / Gateway&quot;]
+    HOST[&quot;💻 Máquina Host (Windows)&quot;]
+    
+    subgraph EXTERNO[&quot;Switch Externo — Modo Bridge&quot;]
+        VM_EXT[&quot;🖥️ VM com IP da LAN\n(ex: 192.168.1.50)&quot;]
+    end
+    
+    subgraph INTERNO[&quot;Switch Interno — Modo NAT/Host-Only&quot;]
+        VM_INT[&quot;🖥️ VM com IP privado\n(ex: 172.18.x.x)&quot;]
+    end
+    
+    subgraph PRIVADO[&quot;Switch Privado — Rede Isolada&quot;]
+        VM_PRI1[&quot;🖥️ VM-A\n(192.168.100.10)&quot;]
+        VM_PRI2[&quot;🖥️ VM-B\n(192.168.100.20)&quot;]
+    end
+
+    INTERNET &lt;--> ROTEADOR
+    ROTEADOR &lt;--> HOST
+    HOST &lt;--> VM_EXT
+    ROTEADOR &lt;--> VM_EXT
+    HOST &lt;--> VM_INT
+    VM_INT -.NAT.-> INTERNET
+    VM_PRI1 &lt;--> VM_PRI2
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+<h3 id="31--switch-externo-bridge-mode">3.1 — Switch Externo (Bridge Mode)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#31--switch-externo-bridge-mode" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>Conceito de rede equivalente:</strong> <strong>Bridge</strong> (Ponte)</p>
+<p>O switch externo “liga” a VM diretamente à <strong>placa de rede física do Host</strong>, como se a VM tivesse seu próprio cabo de rede conectado ao switch físico da sala.</p>
+<ul>
+<li>A VM recebe um IP <strong>do mesmo roteador da rede física</strong> (via DHCP ou estático)</li>
+<li>Outros computadores da rede conseguem enxergar e acessar a VM</li>
+<li>A VM pode acessar a internet diretamente</li>
+</ul>
+<blockquote>
+<p>🔧 <strong>Caso de uso:</strong> Servidor web que precisa ser acessado por todos os PCs do laboratório. Simulação de um servidor em produção na rede local.</p>
+</blockquote>
+<pre><code>Roteador (192.168.1.1)
+    ├── PC do Aluno A (192.168.1.10)
+    ├── PC do Aluno B (192.168.1.11)
+    └── VM no Hyper-V (192.168.1.50) ← mesma rede, mesmo switch físico (em modo bridge)
+</code></pre>
+<hr/>
+<h3 id="32--switch-interno-nat--host-only">3.2 — Switch Interno (NAT / Host-Only)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#32--switch-interno-nat--host-only" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>Conceito de rede equivalente:</strong> <strong>NAT</strong> (Network Address Translation) + Host-Only</p>
+<p>O switch interno cria uma <strong>rede privada entre o Host e as VMs</strong>. O Host consegue acessar as VMs, mas a rede física externa não. Para ter internet, o Hyper-V usa NAT (o Host “empresta” sua conexão).</p>
+<ul>
+<li>VM e Host se comunicam normalmente</li>
+<li>Rede física (outros PCs) <strong>não vê</strong> as VMs</li>
+<li>Com o <strong>Default Switch</strong>, o NAT é automático e as VMs têm internet</li>
+</ul>
+<blockquote>
+<p>🔧 <strong>Caso de uso:</strong> Laboratório de estudo onde você precisa acessar a VM do seu próprio computador sem expô-la para a rede da sala. Desenvolvimento e testes.</p>
+</blockquote>
+<hr/>
+<h3 id="33--switch-privado-rede-isolada">3.3 — Switch Privado (Rede Isolada)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#33--switch-privado-rede-isolada" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>Conceito de rede equivalente:</strong> <strong>Rede Isolada / Air-gapped network</strong></p>
+<p>O switch privado cria uma rede onde <strong>apenas as VMs conectadas a ele se comunicam</strong>. O Host não tem acesso. Não há internet. É um segmento completamente isolado.</p>
+<ul>
+<li>Sem acesso à internet</li>
+<li>Sem acesso ao Host</li>
+<li>Apenas VMs↔VMs</li>
+</ul>
+<blockquote>
+<p>🔧 <strong>Caso de uso:</strong> Simular uma rede de backend isolada (banco de dados, microserviços internos). Implementar segurança por segmentação — exatamente o que empresas fazem com VLANs em redes físicas.</p>
+</blockquote>
+<hr/>
+<h3 id="34--default-switch-bônus-hyper-v">3.4 — Default Switch (Bônus Hyper-V)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#34--default-switch-bônus-hyper-v" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>O Windows cria automaticamente o <strong>“Default Switch”</strong> — um switch <strong>Interno com NAT automático configurado</strong>. As VMs conectadas a ele têm acesso à internet (via NAT do host) sem nenhuma configuração adicional. É o modo ideal para laboratório e instalação de SO.</p>
+<p><strong>Tabela Comparativa Completa:</strong></p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th><strong>Tipo</strong></th><th><strong>VM → Internet</strong></th><th><strong>VM → Host</strong></th><th><strong>VM → VM</strong></th><th><strong>Rede física → VM</strong></th><th><strong>Conceito equivalente</strong></th></tr></thead><tbody><tr><td><strong>Externo</strong></td><td>✅ Direto</td><td>✅ Sim</td><td>✅ Sim</td><td>✅ Sim</td><td>Bridge / Modo promíscuo</td></tr><tr><td><strong>Interno</strong></td><td>❌ (NAT manual)</td><td>✅ Sim</td><td>✅ Sim</td><td>❌ Não</td><td>Host-Only + NAT opcional</td></tr><tr><td><strong>Default Switch</strong></td><td>✅ NAT automático</td><td>✅ Sim</td><td>✅ Sim</td><td>❌ Não</td><td>NAT automático</td></tr><tr><td><strong>Privado</strong></td><td>❌ Não</td><td>❌ Não</td><td>✅ Sim</td><td>❌ Não</td><td>Rede isolada / Air-gap</td></tr></tbody></table></div>
+<hr/>
+<h2 id="-4-laboratório-prático--criando-e-conectando-vms-em-rede">📌 4. Laboratório Prático — Criando e Conectando VMs em Rede<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-4-laboratório-prático--criando-e-conectando-vms-em-rede" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="pré-requisitos">Pré-requisitos<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#pré-requisitos" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li>Windows 10/11 Pro, Enterprise ou Education (64 bits)</li>
+<li>CPU com suporte a virtualização: <strong>Intel VT-x</strong> ou <strong>AMD-V</strong> (verificar BIOS/UEFI)</li>
+<li>Mínimo <strong>8 GB RAM</strong> (recomendado para rodar host + 2 VMs)</li>
+<li>ISO do Ubuntu Server 24.04 LTS baixada</li>
+</ul>
+<h3 id="passo-41--ativando-o-hyper-v">Passo 4.1 — Ativando o Hyper-V<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#passo-41--ativando-o-hyper-v" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>Via PowerShell (como Administrador):</strong></p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="powershell" data-theme="github-light github-dark"><code data-language="powershell" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">Enable-WindowsOptionalFeature</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;"> -</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">Online </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">FeatureName Microsoft</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">Hyper</span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">V </span><span style="--shiki-light:#D73A49;--shiki-dark:#F97583;">-</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">All</span></span></code></pre></figure>
+<p>Ou via interface: <code>Painel de Controle → Programas → Ativar recursos do Windows → ✅ Hyper-V</code></p>
+<blockquote>
+<p>⚠️ <strong>Reinicie</strong> o computador após a ativação.</p>
+</blockquote>
+<hr/>
+<h3 id="passo-42--criando-o-switch-virtual-interno">Passo 4.2 — Criando o Switch Virtual Interno<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#passo-42--criando-o-switch-virtual-interno" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Antes de criar a VM, vamos preparar a rede:</p>
+<ol>
+<li>Abra o <strong>Gerenciador do Hyper-V</strong></li>
+<li>No painel direito: <strong>Gerenciador de Comutador Virtual</strong></li>
+<li>Selecione <strong>Interno</strong> → <strong>Criar Comutador Virtual</strong></li>
+<li>Nome: <code>Rede-Redes-Lab</code></li>
+<li>Clique em <strong>Aplicar</strong> e <strong>OK</strong></li>
+</ol>
+<blockquote>
+<p>💡 Um adaptador virtual (<code>vEthernet (Rede-Redes-Lab)</code>) será criado no Host — você pode dar a ele um IP estático para comunicação Host↔VM.</p>
+</blockquote>
+<hr/>
+<h3 id="passo-43--criando-a-máquina-virtual">Passo 4.3 — Criando a Máquina Virtual<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#passo-43--criando-a-máquina-virtual" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ol>
+<li>Hyper-V → <strong>Novo → Máquina Virtual</strong></li>
+<li>Siga o assistente:</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th><strong>Configuração</strong></th><th><strong>Valor</strong></th><th><strong>Justificativa</strong></th></tr></thead><tbody><tr><td>Nome</td><td><code>SRV-UBUNTU-REDES</code></td><td>Nomenclatura de servidor</td></tr><tr><td>Geração</td><td><strong>Geração 2</strong></td><td>UEFI, boot moderno</td></tr><tr><td>RAM</td><td><strong>2048 MB</strong> + Memória Dinâmica</td><td>Econômico para lab</td></tr><tr><td>Rede</td><td><strong>Default Switch</strong></td><td>Internet durante instalação</td></tr><tr><td>Disco</td><td><strong>20 GB</strong> (novo VHDX)</td><td>Suficiente para Ubuntu Server</td></tr><tr><td>ISO</td><td>Apontar para <code>ubuntu-24.04-live-server-amd64.iso</code></td><td>—</td></tr></tbody></table></div>
+<hr/>
+<h3 id="passo-44--configurando-secure-boot-para-linux">Passo 4.4 — Configurando Secure Boot para Linux<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#passo-44--configurando-secure-boot-para-linux" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<blockquote>
+<p>⚠️ <strong>CRÍTICO — sem isso a VM não inicia!</strong></p>
+</blockquote>
+<ol>
+<li>Clique com o botão direito na VM → <strong>Configurações</strong></li>
+<li><strong>Segurança → Inicialização Segura</strong></li>
+<li>Modelo: <strong><code>Autoridade de Certificação UEFI da Microsoft</code></strong></li>
+<li>Clique em <strong>OK</strong></li>
+</ol>
+<hr/>
+<h3 id="passo-45--instalando-o-ubuntu-server">Passo 4.5 — Instalando o Ubuntu Server<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#passo-45--instalando-o-ubuntu-server" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ol>
+<li>Inicie a VM → <strong>Conectar → Iniciar</strong></li>
+<li>Siga o instalador:</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th><strong>Tela</strong></th><th><strong>Ação</strong></th></tr></thead><tbody><tr><td>Idioma</td><td><strong>English</strong> (recomendado para servidores)</td></tr><tr><td>Network</td><td>Verifique que <code>eth0</code> recebeu IP via DHCP ✅</td></tr><tr><td>Storage</td><td>Disco inteiro com <strong>LVM</strong></td></tr><tr><td>Profile</td><td>Username: <code>aluno</code> / Server: <code>srv-redes-01</code></td></tr><tr><td><strong>SSH</strong></td><td>✅ <strong>Marque “Install OpenSSH server”</strong></td></tr><tr><td>Finalização</td><td><strong>Reboot Now</strong></td></tr></tbody></table></div>
+<hr/>
+<h3 id="passo-46--configurando-a-segunda-interface-de-rede">Passo 4.6 — Configurando a Segunda Interface de Rede<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#passo-46--configurando-a-segunda-interface-de-rede" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Após a instalação, vamos adicionar o switch interno à VM para comunicação Host↔VM:</p>
+<ol>
+<li>VM → <strong>Configurações → Adicionar Hardware → Adaptador de Rede</strong></li>
+<li>Selecione o Switch: <code>Rede-Redes-Lab</code></li>
+<li>Clique em <strong>OK</strong></li>
+</ol>
+<p>Dentro da VM, configure o IP estático via <strong>Netplan</strong>:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Verificar interfaces disponíveis</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">ip</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> a</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Editar a configuração de rede</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">sudo</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> nano</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> /etc/netplan/00-installer-config.yaml</span></span></code></pre></figure>
+<p><strong>Conteúdo do arquivo</strong> (adapte <code>eth1</code> ao nome real da sua interface):</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="yaml" data-theme="github-light github-dark"><code data-language="yaml" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">network</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">  version</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">2</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">  ethernets</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">    eth0</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:          </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Interface do Default Switch (DHCP/internet)</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">      dhcp4</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">true</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">    eth1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:          </span><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Interface do Switch Interno (IP estático)</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">      dhcp4</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">false</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">      addresses</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">        - </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">192.168.100.10/24</span></span></code></pre></figure>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Aplicar as configurações</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">sudo</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> netplan</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> apply</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Verificar</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">ip</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> a</span></span></code></pre></figure>
+<p><strong>No Host (adaptador virtual):</strong> Configure o IP <code>192.168.100.1/24</code> no adaptador <code>vEthernet (Rede-Redes-Lab)</code>:</p>
+<ul>
+<li><code>Win + R</code> → <code>ncpa.cpl</code> → Propriedades → TCP/IPv4 → <code>192.168.100.1</code> / <code>255.255.255.0</code></li>
+</ul>
+<p><strong>Teste de conectividade:</strong></p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Da VM para o Host</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">ping</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> 192.168.100.1</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> -c</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> 4</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Do Host (PowerShell) para a VM</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">ping</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> 192.168.100.10</span></span></code></pre></figure>
+<hr/>
+<h3 id="passo-47--acesso-via-ssh">Passo 4.7 — Acesso via SSH<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#passo-47--acesso-via-ssh" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Com a rede funcionando, acesse o servidor como um sysadmin real:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># No PowerShell ou Terminal do Windows</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">ssh</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> aluno@192.168.100.10</span></span></code></pre></figure>
+<blockquote>
+<p>🎯 <strong>Parabéns!</strong> Você está administrando um servidor Linux virtualizado via SSH através de uma rede virtual configurada por você — exatamente como é feito em AWS EC2, Azure VMs e datacenters corporativos.</p>
+</blockquote>
+<hr/>
+<h2 id="-exercício-avaliativo">🧪 Exercício Avaliativo<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-exercício-avaliativo" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<h3 id="desafio--segmentação-de-rede-virtual">Desafio — Segmentação de Rede Virtual<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#desafio--segmentação-de-rede-virtual" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p><strong>Objetivo:</strong> Aplicar os conceitos de redes virtuais e endereçamento IP estático em um cenário de isolamento de rede.</p>
+<p><strong>Passos:</strong></p>
+<ol>
+<li>✅ Crie a VM <code>SRV-UBUNTU-REDES</code> conforme o roteiro desta aula (com Default Switch)</li>
+<li>✅ No Hyper-V, crie um <strong>Switch Virtual Privado</strong> chamado <code>Rede-Isolada-Redes</code></li>
+<li>✅ Adicione uma <strong>segunda interface de rede</strong> à VM, conectada ao switch <code>Rede-Isolada-Redes</code></li>
+<li>✅ Configure o IP estático <code>192.168.200.10/24</code> na nova interface via Netplan</li>
+<li>✅ Verifique com <code>ip a</code> que a VM tem <strong>duas interfaces</strong>: uma com DHCP (internet) e outra com IP estático (rede isolada)</li>
+<li>✅ No terminal da VM, execute:</li>
+</ol>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Mostrar tabela de roteamento</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">ip</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> route</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> show</span></span>
+<span data-line> </span>
+<span data-line><span style="--shiki-light:#6A737D;--shiki-dark:#6A737D;"># Listar todas as interfaces com seus IPs</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">ip</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> -4</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> addr</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> show</span></span></code></pre></figure>
+<ol start="7">
+<li>✅ Tire <strong>prints</strong> de cada etapa</li>
+</ol>
+<p><strong>Entrega:</strong> Relatório em PDF contendo:</p>
+<ul>
+<li>Print do Gerenciador do Hyper-V mostrando a VM e os switches criados</li>
+<li>Print do <code>ip a</code> mostrando as duas interfaces configuradas</li>
+<li>Print do <code>ip route show</code> mostrando a tabela de rotas</li>
+<li>Uma explicação de <strong>1 parágrafo</strong> respondendo: <em>“Por que a VM consegue acessar a internet pela interface DHCP mas não pela interface do Switch Privado?”</em></li>
+</ul>
+<hr/>
+<h2 id="-resumo-estrutural">📋 Resumo Estrutural<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-resumo-estrutural" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th><strong>Conceito</strong></th><th><strong>Definição em Uma Frase</strong></th></tr></thead><tbody><tr><td><strong>Hypervisor Tipo 1 (Bare-Metal)</strong></td><td>Roda diretamente sobre o hardware antes do SO; gerencia VMs com alto desempenho (ex: Hyper-V).</td></tr><tr><td><strong>Hypervisor Tipo 2 (Hosted)</strong></td><td>Roda dentro de um SO existente, com overhead adicional (ex: VirtualBox).</td></tr><tr><td><strong>Arquivo ISO</strong></td><td>Imagem bit a bit de uma mídia de instalação, usada para instalar SOs em VMs sem mídia física.</td></tr><tr><td><strong>Switch Virtual Externo</strong></td><td>Liga a VM à placa de rede física do Host — VM recebe IP do roteador real (modo bridge).</td></tr><tr><td><strong>Switch Virtual Interno</strong></td><td>Cria rede privada entre VMs e Host; sem exposição à rede física.</td></tr><tr><td><strong>Switch Virtual Privado</strong></td><td>Isola VMs entre si; o Host não tem acesso — equivalente a uma VLAN isolada.</td></tr><tr><td><strong>Default Switch</strong></td><td>Switch Interno com NAT automático — VMs têm internet via conexão do Host.</td></tr><tr><td><strong>Netplan</strong></td><td>Utilitário do Ubuntu para configurar interfaces de rede via arquivos YAML.</td></tr><tr><td><strong>NAT (Network Address Translation)</strong></td><td>Técnica que permite múltiplos dispositivos internos compartilharem um único IP externo.</td></tr><tr><td><strong>Geração 2 (Hyper-V)</strong></td><td>Formato de VM moderna com suporte a UEFI e Secure Boot — obrigatório para SOs modernos.</td></tr></tbody></table></div>
+<hr/>
+<h2 id="-artigo-de-aprofundamento">📄 Artigo de Aprofundamento<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-artigo-de-aprofundamento" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><a href="https://learn.microsoft.com/pt-br/windows-server/virtualization/hyper-v/get-started/create-a-virtual-switch-for-hyper-v-virtual-machines" class="external">Microsoft Learn — Tipos de Switch Virtual do Hyper-V<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+</ul>
+<blockquote>
+<p><em>Documentação oficial cobrindo todos os tipos de switch, requisitos e boas práticas. Essencial para aprofundamento na configuração avançada.</em></p>
+</blockquote>
+<ul>
+<li><a href="https://netplan.io/reference" class="external">Ubuntu Server — Netplan Documentation<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+</ul>
+<blockquote>
+<p><em>Guia completo de configuração de rede via Netplan no Ubuntu Server — o método padrão para configurar IPs estáticos e múltiplas interfaces.</em></p>
+</blockquote>
+<hr/>
+<h2 id="-referências-bibliográficas-e-citações">📚 Referências Bibliográficas e Citações<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-referências-bibliográficas-e-citações" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><strong>TANENBAUM, Andrew S.</strong> <em>Redes de Computadores</em>. 5ª ed. Pearson, 2011. <strong>(Cap. 5 — Camada de Rede: NAT, pp. 450–455; Cap. 8 — Segurança de Redes, p. 767)</strong>. Base conceitual para NAT e SSH.</li>
+<li><strong>KUROSE, James F.; ROSS, Keith W.</strong> <em>Redes de Computadores e a Internet: Uma Abordagem Top-Down</em>. 8ª ed. Pearson, 2021. <strong>(Cap. 4 — Camada de Rede: O Plano de Dados, pp. 305–330; Cap. 6 — A Camada de Enlace e Redes Locais, pp. 440–478)</strong>. Complementa a visão de switches, VLANs e encaminhamento.</li>
+<li><strong>TANENBAUM, Andrew S.; WOODHULL, Albert S.</strong> <em>Sistemas Operacionais: Projeto e Implementação</em>. 3ª ed. Bookman, 2008. <strong>(Cap. 8 — Virtualização, pp. 487–512)</strong>. Fundamentos de hypervisors Tipo 1 e Tipo 2.</li>
+<li><strong>Microsoft Learn.</strong> <em>Hyper-V no Windows Server — Tipos de Switch Virtual</em>. Disponível em: <a href="https://learn.microsoft.com/pt-br/windows-server/virtualization/hyper-v/get-started/create-a-virtual-switch-for-hyper-v-virtual-machines" class="external">https://learn.microsoft.com/pt-br/windows-server/virtualization/hyper-v/get-started/create-a-virtual-switch-for-hyper-v-virtual-machines<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>. Acesso em: Maio 2026.</li>
+<li><strong>Canonical Ltd.</strong> <em>Ubuntu Server 24.04 LTS — Netplan Configuration</em>. Disponível em: <a href="https://netplan.io/reference" class="external">https://netplan.io/reference<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a>. Acesso em: Maio 2026.</li>
+</ul>
+<hr/>
+<p><em>Última atualização: 2026-05-18 | Status: publicado</em></p></article><hr/><div class="page-footer"></div></div><div class="right sidebar"></div><footer class="footer "><div class="footer__brand"><img src="https://uniube.br/img/landing/logo_azul.svg" alt="Universidade de Uberaba" class="footer__logo footer__logo--light"/><img src="https://uniube.br/img/landing/logo_branca.svg" alt="Universidade de Uberaba" class="footer__logo footer__logo--dark"/><div class="footer__info"><span class="footer__name">Prof. Romualdo Filho</span><a class="footer__email" href="mailto:romualdo.filho@uniube.br">romualdo.filho@uniube.br</a></div></div><ul class="footer__links"><li><a href="https://uniube.br" target="_blank" rel="noopener noreferrer">Mural Uniube</a></li></ul></footer></div></div></body><script type="application/javascript" data-persist="true">function n(){let t=this.parentElement;t.classList.toggle("is-collapsed");let e=t.getElementsByClassName("callout-content")[0];if(!e)return;let l=t.classList.contains("is-collapsed");e.style.gridTemplateRows=l?"0fr":"1fr"}function c(){let t=document.getElementsByClassName("callout is-collapsible");for(let e of t){let l=e.getElementsByClassName("callout-title")[0],s=e.getElementsByClassName("callout-content")[0];if(!l||!s)continue;l.addEventListener("click",n),window.addCleanup(()=>l.removeEventListener("click",n));let o=e.classList.contains("is-collapsed");s.style.gridTemplateRows=o?"0fr":"1fr"}}document.addEventListener("nav",c);
+</script><script type="module" data-persist="true">function E(a,e){if(!a)return;function t(o){o.target===this&&(o.preventDefault(),o.stopPropagation(),e())}function n(o){o.key.startsWith("Esc")&&(o.preventDefault(),e())}a?.addEventListener("click",t),window.addCleanup(()=>a?.removeEventListener("click",t)),document.addEventListener("keydown",n),window.addCleanup(()=>document.removeEventListener("keydown",n))}function f(a){for(;a.firstChild;)a.removeChild(a.firstChild)}var m=class{constructor(e,t){this.container=e;this.content=t;this.setupEventListeners(),this.setupNavigationControls(),this.resetTransform()}isDragging=!1;startPan={x:0,y:0};currentPan={x:0,y:0};scale=1;MIN_SCALE=.5;MAX_SCALE=3;cleanups=[];setupEventListeners(){let e=this.onMouseDown.bind(this),t=this.onMouseMove.bind(this),n=this.onMouseUp.bind(this),o=this.onTouchStart.bind(this),r=this.onTouchMove.bind(this),i=this.onTouchEnd.bind(this),s=this.resetTransform.bind(this);this.container.addEventListener("mousedown",e),document.addEventListener("mousemove",t),document.addEventListener("mouseup",n),this.container.addEventListener("touchstart",o,{passive:!1}),document.addEventListener("touchmove",r,{passive:!1}),document.addEventListener("touchend",i),window.addEventListener("resize",s),this.cleanups.push(()=>this.container.removeEventListener("mousedown",e),()=>document.removeEventListener("mousemove",t),()=>document.removeEventListener("mouseup",n),()=>this.container.removeEventListener("touchstart",o),()=>document.removeEventListener("touchmove",r),()=>document.removeEventListener("touchend",i),()=>window.removeEventListener("resize",s))}cleanup(){for(let e of this.cleanups)e()}setupNavigationControls(){let e=document.createElement("div");e.className="mermaid-controls";let t=this.createButton("+",()=>this.zoom(.1)),n=this.createButton("-",()=>this.zoom(-.1)),o=this.createButton("Reset",()=>this.resetTransform());e.appendChild(n),e.appendChild(o),e.appendChild(t),this.container.appendChild(e)}createButton(e,t){let n=document.createElement("button");return n.textContent=e,n.className="mermaid-control-button",n.addEventListener("click",t),window.addCleanup(()=>n.removeEventListener("click",t)),n}onMouseDown(e){e.button===0&&(this.isDragging=!0,this.startPan={x:e.clientX-this.currentPan.x,y:e.clientY-this.currentPan.y},this.container.style.cursor="grabbing")}onMouseMove(e){this.isDragging&&(e.preventDefault(),this.currentPan={x:e.clientX-this.startPan.x,y:e.clientY-this.startPan.y},this.updateTransform())}onMouseUp(){this.isDragging=!1,this.container.style.cursor="grab"}onTouchStart(e){if(e.touches.length!==1)return;this.isDragging=!0;let t=e.touches[0];this.startPan={x:t.clientX-this.currentPan.x,y:t.clientY-this.currentPan.y}}onTouchMove(e){if(!this.isDragging||e.touches.length!==1)return;e.preventDefault();let t=e.touches[0];this.currentPan={x:t.clientX-this.startPan.x,y:t.clientY-this.startPan.y},this.updateTransform()}onTouchEnd(){this.isDragging=!1}zoom(e){let t=Math.min(Math.max(this.scale+e,this.MIN_SCALE),this.MAX_SCALE),n=this.content.getBoundingClientRect(),o=n.width/2,r=n.height/2,i=t-this.scale;this.currentPan.x-=o*i,this.currentPan.y-=r*i,this.scale=t,this.updateTransform()}updateTransform(){this.content.style.transform=`translate(${this.currentPan.x}px, ${this.currentPan.y}px) scale(${this.scale})`}resetTransform(){let t=this.content.querySelector("svg").getBoundingClientRect(),n=t.width/this.scale,o=t.height/this.scale;this.scale=1,this.currentPan={x:(this.container.clientWidth-n)/2,y:(this.container.clientHeight-o)/2},this.updateTransform()}},T=["--secondary","--tertiary","--gray","--light","--lightgray","--highlight","--dark","--darkgray","--codeFont"],y;document.addEventListener("nav",async()=>{let e=document.querySelector(".center").querySelectorAll("code.mermaid");if(e.length===0)return;y||=await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs");let t=y.default,n=new WeakMap;for(let r of e)n.set(r,r.innerText);async function o(){for(let s of e){s.removeAttribute("data-processed");let c=n.get(s);c&&(s.innerHTML=c)}let r=T.reduce((s,c)=>(s[c]=window.getComputedStyle(document.documentElement).getPropertyValue(c),s),{}),i=document.documentElement.getAttribute("saved-theme")==="dark";t.initialize({startOnLoad:!1,securityLevel:"loose",theme:i?"dark":"base",themeVariables:{fontFamily:r["--codeFont"],primaryColor:r["--light"],primaryTextColor:r["--darkgray"],primaryBorderColor:r["--tertiary"],lineColor:r["--darkgray"],secondaryColor:r["--secondary"],tertiaryColor:r["--tertiary"],clusterBkg:r["--light"],edgeLabelBackground:r["--highlight"]}}),await t.run({nodes:e})}await o(),document.addEventListener("themechange",o),window.addCleanup(()=>document.removeEventListener("themechange",o));for(let r=0;r<e.length;r++){let v=function(){let g=l.querySelector("#mermaid-space"),h=l.querySelector(".mermaid-content");if(!h)return;f(h);let w=i.querySelector("svg").cloneNode(!0);h.appendChild(w),l.classList.add("active"),g.style.cursor="grab",u=new m(g,h)},M=function(){l.classList.remove("active"),u?.cleanup(),u=null},i=e[r],s=i.parentElement,c=s.querySelector(".clipboard-button"),d=s.querySelector(".expand-button"),p=window.getComputedStyle(c),L=c.offsetWidth+parseFloat(p.marginLeft||"0")+parseFloat(p.marginRight||"0");d.style.right=`calc(${L}px + 0.3rem)`,s.prepend(d);let l=s.querySelector("#mermaid-container");if(!l)return;let u=null;d.addEventListener("click",v),E(l,M),window.addCleanup(()=>{u?.cleanup(),d.removeEventListener("click",v)})}});
+</script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="./postscript.js" type="module" data-persist="true"></script></html>

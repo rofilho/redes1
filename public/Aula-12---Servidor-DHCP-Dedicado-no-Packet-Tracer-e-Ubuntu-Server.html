@@ -1,0 +1,887 @@
+<!DOCTYPE html>
+<html lang="pt" dir="ltr"><head><title>Aula 12 - Servidor DHCP Dedicado no Packet Tracer e Ubuntu Server | Prof. Romualdo</title><meta charset="utf-8"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com"/><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space Grotesk:wght@400;700&amp;family=Inter:ital,wght@0,400;0,600;1,400;1,600&amp;family=JetBrains Mono:wght@400;600&amp;display=swap"/><link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin="anonymous"/><meta name="viewport" content="width=device-width, initial-scale=1.0"/><meta name="og:site_name" content="🌐 Redes de Computadores I"/><meta property="og:title" content="Aula 12 - Servidor DHCP Dedicado no Packet Tracer e Ubuntu Server | Prof. Romualdo"/><meta property="og:type" content="website"/><meta name="twitter:card" content="summary_large_image"/><meta name="twitter:title" content="Aula 12 - Servidor DHCP Dedicado no Packet Tracer e Ubuntu Server | Prof. Romualdo"/><meta name="twitter:description" content="🟢 Aula 12: Servidor DHCP Dedicado no Packet Tracer e Ubuntu Server Disciplina: Redes de Computadores I (Cód."/><meta property="og:description" content="🟢 Aula 12: Servidor DHCP Dedicado no Packet Tracer e Ubuntu Server Disciplina: Redes de Computadores I (Cód."/><meta property="og:image:alt" content="🟢 Aula 12: Servidor DHCP Dedicado no Packet Tracer e Ubuntu Server Disciplina: Redes de Computadores I (Cód."/><meta property="twitter:domain" content="rofilho.github.io/redes1"/><meta property="og:url" content="https://rofilho.github.io/redes1/Aula-12---Servidor-DHCP-Dedicado-no-Packet-Tracer-e-Ubuntu-Server"/><meta property="twitter:url" content="https://rofilho.github.io/redes1/Aula-12---Servidor-DHCP-Dedicado-no-Packet-Tracer-e-Ubuntu-Server"/><link rel="icon" href="./static/icon.png"/><meta name="description" content="🟢 Aula 12: Servidor DHCP Dedicado no Packet Tracer e Ubuntu Server Disciplina: Redes de Computadores I (Cód."/><meta name="generator" content="Quartz"/><link href="./index.css" rel="stylesheet" type="text/css" data-persist="true"/><style>.expand-button {
+  position: absolute;
+  display: flex;
+  float: right;
+  padding: 0.4rem;
+  margin: 0.3rem;
+  right: 0;
+  color: var(--gray);
+  border-color: var(--dark);
+  background-color: var(--light);
+  border: 1px solid;
+  border-radius: 5px;
+  opacity: 0;
+  transition: 0.2s;
+}
+.expand-button > svg {
+  fill: var(--light);
+  filter: contrast(0.3);
+}
+.expand-button:hover {
+  cursor: pointer;
+  border-color: var(--secondary);
+}
+.expand-button:focus {
+  outline: 0;
+}
+
+pre:hover > .expand-button {
+  opacity: 1;
+  transition: 0.2s;
+}
+
+#mermaid-container {
+  position: fixed;
+  contain: layout;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: none;
+  backdrop-filter: blur(4px);
+  background: rgba(0, 0, 0, 0.5);
+}
+#mermaid-container.active {
+  display: inline-block;
+}
+#mermaid-container > #mermaid-space {
+  border: 1px solid var(--lightgray);
+  background-color: var(--light);
+  border-radius: 5px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 80vh;
+  width: 80vw;
+  overflow: hidden;
+}
+#mermaid-container > #mermaid-space > .mermaid-content {
+  position: relative;
+  transform-origin: 0 0;
+  transition: transform 0.1s ease;
+  overflow: visible;
+  min-height: 200px;
+  min-width: 200px;
+}
+#mermaid-container > #mermaid-space > .mermaid-content pre {
+  margin: 0;
+  border: none;
+}
+#mermaid-container > #mermaid-space > .mermaid-content svg {
+  max-width: none;
+  height: auto;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
+  padding: 8px;
+  background: var(--light);
+  border: 1px solid var(--lightgray);
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 2;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  border: 1px solid var(--lightgray);
+  background: var(--light);
+  color: var(--dark);
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: var(--bodyFont);
+  transition: all 0.2s ease;
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:hover {
+  background: var(--lightgray);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:active {
+  transform: translateY(1px);
+}
+#mermaid-container > #mermaid-space > .mermaid-controls .mermaid-control-button:nth-child(2) {
+  width: auto;
+  padding: 0 12px;
+  font-size: 14px;
+}
+/*# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VSb290IjoiQzpcXFF1YXJ0el9Qb3J0YWlzXFxyZWRlczFcXHF1YXJ0elxcY29tcG9uZW50c1xcc3R5bGVzIiwic291cmNlcyI6WyJtZXJtYWlkLmlubGluZS5zY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFHRjtFQUNFOzs7QUFLRjtFQUNFO0VBQ0E7OztBQUlKO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTs7QUFFQTtFQUNFOztBQUdGO0VBQ0U7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBOztBQUdGO0VBQ0U7RUFDQTs7QUFJSjtFQUNFO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7O0FBRUE7RUFDRTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBO0VBQ0E7RUFDQTtFQUNBOztBQUVBO0VBQ0U7O0FBR0Y7RUFDRTs7QUFJRjtFQUNFO0VBQ0E7RUFDQSIsInNvdXJjZXNDb250ZW50IjpbIi5leHBhbmQtYnV0dG9uIHtcbiAgcG9zaXRpb246IGFic29sdXRlO1xuICBkaXNwbGF5OiBmbGV4O1xuICBmbG9hdDogcmlnaHQ7XG4gIHBhZGRpbmc6IDAuNHJlbTtcbiAgbWFyZ2luOiAwLjNyZW07XG4gIHJpZ2h0OiAwOyAvLyBOT1RFOiByaWdodCB3aWxsIGJlIHNldCBpbiBtZXJtYWlkLmlubGluZS50c1xuICBjb2xvcjogdmFyKC0tZ3JheSk7XG4gIGJvcmRlci1jb2xvcjogdmFyKC0tZGFyayk7XG4gIGJhY2tncm91bmQtY29sb3I6IHZhcigtLWxpZ2h0KTtcbiAgYm9yZGVyOiAxcHggc29saWQ7XG4gIGJvcmRlci1yYWRpdXM6IDVweDtcbiAgb3BhY2l0eTogMDtcbiAgdHJhbnNpdGlvbjogMC4ycztcblxuICAmID4gc3ZnIHtcbiAgICBmaWxsOiB2YXIoLS1saWdodCk7XG4gICAgZmlsdGVyOiBjb250cmFzdCgwLjMpO1xuICB9XG5cbiAgJjpob3ZlciB7XG4gICAgY3Vyc29yOiBwb2ludGVyO1xuICAgIGJvcmRlci1jb2xvcjogdmFyKC0tc2Vjb25kYXJ5KTtcbiAgfVxuXG4gICY6Zm9jdXMge1xuICAgIG91dGxpbmU6IDA7XG4gIH1cbn1cblxucHJlIHtcbiAgJjpob3ZlciA+IC5leHBhbmQtYnV0dG9uIHtcbiAgICBvcGFjaXR5OiAxO1xuICAgIHRyYW5zaXRpb246IDAuMnM7XG4gIH1cbn1cblxuI21lcm1haWQtY29udGFpbmVyIHtcbiAgcG9zaXRpb246IGZpeGVkO1xuICBjb250YWluOiBsYXlvdXQ7XG4gIHotaW5kZXg6IDk5OTtcbiAgbGVmdDogMDtcbiAgdG9wOiAwO1xuICB3aWR0aDogMTAwdnc7XG4gIGhlaWdodDogMTAwdmg7XG4gIG92ZXJmbG93OiBoaWRkZW47XG4gIGRpc3BsYXk6IG5vbmU7XG4gIGJhY2tkcm9wLWZpbHRlcjogYmx1cig0cHgpO1xuICBiYWNrZ3JvdW5kOiByZ2JhKDAsIDAsIDAsIDAuNSk7XG5cbiAgJi5hY3RpdmUge1xuICAgIGRpc3BsYXk6IGlubGluZS1ibG9jaztcbiAgfVxuXG4gICYgPiAjbWVybWFpZC1zcGFjZSB7XG4gICAgYm9yZGVyOiAxcHggc29saWQgdmFyKC0tbGlnaHRncmF5KTtcbiAgICBiYWNrZ3JvdW5kLWNvbG9yOiB2YXIoLS1saWdodCk7XG4gICAgYm9yZGVyLXJhZGl1czogNXB4O1xuICAgIHBvc2l0aW9uOiBmaXhlZDtcbiAgICB0b3A6IDUwJTtcbiAgICBsZWZ0OiA1MCU7XG4gICAgdHJhbnNmb3JtOiB0cmFuc2xhdGUoLTUwJSwgLTUwJSk7XG4gICAgaGVpZ2h0OiA4MHZoO1xuICAgIHdpZHRoOiA4MHZ3O1xuICAgIG92ZXJmbG93OiBoaWRkZW47XG5cbiAgICAmID4gLm1lcm1haWQtY29udGVudCB7XG4gICAgICBwb3NpdGlvbjogcmVsYXRpdmU7XG4gICAgICB0cmFuc2Zvcm0tb3JpZ2luOiAwIDA7XG4gICAgICB0cmFuc2l0aW9uOiB0cmFuc2Zvcm0gMC4xcyBlYXNlO1xuICAgICAgb3ZlcmZsb3c6IHZpc2libGU7XG4gICAgICBtaW4taGVpZ2h0OiAyMDBweDtcbiAgICAgIG1pbi13aWR0aDogMjAwcHg7XG5cbiAgICAgIHByZSB7XG4gICAgICAgIG1hcmdpbjogMDtcbiAgICAgICAgYm9yZGVyOiBub25lO1xuICAgICAgfVxuXG4gICAgICBzdmcge1xuICAgICAgICBtYXgtd2lkdGg6IG5vbmU7XG4gICAgICAgIGhlaWdodDogYXV0bztcbiAgICAgIH1cbiAgICB9XG5cbiAgICAmID4gLm1lcm1haWQtY29udHJvbHMge1xuICAgICAgcG9zaXRpb246IGFic29sdXRlO1xuICAgICAgYm90dG9tOiAyMHB4O1xuICAgICAgcmlnaHQ6IDIwcHg7XG4gICAgICBkaXNwbGF5OiBmbGV4O1xuICAgICAgZ2FwOiA4cHg7XG4gICAgICBwYWRkaW5nOiA4cHg7XG4gICAgICBiYWNrZ3JvdW5kOiB2YXIoLS1saWdodCk7XG4gICAgICBib3JkZXI6IDFweCBzb2xpZCB2YXIoLS1saWdodGdyYXkpO1xuICAgICAgYm9yZGVyLXJhZGl1czogNnB4O1xuICAgICAgYm94LXNoYWRvdzogMCAycHggNHB4IHJnYmEoMCwgMCwgMCwgMC4xKTtcbiAgICAgIHotaW5kZXg6IDI7XG5cbiAgICAgIC5tZXJtYWlkLWNvbnRyb2wtYnV0dG9uIHtcbiAgICAgICAgZGlzcGxheTogZmxleDtcbiAgICAgICAgYWxpZ24taXRlbXM6IGNlbnRlcjtcbiAgICAgICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gICAgICAgIHdpZHRoOiAzMnB4O1xuICAgICAgICBoZWlnaHQ6IDMycHg7XG4gICAgICAgIHBhZGRpbmc6IDA7XG4gICAgICAgIGJvcmRlcjogMXB4IHNvbGlkIHZhcigtLWxpZ2h0Z3JheSk7XG4gICAgICAgIGJhY2tncm91bmQ6IHZhcigtLWxpZ2h0KTtcbiAgICAgICAgY29sb3I6IHZhcigtLWRhcmspO1xuICAgICAgICBib3JkZXItcmFkaXVzOiA0cHg7XG4gICAgICAgIGN1cnNvcjogcG9pbnRlcjtcbiAgICAgICAgZm9udC1zaXplOiAxNnB4O1xuICAgICAgICBmb250LWZhbWlseTogdmFyKC0tYm9keUZvbnQpO1xuICAgICAgICB0cmFuc2l0aW9uOiBhbGwgMC4ycyBlYXNlO1xuXG4gICAgICAgICY6aG92ZXIge1xuICAgICAgICAgIGJhY2tncm91bmQ6IHZhcigtLWxpZ2h0Z3JheSk7XG4gICAgICAgIH1cblxuICAgICAgICAmOmFjdGl2ZSB7XG4gICAgICAgICAgdHJhbnNmb3JtOiB0cmFuc2xhdGVZKDFweCk7XG4gICAgICAgIH1cblxuICAgICAgICAvLyBTdHlsZSB0aGUgcmVzZXQgYnV0dG9uIGRpZmZlcmVudGx5XG4gICAgICAgICY6bnRoLWNoaWxkKDIpIHtcbiAgICAgICAgICB3aWR0aDogYXV0bztcbiAgICAgICAgICBwYWRkaW5nOiAwIDEycHg7XG4gICAgICAgICAgZm9udC1zaXplOiAxNHB4O1xuICAgICAgICB9XG4gICAgICB9XG4gICAgfVxuICB9XG59XG4iXX0= */</style><link href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" rel="stylesheet" type="text/css" data-persist="true"/><script src="./prescript.js" type="application/javascript" data-persist="true"></script><script type="application/javascript" data-persist="true">const fetchData = fetch("./static/contentIndex.json").then(data => data.json())</script><link rel="alternate" type="application/rss+xml" title="RSS Feed" href="https://rofilho.github.io/redes1/index.xml"/><meta property="og:image:width" content="1200"/><meta property="og:image:height" content="630"/><meta property="og:image" content="https://rofilho.github.io/redes1/Aula-12---Servidor-DHCP-Dedicado-no-Packet-Tracer-e-Ubuntu-Server-og-image.webp"/><meta property="og:image:url" content="https://rofilho.github.io/redes1/Aula-12---Servidor-DHCP-Dedicado-no-Packet-Tracer-e-Ubuntu-Server-og-image.webp"/><meta name="twitter:image" content="https://rofilho.github.io/redes1/Aula-12---Servidor-DHCP-Dedicado-no-Packet-Tracer-e-Ubuntu-Server-og-image.webp"/><meta property="og:image:type" content="image/.webp"/></head><body data-slug="Aula-12---Servidor-DHCP-Dedicado-no-Packet-Tracer-e-Ubuntu-Server"><div id="quartz-root" class="page"><div id="quartz-body"><div class="left sidebar"></div><div class="center"><div class="page-header"><header><h2 class="page-title"><a href="." class="page-title__link"><img src="https://uniube.br/img/landing/logo_azul.svg" alt="Uniube" class="page-title__logo page-title__logo--light"/><img src="https://uniube.br/img/landing/logo_branca.svg" alt="Uniube" class="page-title__logo page-title__logo--dark"/><span class="page-title__text">🌐 Redes de Computadores I</span></a></h2><div class="search"><button class="search-button"><svg role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 19.9 19.7"><title>Search</title><g class="search-path" fill="none"><path stroke-linecap="square" d="M18.5 18.3l-5.4-5.4"></path><circle cx="8" cy="8" r="7"></circle></g></svg><p>Pesquisar</p></button><div class="search-container"><div class="search-space"><input autocomplete="off" class="search-bar" name="search" type="text" aria-label="Pesquisar por algo" placeholder="Pesquisar por algo"/><div class="search-layout" data-preview="true"></div></div></div></div><button class="darkmode"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="dayIcon" x="0px" y="0px" viewBox="0 0 35 35" style="enable-background:new 0 0 35 35" xml:space="preserve" aria-label="Tema escuro"><title>Tema escuro</title><path d="M6,17.5C6,16.672,5.328,16,4.5,16h-3C0.672,16,0,16.672,0,17.5    S0.672,19,1.5,19h3C5.328,19,6,18.328,6,17.5z M7.5,26c-0.414,0-0.789,0.168-1.061,0.439l-2,2C4.168,28.711,4,29.086,4,29.5    C4,30.328,4.671,31,5.5,31c0.414,0,0.789-0.168,1.06-0.44l2-2C8.832,28.289,9,27.914,9,27.5C9,26.672,8.329,26,7.5,26z M17.5,6    C18.329,6,19,5.328,19,4.5v-3C19,0.672,18.329,0,17.5,0S16,0.672,16,1.5v3C16,5.328,16.671,6,17.5,6z M27.5,9    c0.414,0,0.789-0.168,1.06-0.439l2-2C30.832,6.289,31,5.914,31,5.5C31,4.672,30.329,4,29.5,4c-0.414,0-0.789,0.168-1.061,0.44    l-2,2C26.168,6.711,26,7.086,26,7.5C26,8.328,26.671,9,27.5,9z M6.439,8.561C6.711,8.832,7.086,9,7.5,9C8.328,9,9,8.328,9,7.5    c0-0.414-0.168-0.789-0.439-1.061l-2-2C6.289,4.168,5.914,4,5.5,4C4.672,4,4,4.672,4,5.5c0,0.414,0.168,0.789,0.439,1.06    L6.439,8.561z M33.5,16h-3c-0.828,0-1.5,0.672-1.5,1.5s0.672,1.5,1.5,1.5h3c0.828,0,1.5-0.672,1.5-1.5S34.328,16,33.5,16z     M28.561,26.439C28.289,26.168,27.914,26,27.5,26c-0.828,0-1.5,0.672-1.5,1.5c0,0.414,0.168,0.789,0.439,1.06l2,2    C28.711,30.832,29.086,31,29.5,31c0.828,0,1.5-0.672,1.5-1.5c0-0.414-0.168-0.789-0.439-1.061L28.561,26.439z M17.5,29    c-0.829,0-1.5,0.672-1.5,1.5v3c0,0.828,0.671,1.5,1.5,1.5s1.5-0.672,1.5-1.5v-3C19,29.672,18.329,29,17.5,29z M17.5,7    C11.71,7,7,11.71,7,17.5S11.71,28,17.5,28S28,23.29,28,17.5S23.29,7,17.5,7z M17.5,25c-4.136,0-7.5-3.364-7.5-7.5    c0-4.136,3.364-7.5,7.5-7.5c4.136,0,7.5,3.364,7.5,7.5C25,21.636,21.636,25,17.5,25z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" class="nightIcon" x="0px" y="0px" viewBox="0 0 100 100" style="enable-background:new 0 0 100 100" xml:space="preserve" aria-label="Tema claro"><title>Tema claro</title><path d="M96.76,66.458c-0.853-0.852-2.15-1.064-3.23-0.534c-6.063,2.991-12.858,4.571-19.655,4.571  C62.022,70.495,50.88,65.88,42.5,57.5C29.043,44.043,25.658,23.536,34.076,6.47c0.532-1.08,0.318-2.379-0.534-3.23  c-0.851-0.852-2.15-1.064-3.23-0.534c-4.918,2.427-9.375,5.619-13.246,9.491c-9.447,9.447-14.65,22.008-14.65,35.369  c0,13.36,5.203,25.921,14.65,35.368s22.008,14.65,35.368,14.65c13.361,0,25.921-5.203,35.369-14.65  c3.872-3.871,7.064-8.328,9.491-13.246C97.826,68.608,97.611,67.309,96.76,66.458z"></path></svg></button></header><div class="popover-hint"><nav class="breadcrumb-container" aria-label="breadcrumbs"><div class="breadcrumb-element"><a href="./">Home</a><p> ❯ </p></div><div class="breadcrumb-element"><a href>Aula 12   Servidor DHCP Dedicado no Packet Tracer e Ubuntu Server</a></div></nav><nav class="lesson-nav" aria-label="Navegação entre aulas"><div class="lesson-nav__slot"><a href="./Aula-10-e-Aula-11---Enderecamento-IP-DHCP-e-Pratica-Wireshark" class="nav-pill nav-pill--prev" data-spa="true"><div class="nav-pill__icon">📖</div><div class="nav-pill__body"><span class="nav-pill__label">← Anterior</span><span class="nav-pill__num">Aula 10 e Aula 11</span><span class="nav-pill__title">Enderecamento IP DHCP e Pratica Wireshark</span></div></a></div><div class="lesson-nav__slot lesson-nav__slot--right"><a href="./Aula-02---Introducao-a-Redes" class="nav-pill nav-pill--next" data-spa="true"><div class="nav-pill__icon">📖</div><div class="nav-pill__body"><span class="nav-pill__label">Próxima →</span><span class="nav-pill__title">🖥️ Aula - 02: Introdução a Redes de Computadores</span></div></a></div></nav><h1 class="article-title">Aula 12 - Servidor DHCP Dedicado no Packet Tracer e Ubuntu Server</h1><p show-comma="true" class="content-meta"><time datetime="2026-06-08T21:52:04.000Z">08 de jun. de 2026</time><span>Leitura de 18 min</span></p><ul class="tags"><li><a href="./tags/redes" class="internal tag-link">redes</a></li><li><a href="./tags/dhcp" class="internal tag-link">dhcp</a></li><li><a href="./tags/packet-tracer" class="internal tag-link">packet-tracer</a></li><li><a href="./tags/ubuntu-server" class="internal tag-link">ubuntu-server</a></li><li><a href="./tags/netplan" class="internal tag-link">netplan</a></li><li><a href="./tags/isc-dhcp-server" class="internal tag-link">isc-dhcp-server</a></li><li><a href="./tags/wireshark" class="internal tag-link">wireshark</a></li></ul></div></div><article class="popover-hint"><h1 id="-aula-12-servidor-dhcp-dedicado-no-packet-tracer-e-ubuntu-server">🟢 Aula 12: Servidor DHCP Dedicado no Packet Tracer e Ubuntu Server<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-aula-12-servidor-dhcp-dedicado-no-packet-tracer-e-ubuntu-server" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h1>
+<p><strong>Disciplina:</strong> Redes de Computadores I (Cód. RED-01)<br/>
+<strong>Curso:</strong> Engenharia / TI — Uniube<br/>
+<strong>Semana:</strong> 12 | 08/06/2026<br/>
+<strong>Professor:</strong> Romualdo Mathias Filho<br/>
+<strong>Tipo:</strong> 🔬 Teórico-Prática (Unificada)<br/>
+<strong>Tópicos:</strong> Simulação DHCP no Packet Tracer, Implantação no Ubuntu Server, Instalação e Análise com Wireshark.</p>
+<hr/>
+<blockquote class="callout info" data-callout="info">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>🎯 Visão Geral da Aula &amp; Recursos </p></div>
+                  
+                </div>
+<div class="callout-content">
+<p><strong>Aprenda como o DHCP funciona por dentro e coloque um servidor real para funcionar — do simulador até o Ubuntu Server — monitorando cada mensagem com o Wireshark no Windows.</strong> Nesta aula você entenderá a teoria completa do protocolo DHCP (campos dos pacotes, lease time, renovação), configurará um servidor dedicado no Packet Tracer, instalará o <code>isc-dhcp-server</code> no Ubuntu Server 22.04 LTS e auditará cada etapa do ciclo DORA usando o Wireshark diretamente no Windows.</p>
+<ul>
+<li><strong>O que você vai dominar:</strong>
+<ul>
+<li>Explicar o funcionamento interno do DHCP: campos Bootstrap, opções DHCP, lease time e renovação de lease.</li>
+<li>Simular um servidor DHCP dedicado (Server-PT) no Cisco Packet Tracer.</li>
+<li>Instalar e configurar o daemon <code>isc-dhcp-server</code> no Ubuntu Server 22.04 LTS.</li>
+<li>Monitorar e interpretar o ciclo DORA em tempo real no Wireshark no Windows.</li>
+</ul>
+</li>
+<li><strong>Pré-requisitos:</strong> <a href="./Aula-10-e-Aula-11---Enderecamento-IP-DHCP-e-Pratica-Wireshark" class="internal alias" data-slug="Aula-10-e-Aula-11---Enderecamento-IP-DHCP-e-Pratica-Wireshark">11 (Conceitos DHCP e DORA)</a>.</li>
+<li><strong>📂 Recursos Adicionais para Download:</strong>
+<ul>
+<li><a href="././../40_Recursos/cheatsheet_dhcp_linux.pdf" class="internal alias" data-slug="40_Recursos/cheatsheet_dhcp_linux.pdf">Ubuntu (PDF)</a></li>
+<li>Cenário Packet Tracer com Servidor Dedicado (.pkt): <a href="https://github.com/rofilho/redes1/labs/aula12_dhcp_server.pkt" class="external">https://github.com/rofilho/redes1/labs/aula12_dhcp_server.pkt<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+</ul>
+</li>
+</ul>
+</div>
+</blockquote>
+<hr/>
+<h2 id="-objetivo-da-aula">🎯 Objetivo da Aula<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-objetivo-da-aula" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Ao final desta aula, os alunos serão capazes de:</p>
+<ul>
+<li><strong>Explicar</strong> o funcionamento interno do protocolo DHCP, incluindo os campos do pacote Bootstrap, as opções DHCP, o lease time e o mecanismo de renovação.</li>
+<li><strong>Configurar</strong> o serviço DHCP em um servidor dedicado no Cisco Packet Tracer para alocação automática de IPs.</li>
+<li><strong>Instalar</strong> e gerenciar o daemon <code>isc-dhcp-server</code> no Ubuntu Server 22.04 LTS para distribuição de escopos dinâmicos.</li>
+<li><strong>Monitorar</strong> e interpretar o ciclo DORA completo no Wireshark instalado em um cliente Windows, identificando cada campo relevante dos pacotes.</li>
+</ul>
+<hr/>
+<h2 id="-revisão-rápida-5-min">🔄 Revisão Rápida (5 min)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-revisão-rápida-5-min" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th style="text-align:left;"><strong>Conceito (Aulas Anteriores)</strong></th><th style="text-align:left;"><strong>Conexão com a Aula de Hoje</strong></th></tr></thead><tbody><tr><td style="text-align:left;"><strong><a href="./Aula-10-e-Aula-11---Enderecamento-IP-DHCP-e-Pratica-Wireshark" class="internal alias" data-slug="Aula-10-e-Aula-11---Enderecamento-IP-DHCP-e-Pratica-Wireshark">Aula 10 e 11 (DHCP e Wireshark)</a></strong></td><td style="text-align:left;">Estudamos o ciclo DHCP DORA (<em>Discover, Offer, Request, ACK</em>) e capturamos pacotes via cliente local. Hoje, assumiremos o papel do administrador, configurando servidores de distribuição.</td></tr><tr><td style="text-align:left;"><strong><a href="./Aula-09---Redes-Virtuais-VMs-ISOs-e-Hyper-V" class="internal alias" data-slug="Aula-09---Redes-Virtuais-VMs-ISOs-e-Hyper-V">Aula 09 (Redes Virtuais e VMs)</a></strong></td><td style="text-align:left;">Aprendemos a criar e configurar VMs e comutadores virtuais. Usaremos esse conhecimento para criar a rede interna isolada para testes do nosso servidor Ubuntu.</td></tr><tr><td style="text-align:left;"><strong><a href="./Aula-06---Pratica-Enderecamento-IPv4-e-Sub-redes-Packet-Tracer" class="internal alias" data-slug="Aula-06---Pratica-Enderecamento-IPv4-e-Sub-redes-Packet-Tracer">Aula 06 (Prática Packet Tracer)</a></strong></td><td style="text-align:left;">Mapeamos planos de endereçamento em topologias locais. Hoje, automatizaremos a distribuição destes blocos via DHCP Server dedicado.</td></tr></tbody></table></div>
+<hr/>
+<h2 id="-1-simulação-de-servidor-dhcp-dedicado-no-packet-tracer-hands-on--20-min">📌 1. Simulação de Servidor DHCP Dedicado no Packet Tracer [Hands-On ⏳ 20 min]<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-1-simulação-de-servidor-dhcp-dedicado-no-packet-tracer-hands-on--20-min" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Em redes corporativas de médio e grande porte, a função de servidor DHCP é frequentemente delegada a <strong>servidores dedicados</strong> (como servidores Windows Server ou Linux dedicados) em vez de ser processada diretamente na CPU dos roteadores de borda. Isso centraliza a gerência e libera recursos de hardware do roteador.</p>
+<p>No Cisco Packet Tracer, simulamos este cenário utilizando o dispositivo <strong>Server-PT</strong>.</p>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;graph LR\n    subgraph LAN_LOCAL [\&quot;Rede Local (Sub-rede 192.168.1.0/24)\&quot;]\n        PC0[\&quot;PC0 (Cliente)&lt;br/>IP: DHCP\&quot;]:::device\n        PC1[\&quot;PC1 (Cliente)&lt;br/>IP: DHCP\&quot;]:::device\n        SRV[\&quot;Servidor DHCP&lt;br/>IP: 192.168.1.2\&quot;]:::server\n        SW[\&quot;Switch0 (2960)\&quot;]:::device\n    end\n    \n    R0[\&quot;Router0 (Gateway)&lt;br/>IP: 192.168.1.1\&quot;]:::device\n    \n    PC0 --- SW\n    PC1 --- SW\n    SRV --- SW\n    SW --- R0\n    \n    classDef device fill:#1f2937,stroke:#4b5563,stroke-width:2px,color:#f3f4f6;\n    classDef server fill:#1e3a8a,stroke:#3b82f6,stroke-width:2px,color:#f3f4f6;&quot;">graph LR
+    subgraph LAN_LOCAL [&quot;Rede Local (Sub-rede 192.168.1.0/24)&quot;]
+        PC0[&quot;PC0 (Cliente)&lt;br/>IP: DHCP&quot;]:::device
+        PC1[&quot;PC1 (Cliente)&lt;br/>IP: DHCP&quot;]:::device
+        SRV[&quot;Servidor DHCP&lt;br/>IP: 192.168.1.2&quot;]:::server
+        SW[&quot;Switch0 (2960)&quot;]:::device
+    end
+    
+    R0[&quot;Router0 (Gateway)&lt;br/>IP: 192.168.1.1&quot;]:::device
+    
+    PC0 --- SW
+    PC1 --- SW
+    SRV --- SW
+    SW --- R0
+    
+    classDef device fill:#1f2937,stroke:#4b5563,stroke-width:2px,color:#f3f4f6;
+    classDef server fill:#1e3a8a,stroke:#3b82f6,stroke-width:2px,color:#f3f4f6;
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+<h3 id="-roteiro-de-configuração-passo-a-passo">🔧 Roteiro de Configuração Passo a Passo:<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-roteiro-de-configuração-passo-a-passo" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ol>
+<li><strong>Abra o Packet Tracer</strong> e monte a seguinte topologia física:
+<ul>
+<li><strong>1x Router (modelo 2911)</strong></li>
+<li><strong>1x Switch (modelo 2960)</strong></li>
+<li><strong>1x Servidor (Server-PT)</strong></li>
+<li><strong>2x PCs Clientes</strong></li>
+<li>Interligue todos os dispositivos ao Switch usando cabos de cobre direto (Straight-Through).</li>
+</ul>
+</li>
+<li><strong>Configuração do Gateway (Router0):</strong>
+<ul>
+<li>Acesse a CLI do roteador e ative a interface GigabitEthernet0/0 com o IP do gateway padrão:</li>
+</ul>
+</li>
+</ol>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="ios" data-theme="github-light github-dark"><code data-language="ios" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>Router> enable</span></span>
+<span data-line><span>Router# configure terminal</span></span>
+<span data-line><span>Router(config)# interface GigabitEthernet0/0</span></span>
+<span data-line><span>Router(config-if)# ip address 192.168.1.1 255.255.255.0</span></span>
+<span data-line><span>Router(config-if)# no shutdown</span></span>
+<span data-line><span>Router(config-if)# exit</span></span></code></pre></figure>
+<ol start="3">
+<li><strong>Configuração IP Estático no Servidor DHCP:</strong>
+<ul>
+<li>Clique no Servidor <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.3669em;"></span><span class="mrel">→</span></span></span></span> aba <strong>Desktop</strong> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.3669em;"></span><span class="mrel">→</span></span></span></span> <strong>IP Configuration</strong>.</li>
+<li>Defina as seguintes configurações estáticas (o próprio servidor DHCP precisa ter IP fixo):
+<ul>
+<li><strong>IP Address:</strong> <code>192.168.1.2</code></li>
+<li><strong>Subnet Mask:</strong> <code>255.255.255.0</code></li>
+<li><strong>Default Gateway:</strong> <code>192.168.1.1</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Configuração do Serviço DHCP no Servidor:</strong>
+<ul>
+<li>Acesse a aba <strong>Services</strong> (Serviços) do Servidor <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.3669em;"></span><span class="mrel">→</span></span></span></span> selecione <strong>DHCP</strong> na barra lateral.</li>
+<li><strong>Ative o serviço</strong> selecionando a opção <strong>On</strong>.</li>
+<li>Configure o pool de endereços padrão (<em>serverPool</em>):
+<ul>
+<li><strong>Default Gateway:</strong> <code>192.168.1.1</code></li>
+<li><strong>Starting IP Address:</strong> <code>192.168.1.10</code></li>
+<li><strong>Subnet Mask:</strong> <code>255.255.255.0</code></li>
+<li><strong>Maximum number of Users:</strong> <code>50</code></li>
+</ul>
+</li>
+<li>Clique no botão <strong>Save</strong> para atualizar o pool.</li>
+</ul>
+</li>
+<li><strong>Configuração dos Clientes (PCs):</strong>
+<ul>
+<li>Acesse o <strong>PC0</strong> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.3669em;"></span><span class="mrel">→</span></span></span></span> aba <strong>Desktop</strong> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.3669em;"></span><span class="mrel">→</span></span></span></span> <strong>IP Configuration</strong> <span class="katex"><span class="katex-html" aria-hidden="true"><span class="base"><span class="strut" style="height:0.3669em;"></span><span class="mrel">→</span></span></span></span> selecione <strong>DHCP</strong>.</li>
+<li>Observe a mensagem <em>“DHCP request successful”</em> e valide se o PC recebeu o primeiro IP utilizável do escopo (<code>192.168.1.10</code>).</li>
+<li>Repita o procedimento no <strong>PC1</strong> e confirme que ele recebeu o IP subsequente (<code>192.168.1.11</code>).</li>
+<li>Abra o Command Prompt do PC0 e valide a conectividade executando <code>ping 192.168.1.11</code> e <code>ping 192.168.1.1</code>.</li>
+</ul>
+</li>
+</ol>
+<blockquote class="callout note" data-callout="note">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>💼 Pergunta de Entrevista </p></div>
+                  
+                </div>
+<div class="callout-content">
+<p><strong>[Pergunta de Redes Corporativas]</strong>: O que é um <strong>DHCP Relay Agent</strong> (Agente de Retransmissão DHCP) e por que ele é crucial em redes divididas por VLANs e roteadores?</p>
+<p><strong>Resposta Esperada:</strong> Mensagens DHCP Discover são enviadas via Broadcast de Camada 3 (<code>255.255.255.255</code>). Como os roteadores barram tráfego de broadcast por padrão para evitar tempestades de rede, clientes localizados em outras sub-redes físicas nunca alcançariam um servidor DHCP centralizado. O DHCP Relay Agent (configurado em switches L3 ou interfaces de roteadores via comando <code>ip helper-address</code> no Cisco IOS) intercepta os broadcasts DHCP locais, converte-os em pacotes Unicast direcionados e os encaminha diretamente ao endereço IP do Servidor DHCP remoto, permitindo centralizar a distribuição de IPs de milhares de computadores em um único servidor.</p>
+</div>
+</blockquote>
+<hr/>
+<h3 id="-checkpoint-teste-seu-conhecimento">🧠 Checkpoint: Teste seu Conhecimento!<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-checkpoint-teste-seu-conhecimento" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<details>
+<summary><b>🔍 Exercício Rápido: Por que configuramos o escopo de IPs começando em 192.168.1.10 e não em 192.168.1.1?</b></summary>
+<blockquote>
+<p><strong>Resposta Correta:</strong> Configurar o ponto inicial em <code>192.168.1.10</code> deixa a faixa inicial (<code>192.168.1.1</code> a <code>192.168.1.9</code>) reservada para atribuição estática manual de infraestrutura (como interfaces de roteador/gateways, switches gerenciáveis, impressoras de rede e o próprio servidor DHCP). Se o pool cobrisse toda a sub-rede a partir do IP <code>.1</code>, o servidor poderia alocar dinamicamente o IP do gateway (<code>192.168.1.1</code>) para uma estação de trabalho comum, gerando um conflito de IP crítico e derrubando a comunicação externa de toda a rede local.</p>
+</blockquote>
+</details>
+<hr/>
+<h2 id="-2-como-o-dhcp-funciona-por-dentro--teoria-completa-teoria--15-min">📌 2. Como o DHCP Funciona por Dentro — Teoria Completa [Teoria ⏳ 15 min]<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-2-como-o-dhcp-funciona-por-dentro--teoria-completa-teoria--15-min" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>O <strong>Dynamic Host Configuration Protocol (DHCP)</strong> é um protocolo da <strong>Camada de Aplicação</strong> (porta UDP <strong>67</strong> no servidor / <strong>68</strong> no cliente) que automatiza a configuração de rede em hosts. Sem ele, todo computador precisaria de IP, máscara, gateway e DNS configurados manualmente.</p>
+<h3 id="21--o-ciclo-dora-em-detalhes">2.1 — O Ciclo DORA em Detalhes<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#21--o-ciclo-dora-em-detalhes" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Quando um computador Windows liga ou clica em “Obter IP automaticamente”, ele executa exatamente estas 4 etapas:</p>
+<pre><button class="expand-button" aria-label="Expand mermaid diagram" data-view-component="true"><svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.72 3.72a.75.75 0 011.06 1.06L2.56 7h10.88l-2.22-2.22a.75.75 0 011.06-1.06l3.5 3.5a.75.75 0 010 1.06l-3.5 3.5a.75.75 0 11-1.06-1.06l2.22-2.22H2.56l2.22 2.22a.75.75 0 11-1.06 1.06l-3.5-3.5a.75.75 0 010-1.06l3.5-3.5z"></path></svg></button><code class="mermaid" data-clipboard="&quot;sequenceDiagram\n    autonumber\n    actor C as 💻 Cliente Windows\n    actor S as 🖥️ Servidor DHCP\n    C->>S: DHCP DISCOVER (Broadcast)\n    Note over C,S: Src IP: 0.0.0.0 | Dst IP: 255.255.255.255&lt;br/>Src MAC: AA:BB:CC:DD:EE:FF | Dst MAC: FF:FF:FF:FF:FF:FF&lt;br/>UDP Src Port: 68 → Dst Port: 67\n    S->>C: DHCP OFFER (Unicast/Broadcast)\n    Note over C,S: Servidor reserva 192.168.1.10 para o MAC do cliente&lt;br/>Inclui: IP oferecido, máscara, gateway, DNS, lease time\n    C->>S: DHCP REQUEST (Broadcast)\n    Note over C,S: Cliente confirma que aceita a oferta&lt;br/>Broadcast para avisar outros servidores DHCP\n    S->>C: DHCP ACK (Unicast/Broadcast)\n    Note over C,S: Confirmação oficial — IP válido por lease time&lt;br/>Cliente grava as configurações na interface de rede&quot;">sequenceDiagram
+    autonumber
+    actor C as 💻 Cliente Windows
+    actor S as 🖥️ Servidor DHCP
+    C->>S: DHCP DISCOVER (Broadcast)
+    Note over C,S: Src IP: 0.0.0.0 | Dst IP: 255.255.255.255&lt;br/>Src MAC: AA:BB:CC:DD:EE:FF | Dst MAC: FF:FF:FF:FF:FF:FF&lt;br/>UDP Src Port: 68 → Dst Port: 67
+    S->>C: DHCP OFFER (Unicast/Broadcast)
+    Note over C,S: Servidor reserva 192.168.1.10 para o MAC do cliente&lt;br/>Inclui: IP oferecido, máscara, gateway, DNS, lease time
+    C->>S: DHCP REQUEST (Broadcast)
+    Note over C,S: Cliente confirma que aceita a oferta&lt;br/>Broadcast para avisar outros servidores DHCP
+    S->>C: DHCP ACK (Unicast/Broadcast)
+    Note over C,S: Confirmação oficial — IP válido por lease time&lt;br/>Cliente grava as configurações na interface de rede
+</code><div id="mermaid-container" role="dialog"><div id="mermaid-space"><div class="mermaid-content"></div></div></div></pre>
+<h4 id="-etapa-1--discover-tem-algum-servidor-dhcp-aí">📦 Etapa 1 — DISCOVER: “Tem algum servidor DHCP aí?”<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-etapa-1--discover-tem-algum-servidor-dhcp-aí" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<ul>
+<li>O cliente ainda <strong>não tem IP</strong>, então usa <code>0.0.0.0</code> como origem.</li>
+<li>Envia um <strong>broadcast</strong> para <code>255.255.255.255</code> — todos na rede recebem.</li>
+<li>O payload Bootstrap inclui o <strong>MAC do cliente</strong> no campo <code>chaddr</code> para que o servidor saiba a quem responder.</li>
+<li>Porta UDP: origem <strong>68</strong> → destino <strong>67</strong>.</li>
+</ul>
+<h4 id="-etapa-2--offer-tenho-um-ip-para-você">📦 Etapa 2 — OFFER: “Tenho um IP para você!”<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-etapa-2--offer-tenho-um-ip-para-você" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<ul>
+<li>O servidor <strong>reserva</strong> temporariamente um IP do pool (ex: <code>192.168.1.10</code>).</li>
+<li>Responde com o IP oferecido, máscara, gateway, DNS e o <strong>lease time</strong> (tempo de validade, ex: 600 segundos).</li>
+<li>O campo <code>yiaddr</code> (<em>Your IP Address</em>) traz o IP proposto para o cliente.</li>
+</ul>
+<h4 id="-etapa-3--request-aceito-quero-esse-ip">📦 Etapa 3 — REQUEST: “Aceito! Quero esse IP.”<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-etapa-3--request-aceito-quero-esse-ip" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<ul>
+<li>Mesmo após receber a Offer, o cliente ainda usa <strong>broadcast</strong> — para avisar <strong>todos</strong> os servidores DHCP da rede que ele escolheu aquele servidor específico.</li>
+<li>Outros servidores que fizeram ofertas cancelam suas reservas e devolvem os IPs ao pool.</li>
+<li>O campo <code>Option 50</code> (Requested IP Address) contém o IP aceito.</li>
+</ul>
+<h4 id="-etapa-4--ack-confirmado-ip-é-seu">📦 Etapa 4 — ACK: “Confirmado! IP é seu.”<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-etapa-4--ack-confirmado-ip-é-seu" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+<ul>
+<li>O servidor confirma definitivamente a concessão e <strong>grava o lease</strong> em seu banco de dados (arquivo <code>dhcpd.leases</code> no Linux).</li>
+<li>O cliente Windows configura a interface de rede com o IP, máscara, gateway e DNS recebidos.</li>
+<li>O timer de <strong>renovação</strong> começa: por padrão, após metade do lease time, o cliente tenta renovar silenciosamente (sem precisar refazer o ciclo DORA completo).</li>
+</ul>
+<hr/>
+<h3 id="22--campos-internos-do-pacote-bootstrap-o-que-o-wireshark-vai-mostrar">2.2 — Campos Internos do Pacote Bootstrap (o que o Wireshark vai mostrar)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#22--campos-internos-do-pacote-bootstrap-o-que-o-wireshark-vai-mostrar" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th style="text-align:left;">Campo</th><th style="text-align:left;">Nome Técnico</th><th style="text-align:left;">O que representa</th></tr></thead><tbody><tr><td style="text-align:left;"><code>op</code></td><td style="text-align:left;">Operation Code</td><td style="text-align:left;">1 = Boot Request (cliente) / 2 = Boot Reply (servidor)</td></tr><tr><td style="text-align:left;"><code>chaddr</code></td><td style="text-align:left;">Client Hardware Address</td><td style="text-align:left;">MAC do cliente (48 bits)</td></tr><tr><td style="text-align:left;"><code>xid</code></td><td style="text-align:left;">Transaction ID</td><td style="text-align:left;">Número aleatório que amarra Discover→Offer→Request→ACK</td></tr><tr><td style="text-align:left;"><code>yiaddr</code></td><td style="text-align:left;">Your IP Address</td><td style="text-align:left;">IP oferecido/confirmado ao cliente (preenchido pelo servidor)</td></tr><tr><td style="text-align:left;"><code>siaddr</code></td><td style="text-align:left;">Server IP Address</td><td style="text-align:left;">IP do servidor DHCP que faz a oferta</td></tr><tr><td style="text-align:left;"><code>giaddr</code></td><td style="text-align:left;">Gateway IP Address</td><td style="text-align:left;">IP do DHCP Relay Agent (quando existe roteamento entre VLANs)</td></tr><tr><td style="text-align:left;"><code>Option 53</code></td><td style="text-align:left;">DHCP Message Type</td><td style="text-align:left;">Tipo da mensagem: 1=Discover, 2=Offer, 3=Request, 5=ACK</td></tr><tr><td style="text-align:left;"><code>Option 51</code></td><td style="text-align:left;">IP Address Lease Time</td><td style="text-align:left;">Tempo de validade em segundos (ex: 600 = 10 min)</td></tr><tr><td style="text-align:left;"><code>Option 3</code></td><td style="text-align:left;">Router</td><td style="text-align:left;">Gateway padrão que o cliente deve usar</td></tr><tr><td style="text-align:left;"><code>Option 6</code></td><td style="text-align:left;">DNS Servers</td><td style="text-align:left;">Servidores DNS fornecidos ao cliente</td></tr></tbody></table></div>
+<blockquote class="callout note" data-callout="note">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>💼 Pergunta de Entrevista </p></div>
+                  
+                </div>
+<div class="callout-content">
+<p><strong>Por que o DHCP REQUEST ainda usa broadcast, mesmo depois de o cliente já ter recebido uma Offer?</strong></p>
+<p><strong>Resposta Esperada:</strong> Porque em redes reais pode haver <strong>múltiplos servidores DHCP</strong> respondendo com ofertas simultâneas. O cliente escolhe apenas uma oferta (geralmente a mais rápida), mas os outros servidores não sabem disso. Ao enviar o REQUEST em broadcast, o cliente notifica publicamente qual servidor foi escolhido — permitindo que os demais cancelem suas reservas e devolvam os IPs ao pool. Se o REQUEST fosse Unicast direto ao servidor escolhido, os outros ficariam com IPs presos indefinidamente.</p>
+</div>
+</blockquote>
+<hr/>
+<h3 id="-checkpoint-teste-seu-conhecimento-1">🧠 Checkpoint: Teste seu Conhecimento!<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-checkpoint-teste-seu-conhecimento-1" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<details>
+<summary><b>🔍 Exercício Rápido: Um cliente Windows recebe o IP 192.168.1.15 com lease time de 600 segundos. Quando ele vai tentar renovar o IP pela primeira vez e como faz isso?</b></summary>
+<blockquote>
+<p><strong>Resposta Correta:</strong> Após <strong>300 segundos</strong> (metade do lease time = T/2), o cliente Windows envia automaticamente um pacote <strong>DHCP Request em Unicast</strong> diretamente ao servidor que concedeu o IP (sem fazer um novo Discover broadcast). Se o servidor confirmar com um ACK, o lease é renovado por mais 600 segundos. Se não responder até 7/8 do tempo (525s), o cliente tenta um segundo REQUEST em broadcast. Somente se não receber resposta até o fim do lease é que ele precisa reiniciar o ciclo DORA completo do zero.</p>
+</blockquote>
+</details>
+<hr/>
+<h2 id="-3-implantação-de-servidor-dhcp-no-ubuntu-server-hands-on--25-min">📌 3. Implantação de Servidor DHCP no Ubuntu Server [Hands-On ⏳ 25 min]<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-3-implantação-de-servidor-dhcp-no-ubuntu-server-hands-on--25-min" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Para simular um cenário real de datacenter, instalaremos e configuraremos um servidor de DHCP corporativo em uma máquina virtual rodando <strong>Ubuntu Server 22.04 LTS</strong>.</p>
+<h3 id="️-topologia-do-ambiente-virtual">⚙️ Topologia do Ambiente Virtual:<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#️-topologia-do-ambiente-virtual" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ul>
+<li><strong>VM 1: Servidor DHCP</strong> (Ubuntu Server com duas placas de rede: <code>eth0</code> em modo Bridge/NAT para acesso à Internet e <code>eth1</code> em modo Rede Interna para servir os clientes).</li>
+<li><strong>VM 2: Cliente Windows</strong> (Windows 10/11 configurado na mesma Rede Interna virtual com IP automático — DHCP).</li>
+</ul>
+<hr/>
+<h3 id="-passo-1-atualizar-o-sistema-e-pacotes">🚀 Passo 1: Atualizar o Sistema e Pacotes<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-passo-1-atualizar-o-sistema-e-pacotes" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Acesse o terminal do Ubuntu Server e execute a atualização das listas de repositórios e pacotes locais:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">sudo</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> apt</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> update</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;"> &amp;&amp; </span><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">sudo</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> apt</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> upgrade</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> -y</span></span></code></pre></figure>
+<hr/>
+<h3 id="-passo-2-fixar-endereço-ip-com-netplan">🚀 Passo 2: Fixar Endereço IP com Netplan<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-passo-2-fixar-endereço-ip-com-netplan" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>No Ubuntu Server moderno, as interfaces de rede são configuradas via <strong>Netplan</strong> com arquivos de sintaxe YAML estruturada localizados em <code>/etc/netplan/</code>.</p>
+<ol>
+<li>Liste e identifique suas interfaces de rede ativas:</li>
+</ol>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">ip</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> a</span></span></code></pre></figure>
+<p><em>(Suponha que suas interfaces sejam identificadas como <code>eth0</code> e <code>eth1</code>).</em></p>
+<ol start="2">
+<li>Abra o arquivo de configuração de rede (substitua o nome do arquivo YAML com base no retorno do comando <code>{tab}</code>):</li>
+</ol>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">sudo</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> nano</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> /etc/netplan/00-installer-config.yaml</span></span></code></pre></figure>
+<ol start="3">
+<li>Configure a interface <code>eth1</code> para ter IP estático (gateway da rede local que distribuirá DHCP):</li>
+</ol>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="yaml" data-theme="github-light github-dark"><code data-language="yaml" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">network</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">  version</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">2</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">  renderer</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">networkd</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">  ethernets</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">    eth0</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">      dhcp4</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">yes</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">    eth1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">      dhcp4</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: </span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">no</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">      addresses</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">        - </span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;">192.168.1.1/24</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">      nameservers</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">:</span></span>
+<span data-line><span style="--shiki-light:#22863A;--shiki-dark:#85E89D;">        addresses</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">: [</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;">127.0.0.1</span><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">]</span></span></code></pre></figure>
+<blockquote class="callout tip" data-callout="tip">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>IMPORTANT</p></div>
+                  
+                </div>
+<div class="callout-content">
+<p>A sintaxe YAML é extremamente sensível a recuos e espaços. <strong>NUNCA use a tecla TAB</strong> para indentação. Use espaços consecutivos (2 ou 4 espaços por nível).</p>
+</div>
+</blockquote>
+<ol start="4">
+<li>Aplique a configuração de rede e valide o novo endereço IP:</li>
+</ol>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">sudo</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> netplan</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> apply</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">ip</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> a</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> show</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> eth1</span></span></code></pre></figure>
+<hr/>
+<h3 id="-passo-3-instalar-o-servidor-dhcp-isc-dhcp-server">🚀 Passo 3: Instalar o Servidor DHCP (<code>isc-dhcp-server</code>)<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-passo-3-instalar-o-servidor-dhcp-isc-dhcp-server" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>O pacote padrão para fornecimento de DHCP em sistemas Debian/Ubuntu é o <code>isc-dhcp-server</code>. Instale-o via gerenciador de pacotes <code>apt</code>:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">sudo</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> apt</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> install</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> isc-dhcp-server</span><span style="--shiki-light:#005CC5;--shiki-dark:#79B8FF;"> -y</span></span></code></pre></figure>
+<p><em>(Nota: O serviço tentará iniciar automaticamente e reportará erro. Isto é normal, pois o arquivo de configuração padrão ainda não está configurado).</em></p>
+<hr/>
+<h3 id="-passo-4-configurar-o-arquivo-principal-dhcpdconf">🚀 Passo 4: Configurar o Arquivo Principal <code>dhcpd.conf</code><a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-passo-4-configurar-o-arquivo-principal-dhcpdconf" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>O arquivo <code>/etc/dhcp/dhcpd.conf</code> define o escopo, tempos de aluguel (<em>lease time</em>) e parâmetros de rede que o daemon distribuirá aos clientes.</p>
+<ol>
+<li>Faça um backup de segurança do arquivo original antes de editá-lo:</li>
+</ol>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">sudo</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> mv</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> /etc/dhcp/dhcpd.conf</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> /etc/dhcp/dhcpd.conf.bak</span></span></code></pre></figure>
+<ol start="2">
+<li>Crie e edite um novo arquivo limpo:</li>
+</ol>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">sudo</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> nano</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> /etc/dhcp/dhcpd.conf</span></span></code></pre></figure>
+<ol start="3">
+<li>Cole a seguinte configuração estruturada:</li>
+</ol>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="github-light github-dark"><code data-language="text" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>option domain-name &quot;exemplo.local&quot;;</span></span>
+<span data-line><span>option domain-name-servers 8.8.8.8, 8.8.4.4;</span></span>
+<span data-line> </span>
+<span data-line><span>default-lease-time 600;</span></span>
+<span data-line><span>max-lease-time 7200;</span></span>
+<span data-line> </span>
+<span data-line><span>subnet 192.168.1.0 netmask 255.255.255.0 {</span></span>
+<span data-line><span>  range 192.168.1.10 192.168.1.100;</span></span>
+<span data-line><span>  option routers 192.168.1.1;</span></span>
+<span data-line><span>  option broadcast-address 192.168.1.255;</span></span>
+<span data-line><span>  option subnet-mask 255.255.255.0;</span></span>
+<span data-line><span>}</span></span></code></pre></figure>
+<hr/>
+<h3 id="-passo-5-mapear-a-interface-de-escuta-do-servidor">🚀 Passo 5: Mapear a Interface de Escuta do Servidor<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-passo-5-mapear-a-interface-de-escuta-do-servidor" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Devemos instruir explicitamente o servidor DHCP em qual placa de rede física ele deve escutar requisições de broadcast.</p>
+<ol>
+<li>Abra o arquivo de variáveis do serviço:</li>
+</ol>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">sudo</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> nano</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> /etc/default/isc-dhcp-server</span></span></code></pre></figure>
+<ol start="2">
+<li>Localize a variável <code>INTERFACESv4</code> e preencha com a interface correspondente à rede interna (no nosso caso, <code>eth1</code>):</li>
+</ol>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="github-light github-dark"><code data-language="text" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>INTERFACESv4=&quot;eth1&quot;</span></span></code></pre></figure>
+<hr/>
+<h3 id="-passo-6-iniciar-e-validar-o-serviço-dhcp">🚀 Passo 6: Iniciar e Validar o Serviço DHCP<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-passo-6-iniciar-e-validar-o-serviço-dhcp" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Ative o daemon e configure-o para inicializar junto com o sistema operacional:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">sudo</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> systemctl</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> restart</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> isc-dhcp-server</span></span>
+<span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">sudo</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> systemctl</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> enable</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> isc-dhcp-server</span></span></code></pre></figure>
+<p>Valide se o serviço está executando sem erros com o status operacional <code>active (running)</code>:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">sudo</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> systemctl</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> status</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> isc-dhcp-server</span></span></code></pre></figure>
+<hr/>
+<h3 id="-passo-7-testar-a-alocação-com-o-cliente-windows">🚀 Passo 7: Testar a Alocação com o Cliente Windows<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-passo-7-testar-a-alocação-com-o-cliente-windows" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ol>
+<li>Acesse a <strong>VM com Windows</strong> configurada na mesma rede interna virtual.</li>
+<li>Confirme que a placa de rede está configurada para <strong>Obter endereço IP automaticamente</strong>:
+<ul>
+<li>Painel de Controle → Central de Rede → Alterar configurações do adaptador → clicar com botão direito na placa → Propriedades → IPv4 → marcar “Obter automaticamente”.</li>
+</ul>
+</li>
+<li>Abra o <strong>Prompt de Comando como Administrador</strong> e force a renovação:</li>
+</ol>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="cmd" data-theme="github-light github-dark"><code data-language="cmd" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">ipconfig /release</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">ipconfig /renew</span></span>
+<span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">ipconfig</span></span></code></pre></figure>
+<ol start="4">
+<li>Verifique se o IP recebido está dentro do range configurado (<code>192.168.1.10</code> a <code>192.168.1.100</code>).</li>
+<li>No servidor Ubuntu, confirme o lease ativo do cliente Windows:</li>
+</ol>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="bash" data-theme="github-light github-dark"><code data-language="bash" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#6F42C1;--shiki-dark:#B392F0;">cat</span><span style="--shiki-light:#032F62;--shiki-dark:#9ECBFF;"> /var/lib/dhcp/dhcpd.leases</span></span></code></pre></figure>
+<blockquote class="callout warning" data-callout="warning">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>⚠️ Gotcha de Infraestrutura </p></div>
+                  
+                </div>
+<div class="callout-content">
+<p>O erro mais frequente na inicialização do <code>isc-dhcp-server</code> é declarar uma <code>subnet</code> no arquivo <code>dhcpd.conf</code> que <strong>não possui correspondência de rede direta com nenhuma interface física configurada</strong>. Se a placa <code>eth1</code> estiver com o IP <code>192.168.10.1/24</code> e você configurar a subnet no arquivo como <code>192.168.1.0/24</code>, o daemon reportará falha crítica no syslog: <em>“No subnet declaration for eth1 (no IPv4 addresses)”</em> e recusará iniciar.</p>
+</div>
+</blockquote>
+<hr/>
+<h2 id="-4-monitorando-o-dhcp-no-wireshark-windows--passo-a-passo-completo-hands-on--20-min">📌 4. Monitorando o DHCP no Wireshark (Windows — Passo a Passo Completo) [Hands-On ⏳ 20 min]<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-4-monitorando-o-dhcp-no-wireshark-windows--passo-a-passo-completo-hands-on--20-min" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<p>Agora você vai ver o protocolo DHCP <strong>ao vivo</strong>, pacote por pacote, no Wireshark instalado no seu computador Windows. Cada mensagem do ciclo DORA vai aparecer na tela em tempo real.</p>
+<hr/>
+<h3 id="-passo-1-instalar-o-wireshark-no-windows">🔧 Passo 1: Instalar o Wireshark no Windows<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-passo-1-instalar-o-wireshark-no-windows" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ol>
+<li>Acesse <a href="https://www.wireshark.org/download.html" class="external">https://www.wireshark.org/download.html<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a> e baixe o instalador <strong>Windows x64 Installer</strong>.</li>
+<li>Execute o instalador. Durante a instalação:
+<ul>
+<li>✅ Marque a opção <strong>Install Npcap</strong> (driver necessário para captura de pacotes no Windows).</li>
+<li>✅ Mantenha as opções padrão e conclua a instalação.</li>
+</ul>
+</li>
+<li>Após instalar, <strong>feche e reabra o Wireshark como Administrador</strong> (clique com botão direito → <em>Executar como administrador</em>). Sem privilégio de administrador, o Wireshark não consegue acessar as interfaces de rede.</li>
+</ol>
+<hr/>
+<h3 id="-passo-2-iniciar-a-captura-na-interface-correta">🔧 Passo 2: Iniciar a Captura na Interface Correta<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-passo-2-iniciar-a-captura-na-interface-correta" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ol>
+<li>Na tela inicial do Wireshark, você verá a <strong>lista de interfaces de rede</strong> disponíveis com um gráfico de atividade ao lado de cada uma.</li>
+<li>Identifique a interface ativa da sua rede (geralmente <strong>Ethernet</strong> ou <strong>Wi-Fi</strong>) — ela será a que tem mais atividade no gráfico.</li>
+<li><strong>Dê um duplo clique</strong> na interface para iniciar a captura. A tela de captura abrirá e começará a exibir pacotes em tempo real.</li>
+<li>No campo de filtro na barra superior, digite:</li>
+</ol>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="text" data-theme="github-light github-dark"><code data-language="text" data-theme="github-light github-dark" style="display:grid;"><span data-line><span>bootp</span></span></code></pre></figure>
+<ol start="5">
+<li>Pressione <strong>Enter</strong>. A lista ficará vazia — isso é normal. Estamos esperando tráfego DHCP chegar.</li>
+</ol>
+<blockquote class="callout tip" data-callout="tip">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>💡 Por que o filtro é <code>bootp</code> e não <code>dhcp</code>?</p></div>
+                  
+                </div>
+<div class="callout-content">
+<p>O DHCP é uma evolução do protocolo anterior chamado BOOTP (<em>Bootstrap Protocol</em>). O Wireshark identifica internamente o tráfego DHCP sob a categoria <code>bootp</code>. Em versões mais recentes do Wireshark, o filtro <code>dhcp</code> também funciona. Use <code>bootp</code> para garantir compatibilidade.</p>
+</div>
+</blockquote>
+<hr/>
+<h3 id="-passo-3-forçar-o-ciclo-dora-completo-no-windows">🔧 Passo 3: Forçar o Ciclo DORA Completo no Windows<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-passo-3-forçar-o-ciclo-dora-completo-no-windows" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ol>
+<li><strong>Abra um segundo Prompt de Comando como Administrador</strong> (sem fechar o Wireshark).</li>
+<li>Execute os dois comandos abaixo em sequência:</li>
+</ol>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="cmd" data-theme="github-light github-dark"><code data-language="cmd" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">ipconfig /release</span></span></code></pre></figure>
+<ul>
+<li>Este comando faz o Windows <strong>devolver</strong> o IP atual ao servidor DHCP, enviando um pacote <strong>DHCP Release</strong>. A interface de rede fica temporariamente sem IP.</li>
+</ul>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="cmd" data-theme="github-light github-dark"><code data-language="cmd" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">ipconfig /renew</span></span></code></pre></figure>
+<ul>
+<li>Este comando força o Windows a <strong>solicitar um novo IP</strong>, iniciando o ciclo DORA completo: Discover → Offer → Request → ACK.</li>
+</ul>
+<ol start="3">
+<li>Aguarde alguns segundos. O <code>ipconfig /renew</code> encerrará quando o IP for recebido.</li>
+<li>Volte ao Wireshark. Você deverá ver <strong>4 pacotes DHCP</strong> aparecendo na lista (Discover, Offer, Request, ACK).</li>
+</ol>
+<hr/>
+<h3 id="-passo-4-analisando-cada-pacote-do-ciclo-dora">🔧 Passo 4: Analisando Cada Pacote do Ciclo DORA<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-passo-4-analisando-cada-pacote-do-ciclo-dora" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Clique em cada pacote e expanda as seções no painel inferior do Wireshark para inspecionar os campos internos:</p>
+<h4 id="-pacote-1--dhcp-discover">🔵 Pacote 1 — DHCP Discover<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-pacote-1--dhcp-discover" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th style="text-align:left;">Seção no Wireshark</th><th style="text-align:left;">Campo</th><th style="text-align:left;">O que verificar</th></tr></thead><tbody><tr><td style="text-align:left;"><strong>Ethernet II</strong></td><td style="text-align:left;">Destination</td><td style="text-align:left;"><code>ff:ff:ff:ff:ff:ff</code> — Broadcast físico total</td></tr><tr><td style="text-align:left;"><strong>Ethernet II</strong></td><td style="text-align:left;">Source</td><td style="text-align:left;">MAC do seu computador Windows</td></tr><tr><td style="text-align:left;"><strong>Internet Protocol v4</strong></td><td style="text-align:left;">Source</td><td style="text-align:left;"><code>0.0.0.0</code> — cliente sem IP ainda</td></tr><tr><td style="text-align:left;"><strong>Internet Protocol v4</strong></td><td style="text-align:left;">Destination</td><td style="text-align:left;"><code>255.255.255.255</code> — Broadcast lógico</td></tr><tr><td style="text-align:left;"><strong>UDP</strong></td><td style="text-align:left;">Source Port</td><td style="text-align:left;"><code>68</code> (cliente DHCP)</td></tr><tr><td style="text-align:left;"><strong>UDP</strong></td><td style="text-align:left;">Destination Port</td><td style="text-align:left;"><code>67</code> (servidor DHCP)</td></tr><tr><td style="text-align:left;"><strong>Bootstrap Protocol</strong></td><td style="text-align:left;">Message type</td><td style="text-align:left;"><code>Boot Request (1)</code></td></tr><tr><td style="text-align:left;"><strong>Bootstrap Protocol</strong></td><td style="text-align:left;">Client MAC address (<code>chaddr</code>)</td><td style="text-align:left;">MAC do seu computador</td></tr><tr><td style="text-align:left;"><strong>Bootstrap Protocol</strong></td><td style="text-align:left;">Transaction ID (<code>xid</code>)</td><td style="text-align:left;">Número aleatório — amarra os 4 pacotes DORA</td></tr><tr><td style="text-align:left;"><strong>DHCP Option 53</strong></td><td style="text-align:left;">DHCP Message Type</td><td style="text-align:left;"><code>Discover (1)</code></td></tr></tbody></table></div>
+<h4 id="-pacote-2--dhcp-offer">🟡 Pacote 2 — DHCP Offer<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-pacote-2--dhcp-offer" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th style="text-align:left;">Seção no Wireshark</th><th style="text-align:left;">Campo</th><th style="text-align:left;">O que verificar</th></tr></thead><tbody><tr><td style="text-align:left;"><strong>Internet Protocol v4</strong></td><td style="text-align:left;">Source</td><td style="text-align:left;">IP do servidor DHCP (ex: <code>192.168.1.1</code>)</td></tr><tr><td style="text-align:left;"><strong>Bootstrap Protocol</strong></td><td style="text-align:left;">Your (client) IP address (<code>yiaddr</code>)</td><td style="text-align:left;">IP sendo oferecido (ex: <code>192.168.1.10</code>)</td></tr><tr><td style="text-align:left;"><strong>Bootstrap Protocol</strong></td><td style="text-align:left;">Transaction ID (<code>xid</code>)</td><td style="text-align:left;"><strong>Mesmo número</strong> do Discover — confirma que é a resposta</td></tr><tr><td style="text-align:left;"><strong>DHCP Option 53</strong></td><td style="text-align:left;">DHCP Message Type</td><td style="text-align:left;"><code>Offer (2)</code></td></tr><tr><td style="text-align:left;"><strong>DHCP Option 51</strong></td><td style="text-align:left;">IP Address Lease Time</td><td style="text-align:left;">Tempo de validade em segundos (ex: <code>600</code>)</td></tr><tr><td style="text-align:left;"><strong>DHCP Option 3</strong></td><td style="text-align:left;">Router</td><td style="text-align:left;">Gateway padrão oferecido (ex: <code>192.168.1.1</code>)</td></tr><tr><td style="text-align:left;"><strong>DHCP Option 6</strong></td><td style="text-align:left;">Domain Name Server</td><td style="text-align:left;">DNS oferecido (ex: <code>8.8.8.8</code>)</td></tr></tbody></table></div>
+<h4 id="-pacote-3--dhcp-request">🟠 Pacote 3 — DHCP Request<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-pacote-3--dhcp-request" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th style="text-align:left;">Seção no Wireshark</th><th style="text-align:left;">Campo</th><th style="text-align:left;">O que verificar</th></tr></thead><tbody><tr><td style="text-align:left;"><strong>Internet Protocol v4</strong></td><td style="text-align:left;">Destination</td><td style="text-align:left;"><code>255.255.255.255</code> — ainda <strong>Broadcast</strong> (avisa todos os servidores)</td></tr><tr><td style="text-align:left;"><strong>DHCP Option 53</strong></td><td style="text-align:left;">DHCP Message Type</td><td style="text-align:left;"><code>Request (3)</code></td></tr><tr><td style="text-align:left;"><strong>DHCP Option 50</strong></td><td style="text-align:left;">Requested IP Address</td><td style="text-align:left;">IP que o cliente está aceitando (ex: <code>192.168.1.10</code>)</td></tr><tr><td style="text-align:left;"><strong>DHCP Option 54</strong></td><td style="text-align:left;">DHCP Server Identifier</td><td style="text-align:left;">IP do servidor escolhido (ex: <code>192.168.1.1</code>)</td></tr></tbody></table></div>
+<h4 id="-pacote-4--dhcp-ack">🟢 Pacote 4 — DHCP ACK<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-pacote-4--dhcp-ack" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h4>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th style="text-align:left;">Seção no Wireshark</th><th style="text-align:left;">Campo</th><th style="text-align:left;">O que verificar</th></tr></thead><tbody><tr><td style="text-align:left;"><strong>Bootstrap Protocol</strong></td><td style="text-align:left;">Your (client) IP address (<code>yiaddr</code>)</td><td style="text-align:left;">IP confirmado definitivamente</td></tr><tr><td style="text-align:left;"><strong>DHCP Option 53</strong></td><td style="text-align:left;">DHCP Message Type</td><td style="text-align:left;"><code>ACK (5)</code></td></tr><tr><td style="text-align:left;"><strong>DHCP Option 51</strong></td><td style="text-align:left;">IP Address Lease Time</td><td style="text-align:left;">Lease time confirmado</td></tr><tr><td style="text-align:left;"><strong>DHCP Option 58</strong></td><td style="text-align:left;">Renewal Time Value (T1)</td><td style="text-align:left;">Tempo para primeira tentativa de renovação (metade do lease)</td></tr><tr><td style="text-align:left;"><strong>DHCP Option 59</strong></td><td style="text-align:left;">Rebinding Time Value (T2)</td><td style="text-align:left;">Tempo para segunda tentativa de renovação (7/8 do lease)</td></tr></tbody></table></div>
+<hr/>
+<h3 id="-passo-5-verificar-o-ip-recebido-no-windows">🔧 Passo 5: Verificar o IP Recebido no Windows<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-passo-5-verificar-o-ip-recebido-no-windows" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<p>Após o <code>ipconfig /renew</code> completar, execute no Prompt de Comando:</p>
+<figure data-rehype-pretty-code-figure><pre tabindex="0" data-language="cmd" data-theme="github-light github-dark"><code data-language="cmd" data-theme="github-light github-dark" style="display:grid;"><span data-line><span style="--shiki-light:#24292E;--shiki-dark:#E1E4E8;">ipconfig /all</span></span></code></pre></figure>
+<p>Observe os campos:</p>
+<ul>
+<li><strong>Endereço IPv4</strong>: IP concedido pelo servidor DHCP.</li>
+<li><strong>Máscara de Sub-rede</strong>: Máscara distribuída pelo servidor.</li>
+<li><strong>Gateway Padrão</strong>: Gateway informado na Option 3.</li>
+<li><strong>Servidores DNS</strong>: DNS informado na Option 6.</li>
+<li><strong>Servidor DHCP</strong>: IP do servidor que concedeu o lease.</li>
+<li><strong>Concessão obtida / Concessão expira</strong>: Timestamps do lease ativo.</li>
+</ul>
+<hr/>
+<h3 id="-passo-6-salvar-a-captura-para-análise-posterior">🔧 Passo 6: Salvar a Captura para Análise Posterior<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-passo-6-salvar-a-captura-para-análise-posterior" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h3>
+<ol>
+<li>No Wireshark, clique em <strong>File → Save As</strong>.</li>
+<li>Salve como <code>captura_dhcp_aula12.pcap</code>.</li>
+<li>Arquivos <code>.pcap</code> podem ser abertos novamente no Wireshark a qualquer momento para revisão, sem precisar estar conectado à rede.</li>
+</ol>
+<blockquote class="callout tip" data-callout="tip">
+<div class="callout-title">
+                  <div class="callout-icon"></div>
+                  <div class="callout-title-inner"><p>💡 Dica de Produção (Pro-Tip) </p></div>
+                  
+                </div>
+<div class="callout-content">
+<p>Em infraestruturas corporativas, a vulnerabilidade mais comum em redes locais é o <strong>Rogue DHCP Server</strong> (servidor DHCP clandestino) — geralmente um roteador doméstico que alguém conectou à porta LAN errada. Ele começa a responder aos broadcasts DHCP mais rápido que o servidor oficial, distribuindo IPs e gateways incorretos para toda a rede. Para detectar isso no Wireshark, use o filtro <code>bootp.option.dhcp == 2</code> — ele mostra apenas mensagens do tipo DHCP Offer. Se aparecerem <strong>dois IPs de origem diferentes</strong> respondendo com Offers, há um servidor clandestino na rede.</p>
+</div>
+</blockquote>
+<h2 id="-resumo-estrutural">📋 Resumo Estrutural<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-resumo-estrutural" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="table-container"><table><thead><tr><th style="text-align:left;"><strong>Conceito / Comando</strong></th><th style="text-align:left;"><strong>Definição e Aplicação Prática em Uma Frase</strong></th></tr></thead><tbody><tr><td style="text-align:left;"><strong>DORA</strong></td><td style="text-align:left;">Sigla para as 4 etapas do ciclo DHCP: <em>Discover, Offer, Request, ACK</em>.</td></tr><tr><td style="text-align:left;"><strong><code>chaddr</code></strong></td><td style="text-align:left;">Campo Bootstrap que carrega o MAC do cliente — permite ao servidor saber a quem ofertar o IP.</td></tr><tr><td style="text-align:left;"><strong><code>yiaddr</code></strong></td><td style="text-align:left;">Campo Bootstrap <em>Your IP Address</em> — preenchido pelo servidor com o IP ofertado/confirmado ao cliente.</td></tr><tr><td style="text-align:left;"><strong><code>xid</code></strong></td><td style="text-align:left;">Transaction ID — número aleatório que amarra os 4 pacotes DORA de uma mesma negociação.</td></tr><tr><td style="text-align:left;"><strong>Option 53</strong></td><td style="text-align:left;">Opção DHCP que define o tipo da mensagem (Discover, Offer, Request, ACK).</td></tr><tr><td style="text-align:left;"><strong>Option 51</strong></td><td style="text-align:left;">Opção DHCP que define o <em>lease time</em> (tempo de validade do IP em segundos).</td></tr><tr><td style="text-align:left;"><strong><code>ipconfig /release</code></strong></td><td style="text-align:left;">Comando Windows que devolve o IP ao servidor DHCP e remove a configuração da interface.</td></tr><tr><td style="text-align:left;"><strong><code>ipconfig /renew</code></strong></td><td style="text-align:left;">Comando Windows que força o ciclo DORA completo para obter novo IP do servidor.</td></tr><tr><td style="text-align:left;"><strong><code>ipconfig /all</code></strong></td><td style="text-align:left;">Comando Windows que exibe IP, gateway, DNS, servidor DHCP e timestamps de lease.</td></tr><tr><td style="text-align:left;"><strong>Filtro <code>bootp</code></strong></td><td style="text-align:left;">Expressão de filtragem no Wireshark para isolar tráfego DHCP da interface capturada.</td></tr><tr><td style="text-align:left;"><strong><code>isc-dhcp-server</code></strong></td><td style="text-align:left;">Daemon Linux que implementa o serviço DHCP no Ubuntu Server.</td></tr><tr><td style="text-align:left;"><strong><code>dhcpd.leases</code></strong></td><td style="text-align:left;">Arquivo de banco de dados do servidor Linux que registra os leases ativos (IP ↔ MAC).</td></tr></tbody></table></div>
+<hr/>
+<h2 id="-artigo-de-aprofundamento">📄 Artigo de Aprofundamento<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-artigo-de-aprofundamento" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><a href="https://ubuntu.com/server/docs/network-dhcp" class="external">Ubuntu Server Documentation — DHCP Server<svg aria-hidden="true" class="external-icon" style="max-width:0.8em;max-height:0.8em;" viewBox="0 0 512 512"><path d="M320 0H288V64h32 82.7L201.4 265.4 178.7 288 224 333.3l22.6-22.6L448 109.3V192v32h64V192 32 0H480 320zM32 32H0V64 480v32H32 456h32V480 352 320H424v32 96H64V96h96 32V32H160 32z"></path></svg></a></li>
+</ul>
+<blockquote>
+<p><em>Resumo prático: Documentação oficial do Ubuntu detalhando a instalação, parametrização e comandos de administração do serviço <code>isc-dhcp-server</code> em datacenters.</em></p>
+</blockquote>
+<hr/>
+<h2 id="-referências-bibliográficas">📚 Referências Bibliográficas<a role="anchor" aria-hidden="true" tabindex="-1" data-no-popover="true" href="#-referências-bibliográficas" class="internal"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path></svg></a></h2>
+<ul>
+<li><strong>TANENBAUM, Andrew S.; FEAMSTER, Nicholas; WETHERALL, David J.</strong> <em>Redes de Computadores</em>. 6. ed. São Paulo: Pearson, 2021. <strong>(Capítulo 5: A Camada de Rede — Protocolos de Autoconfiguração, pp. 340–345)</strong>.</li>
+<li><strong>KUROSE, James F.; ROSS, Keith W.</strong> <em>Redes de computadores e a internet: uma abordagem top-down</em>. 8. ed. São Paulo: Pearson Education do Brasil, 2021. <strong>(Capítulo 4: Camada de Rede: Plano de Dados — Configuração Automática de Hosts, pp. 245–250)</strong>.</li>
+<li><strong>CISCO NETWORKING ACADEMY.</strong> <em>Curso CCNA v7: Switching, Routing, and Wireless Essentials (SRWE)</em>. Cisco Press, 2020. <strong>(Módulo 7: DHCPv4 — Escopos, pools e relays em topologias corporativas)</strong>.</li>
+</ul>
+<hr/>
+<p><em>Última atualização: 2026-06-08 | Status: publicado</em></p></article><hr/><div class="page-footer"></div></div><div class="right sidebar"></div><footer class="footer "><div class="footer__brand"><img src="https://uniube.br/img/landing/logo_azul.svg" alt="Universidade de Uberaba" class="footer__logo footer__logo--light"/><img src="https://uniube.br/img/landing/logo_branca.svg" alt="Universidade de Uberaba" class="footer__logo footer__logo--dark"/><div class="footer__info"><span class="footer__name">Prof. Romualdo Filho</span><a class="footer__email" href="mailto:romualdo.filho@uniube.br">romualdo.filho@uniube.br</a></div></div><ul class="footer__links"><li><a href="https://uniube.br" target="_blank" rel="noopener noreferrer">Mural Uniube</a></li></ul></footer></div></div></body><script type="application/javascript" data-persist="true">function n(){let t=this.parentElement;t.classList.toggle("is-collapsed");let e=t.getElementsByClassName("callout-content")[0];if(!e)return;let l=t.classList.contains("is-collapsed");e.style.gridTemplateRows=l?"0fr":"1fr"}function c(){let t=document.getElementsByClassName("callout is-collapsible");for(let e of t){let l=e.getElementsByClassName("callout-title")[0],s=e.getElementsByClassName("callout-content")[0];if(!l||!s)continue;l.addEventListener("click",n),window.addCleanup(()=>l.removeEventListener("click",n));let o=e.classList.contains("is-collapsed");s.style.gridTemplateRows=o?"0fr":"1fr"}}document.addEventListener("nav",c);
+</script><script type="module" data-persist="true">function E(a,e){if(!a)return;function t(o){o.target===this&&(o.preventDefault(),o.stopPropagation(),e())}function n(o){o.key.startsWith("Esc")&&(o.preventDefault(),e())}a?.addEventListener("click",t),window.addCleanup(()=>a?.removeEventListener("click",t)),document.addEventListener("keydown",n),window.addCleanup(()=>document.removeEventListener("keydown",n))}function f(a){for(;a.firstChild;)a.removeChild(a.firstChild)}var m=class{constructor(e,t){this.container=e;this.content=t;this.setupEventListeners(),this.setupNavigationControls(),this.resetTransform()}isDragging=!1;startPan={x:0,y:0};currentPan={x:0,y:0};scale=1;MIN_SCALE=.5;MAX_SCALE=3;cleanups=[];setupEventListeners(){let e=this.onMouseDown.bind(this),t=this.onMouseMove.bind(this),n=this.onMouseUp.bind(this),o=this.onTouchStart.bind(this),r=this.onTouchMove.bind(this),i=this.onTouchEnd.bind(this),s=this.resetTransform.bind(this);this.container.addEventListener("mousedown",e),document.addEventListener("mousemove",t),document.addEventListener("mouseup",n),this.container.addEventListener("touchstart",o,{passive:!1}),document.addEventListener("touchmove",r,{passive:!1}),document.addEventListener("touchend",i),window.addEventListener("resize",s),this.cleanups.push(()=>this.container.removeEventListener("mousedown",e),()=>document.removeEventListener("mousemove",t),()=>document.removeEventListener("mouseup",n),()=>this.container.removeEventListener("touchstart",o),()=>document.removeEventListener("touchmove",r),()=>document.removeEventListener("touchend",i),()=>window.removeEventListener("resize",s))}cleanup(){for(let e of this.cleanups)e()}setupNavigationControls(){let e=document.createElement("div");e.className="mermaid-controls";let t=this.createButton("+",()=>this.zoom(.1)),n=this.createButton("-",()=>this.zoom(-.1)),o=this.createButton("Reset",()=>this.resetTransform());e.appendChild(n),e.appendChild(o),e.appendChild(t),this.container.appendChild(e)}createButton(e,t){let n=document.createElement("button");return n.textContent=e,n.className="mermaid-control-button",n.addEventListener("click",t),window.addCleanup(()=>n.removeEventListener("click",t)),n}onMouseDown(e){e.button===0&&(this.isDragging=!0,this.startPan={x:e.clientX-this.currentPan.x,y:e.clientY-this.currentPan.y},this.container.style.cursor="grabbing")}onMouseMove(e){this.isDragging&&(e.preventDefault(),this.currentPan={x:e.clientX-this.startPan.x,y:e.clientY-this.startPan.y},this.updateTransform())}onMouseUp(){this.isDragging=!1,this.container.style.cursor="grab"}onTouchStart(e){if(e.touches.length!==1)return;this.isDragging=!0;let t=e.touches[0];this.startPan={x:t.clientX-this.currentPan.x,y:t.clientY-this.currentPan.y}}onTouchMove(e){if(!this.isDragging||e.touches.length!==1)return;e.preventDefault();let t=e.touches[0];this.currentPan={x:t.clientX-this.startPan.x,y:t.clientY-this.startPan.y},this.updateTransform()}onTouchEnd(){this.isDragging=!1}zoom(e){let t=Math.min(Math.max(this.scale+e,this.MIN_SCALE),this.MAX_SCALE),n=this.content.getBoundingClientRect(),o=n.width/2,r=n.height/2,i=t-this.scale;this.currentPan.x-=o*i,this.currentPan.y-=r*i,this.scale=t,this.updateTransform()}updateTransform(){this.content.style.transform=`translate(${this.currentPan.x}px, ${this.currentPan.y}px) scale(${this.scale})`}resetTransform(){let t=this.content.querySelector("svg").getBoundingClientRect(),n=t.width/this.scale,o=t.height/this.scale;this.scale=1,this.currentPan={x:(this.container.clientWidth-n)/2,y:(this.container.clientHeight-o)/2},this.updateTransform()}},T=["--secondary","--tertiary","--gray","--light","--lightgray","--highlight","--dark","--darkgray","--codeFont"],y;document.addEventListener("nav",async()=>{let e=document.querySelector(".center").querySelectorAll("code.mermaid");if(e.length===0)return;y||=await import("https://cdnjs.cloudflare.com/ajax/libs/mermaid/11.4.0/mermaid.esm.min.mjs");let t=y.default,n=new WeakMap;for(let r of e)n.set(r,r.innerText);async function o(){for(let s of e){s.removeAttribute("data-processed");let c=n.get(s);c&&(s.innerHTML=c)}let r=T.reduce((s,c)=>(s[c]=window.getComputedStyle(document.documentElement).getPropertyValue(c),s),{}),i=document.documentElement.getAttribute("saved-theme")==="dark";t.initialize({startOnLoad:!1,securityLevel:"loose",theme:i?"dark":"base",themeVariables:{fontFamily:r["--codeFont"],primaryColor:r["--light"],primaryTextColor:r["--darkgray"],primaryBorderColor:r["--tertiary"],lineColor:r["--darkgray"],secondaryColor:r["--secondary"],tertiaryColor:r["--tertiary"],clusterBkg:r["--light"],edgeLabelBackground:r["--highlight"]}}),await t.run({nodes:e})}await o(),document.addEventListener("themechange",o),window.addCleanup(()=>document.removeEventListener("themechange",o));for(let r=0;r<e.length;r++){let v=function(){let g=l.querySelector("#mermaid-space"),h=l.querySelector(".mermaid-content");if(!h)return;f(h);let w=i.querySelector("svg").cloneNode(!0);h.appendChild(w),l.classList.add("active"),g.style.cursor="grab",u=new m(g,h)},M=function(){l.classList.remove("active"),u?.cleanup(),u=null},i=e[r],s=i.parentElement,c=s.querySelector(".clipboard-button"),d=s.querySelector(".expand-button"),p=window.getComputedStyle(c),L=c.offsetWidth+parseFloat(p.marginLeft||"0")+parseFloat(p.marginRight||"0");d.style.right=`calc(${L}px + 0.3rem)`,s.prepend(d);let l=s.querySelector("#mermaid-container");if(!l)return;let u=null;d.addEventListener("click",v),E(l,M),window.addCleanup(()=>{u?.cleanup(),d.removeEventListener("click",v)})}});
+</script><script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/copy-tex.min.js" type="application/javascript" data-persist="true"></script><script src="./postscript.js" type="module" data-persist="true"></script></html>
