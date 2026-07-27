@@ -143,16 +143,8 @@ Repare que **cinco dos seis caem em segunda ou terça** — e o sexto, 20/11, nu
 
 **Depois da S20:** segunda chamada de **14 a 16/12** · recuperação em **17 ou 18/12** (confirmo a data no AVA junto com o resultado da N2) · lançamento das notas da N2 até **18/12** · encerramento do semestre em **19/12**. As notas da N1 são lançadas até **12/10**.
 
-> [!WARNING] ⚠️ O que ainda depende de confirmação
-> O **dia da semana e a sala** de cada encontro seguem o Horário de Aulas emitido pela secretaria — **atualizo esta página assim que sair, e aviso no AVA.** As **datas de prova** (janelas de 21–30/09 e 1º–11/12) e a **distribuição dos 100 pontos** não mudam.
->
-> Há sábados de reposição no calendário acadêmico (29/08, 12/09, 03/10, 24/10, 07/11), mas **qual dia da semana cada um repõe ainda não está confirmado.**
->
-> A tabela marca a **semana** de cada prova; o **dia exato** sai junto com o Horário de Aulas e cai dentro das janelas institucionais acima. Anuncio com pelo menos duas semanas de antecedência.
->
-> Uma consequência disso: a janela da N1 vai até **30/09**, que já é a S10. Se a prova cair no fim da janela, a **vista da N1 escorrega para a S11** — vista nunca acontece antes da prova. A ordem é fixa mesmo quando a data desliza.
->
-> O mesmo vale no fim do ano, com menos folga: a janela da N2 vai até **11/12**, que é o último dia da S20 — depois dela não há semana de aula. Se a prova cair no fim da janela, a **vista da N2 acontece em encontro extraordinário, entre a prova e 18/12**, com dia e horário combinados no AVA. A vista não é cortada; muda de lugar.
+> [!WARNING] ⚠️ Dia, sala e datas exatas de prova saem no AVA
+> O **dia da semana e a sala** seguem o Horário de Aulas da secretaria — atualizo esta página assim que sair, e aviso no AVA. O **dia exato de cada prova** é anunciado com pelo menos **duas semanas de antecedência**, dentro das janelas acima. O que **não muda**: as janelas de prova e a distribuição dos 100 pontos.
 
 > [!TIP] 💡 Como usar este calendário a seu favor
 > As duas semanas mais perigosas do semestre são a **S07** e a **S08**: endereçamento IPv4 e sub-redes caem logo antes da prova, e a S07 ainda perde um dia de feriado. Se você for tropeçar em alguma coisa, vai ser ali — e é o assunto de maior peso na N1. Chegue nessas duas semanas com as anteriores em dia.
