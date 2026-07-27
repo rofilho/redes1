@@ -20,6 +20,8 @@ publicar: true
 ---
 
 # 🟢 Aula 10 e Aula 11: Endereçamento IP, DHCP e Prática com Wireshark
+> [!WARNING] ⚠️ Material de referência — não é a aula desta semana
+> Esta página vem de uma oferta anterior da disciplina e continua no ar porque o conteúdo serve para estudo. **A numeração dela não corresponde à semana do calendário de 2026-2** — o calendário que vale é o do [Plano de Ensino e Contrato](./Plano-de-Ensino-e-Contrato). Se ela pedir uma ferramenta antes da semana em que o plano a introduz, siga o plano.
 
 **Disciplina:** Redes de Computadores I (Cód. 49304)  
 **Curso:** Sistemas de Informação — Uniube  

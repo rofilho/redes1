@@ -1,8 +1,10 @@
-﻿---
+---
 title: "🖥️ Aula - 02: Introdução a Redes de Computadores"
 ---
 
 # 🖥️ Aula - 02: Introdução a Redes de Computadores
+> [!WARNING] ⚠️ Material de referência — não é a aula desta semana
+> Esta página vem de uma oferta anterior da disciplina e continua no ar porque o conteúdo serve para estudo. **A numeração dela não corresponde à semana do calendário de 2026-2** — o calendário que vale é o do [Plano de Ensino e Contrato](./Plano-de-Ensino-e-Contrato). Se ela pedir uma ferramenta antes da semana em que o plano a introduz, siga o plano.
 
 O contrato foi assinado na Aula 01 — aqui o conteúdo começa. Nesta aula, vamos entender o que são redes de computadores, por que elas são importantes e como fazem parte do nosso dia a dia. Além disso, vamos explorar os principais tipos de redes, os componentes que as compõem e um panorama sobre como os dados trafegam na internet.
 

@@ -1,8 +1,10 @@
-﻿---
+---
 title: "🖥️ Aula - 03: Topologias e Meios de Transmissão"
 ---
 
 # 🖥️ Aula - 03: Topologias e Meios de Transmissão
+> [!WARNING] ⚠️ Material de referência — não é a aula desta semana
+> Esta página vem de uma oferta anterior da disciplina e continua no ar porque o conteúdo serve para estudo. **A numeração dela não corresponde à semana do calendário de 2026-2** — o calendário que vale é o do [Plano de Ensino e Contrato](./Plano-de-Ensino-e-Contrato). Se ela pedir uma ferramenta antes da semana em que o plano a introduz, siga o plano.
 
 Hoje vamos aprofundar nossos conhecimentos sobre como as redes são organizadas fisicamente e logicamente. Vamos estudar as topologias de redes e os diferentes meios de transmissão utilizados para interligar dispositivos, entendendo como essas escolhas impactam o desempenho e a segurança da comunicação.
 

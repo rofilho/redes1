@@ -14,7 +14,7 @@ tags: [redes1, 2026-2, plano-de-ensino, cronograma, contrato]
 **Disciplina:** 49304 — Redes de Computadores I · Sistemas de Informação — Uniube<br>
 **Professor:** Romualdo Mathias Filho<br>
 **Semestre:** 2026-2<br>
-**Carga horária:** 42 horas-aula — **30 presenciais** e **12 não presenciais** (AVA Uniube On-line). No plano de ensino, **as 30 h/a presenciais são integralmente classificadas como prática**: não existe encontro teórico separado. A teoria é a parte não presencial, no AVA.
+**Carga horária:** 42 horas-aula — **30 presenciais** e **12 não presenciais** (AVA Uniube On-line). No plano de ensino, as 30 h/a presenciais estão classificadas como **prática** e as 12 não presenciais como **teórica**: boa parte da fundamentação teórica vive no AVA, e o tempo de sala é para aplicar. **Quantas turmas temos e em que dias depende do Horário de Aulas — atualizo aqui assim que sair.**
 
 > [!INFO] 🎯 O que esta página é
 > Esta é a **página de referência do semestre**, não uma aula. Ementa, objetivos, conteúdo das 20 semanas, composição da nota, segunda chamada, recuperação, ferramentas, regras de sala e bibliografia — tudo mora aqui.
@@ -31,7 +31,7 @@ A disciplina aborda conceitos básicos de redes de computadores, os modelos de r
 
 ### 1.2 Objetivo geral
 
-Reconhecer a organização hierárquica das principais arquiteturas de redes de computadores, **OSI e TCP/IP**, bem como os aspectos ligados aos seus protocolos.
+Reconhecer como as principais arquiteturas de rede se organizam em camadas — **OSI e TCP/IP** — e o que os protocolos de cada camada fazem. Na prática: saber em que camada está o cabo, em que camada está o endereço IP e em que camada está o navegador.
 
 ### 1.3 O que você deve saber fazer no fim do semestre
 
@@ -80,7 +80,7 @@ Reconhecer a organização hierárquica das principais arquiteturas de redes de 
 <figcaption class="au-legenda">Azul é conteúdo, laranja é dia de nota, verde é aplicação. A ordem não é arbitrária: você só consegue construir uma rede no simulador (Bloco 3) depois de saber endereçá-la (Bloco 2), e só endereça depois de entender por onde o sinal passa (Bloco 1).</figcaption>
 </figure>
 
-A granularidade — o que cai em qual semana — está na tabela do Tópico 2. O plano de ensino lista **onze** tópicos programáticos; abaixo eles aparecem agrupados em sete unidades didáticas, que é como o semestre é efetivamente conduzido. O agrupamento é meu; o conteúdo é o oficial, sem acréscimo nem corte.
+A granularidade — o que cai em qual semana — está na tabela do Tópico 2. O plano de ensino lista **onze** tópicos. Abaixo eu os agrupei em sete unidades. O agrupamento é meu; o conteúdo é o oficial, sem acréscimo nem corte.
 
 <details>
 <summary>📄 Conteúdo programático — os 11 tópicos oficiais, agrupados em 7 unidades</summary>
@@ -103,12 +103,12 @@ A granularidade — o que cai em qual semana — está na tabela do Tópico 2. O
 
 ### 1.5 Como as aulas funcionam
 
-As aulas presenciais são **expositivas e dialogadas**, com metodologias ativas que colocam você como protagonista: estudos de caso, trabalhos práticos em laboratório, seminários, projetos e dinâmicas, apoiados pelo **Cisco Packet Tracer**.
+Aula presencial aqui não é palestra. Eu exponho a matéria e pergunto. Você responde e pergunta de volta. O tempo em sala vai para estudo de caso, prática de laboratório, seminário, projeto e dinâmica, apoiados pelo **Cisco Packet Tracer**.
 
-A parte não presencial acontece no **AVA Uniube On-line** — estudos autônomos, vídeos e atividades orientadas, em modelo de **sala de aula invertida** e resolução de problemas. São 12 das 42 horas: não é material extra, é parte da carga.
+A parte não presencial acontece no **AVA Uniube On-line**: estudo por conta, vídeos, atividades com roteiro e problemas para resolver. Você vê parte do conteúdo lá antes do encontro — é a **sala de aula invertida** explicada no Tópico 4.2. São 12 das 42 horas: não é material extra, é parte da carga.
 
 > [!TIP] 💡 Por que esta disciplina é a base de tudo
-> O que se aprende aqui é a base usada nas disciplinas de redes seguintes. O que ficar mal resolvido — principalmente **máscara de sub-rede e gateway** — volta a pesar depois, multiplicado. Não é ameaça: é o motivo de o Bloco 2 ter quatro semanas para um assunto que parece caber em uma.
+> O que se aprende aqui é a base usada nas disciplinas de redes seguintes. O que ficar mal resolvido — principalmente **máscara de sub-rede e gateway** — volta a pesar depois, multiplicado. Não é ameaça: é o motivo de endereçamento ocupar duas semanas inteiras (S07 e S08) e ainda voltar na revisão da N1.
 
 ---
 
@@ -132,22 +132,22 @@ A parte não presencial acontece no **AVA Uniube On-line** — estudos autônomo
 | **14** | 26/10 | Serviços de rede: DNS |
 | **15** | 02/11 | Servidores Web (HTTP/HTTPS) e inserção de serviços · 🚫 feriado 02/11 |
 | **16** | 09/11 | Conectividade com ISP · endereçamento público e privado |
-| **17** | 16/11 | Redes sem fio (802.11) e mobilidade · 🚫 feriado 20/11 |
+| **17** | 16/11 | Redes sem fio (802.11) e mobilidade · 🚫 feriado 20/11 (a confirmar) |
 | **18** | 23/11 | Redes P2P, clientes e servidores · noções de segurança · **projeto final** |
 | **19** | 30/11 | 🎯 **PROVA N2** — dia exato dentro da janela **1º a 11/12** |
 | **20** | 07/12 | **Vista da N2** e encerramento |
 
-🚫 **Feriados do semestre, com o dia da semana:** 31/08 (segunda) · 07/09 (segunda) · 12/10 (segunda) · 13/10 (terça) · 02/11 (segunda) · **20/11 (sexta)**.
+🚫 **Feriados do semestre, com o dia da semana:** 31/08 (segunda) · 07/09 (segunda) · 12/10 (segunda) · 13/10 (terça) · 02/11 (segunda) · **20/11 (sexta)** — este último ainda em confirmação com a secretaria.
 
-Repare que **cinco dos seis caem em segunda ou terça** — e o sexto, 20/11, numa sexta. Quantos deles a nossa turma perde depende inteiramente do dia em que a aula cair; por isso o calendário acima marca a **semana** atingida, e não "a aula está cancelada". Assim que o Horário de Aulas sair, esta tabela ganha as datas exatas e o número de encontros perdidos.
+Repare que **cinco deles caem em segunda ou terça** — e o 20/11, se confirmado, numa sexta. Quantos desses dias a turma perde depende do dia em que a nossa aula cai. Por isso a tabela acima marca a **semana** atingida, e não "a aula está cancelada". Assim que o Horário de Aulas sair, esta tabela ganha as datas exatas e o número de encontros perdidos.
 
-**Depois da S20:** segunda chamada de **14 a 16/12** · recuperação em **17 ou 18/12** (confirmo a data no AVA junto com o resultado da N2) · lançamento das notas da N2 até **18/12** · encerramento do semestre em **19/12**. As notas da N1 são lançadas até **12/10**.
+**Depois da S20:** segunda chamada de **14 a 16/12** · lançamento das notas da N2 até **18/12** · encerramento do semestre em **19/12** — essas três são do calendário da universidade. A **recuperação** é a única cuja data é minha: pela norma ela só pode cair depois da segunda chamada, então fica entre **17 e 18/12**, e confirmo no AVA junto com o resultado da N2. As notas da N1 são lançadas até **12/10**.
 
 > [!WARNING] ⚠️ Dia, sala e datas exatas de prova saem no AVA
 > O **dia da semana e a sala** seguem o Horário de Aulas da secretaria — atualizo esta página assim que sair, e aviso no AVA. O **dia exato de cada prova** é anunciado com pelo menos **duas semanas de antecedência**, dentro das janelas acima. O que **não muda**: as janelas de prova e a distribuição dos 100 pontos.
 
 > [!TIP] 💡 Como usar este calendário a seu favor
-> As duas semanas mais perigosas do semestre são a **S07** e a **S08**: endereçamento IPv4 e sub-redes caem logo antes da prova, e a S07 ainda perde um dia de feriado. Se você for tropeçar em alguma coisa, vai ser ali — e é o assunto de maior peso na N1. Chegue nessas duas semanas com as anteriores em dia.
+> As duas semanas mais perigosas do semestre são a **S07** e a **S08**: endereçamento IPv4 e sub-redes caem logo antes da prova, e a S07 ainda perde um dia de feriado. Se você for tropeçar em alguma coisa, vai ser ali — e é o assunto que mais custa tempo de recuperar depois. Chegue nessas duas semanas com as anteriores em dia.
 
 ---
 
@@ -157,14 +157,14 @@ Repare que **cinco dos seis caem em segunda ou terça** — e o sexto, 20/11, nu
 
 Aprovação: **≥ 60 pontos** e **frequência ≥ 75%**.
 
-| Etapa | Total | Prova | Atividades (laboratório/PBL) | Uniube+ |
+| Etapa | Total | Prova | Atividades (laboratório e problemas) | Uniube+ |
 | :--- | :-: | :-: | :-: | :-: |
 | **N1** | **35** | 25 | 5 | 5 |
 | **N2** | **50** | 30 | 10 | 10 |
 | **Avaliação Institucional** | **15** | 15 | — | — |
 | **Total** | **100** | **70** | **15** | **15** |
 
-As avaliações podem ser aplicadas de forma escrita, prática em laboratório, estudos de caso e projetos, conforme os objetivos de aprendizagem do componente.
+As avaliações podem ser escritas, práticas no laboratório, estudos de caso ou projetos.
 
 **A Avaliação Institucional (15 pts)** não é minha: é uma prova aplicada pela universidade, comum a todos os componentes, com data definida pela instituição. Ela entra direto na sua nota final desta disciplina. **A data ainda não foi divulgada** — quando sair, anuncio no AVA e atualizo esta página.
 
@@ -205,7 +205,7 @@ São mecanismos diferentes, com regras diferentes — e o prazo de um deles é d
 | Ferramenta | Quando | Como |
 | :--- | :--- | :--- |
 | **Cisco Packet Tracer** + conta **NetAcad** | obrigatório a partir da **S10** | [netacad.com](https://www.netacad.com/) — grátis. Crie a conta com calma, não na véspera |
-| **Wireshark** | analisador de tráfego, aulas de captura | [wireshark.org](https://www.wireshark.org/download.html) — grátis |
+| **Wireshark** | analisador de tráfego — opcional, só se eu abrir uma sessão de captura; aviso com duas semanas de antecedência | [wireshark.org](https://www.wireshark.org/download.html) — grátis |
 | **AVA Uniube On-line** | semana 1 até o fim | as **12 h não presenciais**: vídeos, materiais e as atividades do Uniube+ |
 
 ### 4.2 Cinco termos que decidem a sua nota
@@ -224,10 +224,10 @@ São mecanismos diferentes, com regras diferentes — e o prazo de um deles é d
 
 ## 📌 5. As regras da nossa sala
 
-Regra que o professor decreta, o aluno obedece. Regra que a turma escreve, a turma cobra. Estas quatro entraram como **proposta** na Aula 01 e foram a voto — manter, mudar ou cortar —, com espaço para a turma acrescentar as suas:
+Eu não decreto as regras da sala sozinho. Estas quatro entram como **proposta** na Aula 01 e vão a voto — manter, mudar ou cortar —, com espaço para a turma acrescentar as suas:
 
 1. **Celular é agendado, não proibido.** Há janelas em que o celular é a ferramenta e janelas de tela para baixo (prova, exercício cronometrado).
-2. **Pergunta errada é matéria-prima.** Metade dos exemplos desta disciplina sai de erro real cometido em sala.
+2. **Pergunta errada é matéria-prima.** Erro dito em voz alta em sala vira exemplo da aula seguinte — é assim que eu descubro onde a explicação falhou.
 3. **Dupla é rotativa no laboratório.** Ninguém passa o semestre com o mesmo par, e ninguém carrega o outro.
 4. **Quem chega atrasado entra em silêncio.** A abertura é curta e é a parte que mais rende.
 
@@ -243,7 +243,7 @@ Esta é uma página administrativa, e você tem o direito de saber o que aqui é
 
 **1. Documento oficial, e você pode pedir para ver** — é a base do Tópico 1 e da tabela de pontos:
 
-- UNIVERSIDADE DE UBERABA. **Plano de Ensino — 49304 Redes de Computadores I, curso 160 Sistemas de Informação.** Uberlândia, 2026. <span class="au-pag">p. 1 — carga horária (presencial: teórica 0, prática 30; não presencial: teórica 12) e ementa; p. 2 — objetivos e metodologia; p. 3 — conteúdo programático, tópicos 1 a 11; p. 4 — distribuição da pontuação semestral; p. 5 — bibliografias</span>
+- UNIVERSIDADE DE UBERABA. **Plano de Ensino — 49304 Redes de Computadores I, curso 160 Sistemas de Informação.** Uniube, 2026. Documento institucional disponível no AVA. <span class="au-pag">p. 1 — carga horária (presencial: teórica 0, prática 30; não presencial: teórica 12) e ementa; p. 2 — objetivos e metodologia; p. 3 — conteúdo programático, tópicos 1 a 11; p. 4 — distribuição da pontuação semestral; p. 5 — bibliografias</span>
 
 **2. Eu explicando a norma da casa** — todo o Tópico 3. As regras de aprovação, segunda chamada e recuperação são as que a coordenação definiu para Engenharias, Gestão e Tecnologia da Informação em 2026/2. Elas não são minhas e eu não posso mudá-las; trago para cá porque decidem nota e prazo, e porque norma não se lê sozinha. **O texto que vale é o publicado no AVA.**
 
@@ -254,7 +254,7 @@ Esta é uma página administrativa, e você tem o direito de saber o que aqui é
 <details>
 <summary>📚 Bibliografia do componente (referências normalizadas)</summary>
 
-São as obras do componente, para o semestre inteiro. **A localização precisa (capítulo e página) vai na aula em que cada uma for efetivamente usada**, a partir da S02.
+São as obras do componente, para o semestre inteiro. **A localização precisa (capítulo e página) vai na aula em que cada uma for efetivamente usada** — quando a aula não trouxer, é porque a obra não foi usada ali.
 
 *Básica* — biblioteca virtual da Uniube:
 

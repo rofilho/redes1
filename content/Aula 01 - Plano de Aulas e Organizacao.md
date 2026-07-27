@@ -18,7 +18,7 @@ tags: [redes1, 2026-2, contrato, apresentacao]
 **Documento de referência:** [Plano de Ensino e Contrato](./Plano-de-Ensino-e-Contrato) — é lá que mora tudo o que esta aula apresenta.
 
 > [!NOTE] 📋 Esta aula é a exceção do semestre
-> O plano de ensino classifica as 30 h/a presenciais como **prática** — não existe encontro teórico separado. Se o componente é todo prático, por que a primeira aula é conversa? Porque contrato não se pratica: nota, prazo e regra precisam ser ditos uma vez, com todo mundo junto, antes de qualquer laboratório existir. **Esta é a única aula do semestre em que a sala não vai construir nada.** O conteúdo de redes começa na Aula 02.
+> O plano de ensino classifica as 30 h/a presenciais como **prática** — não existe encontro teórico separado. Nota, prazo e regra eu digo uma vez só, com todo mundo junto, antes do primeiro laboratório. **Esta é a única aula do semestre em que a sala não vai construir nada.** O conteúdo de redes começa na Aula 02.
 
 ---
 
@@ -52,7 +52,7 @@ A ideia: **a rede tem camadas**, e cada uma pode falhar sozinha. A velocidade co
 </div>
 
 > [!INFO] 🎯 Visão geral e recursos
-> Hoje a gente percorre o **contrato do semestre** e fecha os acordos da sala. O documento completo — ementa, calendário das 20 semanas, nota, recuperação, bibliografia — é a página [Plano de Ensino e Contrato](./Plano-de-Ensino-e-Contrato): esta aula apresenta, aquela página guarda.
+> Hoje eu apresento o **contrato do semestre** e a turma fecha os acordos da sala. O documento completo — ementa, calendário das 20 semanas, nota, recuperação, bibliografia — é a página [Plano de Ensino e Contrato](./Plano-de-Ensino-e-Contrato): esta aula apresenta, aquela página guarda.
 >
 > **O que você leva desta aula**
 > - Onde os **100 pontos** são ganhos — e os 30 que não dependem de prova.
@@ -62,27 +62,27 @@ A ideia: **a rede tem camadas**, e cada uma pode falhar sozinha. A velocidade co
 >
 > **📂 Recursos**
 > - [Plano de Ensino e Contrato](./Plano-de-Ensino-e-Contrato) — a referência do semestre
-> - [Cisco Packet Tracer + conta NetAcad](https://www.netacad.com/) — grátis; obrigatório a partir da S10. Crie a conta com calma, não na véspera.
-> - [Wireshark](https://www.wireshark.org/download.html) — analisador de tráfego, grátis; usado nas aulas de captura
+> - [Cisco Packet Tracer + conta NetAcad](https://www.netacad.com/) — grátis; obrigatório a partir da **S10** (Unidade 4, simulação). Crie a conta na primeira semana, não na véspera.
+> - [Wireshark](https://www.wireshark.org/download.html) — analisador de tráfego, grátis; instale só quando eu avisar, com duas semanas de antecedência
 > - AVA Uniube On-line — as **12 h não presenciais** e as atividades do Uniube+
 
 ### ⏱️ Como os minutos desta aula são gastos
 
-O plano de ensino conta **30 horas-aula presenciais**. Hora-aula não é hora de relógio: a 50 minutos cada, distribuídas em 20 semanas, o encontro semanal fica em torno de **75 minutos**. É esse o tamanho que a tabela abaixo orça.
+O plano de ensino conta **30 horas-aula presenciais**. Uma hora-aula tem 50 minutos, não 60. São 30 delas em 20 semanas: o encontro semanal fica em torno de **75 minutos**. É esse o tempo que a tabela abaixo divide.
 
 | Min | Bloco | Onde está |
 | :-- | :--- | :--- |
 | 0–5 | Entrada, chamada, apresentações | — |
 | 5–14 | **Nosso caminho até aqui** — as três perguntas sobre como o jogo funciona | bloco de abertura |
 | 14–30 | **A disciplina em 16 minutos** — o que Redes I cobre e o mapa do semestre | Tópico 1 |
-| 30–33 | Pausa procedural — comparar anotações com o colega | — |
+| 30–33 | Pausa — comparar anotações com o colega | — |
 | 33–48 | **Nota, prazos e segundas chances** — os 100 pontos, SAE, recuperação | Tópico 2 |
 | 48–58 | **Regras de sala** — propostas e votação | Slot interativo |
 | 58–66 | Dúvidas abertas sobre o contrato | — |
-| 66–70 | Reflexão + exit ticket | Fechamento |
+| 66–70 | Reflexão + bilhete de saída | Fechamento |
 | **70–75** | **Folga** — dúvida longa, sala trocada, problema de matrícula | — |
 
-> ⚠️ **O que ainda não está confirmado é o dia da semana e a sala** — e, com eles, a duração exata do encontro. Assim que o Horário de Aulas sair, atualizo o [plano da disciplina](./Plano-de-Ensino-e-Contrato) e aviso no AVA. Se o encontro for maior que 75 min, a folga cresce; nenhum bloco acima encolhe.
+> ⚠️ **O que ainda não está confirmado é o dia da semana e a sala** — e, com eles, a duração exata do encontro. Assim que o Horário de Aulas sair, atualizo o [plano da disciplina](./Plano-de-Ensino-e-Contrato) e aviso no AVA. Se o encontro for maior que 75 min, sobra mais folga no fim — a tabela acima não muda.
 
 <aside class="au-antes">
 <b class="au-nota-t">Antes de começar</b>
@@ -103,7 +103,7 @@ Cinco termos que vão decidir a sua nota e que quase ninguém lê a tempo:
 
 ---
 
-## 📌 1. A disciplina em 16 minutos [Exposição dialogada ⏳ 16 min + 3 de pausa]
+## 📌 1. A disciplina em 16 minutos [⏳ 16 min + 3 de pausa]
 
 Não vou ler o plano de ensino em voz alta — ele está publicado, íntegro, no [Plano de Ensino e Contrato](./Plano-de-Ensino-e-Contrato). O que cabe aqui é o **mapa**: o que a disciplina cobre, em que ordem, e por quê.
 
@@ -149,7 +149,7 @@ Não vou ler o plano de ensino em voz alta — ele está publicado, íntegro, no
 
 - **Carga:** 42 h/a — 30 presenciais (prática) + 12 no AVA. O AVA não é material extra, é carga.
 - **Calendário:** 20 semanas, N1 na **S09** (janela 21–30/09), N2 na **S19** (janela 1º–11/12), seis feriados no caminho. A tabela completa está no plano.
-- **Ferramentas:** Packet Tracer + conta NetAcad a partir da S10; Wireshark nas aulas de captura.
+- **Ferramentas:** Packet Tracer + conta NetAcad a partir da S10. Wireshark é opcional, e eu aviso com antecedência se abrir uma sessão de captura.
 - **As duas semanas mais perigosas:** S07 e S08 — endereçamento IPv4 e sub-redes, logo antes da N1.
 
 > [!TIP] 💡 Por que esta disciplina é a base de tudo
@@ -157,7 +157,7 @@ Não vou ler o plano de ensino em voz alta — ele está publicado, íntegro, no
 
 ---
 
-## 📌 2. Nota, prazos e segundas chances [Exposição dialogada ⏳ 15 min]
+## 📌 2. Nota, prazos e segundas chances [⏳ 15 min]
 
 Antes da lista, uma aposta. **Escreva o número no papel** antes de abrir a resposta — ela vale mais se você tiver se comprometido primeiro.
 
@@ -166,9 +166,9 @@ Antes da lista, uma aposta. **Escreva o número no papel** antes de abrir a resp
 <details class="au-aposta">
 <summary>Apostou? Agora confira — e pense no que isso significa para quem tem aula nesses dias</summary>
 
-**Cinco dos seis** — 31/08, 07/09, 12/10, 13/10 e 02/11 caem em segunda ou terça; só o 20/11 cai numa sexta.
+**Cinco deles** — 31/08, 07/09, 12/10, 13/10 e 02/11 — caem em segunda ou terça. O 20/11 cai numa sexta, e ainda estou confirmando com a secretaria se há aula nesse dia.
 
-O que isso significa: se a nossa aula cair numa segunda, a turma perde **até quatro encontros**; se cair numa quarta ou quinta, perde **zero**. O mesmo calendário, experiências completamente diferentes — e é por isso que o [plano da disciplina](./Plano-de-Ensino-e-Contrato) marca a *semana* atingida, não "aula cancelada". Quando o Horário de Aulas sair, a conta fecha.
+O que isso significa: se a nossa aula cair numa segunda, a turma perde **até quatro encontros**; se cair numa quarta ou quinta, perde **zero**. O mesmo calendário, experiências completamente diferentes — e por isso o [plano da disciplina](./Plano-de-Ensino-e-Contrato) marca a *semana* atingida, não "aula cancelada". Quando o Horário de Aulas sair, eu digo quantos encontros a nossa turma perde.
 
 </details>
 
@@ -185,12 +185,12 @@ A regra completa — tabelas, requisitos, datas — está no [Tópico 3 do plano
 
 ---
 
-## 🗳️ Slot interativo — as regras de sala [Discussão e votação ⏳ 10 min]
+## 🗳️ Slot interativo — as regras de sala [⏳ 10 min]
 
 Regra que o professor decreta, o aluno obedece. Regra que a turma escreve, a turma cobra. Entro com quatro propostas; vocês cortam, mudam e acrescentam:
 
 1. **Celular é agendado, não proibido.** Há janelas em que o celular é a ferramenta e janelas de tela para baixo (prova, exercício cronometrado).
-2. **Pergunta errada é matéria-prima.** Metade dos exemplos desta disciplina sai de erro real cometido em sala.
+2. **Pergunta errada é matéria-prima.** Erro dito em voz alta em sala vira exemplo da aula seguinte — é assim que eu descubro onde a explicação falhou.
 3. **Dupla é rotativa no laboratório.** Ninguém passa o semestre com o mesmo par, e ninguém carrega o outro.
 4. **Quem chega atrasado entra em silêncio.** A abertura é curta e é a parte que mais rende.
 
@@ -205,7 +205,7 @@ Os acordos que passarem da maioria entram na versão final, e o **[Plano de Ensi
 A votação é da turma, não minha: eu não desempato.
 
 </div>
-<p class="au-slot-b"><b>Plano B:</b> sem internet ou sem projetor, a votação é por <b>mão levantada</b>, proposta a proposta, e o acordo extra vai em meia folha de papel recolhida na saída. Mesmo resultado, mesmos 10 minutos, zero dependência de rede — o que é apropriado para uma aula de redes.</p>
+<p class="au-slot-b"><b>Plano B:</b> sem internet ou sem projetor, a votação é por <b>mão levantada</b>, uma proposta de cada vez. O acordo extra vai em meia folha de papel, recolhida na saída. Sem depender de rede — o que é apropriado para uma aula de redes.</p>
 </div>
 
 ---
@@ -235,9 +235,9 @@ A votação é da turma, não minha: eu não desempato.
 
 ---
 
-## 🎬 Fechamento — exit ticket
+## 🎬 Fechamento — bilhete de saída
 
-Toda aula termina do mesmo jeito: duas perguntas anônimas, sem nota. O que você responder **abre a aula seguinte** — os pontos mais citados como confusos entram na revisão de abertura.
+A aula termina com duas perguntas anônimas, em **meia folha de papel** recolhida na saída — sem nome e sem nota. O que você responder **abre a aula seguinte**: os pontos mais citados como confusos entram na revisão de abertura.
 
 **Hoje:** *(1)* O que mais te preocupa nesta disciplina? *(2)* Qual regra do contrato ficou menos clara?
 
@@ -256,7 +256,7 @@ Esta aula é administrativa: quase nada dela sai de livro. Vale você saber o qu
 
 **Documento, e você pode pedir para ver:**
 
-- UNIVERSIDADE DE UBERABA. **Plano de Ensino — 49304 Redes de Computadores I, curso 160 Sistemas de Informação.** Uberlândia, 2026. <span class="au-pag">p. 1 — carga horária e ementa; p. 3 — conteúdo programático; p. 4 — distribuição da pontuação semestral</span> — é dele que saem a ementa, o conteúdo e os 100 pontos.
+- UNIVERSIDADE DE UBERABA. **Plano de Ensino — 49304 Redes de Computadores I, curso 160 Sistemas de Informação.** Uberaba: Uniube, [2026]. <span class="au-pag">p. 1 — carga horária e ementa; p. 3 — conteúdo programático; p. 4 — distribuição da pontuação semestral</span> — é dele que saem a ementa, o conteúdo e os 100 pontos.
 
 **Eu explicando, e onde você confere:**
 
