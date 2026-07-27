@@ -12,9 +12,9 @@ tags: [redes1, 2026-2, contrato, apresentacao]
 
 # 🟢 Aula 01 — Apresentação e Contrato da Disciplina
 
-**Disciplina:** 49304 — Redes de Computadores I · Sistemas de Informação — Uniube
-**Professor:** Romualdo Mathias Filho
-**Semana:** 1 · Semana de **27/07/2026**
+**Disciplina:** 49304 — Redes de Computadores I · Sistemas de Informação — Uniube<br>
+**Professor:** Romualdo Mathias Filho<br>
+**Semana:** 1 · Semana de **27/07/2026**<br>
 **Documento de referência:** [Plano de Ensino e Contrato](./Plano-de-Ensino-e-Contrato) — é lá que mora tudo o que esta aula apresenta.
 
 > [!NOTE] 📋 Esta aula é a exceção do semestre

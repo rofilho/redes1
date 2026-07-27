@@ -11,9 +11,9 @@ tags: [redes1, 2026-2, plano-de-ensino, cronograma, contrato]
 
 # 📘 Plano de Ensino e Contrato — Redes de Computadores I
 
-**Disciplina:** 49304 — Redes de Computadores I · Sistemas de Informação — Uniube
-**Professor:** Romualdo Mathias Filho
-**Semestre:** 2026-2
+**Disciplina:** 49304 — Redes de Computadores I · Sistemas de Informação — Uniube<br>
+**Professor:** Romualdo Mathias Filho<br>
+**Semestre:** 2026-2<br>
 **Carga horária:** 42 horas-aula — **30 presenciais** e **12 não presenciais** (AVA Uniube On-line). No plano de ensino, **as 30 h/a presenciais são integralmente classificadas como prática**: não existe encontro teórico separado. A teoria é a parte não presencial, no AVA.
 
 > [!INFO] 🎯 O que esta página é
