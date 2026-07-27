@@ -108,7 +108,7 @@ As aulas presenciais são **expositivas e dialogadas**, com metodologias ativas 
 A parte não presencial acontece no **AVA Uniube On-line** — estudos autônomos, vídeos e atividades orientadas, em modelo de **sala de aula invertida** e resolução de problemas. São 12 das 42 horas: não é material extra, é parte da carga.
 
 > [!TIP] 💡 Por que esta disciplina é a base de tudo
-> Redes I é pré-requisito direto de **Redes II**, onde você vai segmentar redes em VLANs, rotear dinamicamente e escrever política de acesso. O que ficar mal resolvido aqui — principalmente **máscara de sub-rede e gateway** — reaparece lá multiplicado por dez. Não é ameaça: é o motivo de o Bloco 2 ter quatro semanas para um assunto que parece caber em uma.
+> O que se aprende aqui é a base usada nas disciplinas de redes seguintes. O que ficar mal resolvido — principalmente **máscara de sub-rede e gateway** — volta a pesar depois, multiplicado. Não é ameaça: é o motivo de o Bloco 2 ter quatro semanas para um assunto que parece caber em uma.
 
 ---
 
@@ -169,7 +169,7 @@ As avaliações podem ser aplicadas de forma escrita, prática em laboratório, 
 **A Avaliação Institucional (15 pts)** não é minha: é uma prova aplicada pela universidade, comum a todos os componentes, com data definida pela instituição. Ela entra direto na sua nota final desta disciplina. **A data ainda não foi divulgada** — quando sair, anuncio no AVA e atualizo esta página.
 
 > [!IMPORTANT] 🎯 Trinta pontos não dependem de prova
-> Faça a conta na tabela: **15 pontos de atividades + 15 do Uniube+ = 30 dos 100 pontos** que dependem de **entregar**, não de acertar. Quem acerta 40 pontos de prova e entrega tudo fecha com 70+; quem acerta os mesmos 40 e não entrega nada fecha com 48 — e pode nem ter direito à recuperação, porque um dos requisitos é não estar com o Uniube+/AVA zerado.
+> Faça a conta na tabela: **15 pontos de atividades + 15 do Uniube+ = 30 dos 100 pontos** que dependem de **entregar**, não de acertar. Quem acerta 40 pontos de prova e entrega tudo fecha com 70; quem acerta os mesmos 40 e não entrega nada fecha com 40 — na faixa da recuperação, mas sem direito a ela, porque um dos requisitos é não estar com o Uniube+/AVA zerado.
 
 > [!WARNING] ⚠️ Os 15 pontos de atividade ainda não estão detalhados
 > A distribuição acima é oficial e não muda. **Quais** atividades de laboratório e PBL valem os 5 pontos da N1 e os 10 da N2 — quantas, em que semanas, com que critério — eu ainda estou fechando, e publico aqui até a **S03**. Nenhuma atividade valendo ponto será cobrada sem estar anunciada nesta página com pelo menos duas semanas de antecedência.
@@ -210,13 +210,13 @@ São mecanismos diferentes, com regras diferentes — e o prazo de um deles é d
 
 ### 4.2 Cinco termos que decidem a sua nota
 
-**Uniube+** — as atividades do AVA que valem **15 pontos** no semestre (5 na N1, 10 na N2). São os pontos mais baratos do ano e fecham cedo.
+**Uniube+** — rubrica institucional que vale **15 pontos** no semestre (5 na N1, 10 na N2), lançada pelo AVA. Quais atividades a compõem e os prazos são definidos pela coordenação e ainda não foram divulgados — publico aqui assim que confirmar.
 
-**SAE** — a *Solicitação de Atendimento ao Estudante*, o formulário do AVA por onde se pede qualquer coisa formal à instituição. É o canal oficial: pedido feito fora dele não existe, e é por ele que se pede a segunda chamada.
+**SAE** — a solicitação formal aberta pelo aluno no AVA. É por ele que se pede a segunda chamada, em até 3 dias úteis da prova perdida, com o atestado anexado.
 
 **Segunda chamada (substitutiva)** — a segunda chance de quem **faltou** à prova. Pede-se pelo **SAE, em até 3 dias úteis**.
 
-**Recuperação** — a segunda chance de quem **fez** as provas e fechou entre **40 e 59** pontos. Não se pede: o direito nasce da nota.
+**Recuperação** — a segunda chance de quem **fez** as provas e fechou entre **40 e 59** pontos. Os requisitos estão no Tópico 3; data, horário e a forma de acesso eu confirmo com a coordenação e publico no AVA.
 
 **Sala de aula invertida** — parte do conteúdo é estudada **antes** do encontro, no AVA; o tempo presencial fica para problema, dúvida e laboratório. É o que as 12 h não presenciais significam na prática.
 
@@ -239,13 +239,14 @@ Regra que o professor decreta, o aluno obedece. Regra que a turma escreve, a tur
 <div class="au-refs">
 <b>Fontes desta página</b>
 
-Esta é uma página administrativa: o que ela afirma vem de dois documentos institucionais, não de livro. Em qualquer divergência entre esta página e esses documentos, **valem os documentos**.
+Esta é uma página administrativa: o que ela afirma vem de documentos institucionais, não de livro. Em qualquer divergência entre esta página e esses documentos, **valem os documentos**.
 
 - UNIVERSIDADE DE UBERABA. **Avaliações de Segunda Chamada e Recuperação de Aprendizagem — Cursos: Engenharias, Gestão e Tecnologia da Informação, 2026/2.** Campus Uberlândia, 2026. <span class="au-pag">seç. 1 — aprovação (≥ 60 pontos e 75% de frequência); seç. 2 — distribuição dos 100 pontos; seç. 3 — datas travadas do semestre, incluindo os prazos de lançamento (12/10 e 18/12) e o encerramento em 19/12; seç. 4 — segunda chamada, prazo de 3 dias úteis pelo SAE e aplicação de 14 a 16/12; seç. 5 — recuperação, os três requisitos, o zeramento das provas e o teto de 60</span> — **fonte de tudo que está no Tópico 3.**
-- UNIVERSIDADE DE UBERABA. **Plano de Ensino — 49304 Redes de Computadores I, curso 160 Sistemas de Informação.** Uberlândia, 2026. <span class="au-pag">p. 1 — quadro de carga horária (presencial: teórica 0, prática 30; não presencial: teórica 12) e ementa; p. 2 — objetivos geral e específicos, metodologia; p. 3 — conteúdo programático, tópicos 1 a 11; p. 4 — quadro de distribuição da pontuação semestral; p. 5 — bibliografias básica e complementar</span> — **fonte dos Tópicos 1 e 2 e da tabela de pontos do Tópico 3.**
+- UNIVERSIDADE DE UBERABA. **Plano de Ensino — 49304 Redes de Computadores I, curso 160 Sistemas de Informação.** Uberlândia, 2026. <span class="au-pag">p. 1 — quadro de carga horária (presencial: teórica 0, prática 30; não presencial: teórica 12) e ementa; p. 2 — objetivos geral e específicos, metodologia; p. 3 — conteúdo programático, tópicos 1 a 11; p. 4 — quadro de distribuição da pontuação semestral; p. 5 — bibliografias básica e complementar</span> — **fonte do Tópico 1 e da tabela de pontos do Tópico 3.**
+- UNIVERSIDADE DE UBERABA. **Calendário Acadêmico 2026.** Uberlândia, 2026. <span class="au-pag">datas de início e fim do semestre, feriados e sábados letivos</span> — **fonte das datas do Tópico 2.** A distribuição do conteúdo pelas 20 semanas é planejamento meu sobre esse calendário, não parte dele; o Horário de Aulas, que define dia e sala, ainda não saiu.
 
 <details>
-<summary>📚 Bibliografia oficial do componente (reprodução do plano de ensino)</summary>
+<summary>📚 Bibliografia do componente (referências normalizadas)</summary>
 
 São as obras do componente, para o semestre inteiro. **A localização precisa (capítulo e página) vai na aula em que cada uma for efetivamente usada**, a partir da S02.
 

@@ -30,7 +30,7 @@ Esta é a primeira aula, então o "até aqui" não é matéria — é a sua expe
 <details>
 <summary>De 100 pontos numa disciplina da Uniube, quantos você acha que dá para garantir sem acertar uma única questão de prova?</summary>
 
-**Trinta.** 15 pontos de atividades (laboratório/PBL) + 15 do Uniube+ dependem só de **entregar**, não de acertar. A conta completa está no [plano da disciplina](./Plano-de-Ensino-e-Contrato).
+**Trinta.** 15 pontos de atividades (laboratório/PBL) + 15 do Uniube+ **não são prova** — são entregas ao longo do semestre, e quem entrega no prazo pega a maior parte deles. A conta completa está no [plano da disciplina](./Plano-de-Ensino-e-Contrato).
 
 </details>
 
@@ -89,13 +89,13 @@ O plano de ensino conta **30 horas-aula presenciais**. Hora-aula não é hora de
 
 Cinco termos que vão decidir a sua nota e que quase ninguém lê a tempo:
 
-**Uniube+** — as atividades do AVA que valem **15 pontos** no semestre (5 na N1, 10 na N2). São os pontos mais baratos do ano e fecham cedo.
+**Uniube+** — rubrica institucional que vale **15 pontos** no semestre (5 na N1, 10 na N2), lançada pelo AVA. O formato e os prazos são definidos pela coordenação; assim que saírem, publico no plano da disciplina.
 
-**SAE** — a *Solicitação de Atendimento ao Estudante*, o formulário do AVA por onde se pede qualquer coisa formal à instituição. É o canal oficial: pedido feito fora dele não existe, e é por ele que se pede a segunda chamada.
+**SAE** — a solicitação formal aberta pelo aluno no AVA. É por ele que se pede a segunda chamada: a justificativa e o atestado vão anexados, e quem analisa é a coordenação.
 
 **Segunda chamada (substitutiva)** — a segunda chance de quem **faltou** à prova. Pede-se pelo **SAE, em até 3 dias úteis**.
 
-**Recuperação** — a segunda chance de quem **fez** as provas e fechou entre **40 e 59** pontos. Não se pede: o direito nasce da nota.
+**Recuperação** — a segunda chance de quem **fez** as provas e fechou entre **40 e 59** pontos. Os requisitos estão no Tópico 3 do plano; data, horário e a forma de acesso eu confirmo com a coordenação e publico no AVA.
 
 **Sala de aula invertida** — parte do conteúdo é estudada **antes** do encontro, no AVA; o tempo presencial fica para problema, dúvida e laboratório. É o que as 12 h não presenciais significam na prática.
 
@@ -153,7 +153,7 @@ Não vou ler o plano de ensino em voz alta — ele está publicado, íntegro, no
 - **As duas semanas mais perigosas:** S07 e S08 — endereçamento IPv4 e sub-redes, logo antes da N1.
 
 > [!TIP] 💡 Por que esta disciplina é a base de tudo
-> Redes I é pré-requisito direto de **Redes II**, onde você vai segmentar redes em VLANs, rotear dinamicamente e escrever política de acesso. O que ficar mal resolvido aqui — principalmente **máscara de sub-rede e gateway** — reaparece lá multiplicado por dez.
+> O que se aprende aqui é a base usada nas disciplinas de redes seguintes. O que ficar mal resolvido — principalmente **máscara de sub-rede e gateway** — volta a pesar depois, multiplicado.
 
 ---
 
@@ -218,7 +218,7 @@ A votação é da turma, não minha: eu não desempato.
 | **Referência do semestre** | [Plano de Ensino e Contrato](./Plano-de-Ensino-e-Contrato) — guarde o link |
 | **Carga horária** | 42 h/a — 30 presenciais (prática) + **12 no AVA** (é carga, não extra) |
 | **Aprovação** | ≥ 60 pontos **e** ≥ 75% de frequência |
-| **Distribuição** | N1 = 35 · N2 = 50 · Institucional = 15 — **30 pontos só dependem de entregar** |
+| **Distribuição** | N1 = 35 · N2 = 50 · Institucional = 15 — **30 pontos vêm de entregas, não de prova** |
 | **Provas** | N1 na **S09** (janela 21–30/09) · N2 na **S19** (janela 1º–11/12) |
 | **Segunda chamada** | Faltou → **SAE no AVA em 3 dias úteis**. Atestado vai no SAE, não comigo |
 | **Recuperação** | Nota 40–59 + todas as provas feitas + Uniube+ não zerado. **Zera** as provas, **teto 60** |
