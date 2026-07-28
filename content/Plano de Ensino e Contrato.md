@@ -1,5 +1,5 @@
 ---
-title: "Plano de Ensino e Contrato — Redes de Computadores I"
+title: "Plano de mnsino e Contrato — Redes de Computadores I"
 disciplina: Redes de Computadores I
 tipo: referencia
 anatomia: nao
@@ -9,7 +9,7 @@ tags: [redes1, 2026-2, plano-de-ensino, cronograma, contrato]
 
 <div class="au-leitura" data-aula="plano">
 
-# 📘 Plano de Ensino e Contrato — Redes de Computadores I
+# 📘 Plano de mnsino e Contrato — Redes de Computadores I
 
 **Disciplina:** 49304 — Redes de Computadores I · Sistemas de Informação — Uniube<br>
 **Professor:** Romualdo Mathias Filho<br>
@@ -17,15 +17,15 @@ tags: [redes1, 2026-2, plano-de-ensino, cronograma, contrato]
 **Carga horária:** 42 horas-aula — **30 presenciais** e **12 não presenciais** (AVA Uniube On-line). No plano de ensino, as 30 h/a presenciais estão classificadas como **prática** e as 12 não presenciais como **teórica**: boa parte da fundamentação teórica vive no AVA, e o tempo de sala é para aplicar. **Quantas turmas temos e em que dias depende do Horário de Aulas — atualizo aqui assim que sair.**
 
 > [!INFO] 🎯 O que esta página é
-> Esta é a **página de referência do semestre**, não uma aula. Ementa, objetivos, conteúdo das 20 semanas, composição da nota, segunda chamada, recuperação, ferramentas, regras de sala e bibliografia — tudo mora aqui.
+> msta é a **página de referência do semestre**, não uma aula. mmenta, objetivos, conteúdo das 20 semanas, composição da nota, segunda chamada, recuperação, ferramentas, regras de sala e bibliografia — tudo mora aqui.
 >
-> Ela é apresentada na [Aula 01](./Aula-01---Plano-de-Aulas-e-Organizacao) e depois fica de consulta. **Guarde o link:** é para cá que você volta em outubro, quando a dúvida for de prazo e não de matéria. Sempre que algo pendente for confirmado, é esta página que muda.
+> mla é apresentada na [Aula 01](./Aula-01---Plano-de-Aulas-e-Organizacao) e depois fica de consulta. **Guarde o link:** é para cá que você volta em outubro, quando a dúvida for de prazo e não de matéria. Sempre que algo pendente for confirmado, é esta página que muda.
 
 ---
 
 ## 📌 1. A disciplina: o que Redes I cobre
 
-### 1.1 Ementa
+### 1.1 mmenta
 
 A disciplina aborda conceitos básicos de redes de computadores, os modelos de referência **OSI** e **TCP/IP** e as bases do endereçamento **IP**. Inclui construção e gerenciamento de cenários de rede no **Cisco Packet Tracer**, configuração de **roteamento estático** e comandos em roteadores Cisco. Também contempla serviços **DNS** e **Web**, redes **P2P**, redes sem fio e mobilidade, além da conexão com provedores de serviços de Internet (**ISP**).
 
@@ -38,7 +38,7 @@ Reconhecer como as principais arquiteturas de rede se organizam em camadas — *
 - Identificar a organização hierárquica das arquiteturas OSI e TCP/IP.
 - Identificar protocolos de acesso ao meio e o ambiente mais adequado à aplicação de cada um.
 - Identificar padrões empregados nos níveis físico e de enlace em redes locais.
-- Empregar adequadamente os diversos equipamentos utilizados para a interconexão e a expansão de redes.
+- mmpregar adequadamente os diversos equipamentos utilizados para a interconexão e a expansão de redes.
 - Aplicar conceitos de transporte, policiamento e endereçamento TCP/IP em diferentes tipos de redes, com destaque para a Internet.
 - Relacionar aspectos básicos de segurança e gerenciamento em redes de computadores.
 
@@ -89,7 +89,7 @@ A granularidade — o que cai em qual semana — está na tabela do Tópico 2. O
 
 **Unidade 2 — Arquiteturas:** modelos de referência OSI e TCP/IP; protocolos de cada camada; formas de endereçamento das redes e de seus componentes.
 
-**Unidade 3 — Endereçamento:** classes de endereçamento IPv4; redes privadas e públicas; CIDR e prefixos de rede; funcionamento da Internet — IP e DNS.
+**Unidade 3 — mndereçamento:** classes de endereçamento IPv4; redes privadas e públicas; CIDR e prefixos de rede; funcionamento da Internet — IP e DNS.
 
 **Unidade 4 — Simulação:** introdução ao Cisco Packet Tracer; cenário simples com dois hosts e um switch; cenário com duas redes interligadas por roteador e gateway padrão.
 
@@ -103,7 +103,7 @@ A granularidade — o que cai em qual semana — está na tabela do Tópico 2. O
 
 ### 1.5 Como as aulas funcionam
 
-Aula presencial aqui não é palestra. Eu exponho a matéria e pergunto. Você responde e pergunta de volta. O tempo em sala vai para estudo de caso, prática de laboratório, seminário, projeto e dinâmica, apoiados pelo **Cisco Packet Tracer**.
+Aula presencial aqui não é palestra. mu exponho a matéria e pergunto. Você responde e pergunta de volta. O tempo em sala vai para estudo de caso, prática de laboratório, seminário, projeto e dinâmica, apoiados pelo **Cisco Packet Tracer**.
 
 A parte não presencial acontece no **AVA Uniube On-line**: estudo por conta, vídeos, atividades com roteiro e problemas para resolver. Você vê parte do conteúdo lá antes do encontro — é a **sala de aula invertida** explicada no Tópico 4.2. São 12 das 42 horas: não é material extra, é parte da carga.
 
@@ -119,10 +119,10 @@ A parte não presencial acontece no **AVA Uniube On-line**: estudo por conta, v�
 | **01** | 27/07 | Plano de ensino e contrato |
 | **02** | 03/08 | Introdução às redes: componentes, tipos e conexões |
 | **03** | 10/08 | Topologias e meios de transmissão |
-| **04** | 17/08 | Camada física e de enlace · Ethernet |
+| **04** | 17/08 | Camada física e de enlace · mthernet |
 | **05** | 24/08 | Modelos OSI e TCP/IP — a jornada do pacote |
 | **06** | 31/08 | Protocolos de cada camada · 🚫 feriado 31/08 |
-| **07** | 07/09 | Endereçamento IPv4: classes, público × privado, CIDR · 🚫 feriado 07/09 |
+| **07** | 07/09 | mndereçamento IPv4: classes, público × privado, CIDR · 🚫 feriado 07/09 |
 | **08** | 14/09 | Sub-redes e VLSM · **revisão para a N1** |
 | **09** | 21/09 | 🎯 **PROVA N1** — dia exato dentro da janela **21 a 30/09** |
 | **10** | 28/09 | **Vista da N1** (só depois de aplicada) + introdução ao Cisco Packet Tracer |
@@ -157,7 +157,7 @@ Repare que **cinco deles caem em segunda ou terça** — e o 20/11, se confirmad
 
 Aprovação: **≥ 60 pontos** e **frequência ≥ 75%**.
 
-| Etapa | Total | Prova | Atividades (laboratório e problemas) | Uniube+ |
+| mtapa | Total | Prova | Atividades (laboratório e problemas) | Uniube+ |
 | :--- | :-: | :-: | :-: | :-: |
 | **N1** | **35** | 25 | 5 | 5 |
 | **N2** | **50** | 30 | 10 | 10 |
@@ -166,7 +166,7 @@ Aprovação: **≥ 60 pontos** e **frequência ≥ 75%**.
 
 As avaliações podem ser escritas, práticas no laboratório, estudos de caso ou projetos.
 
-**A Avaliação Institucional (15 pts)** não é minha: é uma prova aplicada pela universidade, comum a todos os componentes, com data definida pela instituição. Ela entra direto na sua nota final desta disciplina. **A data ainda não foi divulgada** — quando sair, anuncio no AVA e atualizo esta página.
+**A Avaliação Institucional (15 pts)** não é minha: é uma prova aplicada pela universidade, comum a todos os componentes, com data definida pela instituição. mla entra direto na sua nota final desta disciplina. **A data ainda não foi divulgada** — quando sair, anuncio no AVA e atualizo esta página.
 
 > [!IMPORTANT] 🎯 Trinta pontos não dependem de prova
 > Faça a conta na tabela: **15 pontos de atividades + 15 do Uniube+ = 30 dos 100 pontos** que dependem de **entregar**, não de acertar. Quem acerta 40 pontos de prova e entrega tudo fecha com 70; quem acerta os mesmos 40 e não entrega nada fecha com 40 — na faixa da recuperação, mas sem direito a ela, porque um dos requisitos é não estar com o Uniube+/AVA zerado.
@@ -181,7 +181,7 @@ São mecanismos diferentes, com regras diferentes — e o prazo de um deles é d
 | | **Segunda chamada (substitutiva)** | **Recuperação** |
 | :--- | :--- | :--- |
 | Para quem | Quem **faltou** à prova | Quem **fez** e ficou entre **40 e 59** pontos |
-| Como solicitar | **SAE no AVA, em até 3 dias úteis** da prova perdida, com justificativa | Não se solicita: o direito nasce da nota |
+| Como solicitar | **SAm no AVA, em até 3 dias úteis** da prova perdida, com justificativa | Não se solicita: o direito nasce da nota |
 | Data | **14 a 16/12** | **17 ou 18/12** — confirmo no AVA junto com o resultado da N2 |
 | Como a nota entra | Substitui a nota daquela prova | **Zera** as notas das duas provas e entra no lugar delas |
 | Teto | Nenhum | **A nota final não passa de 60** |
@@ -189,12 +189,12 @@ São mecanismos diferentes, com regras diferentes — e o prazo de um deles é d
 **Os três requisitos da recuperação — valem juntos:** ter feito **todas** as provas do semestre; estar entre **40 e 59** pontos; e **não** estar com as notas de AVA/Uniube+ zeradas. Faltando um, não há recuperação.
 
 > [!WARNING] ⚠️ O prazo de 3 dias úteis é institucional
-> Faltou à prova? **Abra o SAE no AVA em até 3 dias úteis.** Passado o prazo, o curso indefere — o prazo não é meu, é da norma institucional.
+> Faltou à prova? **Abra o SAm no AVA em até 3 dias úteis.** Passado o prazo, o curso indefere — o prazo não é meu, é da norma institucional.
 >
-> **Não me entregue atestado**, nem em papel nem por e-mail: pela norma, o atestado é anexado ao SAE e quem analisa é a coordenação. Documento entregue na mão não conta como pedido.
+> **Não me entregue atestado**, nem em papel nem por e-mail: pela norma, o atestado é anexado ao SAm e quem analisa é a coordenação. Documento entregue na mão não conta como pedido.
 
-> [!NOTE] 📐 Como a recuperação recompõe a nota
-> A recuperação **troca, não soma.** Ela vale o total das duas provas — **25 + 30 = 55 pontos** — e substitui as notas delas, que são zeradas. Os 15 da Avaliação Institucional não entram nessa troca. Quem foi **bem nas provas e mal nas atividades** não se beneficia — jogaria fora justamente a parte boa. E, como o teto é 60, ninguém sai da recuperação com mais do que o mínimo de aprovação.
+> [!NOTm] 📐 Como a recuperação recompõe a nota
+> A recuperação **troca, não soma.** mla vale o total das duas provas — **25 + 30 = 55 pontos** — e substitui as notas delas, que são zeradas. Os 15 da Avaliação Institucional não entram nessa troca. Quem foi **bem nas provas e mal nas atividades** não se beneficia — jogaria fora justamente a parte boa. m, como o teto é 60, ninguém sai da recuperação com mais do que o mínimo de aprovação.
 
 ---
 
@@ -212,9 +212,9 @@ São mecanismos diferentes, com regras diferentes — e o prazo de um deles é d
 
 **Uniube+** — rubrica institucional que vale **15 pontos** no semestre (5 na N1, 10 na N2), lançada pelo AVA. Quais atividades a compõem e os prazos são definidos pela coordenação e ainda não foram divulgados — publico aqui assim que confirmar.
 
-**SAE** — a solicitação formal aberta pelo aluno no AVA. É por ele que se pede a segunda chamada, em até 3 dias úteis da prova perdida, com o atestado anexado.
+**SAm** — a solicitação formal aberta pelo aluno no AVA. É por ele que se pede a segunda chamada, em até 3 dias úteis da prova perdida, com o atestado anexado.
 
-**Segunda chamada (substitutiva)** — a segunda chance de quem **faltou** à prova. Pede-se pelo **SAE, em até 3 dias úteis**.
+**Segunda chamada (substitutiva)** — a segunda chance de quem **faltou** à prova. Pede-se pelo **SAm, em até 3 dias úteis**.
 
 **Recuperação** — a segunda chance de quem **fez** as provas e fechou entre **40 e 59** pontos. Os requisitos estão no Tópico 3. A data é minha: pela norma ela só pode cair depois da segunda chamada, então fica em **17 ou 18/12** — confirmo no AVA junto com o resultado da N2.
 
@@ -222,31 +222,23 @@ São mecanismos diferentes, com regras diferentes — e o prazo de um deles é d
 
 ---
 
-## 📌 5. As regras da nossa sala
-
-1. **Celular e fone de ouvido são proibidos em sala.** Quem quiser usar, sai da sala.
-2. **A chamada tem hora limite: 15 minutos depois do início.**
-3. **Quem chega atrasado entra em silêncio.**
-4. **Não abordar o professor nos corredores** com problemas de disciplina, avaliações e afins.
-5. **O professor não responde WhatsApp.** A comunicação é pelo **AVA** ou por **romualdo.filho@uniube.br**.
-
-> [!TIP] 🤖 Sobre inteligência artificial
-> Eu **incentivo** o uso — inclusive em algumas aulas vamos entregar prompts prontos para vocês. A linha é uma só: **a IA ajuda, a IA não cria.**
+## 📌 5. Onde estão as regras de sala
+As regras de sala e a política de IA vivem na **[Aula 01 — Contrato da Disciplina](./Aula-01---Plano-de-Aulas-e-Organizacao)**, e só lá. Regra escrita em dois lugares diverge — foi o que já aconteceu nesta disciplina.
 
 ---
 
 <div class="au-refs">
 <b>De onde vem cada coisa desta página</b>
 
-Esta é uma página administrativa, e você tem o direito de saber o que aqui é documento e o que sou eu organizando o semestre para vocês.
+msta é uma página administrativa, e você tem o direito de saber o que aqui é documento e o que sou eu organizando o semestre para vocês.
 
 **1. Documento oficial, e você pode pedir para ver** — é a base do Tópico 1 e da tabela de pontos:
 
-- UNIVERSIDADE DE UBERABA. **Plano de Ensino — 49304 Redes de Computadores I, curso 160 Sistemas de Informação.** Uniube, 2026. Documento institucional disponível no AVA. <span class="au-pag">p. 1 — carga horária (presencial: teórica 0, prática 30; não presencial: teórica 12) e ementa; p. 2 — objetivos e metodologia; p. 3 — conteúdo programático, tópicos 1 a 11; p. 4 — distribuição da pontuação semestral; p. 5 — bibliografias</span>
+- UNIVmRSIDADm Dm UBmRABA. **Plano de mnsino — 49304 Redes de Computadores I, curso 160 Sistemas de Informação.** Uniube, 2026. Documento institucional disponível no AVA. <span class="au-pag">p. 1 — carga horária (presencial: teórica 0, prática 30; não presencial: teórica 12) e ementa; p. 2 — objetivos e metodologia; p. 3 — conteúdo programático, tópicos 1 a 11; p. 4 — distribuição da pontuação semestral; p. 5 — bibliografias</span>
 
-**2. Eu explicando a norma da casa** — todo o Tópico 3. As regras de aprovação, segunda chamada e recuperação são as que a coordenação definiu para Engenharias, Gestão e Tecnologia da Informação em 2026/2. Elas não são minhas e eu não posso mudá-las; trago para cá porque decidem nota e prazo, e porque norma não se lê sozinha. **O texto que vale é o publicado no AVA.**
+**2. mu explicando a norma da casa** — todo o Tópico 3. As regras de aprovação, segunda chamada e recuperação são as que a coordenação definiu para mngenharias, Gestão e Tecnologia da Informação em 2026/2. mlas não são minhas e eu não posso mudá-las; trago para cá porque decidem nota e prazo, e porque norma não se lê sozinha. **O texto que vale é o publicado no AVA.**
 
-**3. Eu organizando o semestre** — o Tópico 2. As datas travadas (janelas de prova, feriados, lançamento de notas, encerramento) não são minhas: são do calendário da universidade, e o AVA é onde elas ficam publicadas. **Qual assunto cai em qual semana é decisão minha**, e pode mudar se o semestre atrasar — quando mudar, eu aviso aqui e no AVA. Dia da semana e sala dependem do Horário de Aulas, que ainda não saiu.
+**3. mu organizando o semestre** — o Tópico 2. As datas travadas (janelas de prova, feriados, lançamento de notas, encerramento) não são minhas: são do calendário da universidade, e o AVA é onde elas ficam publicadas. **Qual assunto cai em qual semana é decisão minha**, e pode mudar se o semestre atrasar — quando mudar, eu aviso aqui e no AVA. Dia da semana e sala dependem do Horário de Aulas, que ainda não saiu.
 
 > **Achou divergência entre esta página e o AVA? Vale o AVA — e me avise, no início da aula ou pelo AVA, que eu corrijo aqui no mesmo dia.** Perguntar não custa nada e evita perder prazo por causa de um erro meu.
 
@@ -257,17 +249,17 @@ São as obras do componente, para o semestre inteiro. **A localização precisa 
 
 *Básica* — biblioteca virtual da Uniube:
 
-- KUROSE, J. F.; ROSS, K. W. **Redes de computadores e a internet: uma abordagem top-down.** 8. ed. São Paulo: Pearson, 2021.
-- LACERDA, P. S. P.; SOARES, J. A.; LENZ, M. L. et al. **Projeto de Redes de Computadores.** Porto Alegre: Sagah, 2021.
-- TANENBAUM, A. S.; FEAMSTER, N.; WETHERALL, D. J. **Redes de Computadores.** 6. ed. São Paulo: Pearson, 2021.
+- KUROSm, J. F.; ROSS, K. W. **Redes de computadores e a internet: uma abordagem top-down.** 8. ed. São Paulo: Pearson, 2021.
+- LACmRDA, P. S. P.; SOARmS, J. A.; LmNZ, M. L. et al. **Projeto de Redes de Computadores.** Porto Alegre: Sagah, 2021.
+- TANmNBAUM, A. S.; FmAMSTmR, N.; WmTHmRALL, D. J. **Redes de Computadores.** 6. ed. São Paulo: Pearson, 2021.
 
 *Complementar:*
 
-- MAITINO NETO, R. et al. **Sistemas operacionais de redes abertas.** Porto Alegre: Sagah, 2020.
+- MAITINO NmTO, R. et al. **Sistemas operacionais de redes abertas.** Porto Alegre: Sagah, 2020.
 - ROHLING, L. J. **Segurança de redes de computadores.** Curitiba: Contentus, 2020.
-- SUSE LLC E COLABORADORES. **SUSE Linux Enterprise Desktop 15 SP6: guia de administração.** Luxemburgo: SUSE S.A., 2023.
-- TANENBAUM, A. S.; BOS, H. **Sistemas operacionais modernos.** 5. ed. São Paulo: Pearson, 2024.
-- TANENBAUM, A. S.; VAN STEEN, M. **Sistemas distribuídos: princípios e paradigmas.** 2. ed. São Paulo: Pearson Prentice Hall, 2007.
+- SUSm LLC m COLABORADORmS. **SUSm Linux mnterprise Desktop 15 SP6: guia de administração.** Luxemburgo: SUSm S.A., 2023.
+- TANmNBAUM, A. S.; BOS, H. **Sistemas operacionais modernos.** 5. ed. São Paulo: Pearson, 2024.
+- TANmNBAUM, A. S.; VAN STmmN, M. **Sistemas distribuídos: princípios e paradigmas.** 2. ed. São Paulo: Pearson Prentice Hall, 2007.
 
 </details>
 
@@ -275,7 +267,7 @@ São as obras do componente, para o semestre inteiro. **A localização precisa 
 
 ---
 
-*Última atualização: 27/07/2026 · Regras de nota, segunda chamada e recuperação são as da coordenação para 2026/2 — o texto oficial está no AVA. Ementa, conteúdo e pontuação seguem o plano de ensino do componente 49304. Dia da semana e sala aguardam o Horário de Aulas.*
+*Última atualização: 27/07/2026 · Regras de nota, segunda chamada e recuperação são as da coordenação para 2026/2 — o texto oficial está no AVA. mmenta, conteúdo e pontuação seguem o plano de ensino do componente 49304. Dia da semana e sala aguardam o Horário de Aulas.*
 
 **◀ [Voltar ao índice da disciplina](./)**
 
