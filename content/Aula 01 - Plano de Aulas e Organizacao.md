@@ -31,27 +31,21 @@ tags: [redes1, 2026-2, contrato, apresentacao]
 
 Começo por aqui porque é o que vale a partir de agora, não em novembro.
 
-### As regras, e elas não estão em votação
+### As regras
 
-Estas são minhas. Não são proposta, não vamos votar, e eu não abro exceção individual — abrir para um é desfazer para todos.
+1. **Celular e fone de ouvido são proibidos em sala.** Quem quiser usar, sai da sala.
+2. **A chamada tem hora limite: 15 minutos depois do início.**
+3. **Quem chega atrasado entra em silêncio.**
+4. **Não abordar o professor nos corredores** com problemas de disciplina, avaliações e afins.
+5. **O professor não responde WhatsApp.** A comunicação é pelo **AVA** ou por **romualdo.filho@uniube.br**.
 
-| # | A regra | Por quê |
-| :-: | :--- | :--- |
-| **1** | **Celular e fone de ouvido são proibidos em sala.** Quem precisar usar, sai da sala e volta depois. | Não é moralismo: é que o aparelho aberto derruba o seu rendimento e o de quem senta do lado. Sair não é punição — é a alternativa honesta a fingir que está acompanhando. |
-| **2** | **A chamada fecha às 21:00**, quinze minutos depois do início. | Depois disso eu não abro a lista de novo. Frequência é requisito de aprovação junto com a nota, e a régua é a mesma para os 30. |
-| **3** | **Quem chega atrasado entra em silêncio.** | Entrar sem interromper custa nada. A abertura é curta e é onde eu digo o que muda na semana. |
-| **4** | **Assunto de disciplina não se resolve no corredor.** Nota, avaliação, falta, prazo — nada disso no caminho da sala. | No corredor eu não tenho o diário, não tenho o AVA e não tenho o seu histórico na frente. Qualquer resposta que eu der ali vai ser chute, e chute meu vira problema seu. |
-| **5** | **Eu não respondo WhatsApp.** Comunicação é pelo **AVA** ou por **romualdo.filho@uniube.br**. | Os dois canais ficam registrados e eu consigo achar depois. WhatsApp some, e "eu te avisei" sem registro não vale para nenhum de nós. |
+### Sobre inteligência artificial
 
-### Sobre inteligência artificial: eu incentivo
-
-Vou usar IA com vocês, e em algumas aulas vou entregar os prompts prontos. Não tenho interesse em caçar ninguém.
-
-A linha é uma só, simples de enunciar e fácil de verificar:
+Eu incentivo o uso — inclusive em algumas aulas vamos entregar prompts prontos para vocês.
 
 > **A IA ajuda. A IA não cria.**
 
-Ela pode explicar, revisar, sugerir caminho, destravar. O que ela **não** pode é ser a autora do que você entrega. O teste que eu aplico é direto: se eu apontar para uma linha da sua entrega e perguntar por que está assim, você precisa saber responder. Não sabendo, aquilo não é seu — e o que não é seu não vale ponto.
+Ela pode ajudar. O que ela **não** pode é criar por você.
 
 ---
 
@@ -97,9 +91,6 @@ A estrutura abaixo é **oficial**: as unidades e a numeração são do plano de 
 | **11** | Conexão com provedores de Internet (ISP) | S16 |
 
 **A ferramenta do semestre é o Cisco Packet Tracer**, e ela entra na **S10**, junto com a Unidade 4. Até lá não precisa instalar nada. Quando chegar a hora eu aviso com antecedência — a conta no NetAcad é gratuita.
-
-> [!TIP] 💡 Onde isto costuma doer depois
-> **Endereçamento IP e sub-redes (S07 e S08)** é o bloco que mais volta a pesar. Ele é pré-requisito direto de Redes de Computadores II, e quem sai daqui com máscara e gateway mal resolvidos paga de novo no semestre seguinte, multiplicado. Se em algum momento você tiver que escolher onde recuperar atraso, recupere aí.
 
 ---
 
@@ -225,10 +216,11 @@ A consequência é contraintuitiva e vale entender agora, não em dezembro: **qu
 | **Turma 12** · segunda | VIA232 · **16 encontros** · perde 31/08, 07/09, 12/10, 02/11 |
 | **Turma 13** · quarta | VIA207 · **20 encontros** · não perde nenhum |
 | **Ferramenta** | Cisco Packet Tracer, a partir da **S10** |
-| **Celular** | Proibido em sala. Precisa usar, sai da sala |
-| **Chamada** | Fecha às **21:00** |
-| **Falar comigo** | AVA ou **romualdo.filho@uniube.br**. Não é WhatsApp e não é corredor |
-| **IA** | Incentivada. **Ajuda, não cria** — você tem que saber explicar o que entregou |
+| **Celular e fone** | Proibidos em sala. Quem quiser usar, sai da sala |
+| **Chamada** | Hora limite: **15 min depois do início** — às **21:00** |
+| **Corredor** | Disciplina, avaliação e afins **não** se tratam no corredor |
+| **Falar comigo** | AVA ou **romualdo.filho@uniube.br** — **não** respondo WhatsApp |
+| **IA** | Incentivada. **A IA ajuda, a IA não cria** |
 | **Encerramento do semestre** | 19/12 |
 
 </div>
