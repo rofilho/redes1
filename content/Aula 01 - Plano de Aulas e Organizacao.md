@@ -6,7 +6,7 @@ aula: 1
 tipo: pratica
 semana: 1
 date: 2026-07-27
-anatomia: nao  # contrato conduzido, nao aula com dinamica — decidido com o professor em 28/07
+anatomia: nao  # contrato conduzido, nao aula com dinamica
 tags: [redes1, 2026-2, contrato, apresentacao]
 ---
 
@@ -41,7 +41,7 @@ Começo por aqui porque é o que vale a partir de agora, não em novembro.
 
 ### Sobre inteligência artificial
 
-Eu incentivo o uso — inclusive em algumas aulas vamos entregar prompts prontos para vocês.
+Eu incentivo o uso.
 
 > **A IA ajuda. A IA não cria.**
 
@@ -113,7 +113,7 @@ O calendário da universidade tem cinco sábados letivos de reposição:
 
 A Turma 12 perde quatro encontros, e os sábados são cinco. Mas **eu ainda não confirmei com a secretaria qual sábado repõe qual segunda**, e não anuncio data de aula por suposição minha. Quando a secretaria fechar, publico no AVA e atualizo esta página no mesmo dia.
 
-**O que a Turma 12 pode contar desde já:** o conteúdo não vai ser cortado. Se a reposição de sábado não cobrir os quatro encontros, o que encolhe é o aprofundamento de **redes sem fio (S17)** — nessa ordem, e nunca endereçamento, roteamento ou serviços, que são o pré-requisito de Redes II.
+**O que a Turma 12 pode contar desde já:** o conteúdo não vai ser cortado. **Se a reposição não cobrir os quatro encontros, eu digo em sala o que encolhe — e endereçamento, roteamento e serviços não entram nessa conta**, porque são pré-requisito de Redes II. `[CONFIRMAR: qual conteúdo cede primeiro]`
 
 ### Semana a semana
 
@@ -161,7 +161,7 @@ A distribuição abaixo é **oficial e não muda** — está no plano de ensino 
 
 ### O que isso significa na prática
 
-**70 dos 100 pontos são prova.** É a maior parte, e não adianta fingir o contrário. Mas **30 pontos não são prova** — 15 de atividade e 15 de Uniube+ — e esses 30 são os mais baratos do semestre: dependem de entregar, não de acertar sob pressão. Quem chega na prova da N2 já tendo garantido a maior parte deles disputa uma faixa muito mais confortável.
+**70 dos 100 pontos são prova.** É a maior parte, e não adianta fingir o contrário. Mas **30 pontos não são prova** — 15 de atividade e 15 de Uniube+.
 
 > [!WARNING] ⚠️ O que ainda não está definido — e eu não vou inventar
 > - **As atividades que valem os 15 pontos** (5 na N1, 10 na N2): quantas, quais e em que semanas — **ainda não decidi.** Vou definir levando em conta que qualquer coisa valendo ponto tem que cair em semana que as **duas** turmas têm.
@@ -204,7 +204,7 @@ Quem chega na faixa dos 40–59 com o AVA zerado **não tem direito à recupera�
 
 E o mecanismo importa: a recuperação vale o total das provas do semestre — **25 + 30 = 55 pontos** — e **substitui** as notas das provas, que são zeradas. Ela não soma em cima do que você já tinha.
 
-A consequência é contraintuitiva e vale entender agora, não em dezembro: **quem foi bem nas provas e mal na atividade contínua não se beneficia da recuperação** — jogaria fora justamente a parte boa. Ela foi desenhada para quem tem provas fracas e nota contínua de pé. Somado ao teto de 60, ninguém sai da recuperação com mais do que o mínimo de aprovação.
+A consequência é contraintuitiva e vale entender agora, não em dezembro: **quem foi bem nas provas e mal na atividade contínua não se beneficia da recuperação** — jogaria fora justamente a parte boa. Somado ao teto de 60, ninguém sai da recuperação com mais do que o mínimo de aprovação.
 
 ---
 
