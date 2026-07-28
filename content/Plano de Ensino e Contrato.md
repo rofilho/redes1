@@ -216,9 +216,9 @@ São mecanismos diferentes, com regras diferentes — e o prazo de um deles é d
 
 **Segunda chamada (substitutiva)** — a segunda chance de quem **faltou** à prova. Pede-se pelo **SAE, em até 3 dias úteis**.
 
-**Recuperação** — a segunda chance de quem **fez** as provas e fechou entre **40 e 59** pontos. Os requisitos estão no Tópico 3; data, horário e a forma de acesso eu confirmo com a coordenação e publico no AVA.
+**Recuperação** — a segunda chance de quem **fez** as provas e fechou entre **40 e 59** pontos. Os requisitos estão no Tópico 3. A data é minha: pela norma ela só pode cair depois da segunda chamada, então fica em **17 ou 18/12** — confirmo no AVA junto com o resultado da N2.
 
-**Sala de aula invertida** — parte do conteúdo é estudada **antes** do encontro, no AVA; o tempo presencial fica para problema, dúvida e laboratório. É o que as 12 h não presenciais significam na prática.
+**Sala de aula invertida** — parte do conteúdo é estudada **antes** do encontro, no AVA; o tempo presencial fica para problema, dúvida e laboratório. É o que as 12 h/a não presenciais significam na prática.
 
 ---
 

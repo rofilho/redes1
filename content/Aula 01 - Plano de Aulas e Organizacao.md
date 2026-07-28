@@ -64,7 +64,7 @@ A ideia: **a rede tem camadas**, e cada uma pode falhar sozinha. A velocidade co
 > - [Plano de Ensino e Contrato](./Plano-de-Ensino-e-Contrato) — a referência do semestre
 > - [Cisco Packet Tracer + conta NetAcad](https://www.netacad.com/) — grátis; obrigatório a partir da **S10** (Unidade 4, simulação). Crie a conta na primeira semana, não na véspera.
 > - [Wireshark](https://www.wireshark.org/download.html) — analisador de tráfego, grátis; instale só quando eu avisar, com duas semanas de antecedência
-> - AVA Uniube On-line — as **12 h não presenciais** e as atividades do Uniube+
+> - AVA Uniube On-line — as **12 h/a não presenciais** e as atividades do Uniube+
 
 ### ⏱️ Como os minutos desta aula são gastos
 
@@ -95,9 +95,9 @@ Cinco termos que vão decidir a sua nota e que quase ninguém lê a tempo:
 
 **Segunda chamada (substitutiva)** — a segunda chance de quem **faltou** à prova. Pede-se pelo **SAE, em até 3 dias úteis**.
 
-**Recuperação** — a segunda chance de quem **fez** as provas e fechou entre **40 e 59** pontos. Os requisitos estão no Tópico 3 do plano; data, horário e a forma de acesso eu confirmo com a coordenação e publico no AVA.
+**Recuperação** — a segunda chance de quem **fez** as provas e fechou entre **40 e 59** pontos. Os requisitos estão no Tópico 3 do plano. A data é minha: pela norma ela só pode cair depois da segunda chamada, então fica em **17 ou 18/12** — confirmo no AVA junto com o resultado da N2.
 
-**Sala de aula invertida** — parte do conteúdo é estudada **antes** do encontro, no AVA; o tempo presencial fica para problema, dúvida e laboratório. É o que as 12 h não presenciais significam na prática.
+**Sala de aula invertida** — parte do conteúdo é estudada **antes** do encontro, no AVA; o tempo presencial fica para problema, dúvida e laboratório. É o que as 12 h/a não presenciais significam na prática.
 
 </aside>
 
