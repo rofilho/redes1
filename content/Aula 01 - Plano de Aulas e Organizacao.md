@@ -1,280 +1,272 @@
 ---
-title: "Aula 01 — Apresentação e Contrato da Disciplina"
+title: "Aula 01 — Contrato da Disciplina"
 disciplina: Redes de Computadores I
+codigo: "49304"
 aula: 1
 tipo: pratica
 semana: 1
 date: 2026-07-27
+anatomia: nao  # contrato conduzido, nao aula com dinamica — decidido com o professor em 28/07
 tags: [redes1, 2026-2, contrato, apresentacao]
 ---
 
 <div class="au-leitura" data-aula="s01">
 
-# 🟢 Aula 01 — Apresentação e Contrato da Disciplina
+# 🟢 Aula 01 — Contrato da Disciplina
 
-**Disciplina:** 49304 — Redes de Computadores I · Sistemas de Informação — Uniube<br>
-**Professor:** Romualdo Mathias Filho<br>
-**Semana:** 1 · Semana de **27/07/2026**<br>
-**Documento de referência:** [Plano de Ensino e Contrato](./Plano-de-Ensino-e-Contrato) — é lá que mora tudo o que esta aula apresenta.
+**Disciplina:** 49304 — Redes de Computadores I · Curso 160, Sistemas de Informação — Uniube<br>
+**Professor:** Romualdo Mathias Filho · **romualdo.filho@uniube.br**<br>
+**Turma 12:** segunda-feira · 20:45–22:00 · **VIA232** · primeira aula 27/07/2026<br>
+**Turma 13:** quarta-feira · 20:45–22:00 · **VIA207** · primeira aula 29/07/2026<br>
+**Carga horária:** 42 h/a — 30 presenciais (prática) + 12 no AVA
 
-> [!NOTE] 📋 Esta aula é a exceção do semestre
-> O plano de ensino classifica as 30 h/a presenciais como **prática** — não existe encontro teórico separado. Nota, prazo e regra eu digo uma vez só, com todo mundo junto, antes do primeiro laboratório. **Esta é a única aula do semestre em que a sala não vai construir nada.** O conteúdo de redes começa na Aula 02.
-
----
-
-<div class="au-caminho">
-<b>Nosso caminho até aqui</b>
-
-Esta é a primeira aula, então o "até aqui" não é matéria — é a sua experiência com qualquer disciplina que você já cursou, mais uma amostra do que vem por aí. Responda de cabeça **antes** de abrir cada resposta. Errar aqui é de graça.
-
-<details>
-<summary>De 100 pontos numa disciplina da Uniube, quantos você acha que dá para garantir sem acertar uma única questão de prova?</summary>
-
-**Trinta.** 15 pontos de atividades (laboratório e PBL — aprendizagem baseada em problemas) + 15 do Uniube+ **não são prova** — são entregas ao longo do semestre, e quem entrega no prazo pega a maior parte deles. A conta completa está no [plano da disciplina](./Plano-de-Ensino-e-Contrato).
-
-</details>
-
-<details>
-<summary>Você faltou a uma prova com atestado médico. Entregar o atestado ao professor resolve?</summary>
-
-**Não.** Pela norma institucional, o caminho é abrir um **SAE no AVA em até 3 dias úteis**, com o atestado anexado. Quem analisa é a coordenação; o professor não pode nem receber o documento. Passou o prazo, indefere.
-
-</details>
-
-<details>
-<summary>Por que o Wi-Fi fica ruim em um cômodo específico da casa, mesmo com o plano de internet contratado sendo rápido?</summary>
-
-**Porque o problema não está na internet, está no meio físico.** Parede, distância e interferência degradam o sinal entre o seu aparelho e o roteador — um trecho que a operadora nem enxerga.
-
-A ideia: **a rede tem camadas**, e cada uma pode falhar sozinha. A velocidade contratada é de uma camada; a parede é de outra. É esta pergunta que a **Aula 02** começa a responder — hoje é só a aposta.
-
-</details>
-</div>
-
-> [!INFO] 🎯 Visão geral e recursos
-> Hoje eu apresento o **contrato do semestre** e a turma fecha os acordos da sala. O documento completo — ementa, calendário das 20 semanas, nota, recuperação, bibliografia — é a página [Plano de Ensino e Contrato](./Plano-de-Ensino-e-Contrato): esta aula apresenta, aquela página guarda.
+> [!NOTE] 📄 Esta página é o contrato inteiro
+> Tudo o que decide a sua nota, o seu prazo e a sua frequência está **aqui**, e só aqui. Não existe segunda página com a mesma regra escrita de outro jeito. Se você só puder guardar um link do semestre, guarde este.
 >
-> **O que você leva desta aula**
-> - Onde os **100 pontos** são ganhos — e os 30 que não dependem de prova.
-> - As datas que travam o semestre: provas, segunda chamada, recuperação.
-> - O prazo de **3 dias úteis** do SAE para a segunda chamada.
-> - As **regras de sala**, votadas — não decretadas.
+> Ela está organizada na ordem em que a aula acontece — do momento em que você senta até o momento em que sai. Dá para acompanhar em tempo real, e dá para reabrir em novembro procurando uma data.
+
+---
+
+## 🕘 20:45 · Como esta sala funciona
+
+Começo por aqui porque é o que vale a partir de agora, não em novembro.
+
+### As regras, e elas não estão em votação
+
+Estas são minhas. Não são proposta, não vamos votar, e eu não abro exceção individual — abrir para um é desfazer para todos.
+
+| # | A regra | Por quê |
+| :-: | :--- | :--- |
+| **1** | **Celular e fone de ouvido são proibidos em sala.** Quem precisar usar, sai da sala e volta depois. | Não é moralismo: é que o aparelho aberto derruba o seu rendimento e o de quem senta do lado. Sair não é punição — é a alternativa honesta a fingir que está acompanhando. |
+| **2** | **A chamada fecha às 21:00**, quinze minutos depois do início. | Depois disso eu não abro a lista de novo. Frequência é requisito de aprovação junto com a nota, e a régua é a mesma para os 30. |
+| **3** | **Quem chega atrasado entra em silêncio.** | Entrar sem interromper custa nada. A abertura é curta e é onde eu digo o que muda na semana. |
+| **4** | **Assunto de disciplina não se resolve no corredor.** Nota, avaliação, falta, prazo — nada disso no caminho da sala. | No corredor eu não tenho o diário, não tenho o AVA e não tenho o seu histórico na frente. Qualquer resposta que eu der ali vai ser chute, e chute meu vira problema seu. |
+| **5** | **Eu não respondo WhatsApp.** Comunicação é pelo **AVA** ou por **romualdo.filho@uniube.br**. | Os dois canais ficam registrados e eu consigo achar depois. WhatsApp some, e "eu te avisei" sem registro não vale para nenhum de nós. |
+
+### Sobre inteligência artificial: eu incentivo
+
+Vou usar IA com vocês, e em algumas aulas vou entregar os prompts prontos. Não tenho interesse em caçar ninguém.
+
+A linha é uma só, simples de enunciar e fácil de verificar:
+
+> **A IA ajuda. A IA não cria.**
+
+Ela pode explicar, revisar, sugerir caminho, destravar. O que ela **não** pode é ser a autora do que você entrega. O teste que eu aplico é direto: se eu apontar para uma linha da sua entrega e perguntar por que está assim, você precisa saber responder. Não sabendo, aquilo não é seu — e o que não é seu não vale ponto.
+
+---
+
+## 🕘 21:00 · O que é Redes de Computadores I
+
+### Em uma frase
+
+Ao final do semestre você deve conseguir **planejar, configurar e testar** uma rede local ou de médio porte — endereçar, ligar redes distintas por um roteador, colocar serviços no ar e diagnosticar quando não funciona.
+
+Isso é o **perfil do egresso** que o plano de ensino define, não uma promessa minha.
+
+### A disciplina é 100% prática
+
+O plano de ensino distribui as 42 h/a assim:
+
+| | Horas-aula | O que é |
+| :--- | :-: | :--- |
+| **Presencial — prática** | **30** | Nossos encontros. Note: presencial **teórica é zero** |
+| **Não presencial — teórica** | **12** | AVA Uniube On-line. **É carga da disciplina, não material extra** |
+| **Total** | **42** | |
+
+Duas consequências que valem dizer em voz alta:
+
+1. **Não existe aula teórica separada.** O que for teoria acontece dentro do encontro prático, ou no AVA antes dele. É a sala de aula invertida que o plano prevê: você chega tendo lido, e o tempo presencial vai para o problema.
+2. **As 12 h/a do AVA não são opcionais.** São quase um terço da carga. Quem trata o AVA como extra está deixando 12 h/a de lado — e é lá que mora parte do que decide nota.
+
+### Os 11 blocos de conteúdo
+
+A estrutura abaixo é **oficial**: as unidades e a numeração são do plano de ensino da Uniube, não minhas. A coluna da direita é a **minha** organização — em que semana cada uma cai.
+
+| # | Unidade oficial | Semana |
+| :-: | :--- | :-- |
+| **1** | Conceitos básicos de redes · componentes, tipos e conexões | S02 · S03 |
+| **2** | Os modelos de referência OSI e TCP/IP | S04 · S05 · S06 |
+| **3** | Bases do endereçamento IP · classes, público × privado, CIDR, DNS | S07 · S08 |
+| **4** | Cenários no Cisco Packet Tracer · dois hosts, duas redes, gateway | S10 · S11 |
+| **5** | Roteamento e cenários roteados · rotas estáticas | S12 · S13 |
+| **6** | Comandos de configuração em roteadores Cisco | S13 |
+| **7** | Servidores DNS e Web em cenários de rede | S14 · S15 |
+| **8** | Dispositivos, clientes, servidores e conectividade | S16 · S18 |
+| **9** | Redes ponto a ponto (P2P) | S18 |
+| **10** | Redes sem fio e mobilidade | S17 |
+| **11** | Conexão com provedores de Internet (ISP) | S16 |
+
+**A ferramenta do semestre é o Cisco Packet Tracer**, e ela entra na **S10**, junto com a Unidade 4. Até lá não precisa instalar nada. Quando chegar a hora eu aviso com antecedência — a conta no NetAcad é gratuita.
+
+> [!TIP] 💡 Onde isto costuma doer depois
+> **Endereçamento IP e sub-redes (S07 e S08)** é o bloco que mais volta a pesar. Ele é pré-requisito direto de Redes de Computadores II, e quem sai daqui com máscara e gateway mal resolvidos paga de novo no semestre seguinte, multiplicado. Se em algum momento você tiver que escolher onde recuperar atraso, recupere aí.
+
+---
+
+## 🕘 21:20 · O calendário da sua turma
+
+**As duas turmas não têm o mesmo número de encontros.** Isso não é detalhe administrativo — é a informação mais importante desta seção, e você precisa saber em qual coluna está.
+
+| | **Turma 12** · segunda | **Turma 13** · quarta |
+| :--- | :--- | :--- |
+| Sala | VIA232 | VIA207 |
+| Encontros no semestre | **16** | **20** |
+| Feriados que caem no seu dia | **4** — 31/08, 07/09, 12/10, 02/11 | **nenhum** |
+| Carga presencial efetiva | 24 h/a — **80%** | 30 h/a — 100% |
+
+Existem **cinco sábados letivos de reposição** no calendário da universidade: **29/08 · 12/09 · 03/10 · 24/10 · 07/11**. A Turma 12 perde exatamente quatro encontros e há cinco sábados — mas **eu ainda não confirmei com a secretaria qual sábado repõe qual segunda**, e não vou anunciar data de aula com base em suposição minha. Assim que a secretaria fechar, publico no AVA e atualizo esta página no mesmo dia.
+
+**O que a Turma 12 pode contar desde já:** o conteúdo não vai ser cortado. Se a reposição de sábado não cobrir os quatro encontros, o que encolhe é o aprofundamento de **redes sem fio (S17)** — nessa ordem, e nunca endereçamento, roteamento ou serviços, que são o pré-requisito de Redes II.
+
+### Semana a semana
+
+| S | Turma 12 · seg | Turma 13 · qua | Assunto |
+| :-: | :-- | :-- | :--- |
+| **01** | 27/07 | 29/07 | Contrato da disciplina |
+| **02** | 03/08 | 05/08 | Componentes, tipos e conexões de rede |
+| **03** | 10/08 | 12/08 | Topologias e meios de transmissão |
+| **04** | 17/08 | 19/08 | Camada física e de enlace · Ethernet |
+| **05** | 24/08 | 26/08 | Modelos OSI e TCP/IP |
+| **06** | 🚫 31/08 | 02/09 | Protocolos de cada camada |
+| **07** | 🚫 07/09 | 09/09 | Endereçamento IPv4 · classes, público × privado, CIDR |
+| **08** | 14/09 | 16/09 | Sub-redes e VLSM · revisão para a N1 |
+| **09** | 21/09 | 23/09 | 🎯 **PROVA N1** — dentro da janela 21 a 30/09 |
+| **10** | 28/09 | 30/09 | Vista da N1 · introdução ao Packet Tracer |
+| **11** | 05/10 | 07/10 | Packet Tracer: dois hosts e um switch; duas redes com roteador |
+| **12** | 🚫 12/10 | 14/10 | Roteamento IP e gateway padrão |
+| **13** | 19/10 | 21/10 | Rotas estáticas · comandos Cisco |
+| **14** | 26/10 | 28/10 | Serviços de rede: DNS |
+| **15** | 🚫 02/11 | 04/11 | Servidores Web (HTTP/HTTPS) no cenário |
+| **16** | 09/11 | 11/11 | Conectividade com ISP · endereçamento público e privado |
+| **17** | 16/11 | 18/11 | Redes sem fio (802.11) e mobilidade |
+| **18** | 23/11 | 25/11 | P2P, clientes e servidores · noções de segurança |
+| **19** | 30/11 | 02/12 | 🎯 **PROVA N2** — dentro da janela 1º a 11/12 |
+| **20** | 07/12 | 09/12 | Vista da N2 e encerramento |
+
+🚫 = feriado, sem aula. **Encerramento do semestre letivo: 19/12.**
+
+O **dia exato** de cada prova dentro da janela eu confirmo e publico no AVA com antecedência. A janela é institucional; o dia, dentro dela, é meu.
+
+---
+
+## 🕘 21:35 · Os 100 pontos
+
+A distribuição abaixo é **oficial e não muda** — está no plano de ensino da Uniube, e nem eu nem vocês podemos alterá-la.
+
+| Momento | Vale | Prova | Atividade | Uniube+ |
+| :--- | :-: | :-: | :-: | :-: |
+| **N1** | **35** | 25 | 5 | 5 |
+| **N2** | **50** | 30 | 10 | 10 |
+| **Avaliação Institucional** | **15** | 15 | — | — |
+| **Total** | **100** | **70** | **15** | **15** |
+
+**Aprovação exige as duas coisas ao mesmo tempo: 60 pontos e 75% de frequência.** Nota alta não compensa falta, e presença não compensa nota.
+
+### O que isso significa na prática
+
+**70 dos 100 pontos são prova.** É a maior parte, e não adianta fingir o contrário. Mas **30 pontos não são prova** — 15 de atividade e 15 de Uniube+ — e esses 30 são os mais baratos do semestre: dependem de entregar, não de acertar sob pressão. Quem chega na prova da N2 já tendo garantido a maior parte deles disputa uma faixa muito mais confortável.
+
+> [!WARNING] ⚠️ O que ainda não está definido — e eu não vou inventar
+> - **As atividades que valem os 15 pontos** (5 na N1, 10 na N2): quantas, quais e em que semanas — **ainda não decidi.** Vou definir levando em conta que qualquer coisa valendo ponto tem que cair em semana que as **duas** turmas têm.
+> - **O Uniube+** (5 na N1, 10 na N2): formato e prazos são definidos pela coordenação e lançados pelo AVA. Aguardando.
+> - **A Avaliação Institucional** (15 pontos): data e formato são da instituição. Aguardando.
 >
-> **📂 Recursos**
-> - [Plano de Ensino e Contrato](./Plano-de-Ensino-e-Contrato) — a referência do semestre
-> - [Cisco Packet Tracer + conta NetAcad](https://www.netacad.com/) — grátis; obrigatório a partir da **S10** (Unidade 4, simulação). Crie a conta na primeira semana, não na véspera.
-> - [Wireshark](https://www.wireshark.org/download.html) — analisador de tráfego, grátis; instale só quando eu avisar, com duas semanas de antecedência
-> - AVA Uniube On-line — as **12 h/a não presenciais** e as atividades do Uniube+
-
-### ⏱️ Como os minutos desta aula são gastos
-
-O plano de ensino conta **30 horas-aula presenciais**. Uma hora-aula tem 50 minutos, não 60. São 30 delas em 20 semanas: o encontro semanal fica em torno de **75 minutos**. É esse o tempo que a tabela abaixo divide.
-
-| Min | Bloco | Onde está |
-| :-- | :--- | :--- |
-| 0–5 | Entrada, chamada, apresentações | — |
-| 5–14 | **Nosso caminho até aqui** — as três perguntas sobre como o jogo funciona | bloco de abertura |
-| 14–30 | **A disciplina em 16 minutos** — o que Redes I cobre e o mapa do semestre | Tópico 1 |
-| 30–33 | Pausa — comparar anotações com o colega | — |
-| 33–48 | **Nota, prazos e segundas chances** — os 100 pontos, SAE, recuperação | Tópico 2 |
-| 48–58 | **Regras de sala** — propostas e votação | Slot interativo |
-| 58–66 | Dúvidas abertas sobre o contrato | — |
-| 66–70 | Reflexão + bilhete de saída | Fechamento |
-| **70–75** | **Folga** — dúvida longa, sala trocada, problema de matrícula | — |
-
-> ⚠️ **O que ainda não está confirmado é o dia da semana e a sala** — e, com eles, a duração exata do encontro. Assim que o Horário de Aulas sair, atualizo o [plano da disciplina](./Plano-de-Ensino-e-Contrato) e aviso no AVA. Se o encontro for maior que 75 min, sobra mais folga no fim — a tabela acima não muda.
-
-<aside class="au-antes">
-<b class="au-nota-t">Antes de começar</b>
-
-Cinco termos que vão decidir a sua nota e que quase ninguém lê a tempo:
-
-**Uniube+** — rubrica institucional que vale **15 pontos** no semestre (5 na N1, 10 na N2), lançada pelo AVA. O formato e os prazos são definidos pela coordenação; assim que saírem, publico no plano da disciplina.
-
-**SAE** — a solicitação formal aberta pelo aluno no AVA. É por ele que se pede a segunda chamada: a justificativa e o atestado vão anexados, e quem analisa é a coordenação.
-
-**Segunda chamada (substitutiva)** — a segunda chance de quem **faltou** à prova. Pede-se pelo **SAE, em até 3 dias úteis**.
-
-**Recuperação** — a segunda chance de quem **fez** as provas e fechou entre **40 e 59** pontos. Os requisitos estão no Tópico 3 do plano. A data é minha: pela norma ela só pode cair depois da segunda chamada, então fica em **17 ou 18/12** — confirmo no AVA junto com o resultado da N2.
-
-**Sala de aula invertida** — parte do conteúdo é estudada **antes** do encontro, no AVA; o tempo presencial fica para problema, dúvida e laboratório. É o que as 12 h/a não presenciais significam na prática.
-
-</aside>
+> Os três serão publicados **no AVA**, e esta página é atualizada no mesmo dia. Enquanto estiver escrito "aguardando" aqui, é porque eu não sei — não porque esqueci de contar.
 
 ---
 
-## 📌 1. A disciplina em 16 minutos [⏳ 16 min + 3 de pausa]
+## 🕘 21:50 · Se as coisas derem errado
 
-Não vou ler o plano de ensino em voz alta — ele está publicado, íntegro, no [Plano de Ensino e Contrato](./Plano-de-Ensino-e-Contrato). O que cabe aqui é o **mapa**: o que a disciplina cobre, em que ordem, e por quê.
+São dois mecanismos diferentes, para situações diferentes, e as pessoas confundem os dois todo semestre.
 
-### 1.1 O semestre em quatro movimentos
+| | **Segunda chamada** (substitutiva) | **Recuperação** |
+| :--- | :--- | :--- |
+| Para quem | Quem **faltou** à prova | Quem **fez** as provas e ficou entre **40 e 59** pontos |
+| Como pedir | **SAE no AVA, em até 3 dias úteis** da prova perdida, com justificativa anexada | Não se pede: o direito nasce da nota |
+| Data | **14 a 16/12** | Depois de 16/12 — a data é minha, confirmo no AVA junto com o resultado da N2 |
+| Como entra na nota | Substitui a nota daquela prova | **Zera** as duas provas e entra no lugar delas |
+| Teto | Nenhum | **A nota final não passa de 60** |
 
-<figure class="au-fig">
-<svg viewBox="0 0 700 210" role="img" aria-label="Arco do semestre de Redes I em quatro blocos: fundamentos nas semanas 1 a 4, enderecamento nas semanas 5 a 8, prova N1 na semana 9, pratica e roteamento nas semanas 10 a 13, servicos e conectividade nas semanas 14 a 18, e prova N2 na semana 19">
-<rect x="14" y="18" width="150" height="72" rx="6" fill="none" stroke="#2778c4" stroke-width="2"></rect>
-<text x="89" y="39" text-anchor="middle" font-size="12" fill="#2778c4" font-family="monospace" font-weight="bold">BLOCO 1 · S01–S04</text>
-<text x="89" y="56" text-anchor="middle" font-size="10" fill="#8a8f98" font-family="monospace">como a rede funciona</text>
-<text x="89" y="70" text-anchor="middle" font-size="10" fill="#8a8f98" font-family="monospace">topologias · meios</text>
-<text x="89" y="83" text-anchor="middle" font-size="10" fill="#8a8f98" font-family="monospace">física · enlace · OSI</text>
-<line x1="164" y1="54" x2="178" y2="54" stroke="#8a8f98" stroke-width="2"></line>
-<rect x="178" y="18" width="150" height="72" rx="6" fill="none" stroke="#2778c4" stroke-width="2"></rect>
-<text x="253" y="39" text-anchor="middle" font-size="12" fill="#2778c4" font-family="monospace" font-weight="bold">BLOCO 2 · S05–S08</text>
-<text x="253" y="56" text-anchor="middle" font-size="10" fill="#8a8f98" font-family="monospace">quem é quem na rede</text>
-<text x="253" y="70" text-anchor="middle" font-size="10" fill="#8a8f98" font-family="monospace">IPv4 · classes · CIDR</text>
-<text x="253" y="83" text-anchor="middle" font-size="10" fill="#8a8f98" font-family="monospace">sub-redes · VLSM</text>
-<line x1="328" y1="54" x2="342" y2="54" stroke="#8a8f98" stroke-width="2"></line>
-<rect x="342" y="32" width="74" height="44" rx="6" fill="none" stroke="#b1541b" stroke-width="2.5"></rect>
-<text x="379" y="51" text-anchor="middle" font-size="11" fill="#b1541b" font-family="monospace" font-weight="bold">PROVA N1</text>
-<text x="379" y="67" text-anchor="middle" font-size="11" fill="#b1541b" font-family="monospace">S09</text>
-<line x1="416" y1="54" x2="430" y2="54" stroke="#8a8f98" stroke-width="2"></line>
-<rect x="430" y="18" width="150" height="72" rx="6" fill="none" stroke="#2778c4" stroke-width="2"></rect>
-<text x="505" y="39" text-anchor="middle" font-size="12" fill="#2778c4" font-family="monospace" font-weight="bold">BLOCO 3 · S10–S13</text>
-<text x="505" y="56" text-anchor="middle" font-size="10" fill="#8a8f98" font-family="monospace">construir e conectar</text>
-<text x="505" y="70" text-anchor="middle" font-size="10" fill="#8a8f98" font-family="monospace">Packet Tracer · gateway</text>
-<text x="505" y="83" text-anchor="middle" font-size="10" fill="#8a8f98" font-family="monospace">rotas estáticas · CLI</text>
-<line x1="505" y1="90" x2="505" y2="122" stroke="#00aa9f" stroke-width="2" stroke-dasharray="4 3"></line>
-<rect x="392" y="122" width="226" height="66" rx="6" fill="none" stroke="#00aa9f" stroke-width="2"></rect>
-<text x="505" y="143" text-anchor="middle" font-size="12" fill="#00aa9f" font-family="monospace" font-weight="bold">BLOCO 4 · S14–S18</text>
-<text x="505" y="160" text-anchor="middle" font-size="10" fill="#8a8f98" font-family="monospace">serviços e mundo real</text>
-<text x="505" y="174" text-anchor="middle" font-size="10" fill="#8a8f98" font-family="monospace">DNS · HTTP · ISP · Wi-Fi · P2P</text>
-<rect x="626" y="122" width="60" height="66" rx="6" fill="none" stroke="#b1541b" stroke-width="2.5"></rect>
-<text x="656" y="148" text-anchor="middle" font-size="11" fill="#b1541b" font-family="monospace" font-weight="bold">PROVA</text>
-<text x="656" y="164" text-anchor="middle" font-size="11" fill="#b1541b" font-family="monospace">N2</text>
-<text x="656" y="180" text-anchor="middle" font-size="10" fill="#8a8f98" font-family="monospace">S19</text>
-</svg>
-<figcaption class="au-legenda">Azul é conteúdo, laranja é dia de nota, verde é aplicação. A ordem não é arbitrária: você só constrói uma rede no simulador (Bloco 3) depois de saber endereçá-la (Bloco 2), e só endereça depois de entender por onde o sinal passa (Bloco 1). Semana a semana → <a href="./Plano-de-Ensino-e-Contrato">Plano de Ensino e Contrato</a>.</figcaption>
-</figure>
+### O prazo de 3 dias úteis, que é o que mais reprova por descuido
 
-### 1.2 O que fica combinado hoje
+**Faltou à prova? Abra o SAE no AVA em até 3 dias úteis.** Passou o prazo, o curso indefere — e não é decisão minha, é norma institucional.
 
-- **Carga:** 42 h/a — 30 presenciais (prática) + 12 no AVA. O AVA não é material extra, é carga.
-- **Calendário:** 20 semanas, N1 na **S09** (janela 21–30/09), N2 na **S19** (janela 1º–11/12), seis feriados no caminho. A tabela completa está no plano.
-- **Ferramentas:** Packet Tracer + conta NetAcad a partir da S10. Wireshark é opcional, e eu aviso com antecedência se abrir uma sessão de captura.
-- **As duas semanas mais perigosas:** S07 e S08 — endereçamento IPv4 e sub-redes, logo antes da N1.
+E o ponto que sempre pega: **não me entregue atestado.** Nem em papel, nem por e-mail, nem no corredor. Pela norma, o atestado é anexado ao SAE e quem analisa é a coordenação. Documento entregue na minha mão não produz efeito nenhum, e ainda faz você perder o prazo achando que resolveu.
 
-> [!TIP] 💡 Por que esta disciplina é a base de tudo
-> O que se aprende aqui é a base usada nas disciplinas de redes seguintes. O que ficar mal resolvido — principalmente **máscara de sub-rede e gateway** — volta a pesar depois, multiplicado.
+Se você guardar uma única coisa desta aula, que seja esta.
+
+### A recuperação troca, não soma
+
+Os **três requisitos valem juntos**: ter feito todas as provas · estar entre 40 e 59 pontos · não estar com as notas de AVA/Uniube+ zeradas. Quem chega na faixa dos 40–59 com o AVA zerado **não tem direito à recuperação.**
+
+E o mecanismo importa: a recuperação vale o total das provas do semestre — **25 + 30 = 55 pontos** — e **substitui** as notas das provas, que são zeradas. Ela não soma em cima do que você já tinha.
+
+A consequência é contraintuitiva e vale entender agora, não em dezembro: **quem foi bem nas provas e mal na atividade contínua não se beneficia da recuperação** — jogaria fora justamente a parte boa. Ela foi desenhada para quem tem provas fracas e nota contínua de pé. Somado ao teto de 60, ninguém sai da recuperação com mais do que o mínimo de aprovação.
 
 ---
 
-## 📌 2. Nota, prazos e segundas chances [⏳ 15 min]
+## 🕘 22:00 · O que fazer nesta semana
 
-Antes da lista, uma aposta. **Escreva o número no papel** antes de abrir a resposta — ela vale mais se você tiver se comprometido primeiro.
-
-> **O semestre tem seis feriados. Quantos deles caem numa segunda ou terça-feira?**
-
-<details class="au-aposta">
-<summary>Apostou? Agora confira — e pense no que isso significa para quem tem aula nesses dias</summary>
-
-**Cinco deles** — 31/08, 07/09, 12/10, 13/10 e 02/11 — caem em segunda ou terça. O 20/11 cai numa sexta, e ainda estou confirmando com a secretaria se há aula nesse dia.
-
-O que isso significa: se a nossa aula cair numa segunda, a turma perde **até quatro encontros**; se cair numa quarta ou quinta, perde **zero**. O mesmo calendário, experiências completamente diferentes — e por isso o [plano da disciplina](./Plano-de-Ensino-e-Contrato) marca a *semana* atingida, não "aula cancelada". Quando o Horário de Aulas sair, eu digo quantos encontros a nossa turma perde.
-
-</details>
-
-A regra completa — tabelas, requisitos, datas — está no [Tópico 3 do plano](./Plano-de-Ensino-e-Contrato). Aqui vai o que decide aprovação, na ordem em que costuma pegar as pessoas:
-
-1. **Aprovação = ≥ 60 pontos E ≥ 75% de frequência.** As duas juntas; nota alta não compensa falta.
-2. **Os 100 pontos:** N1 = 35 (25 prova + 5 atividades + 5 Uniube+) · N2 = 50 (30 + 10 + 10) · Institucional = 15. **70 pontos são prova; 30 são entrega.**
-3. **Faltou à prova?** SAE no AVA em **até 3 dias úteis**, atestado anexado no SAE — **não na minha mão**. Segunda chamada de 14 a 16/12.
-4. **Ficou entre 40 e 59?** Recuperação — se todas as provas foram feitas e o Uniube+ não está zerado. Ela **zera as notas das duas provas — 25 + 30 = 55 pontos — e vale por elas**, e a nota final **trava em 60**.
-5. **Datas que não mudam:** notas da N1 até 12/10 · notas da N2 até 18/12 · encerramento 19/12.
-
-> [!WARNING] ⚠️ O prazo de 3 dias úteis é institucional
-> Não é regra minha, é institucional — e o curso indefere fora do prazo. Se você guardar uma única coisa desta aula, que seja esta: **atestado vai no SAE, em 3 dias úteis.**
-
----
-
-## 🗳️ Slot interativo — as regras de sala [⏳ 10 min]
-
-Regra que o professor decreta, o aluno obedece. Regra que a turma escreve, a turma cobra. Entro com quatro propostas; vocês cortam, mudam e acrescentam:
-
-1. **Celular é agendado, não proibido.** Há janelas em que o celular é a ferramenta e janelas de tela para baixo (prova, exercício cronometrado).
-2. **Pergunta errada é matéria-prima.** Erro dito em voz alta em sala vira exemplo da aula seguinte — é assim que eu descubro onde a explicação falhou.
-3. **Dupla é rotativa no laboratório.** Ninguém passa o semestre com o mesmo par, e ninguém carrega o outro.
-4. **Quem chega atrasado entra em silêncio.** A abertura é curta e é a parte que mais rende.
-
-<div class="au-slot">
-<div class="au-slot-h"><b>Interativo</b> · votação em sala · 10 min</div>
-<div class="au-slot-c">
-
-**Votação dos acordos.** Proposta a proposta, mão levantada: **manter, mudar ou cortar.** Fica aberto o campo para **acrescentar** um acordo que ninguém propôs.
-
-Os acordos que passarem por **maioria simples da sala presente** entram na versão final, e o **[Plano de Ensino e Contrato](./Plano-de-Ensino-e-Contrato) é atualizado** com o texto votado. O contrato não fica no quadro; fica publicado.
-
-Mão levantada é aberta: todo mundo vê como você votou. A votação é da turma, não minha: eu não desempato.
-
-</div>
-<p class="au-slot-b"><b>O acordo que ninguém quiser propor em voz alta</b> vai em meia folha de papel, recolhida na saída — e vale o mesmo na apuração. Nada disto depende de rede nem de projetor, o que é apropriado para uma aula de redes.</p>
-</div>
-
----
+1. **Entre no AVA Uniube On-line** e localize a disciplina. É lá que sai tudo o que esta página marca como "aguardando".
+2. **Anote a data da sua turma** — segunda ou quarta — e confira quantos encontros ela tem.
+3. **Não instale nada ainda.** O Packet Tracer entra na S10 e eu aviso com antecedência.
 
 <div class="au-resumo">
-<b>Resumo da aula</b>
+<b>Resumo — o que consultar depois</b>
 
-| Item | O que você precisa lembrar |
+| Item | O que lembrar |
 | :--- | :--- |
-| **Referência do semestre** | [Plano de Ensino e Contrato](./Plano-de-Ensino-e-Contrato) — guarde o link |
-| **Carga horária** | 42 h/a — 30 presenciais (prática) + **12 no AVA** (é carga, não extra) |
-| **Aprovação** | ≥ 60 pontos **e** ≥ 75% de frequência |
-| **Distribuição** | N1 = 35 · N2 = 50 · Institucional = 15 — **30 pontos vêm de entregas, não de prova** |
-| **Provas** | N1 na **S09** (janela 21–30/09) · N2 na **S19** (janela 1º–11/12) |
-| **Segunda chamada** | Faltou → **SAE no AVA em 3 dias úteis**. Atestado vai no SAE, não comigo |
-| **Recuperação** | Nota 40–59 + todas as provas feitas + Uniube+ não zerado. **Zera** as provas, **teto 60** |
-| **Ferramenta** | Cisco Packet Tracer + conta NetAcad, a partir da S10 |
-| **Regras de sala** | Votadas hoje — o texto aprovado vai para o plano publicado |
-| **Conteúdo de redes** | Começa na **Aula 02** |
+| **Aprovação** | ≥ 60 pontos **e** ≥ 75% de frequência — as duas juntas |
+| **Distribuição** | N1 35 · N2 50 · Institucional 15 — **30 pontos não são prova** |
+| **Provas** | N1 na janela **21–30/09** · N2 na janela **1º–11/12** · dia exato no AVA |
+| **Faltou à prova** | **SAE no AVA em 3 dias úteis.** Atestado vai no SAE, **não** comigo |
+| **Segunda chamada** | 14 a 16/12 |
+| **Recuperação** | 40–59 pts + todas as provas feitas + AVA não zerado · **zera as provas** · teto 60 |
+| **Turma 12** · segunda | VIA232 · **16 encontros** · perde 31/08, 07/09, 12/10, 02/11 |
+| **Turma 13** · quarta | VIA207 · **20 encontros** · não perde nenhum |
+| **Ferramenta** | Cisco Packet Tracer, a partir da **S10** |
+| **Celular** | Proibido em sala. Precisa usar, sai da sala |
+| **Chamada** | Fecha às **21:00** |
+| **Falar comigo** | AVA ou **romualdo.filho@uniube.br**. Não é WhatsApp e não é corredor |
+| **IA** | Incentivada. **Ajuda, não cria** — você tem que saber explicar o que entregou |
+| **Encerramento do semestre** | 19/12 |
 
-</div>
-
-<div class="au-podcast">
-<p><b>🎧 Revisão em áudio</b> — gerada por IA a partir desta página, para ouvir no trajeto. O áudio complementa; a página é a fonte.</p>
-<p><i>Disponível em breve.</i></p>
-</div>
-
----
-
-## 🎬 Fechamento — bilhete de saída
-
-A aula termina com duas perguntas anônimas, em **meia folha de papel** recolhida na saída — sem nome e sem nota. O que você responder **abre a aula seguinte**: os pontos mais citados como confusos entram na revisão de abertura.
-
-**Hoje:** *(1)* O que mais te preocupa nesta disciplina? *(2)* Qual regra do contrato ficou menos clara?
-
-<div class="au-reflexao">
-<b>Para pensar até a próxima aula</b>
-
-<p>Você usa rede o dia inteiro: mensagem, vídeo, mapa, pagamento. Escolha <b>uma</b> dessas coisas que você fez hoje e tente descrever, em três frases, o caminho que a informação percorreu desde o seu aparelho até o outro lado.</p>
-
-<p>Você não vai conseguir — e é esse o ponto. Guarde o que você escreveu. Em dezembro, reescreva as mesmas três frases e compare: a distância entre as duas versões é, literalmente, a disciplina.</p>
 </div>
 
 <div class="au-refs">
 <b>De onde vem o que eu disse hoje</b>
 
-Esta aula é administrativa: quase nada dela sai de livro. Vale você saber o que é documento e o que sou eu falando.
+Esta aula é administrativa: quase nada dela sai de livro. Vale você saber o que é documento oficial e o que sou eu falando.
 
 **Documento, e você pode pedir para ver:**
 
-- UNIVERSIDADE DE UBERABA. **Plano de Ensino — 49304 Redes de Computadores I, curso 160 Sistemas de Informação.** Uberaba: Uniube, [2026]. <span class="au-pag">p. 1 — carga horária e ementa; p. 3 — conteúdo programático; p. 4 — distribuição da pontuação semestral</span> — é dele que saem a ementa, o conteúdo e os 100 pontos.
+- UNIVERSIDADE DE UBERABA. **Plano de Ensino — 49304 Redes de Computadores I, curso 160 Sistemas de Informação.** Uniube, 2026. <span class="au-pag">p. 1 — carga horária, ementa e perfil do egresso; p. 3 — conteúdo programático nas 11 unidades; p. 4 — distribuição da pontuação semestral</span> — é dele que saem a carga, os 11 blocos de conteúdo e os 100 pontos.
 
-**Eu explicando, e onde você confere:**
+**Norma da coordenação, que vale acima do meu plano:**
 
-As regras de **aprovação, segunda chamada e recuperação** são as que a coordenação definiu para os cursos de Engenharias, Gestão e Tecnologia da Informação neste semestre. Eu as trago para cá porque decidem nota e prazo, e porque ninguém lê norma por conta própria em julho. **O texto que vale é o do AVA.**
+As regras de **aprovação, segunda chamada e recuperação** são as definidas pela coordenação para os cursos de Engenharias, Gestão e Tecnologia da Informação do **Campus Uberlândia** neste semestre. Não são minhas e eu não posso alterá-las. Trago para cá porque decidem nota e prazo, e porque ninguém lê norma por conta própria em julho. **O texto que vale é o publicado no AVA.**
 
-**Divergiu do AVA? Vale o AVA — e me avise, no início da aula ou pelo AVA, que eu corrijo esta página no mesmo dia.** O detalhamento está no [Plano de Ensino e Contrato](./Plano-de-Ensino-e-Contrato).
+**As bibliografias do componente**, todas na biblioteca virtual da Uniube:
+
+- KUROSE, J. F. **Redes de computadores e a internet: uma abordagem top-down.** 8. ed. São Paulo: Pearson, 2021.
+- TANENBAUM, A. S.; FEAMSTER, N.; WETHERALL, D. J. **Redes de Computadores.** 6. ed. São Paulo: Pearson, 2021.
+- LACERDA, P. S. P. *et al.* **Projeto de Redes de Computadores.** Porto Alegre: Sagah, 2021.
+
+**Eu falando:** a distribuição do conteúdo pelas 20 semanas, a ordem em que os assuntos entram, a escolha de qual conteúdo encolhe se o semestre apertar, e as regras de sala. Isso é decisão minha, e eu assumo.
+
+**Divergiu do AVA? Vale o AVA — e me avise, no início da aula ou pelo AVA, que eu corrijo esta página no mesmo dia.**
 
 </div>
 
 <div class="au-proxima">
 <b>Na próxima aula</b>
 
-<p>Hoje foi contrato; na <b>Aula 02</b> o conteúdo começa: <b>quais são as peças de uma rede</b>, o que cada uma decide sozinha — e por que a peça mais barata da sua casa é a que mais derruba a conexão. Antes dela, faça a reflexão acima e ative seu acesso ao AVA.</p>
+<p>Hoje foi contrato. Na próxima o conteúdo começa: <b>quais são as peças de uma rede</b> e o que cada uma decide sozinha. Você usa todas elas todo dia sem saber o nome de nenhuma — e é por isso que, quando a conexão cai, quase ninguém sabe por onde começar a olhar.</p>
 </div>
 
 ---
 
-*Última atualização: 27/07/2026 · Regras de nota, segunda chamada e recuperação são as da coordenação para 2026/2 — o texto oficial está no AVA. Carga e pontuação seguem o plano de ensino do componente 49304. Dia da semana e sala aguardam o Horário de Aulas — ver o aviso no orçamento de minutos.*
+*Última atualização: 28/07/2026 · Carga, ementa, conteúdo programático e distribuição da pontuação seguem o plano de ensino do componente 49304. Regras de aprovação, segunda chamada e recuperação são as da coordenação para 2026/2 — o texto oficial está no AVA. As atividades da N1 e da N2, o Uniube+, a Avaliação Institucional e o mapeamento dos sábados de reposição ainda não estão definidos, e estão marcados como tal ao longo da página.*
 
 **◀ [Voltar ao índice da disciplina](./)**
 

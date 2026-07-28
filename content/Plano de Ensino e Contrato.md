@@ -224,15 +224,16 @@ São mecanismos diferentes, com regras diferentes — e o prazo de um deles é d
 
 ## 📌 5. As regras da nossa sala
 
-Eu não decreto as regras da sala sozinho. Estas quatro entram como **proposta** na Aula 01 e vão a voto — manter, mudar ou cortar —, com espaço para a turma acrescentar as suas:
+Estas regras são minhas. Não são proposta e não vão a voto — e eu não abro exceção individual, porque abrir para um é desfazer para todos.
 
-1. **Celular é agendado, não proibido.** Há janelas em que o celular é a ferramenta e janelas de tela para baixo (prova, exercício cronometrado).
-2. **Pergunta errada é matéria-prima.** Erro dito em voz alta em sala vira exemplo da aula seguinte — é assim que eu descubro onde a explicação falhou.
-3. **Dupla é rotativa no laboratório.** Ninguém passa o semestre com o mesmo par, e ninguém carrega o outro.
-4. **Quem chega atrasado entra em silêncio.** A abertura é curta e é a parte que mais rende.
+1. **Celular e fone de ouvido são proibidos em sala.** Quem precisar usar, sai da sala e volta depois. Não é moralismo: o aparelho aberto derruba o seu rendimento e o de quem senta do lado, e sair é a alternativa honesta a fingir que está acompanhando.
+2. **A chamada fecha 15 minutos depois do início da aula.** Depois disso eu não abro a lista de novo. Frequência é requisito de aprovação junto com a nota, e a régua é a mesma para todos.
+3. **Quem chega atrasado entra em silêncio.** A abertura é curta e é onde eu digo o que muda na semana.
+4. **Assunto de disciplina não se resolve no corredor.** Nota, avaliação, falta, prazo — nada disso no caminho da sala. No corredor eu não tenho o diário nem o AVA na frente, e qualquer resposta que eu der ali vira problema seu.
+5. **Eu não respondo WhatsApp.** Comunicação é pelo **AVA** ou por **romualdo.filho@uniube.br**. Os dois ficam registrados e eu consigo achar depois.
 
-> [!NOTE] 🗳️ Status da votação
-> **Aguardando a votação da Aula 01.** Assim que a turma votar, esta seção é substituída pelo texto aprovado — com os cortes, as mudanças e os acordos acrescentados. O contrato não fica no quadro; fica publicado aqui.
+> [!TIP] 🤖 Sobre inteligência artificial
+> Eu **incentivo** o uso, e em algumas aulas entrego os prompts prontos. Não tenho interesse em caçar ninguém. A linha é uma só: **a IA ajuda, a IA não cria.** Ela pode explicar, revisar, sugerir caminho, destravar — o que ela não pode é ser a autora do que você entrega. O teste é direto: se eu apontar para uma linha da sua entrega e perguntar por que está assim, você precisa saber responder. Não sabendo, aquilo não é seu — e o que não é seu não vale ponto.
 
 ---
 
