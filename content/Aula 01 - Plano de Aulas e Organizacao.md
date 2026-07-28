@@ -105,7 +105,13 @@ A estrutura abaixo é **oficial**: as unidades e a numeração são do plano de 
 | Feriados que caem no seu dia | **4** — 31/08, 07/09, 12/10, 02/11 | **nenhum** |
 | Carga presencial efetiva | 24 h/a — **80%** | 30 h/a — 100% |
 
-Existem **cinco sábados letivos de reposição** no calendário da universidade: **29/08 · 12/09 · 03/10 · 24/10 · 07/11**. A Turma 12 perde exatamente quatro encontros e há cinco sábados — mas **eu ainda não confirmei com a secretaria qual sábado repõe qual segunda**, e não vou anunciar data de aula com base em suposição minha. Assim que a secretaria fechar, publico no AVA e atualizo esta página no mesmo dia.
+O calendário da universidade tem cinco sábados letivos de reposição:
+
+| Sábados de reposição |
+| :--: |
+| **29/08** · **12/09** · **03/10** · **24/10** · **07/11** |
+
+A Turma 12 perde quatro encontros, e os sábados são cinco. Mas **eu ainda não confirmei com a secretaria qual sábado repõe qual segunda**, e não anuncio data de aula por suposição minha. Quando a secretaria fechar, publico no AVA e atualizo esta página no mesmo dia.
 
 **O que a Turma 12 pode contar desde já:** o conteúdo não vai ser cortado. Se a reposição de sábado não cobrir os quatro encontros, o que encolhe é o aprofundamento de **redes sem fio (S17)** — nessa ordem, e nunca endereçamento, roteamento ou serviços, que são o pré-requisito de Redes II.
 
@@ -188,7 +194,13 @@ Se você guardar uma única coisa desta aula, que seja esta.
 
 ### A recuperação troca, não soma
 
-Os **três requisitos valem juntos**: ter feito todas as provas · estar entre 40 e 59 pontos · não estar com as notas de AVA/Uniube+ zeradas. Quem chega na faixa dos 40–59 com o AVA zerado **não tem direito à recuperação.**
+São **três requisitos, e valem juntos**:
+
+1. Ter feito todas as provas.
+2. Estar entre **40 e 59 pontos**.
+3. Não estar com as notas de AVA/Uniube+ zeradas.
+
+Quem chega na faixa dos 40–59 com o AVA zerado **não tem direito à recuperação.**
 
 E o mecanismo importa: a recuperação vale o total das provas do semestre — **25 + 30 = 55 pontos** — e **substitui** as notas das provas, que são zeradas. Ela não soma em cima do que você já tinha.
 

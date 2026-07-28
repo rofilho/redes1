@@ -124,7 +124,9 @@ A máscara de sub-rede é o elemento crucial de 32 bits que **informa aos rotead
 
 ### 2.1 — A Operação Lógica AND
 
-Dispositivos de rede realizam uma operação binária **AND (E lógico)** entre o endereço IP e a Máscara para extrair o endereço de rede correspondente. No AND, o resultado só é 1 se ambos os bits comparados forem 1:
+Para extrair o endereço de rede, os dispositivos fazem uma operação binária **AND (E lógico)** entre o IP e a máscara.
+
+No AND, o resultado só é 1 quando **os dois** bits são 1:
 
 ```text
 IP:       192.168.10.74   ->  11000000.10101000.00001010.01001010
@@ -135,7 +137,7 @@ Rede:     192.168.10.0    ->  11000000.10101000.00001010.00000000
 
 ### 2.2 — Notação CIDR e Fórmulas de Sub-rede
 
-A notação **CIDR (Classless Inter-Domain Routing)** simplifica essa escrita utilizando uma barra (`/`) seguida pelo número de bits consecutivos que estão ativados na máscara (ex: `/24` = `255.255.255.0`, `/26` = `255.255.255.192`).
+A notação **CIDR (Classless Inter-Domain Routing)** simplifica essa escrita. Usa uma barra (`/`) seguida do número de bits ativados na máscara — `/24` é `255.255.255.0`, e `/26` é `255.255.255.192`.
 Para projetar e calcular sub-redes, utilizamos duas fórmulas fundamentais:
 1.  **Quantidade Total de Hosts por Sub-rede:** $Hosts = 2^h - 2$ *(Onde $h$ é o número de bits de host no octeto final).*
 2.  **Quantidade de Sub-redes Possíveis:** $Subredes = 2^s$ *(Onde $s$ representa o número de bits "emprestados" da máscara de rede padrão).*

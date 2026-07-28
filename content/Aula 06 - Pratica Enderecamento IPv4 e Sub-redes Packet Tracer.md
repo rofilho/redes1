@@ -190,7 +190,9 @@ ping 192.168.20.11    → (PC3, rede diferente)
    - O que muda no cabeçalho **Ethernet (Layer 2)** quando o pacote passa pelo roteador?
    - O que **não** muda no cabeçalho **IP (Layer 3)**?
 
-💡 **Explicação:** O roteador recebe o quadro Ethernet, **remove** o cabeçalho da camada 2, lê o IP destino (camada 3), e **reencapsula** o pacote em um novo quadro Ethernet com o MAC da interface de saída — por isso o MAC muda a cada salto, mas o IP destino permanece o mesmo.
+💡 **Explicação:** o roteador recebe o quadro Ethernet e **remove** o cabeçalho da camada 2. Lê o IP destino (camada 3). Depois **reencapsula** o pacote num novo quadro Ethernet, com o MAC da interface de saída.
+
+Por isso o **MAC muda a cada salto**, mas o **IP destino permanece o mesmo**.
 
 ✅ **Checkpoint:** No painel PDU Information, você deve ver o `Dest IP` sempre igual a `192.168.20.10`, mas o `Dest MAC` mudando antes e depois do roteador.
 

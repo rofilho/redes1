@@ -104,7 +104,7 @@ Agora que conhecemos as topologias e os meios de transmissão, vamos refletir:
 
 Nesta aula, exploramos como as redes são estruturadas por meio de diferentes topologias e estudamos os principais meios de transmissão, tanto guiados quanto não guiados. Esses conceitos são fundamentais para projetar redes eficientes, escaláveis e confiáveis.
 
-Como tarefa, pesquise sobre tecnologias emergentes de conectividade, como redes 5G e Wi‑Fi 6/6E, e pense em como elas podem impactar o desenho de redes nos próximos anos; traga suas dúvidas e descobertas para a próxima aula.
+**Tarefa:** pesquise sobre tecnologias emergentes de conectividade — **5G** e **Wi‑Fi 6/6E**. Pense em como elas podem impactar o desenho de redes nos próximos anos. Traga dúvidas e descobertas para a próxima aula.
 
 ---
 
