@@ -9,8 +9,8 @@ codigo: "49325"
 aula: 7
 titulo: "Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake"
 tipo: teorica
-semana: 7
-data: 2026-05-07
+semana: 6
+data: 2026-08-31
 status: publicado
 tags:
   - redes
@@ -22,12 +22,9 @@ tags:
 publicar: true
 ---
 
-> [!WARNING] ⚠️ Material de referência — confira a semana no calendário
-> Esta página vem de uma oferta anterior da disciplina e continua no ar porque o conteúdo serve para estudo. **A numeração dela pode não corresponder à semana do calendário de 2026-2** — o calendário que vale é o do [Plano de Ensino e Contrato](./Plano-de-Ensino-e-Contrato). Se ela pedir uma ferramenta antes da semana em que o plano a introduz, siga o plano.
-
 **Disciplina:** Redes de Computadores I (Cód. 49325)<br>
 **Curso:** Sistemas de Informação — Uniube<br>
-**Semana:** 7 | Quarta-feira<br>
+**Semana:** 06 — semana de 31/08<br>
 **Professor:** Romualdo Mathias Filho<br>
 **Tipo:** 📘 Teórica<br>
 **Tópicos:** Camada de Transporte, TCP, UDP, Three-Way Handshake, Portas, Multiplexação, Controle de Fluxo

@@ -3,10 +3,7 @@ title: "🖥️ Aula - 05: Modelo OSI vs. TCP/IP, ARP e Prática no Packet Trac
 ---
 
 
-> [!WARNING] ⚠️ Material de referência — confira a semana no calendário
-> Esta página vem de uma oferta anterior da disciplina e continua no ar porque o conteúdo serve para estudo. **A numeração dela pode não corresponder à semana do calendário de 2026-2** — o calendário que vale é o do [Plano de Ensino e Contrato](./Plano-de-Ensino-e-Contrato). Se ela pedir uma ferramenta antes da semana em que o plano a introduz, siga o plano.
-
-> **Disciplina:** Redes de Computadores I (Cód. 49325) | **Curso:** Sistemas de Informação, Uniube | **Semana 4** | 09/03/2026 | Prof. Romualdo Mathias Filho
+> **Disciplina:** Redes de Computadores I (Cód. 49325) | **Curso:** Sistemas de Informação, Uniube | **Semana 05** — semana de **24/08** | Prof. Romualdo Mathias Filho
 > 
 
 ---
