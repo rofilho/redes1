@@ -1,17 +1,5 @@
 ---
 title: "🖥️ Aula - 07: Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake"
----
-
-
----
-disciplina: Redes de Computadores I
-codigo: "49325"
-aula: 7
-titulo: "Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake"
-tipo: teorica
-semana: 6
-data: 2026-08-31
-status: publicado
 tags:
   - redes
   - tcp
@@ -19,8 +7,9 @@ tags:
   - transporte
   - handshake
   - portas
-publicar: true
 ---
+
+
 
 **Disciplina:** Redes de Computadores I (Cód. 49325)<br>
 **Curso:** Sistemas de Informação — Uniube<br>
