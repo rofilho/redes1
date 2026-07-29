@@ -3,7 +3,6 @@ title: "🖥️ Aula - 05: Modelo OSI vs. TCP/IP, ARP e Prática no Packet Trac
 ---
 
 
-# 🖥️ Aula - 05: Modelo OSI vs. TCP/IP, ARP e Prática no Packet Tracer
 > [!WARNING] ⚠️ Material de referência — confira a semana no calendário
 > Esta página vem de uma oferta anterior da disciplina e continua no ar porque o conteúdo serve para estudo. **A numeração dela pode não corresponder à semana do calendário de 2026-2** — o calendário que vale é o do [Plano de Ensino e Contrato](./Plano-de-Ensino-e-Contrato). Se ela pedir uma ferramenta antes da semana em que o plano a introduz, siga o plano.
 
@@ -12,7 +11,7 @@ title: "🖥️ Aula - 05: Modelo OSI vs. TCP/IP, ARP e Prática no Packet Trac
 
 ---
 
-# 🖥️ Aula - 05: Modelo OSI vs. TCP/IP, ARP e Prática no Packet Tracer
+## 🎯 Objetivos da aula
 
 Ao final desta aula, o aluno deve ser capaz de:
 
@@ -23,7 +22,7 @@ Ao final desta aula, o aluno deve ser capaz de:
 
 ---
 
-# 🖥️ Aula - 05: Modelo OSI vs. TCP/IP, ARP e Prática no Packet Tracer
+## 🧭 De onde viemos
 
 | **Aula** | **Conceito** | **Definição** |
 | --- | --- | --- |
@@ -37,11 +36,10 @@ Ao final desta aula, o aluno deve ser capaz de:
 
 ---
 
-# 🖥️ Aula - 05: Modelo OSI vs. TCP/IP, ARP e Prática no Packet Tracer
+## Os dois modelos de referência
 
 Existem dois grandes modelos que padronizam a arquitetura de redes. O modelo OSI é o nosso mapa teórico de 7 camadas, mas o mundo real roda essencialmente sobre a arquitetura TCP/IP de 4 (ou 5, dependendo dos autores) camadas.
 
-# 🖥️ Aula - 05: Modelo OSI vs. TCP/IP, ARP e Prática no Packet Tracer
 
 ```mermaid
 graph TD
@@ -92,7 +90,7 @@ graph TD
 
 ---
 
-# 🖥️ Aula - 05: Modelo OSI vs. TCP/IP, ARP e Prática no Packet Tracer
+## Encapsulamento e desencapsulamento
 
 A comunicação através dos modelos de referência ocorre por **encapsulamento** na origem, e por **desencapsulamento** no destino. É o ato de envelopar informações de uma camada dentro da outra.
 
@@ -124,7 +122,7 @@ flowchart TD
 
 ---
 
-# 🖥️ Aula - 05: Modelo OSI vs. TCP/IP, ARP e Prática no Packet Tracer
+## ARP
 
 Nós sabíamos o IP do roteador (camada 3), mas para colocar o pacote no quadro Ethernet (camada 2), precisamos do MAC da interface daquele roteador. Como descobrir?
 
@@ -161,14 +159,14 @@ sequenceDiagram
 
 ---
 
-# 🖥️ Aula - 05: Modelo OSI vs. TCP/IP, ARP e Prática no Packet Tracer
+## 🧪 Prática no Packet Tracer
 
 *(Metade final da aula será dedicada EXCLUSIVAMENTE ao uso da ferramenta pela turma).*
 
 > **Aviso de Professor:** *A teoria de encapsulamento costuma voar da mente rápido quando não pegamos com as próprias mãos. A mágica do Packet Tracer está no modo de Simulação, onde conseguimos colocar a rede em câmera lenta e ver cada bit e cabeçalho.*
 > 
 
-# 🖥️ Aula - 05: Modelo OSI vs. TCP/IP, ARP e Prática no Packet Tracer
+### Prática 1
 
 **Objetivo:** Verificar como um Switch aprende os MACs baseado no que explicamos na Aula 04.
 1. Abra o Packet Tracer e adicione **1 Switch 2960** e **3 PCs** (PC0, PC1, PC2).
@@ -184,7 +182,7 @@ sequenceDiagram
 
 ---
 
-# 🖥️ Aula - 05: Modelo OSI vs. TCP/IP, ARP e Prática no Packet Tracer
+### Prática 2
 
 **Objetivo:** Capturar o “envelope” no exato momento da transmissão e observar a “Mágica do ARP”.
 1. Com a topologia montada da Atividade 1, no Packet Tracer, altere do modo **Realtime** (canto inferior direito) para o modo **Simulation**.
@@ -202,7 +200,7 @@ sequenceDiagram
 
 ---
 
-# 🖥️ Aula - 05: Modelo OSI vs. TCP/IP, ARP e Prática no Packet Tracer
+### Prática 3
 
 **Objetivo:** Ver as 7 (ou 4) camadas funcionando em um pacote no Packet Tracer.
 1. Pegue um envelopinho de um ping (ICMP) sendo recebido/transmitido em um PC do modo Simulation da Atividade 2.
@@ -216,7 +214,7 @@ sequenceDiagram
 
 ---
 
-# 🖥️ Aula - 05: Modelo OSI vs. TCP/IP, ARP e Prática no Packet Tracer
+## Missões para o aluno
 
 **Missões para o Aluno (Treino no Packet Tracer e Preparo Semanal):**
 
@@ -226,7 +224,7 @@ sequenceDiagram
 
 ---
 
-# 🖥️ Aula - 05: Modelo OSI vs. TCP/IP, ARP e Prática no Packet Tracer
+## ✅ Resumo — conceitos em uma frase
 
 | **Conceito** | **Definição em Uma Frase** |
 | --- | --- |
@@ -244,7 +242,7 @@ sequenceDiagram
 ---
 
 
-# 🖥️ Aula - 05: Modelo OSI vs. TCP/IP, ARP e Prática no Packet Tracer
+## Desafio
 
 **Cenário:** Monte a seguinte topologia:
 
@@ -267,7 +265,7 @@ sequenceDiagram
 
 ---
 
-# 🖥️ Aula - 05: Modelo OSI vs. TCP/IP, ARP e Prática no Packet Tracer
+## ➡️ Próxima aula
 
 **Para a próxima aula (Semana 5: Endereçamento IPv4, Máscaras e Sub-redes):**
 
@@ -281,9 +279,8 @@ sequenceDiagram
 
 ---
 
-# 🖥️ Aula - 05: Modelo OSI vs. TCP/IP, ARP e Prática no Packet Tracer
 
-# 🖥️ Aula - 05: Modelo OSI vs. TCP/IP, ARP e Prática no Packet Tracer
+## 📚 Referências
 
 | **Autor** | **Obra** | **Capítulo/Seção Utilizada** |
 | --- | --- | --- |
@@ -291,7 +288,7 @@ sequenceDiagram
 | KUROSE, J. F. | Redes de Computadores e a Internet. 8. ed. Pearson, 2021 | Cap. 1 (Seção 1.5: Camadas Protocolares), Cap. 6 (Seção 6.4: ARP) |
 | CISCO NETWORKING ACADEMY | Curso CCNAv7: Introduction to Networks | Módulos: Modelo OSI/TCP, ARP, Packet Tracer Labs |
 
-# 🖥️ Aula - 05: Modelo OSI vs. TCP/IP, ARP e Prática no Packet Tracer
+### Links úteis
 
 - [Download Cisco Packet Tracer Oficial](https://www.netacad.com/courses/packet-tracer)
 - [RFC 826: Especificação oficial do ARP](https://datatracker.ietf.org/doc/html/rfc826)

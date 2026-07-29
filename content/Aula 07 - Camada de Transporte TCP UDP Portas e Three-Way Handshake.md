@@ -22,7 +22,6 @@ tags:
 publicar: true
 ---
 
-# 🖥️ Aula - 07: Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake
 > [!WARNING] ⚠️ Material de referência — confira a semana no calendário
 > Esta página vem de uma oferta anterior da disciplina e continua no ar porque o conteúdo serve para estudo. **A numeração dela pode não corresponder à semana do calendário de 2026-2** — o calendário que vale é o do [Plano de Ensino e Contrato](./Plano-de-Ensino-e-Contrato). Se ela pedir uma ferramenta antes da semana em que o plano a introduz, siga o plano.
 
@@ -39,7 +38,7 @@ publicar: true
 
 ---
 
-# 🖥️ Aula - 07: Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake
+## 🎯 Objetivos da aula
 
 Ao final desta aula, os alunos serão capazes de:
 
@@ -52,7 +51,7 @@ Ao final desta aula, os alunos serão capazes de:
 
 ---
 
-# 🖥️ Aula - 07: Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake
+## 🧭 De onde viemos
 
 | **Conceito (Aulas Anteriores)** | **Conexão com hoje** |
 | --- | --- |
@@ -65,9 +64,8 @@ Ao final desta aula, os alunos serão capazes de:
 
 ---
 
-# 🖥️ Aula - 07: Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake
 
-# 🖥️ Aula - 07: Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake
+## A camada de transporte
 
 Imagine um computador recebendo dados simultaneamente de:
 - Uma aba do navegador carregando uma página web
@@ -79,7 +77,7 @@ Todos esses dados chegam pelo mesmo endereço IP. **Como o sistema operacional s
 
 A resposta são as **portas** — números que identificam processos específicos dentro de um host.
 
-# 🖥️ Aula - 07: Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake
+### O que ela faz
 
 | Função | Descrição |
 | --- | --- |
@@ -97,11 +95,11 @@ A resposta são as **portas** — números que identificam processos específico
 
 ---
 
-# 🖥️ Aula - 07: Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake
+## TCP
 
 O TCP é o protocolo de transporte **orientado à conexão**. Antes de enviar qualquer dado, ele estabelece uma conexão formal entre emissor e receptor.
 
-# 🖥️ Aula - 07: Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake
+### Características
 
 | Característica | Detalhe |
 | --- | --- |
@@ -112,7 +110,7 @@ O TCP é o protocolo de transporte **orientado à conexão**. Antes de enviar qu
 | **Controle de congestionamento** | Reduz taxa de envio quando detecta congestionamento na rede |
 | **Verificação de integridade** | Checksum em cada segmento |
 
-# 🖥️ Aula - 07: Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake
+### Como uma conexão funciona
 
 ```
 Emissor                          Receptor
@@ -127,7 +125,7 @@ Emissor                          Receptor
   |--- [FIN / FIN-ACK / ACK] ------->|   (3) Encerramento da conexão
 ```
 
-# 🖥️ Aula - 07: Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake
+### O cabeçalho TCP
 
 ```
  0                   1                   2                   3
@@ -156,11 +154,11 @@ Emissor                          Receptor
 
 ---
 
-# 🖥️ Aula - 07: Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake
+## Three-Way Handshake
 
 O **Three-Way Handshake** é o ritual de três mensagens que o TCP usa para sincronizar cliente e servidor antes de transmitir dados.
 
-# 🖥️ Aula - 07: Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake
+### As três mensagens
 
 ```
     CLIENTE                              SERVIDOR
@@ -179,7 +177,7 @@ O **Three-Way Handshake** é o ritual de três mensagens que o TCP usa para sinc
 ![[assets/aula07_handshake.png]]
 > *Figura 2: Diagrama do Three-Way Handshake TCP — as três mensagens que estabelecem uma conexão confiável.*
 
-# 🖥️ Aula - 07: Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake
+### Por que três, e não duas
 
 Com **apenas 2 mensagens** (SYN + SYN-ACK), o cliente saberia que o servidor o ouviu, mas o **servidor não saberia se o cliente recebeu seu SYN-ACK**. O terceiro ACK fecha esse ciclo — ambos confirmam que ambos estão sincronizados.
 
@@ -190,7 +188,7 @@ Com **apenas 2 mensagens** (SYN + SYN-ACK), o cliente saberia que o servidor o o
 > 
 > Só depois das três frases a conversa de fato começa.
 
-# 🖥️ Aula - 07: Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake
+### Encerrando a conexão
 
 Para encerrar, o TCP usa **4 mensagens** (porque cada lado encerra sua direção de forma independente):
 
@@ -202,7 +200,7 @@ Para encerrar, o TCP usa **4 mensagens** (porque cada lado encerra sua direção
        |--- ACK --------------------------->|  "Ok, conexão encerrada."
 ```
 
-# 🖥️ Aula - 07: Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake
+### Ataque SYN Flood
 
 O atacante explora o Handshake enviando **milhares de SYNs falsos**. O servidor responde com SYN-ACK e aguarda o ACK que nunca vem, consumindo recursos com conexões "semiabertas" até travar.
 
@@ -213,11 +211,11 @@ O atacante explora o Handshake enviando **milhares de SYNs falsos**. O servidor 
 
 ---
 
-# 🖥️ Aula - 07: Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake
+## UDP
 
 O UDP é o protocolo de transporte **sem conexão** — envia dados diretamente, sem handshake, sem confirmação, sem controle de ordem.
 
-# 🖥️ Aula - 07: Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake
+### Características
 
 | Característica | Detalhe |
 | --- | --- |
@@ -227,7 +225,7 @@ O UDP é o protocolo de transporte **sem conexão** — envia dados diretamente,
 | **Baixa latência** | Overhead mínimo — cabeçalho de apenas 8 bytes |
 | **Alta velocidade** | Sem espera por confirmações — ideal para tempo real |
 
-# 🖥️ Aula - 07: Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake
+### O cabeçalho UDP
 
 ```
  0                   1                   2                   3
@@ -248,7 +246,7 @@ Apenas 4 campos! Compare com os 10+ campos do TCP.
 
 ---
 
-# 🖥️ Aula - 07: Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake
+### TCP × UDP
 
 | **Aspecto** | **TCP** | **UDP** |
 | --- | --- | --- |
@@ -261,16 +259,15 @@ Apenas 4 campos! Compare com os 10+ campos do TCP.
 | **Quando usar** | Quando a **integridade importa mais que a velocidade** | Quando a **velocidade importa mais que a integridade** |
 | **Exemplos** | HTTP/HTTPS, e-mail (SMTP/IMAP), transferência de arquivos (FTP), SSH | Streaming (Netflix, YouTube), VoIP, jogos online, DNS, DHCP |
 
-# 🖥️ Aula - 07: Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake
+### Quando usar cada um
 - **Perder um frame de vídeo?** Aceitável — o vídeo continua. → **UDP**
 - **Perder um byte de uma transferência bancária?** Catastrófico. → **TCP**
 - **DNS?** Consulta rápida, tolerável repetir se falhar. → **UDP** (mas usa TCP para transferências de zona)
 
 ---
 
-# 🖥️ Aula - 07: Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake
 
-# 🖥️ Aula - 07: Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake
+## Portas
 
 Uma **porta** é um número de 16 bits (0 a 65.535) que identifica um **processo** ou **serviço** específico dentro de um host. O par `(IP, Porta)` forma um **socket** — o endereço completo de um processo na rede.
 
@@ -285,7 +282,7 @@ Endereço completo de um serviço:
 Socket: (192.168.1.10, 443) = servidor HTTPS nessa máquina
 ```
 
-# 🖥️ Aula - 07: Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake
+### As faixas
 
 | Faixa | Nome | Uso |
 | --- | --- | --- |
@@ -293,7 +290,7 @@ Socket: (192.168.1.10, 443) = servidor HTTPS nessa máquina
 | **1024 – 49151** | Registered (Registradas) | Aplicações específicas (MySQL: 3306, RDP: 3389...) |
 | **49152 – 65535** | Dynamic/Ephemeral (Efêmeras) | Portas temporárias usadas pelos clientes nas conexões |
 
-# 🖥️ Aula - 07: Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake
+### As portas mais comuns
 
 | Porta | Protocolo | Serviço | Transporte |
 | --- | --- | --- | --- |
@@ -315,7 +312,7 @@ Socket: (192.168.1.10, 443) = servidor HTTPS nessa máquina
 ![[assets/aula07_portas_sockets.png]]
 > *Figura 4: Portas de rede e sockets — múltiplos clientes acessando diferentes serviços no mesmo servidor.*
 
-# 🖥️ Aula - 07: Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake
+### Um exemplo completo
 
 ```
 CLIENTE (Navegador)               SERVIDOR Web
@@ -335,7 +332,7 @@ O cliente usa uma **porta efêmera** (gerada aleatoriamente acima de 49152) para
 
 ---
 
-# 🖥️ Aula - 07: Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake
+## ✅ Resumo
 
 | **Conceito** | **Definição** |
 | --- | --- |
@@ -353,7 +350,7 @@ O cliente usa uma **porta efêmera** (gerada aleatoriamente acima de 49152) para
 ---
 
 
-# 🖥️ Aula - 07: Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake
+## Missões para o aluno
 
 Responda no caderno ou no Moodle:
 
@@ -371,7 +368,7 @@ Responda no caderno ou no Moodle:
 
 ---
 
-# 🖥️ Aula - 07: Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake
+## 📚 Referências
 
 - [RFC 793 — Transmission Control Protocol (IETF)](https://datatracker.ietf.org/doc/html/rfc793)
   > *Especificação original do TCP, de 1981. Vale a leitura da seção 3.4 (Establishing a Connection) para ver o Handshake definido formalmente pelos criadores da internet.*
@@ -381,7 +378,7 @@ Responda no caderno ou no Moodle:
 
 ---
 
-# 🖥️ Aula - 07: Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake
+### Bibliografia
 
 - KUROSE, J. F.; ROSS, K. W. *Redes de Computadores e a Internet*. 8. ed. Pearson, 2021. **Cap. 3 — Camada de Transporte** (Seções 3.1 a 3.5).
 - TANENBAUM, A. S.; FEAMSTER, N.; WETHERALL, D. J. *Redes de Computadores*. 6. ed. Pearson, 2021. **Cap. 6 — Camada de Transporte**.

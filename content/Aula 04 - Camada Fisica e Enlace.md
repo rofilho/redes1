@@ -3,7 +3,6 @@ title: "🖥️ Aula - 04: Camada Física, Camada de Enlace e Ethernet"
 ---
 
 
-# 🖥️ Aula - 04: Camada Física, Camada de Enlace e Ethernet
 > [!WARNING] ⚠️ Material de referência — confira a semana no calendário
 > Esta página vem de uma oferta anterior da disciplina e continua no ar porque o conteúdo serve para estudo. **A numeração dela pode não corresponder à semana do calendário de 2026-2** — o calendário que vale é o do [Plano de Ensino e Contrato](./Plano-de-Ensino-e-Contrato). Se ela pedir uma ferramenta antes da semana em que o plano a introduz, siga o plano.
 
@@ -12,7 +11,7 @@ title: "🖥️ Aula - 04: Camada Física, Camada de Enlace e Ethernet"
 
 ---
 
-# 🖥️ Aula - 04: Camada Física, Camada de Enlace e Ethernet
+## 🎯 Objetivos da aula
 
 Ao final desta aula, o aluno deve ser capaz de:
 
@@ -24,7 +23,7 @@ Ao final desta aula, o aluno deve ser capaz de:
 
 ---
 
-# 🖥️ Aula - 04: Camada Física, Camada de Enlace e Ethernet
+## 🧭 De onde viemos
 
 | **Aula** | **Conceito** | **Definição** |
 | --- | --- | --- |
@@ -40,7 +39,7 @@ Ao final desta aula, o aluno deve ser capaz de:
 
 ---
 
-# 🖥️ Aula - 04: Camada Física, Camada de Enlace e Ethernet
+## O modelo OSI
 
 **Definição:** O modelo OSI (Open Systems Interconnection), padronizado pela ISO em 1984, divide a comunicação em rede em **7 camadas**, cada uma com responsabilidades distintas (Tanenbaum, Cap. 1, Seção 1.4). Hoje focaremos nas duas camadas inferiores:
 
@@ -62,7 +61,7 @@ Modelo OSI com 7 camadas empilhadas, camadas 1 (Física) e 2 (Enlace) destacadas
 
 ---
 
-# 🖥️ Aula - 04: Camada Física, Camada de Enlace e Ethernet
+## Camada física
 
 **Definição:** A camada física (Tanenbaum, Cap. 2, Seção 2.1) é responsável pela transmissão de **bits brutos** (0s e 1s) através do meio de comunicação. Ela define as especificações elétricas, mecânicas, funcionais e procedimentais para ativar e manter a conexão física entre dispositivos.
 
@@ -77,14 +76,14 @@ Modelo OSI com 7 camadas empilhadas, camadas 1 (Física) e 2 (Enlace) destacadas
 | **Sinalização** | Banda base (Ethernet) ou banda larga (TV a cabo) |
 | **Taxa de dados** | Medida em bps: 100 Mbps, 1 Gbps, 10 Gbps, etc. |
 
-# 🖥️ Aula - 04: Camada Física, Camada de Enlace e Ethernet
+### Na prática
 
 - **Cabo Ethernet CAT6:** transmite sinais elétricos codificados como variações de tensão nos pares de cobre
 - **Fibra óptica:** transmite pulsos de luz (LED ou laser) pelo núcleo de vidro, representando 0s e 1s
 - **Wi-Fi:** ondas de rádio moduladas (OFDM) carregam os bits entre o Access Point e o dispositivo
 - **Conector RJ-45:** a especificação mecânica define 8 pinos organizados nos padrões T568A ou T568B
 
-# 🖥️ Aula - 04: Camada Física, Camada de Enlace e Ethernet
+### Padrões Ethernet
 
 | **Padrão** | **Velocidade** | **Meio** | **Distância** | **Nome Comum** |
 | --- | --- | --- | --- | --- |
@@ -100,7 +99,7 @@ Modelo OSI com 7 camadas empilhadas, camadas 1 (Física) e 2 (Enlace) destacadas
 
 ---
 
-# 🖥️ Aula - 04: Camada Física, Camada de Enlace e Ethernet
+## Camada de enlace
 
 **Definição:** A camada de enlace (Tanenbaum, Cap. 3, Seção 3.1) transforma o serviço "bruto" da camada física em uma **comunicação confiável entre nós adjacentes**. Ela organiza os bits em **quadros (frames)**, adiciona endereçamento local (MAC) e implementa detecção de erros.
 
@@ -114,14 +113,14 @@ Modelo OSI com 7 camadas empilhadas, camadas 1 (Física) e 2 (Enlace) destacadas
 | **Controle de fluxo** | Evita que um transmissor rápido sobrecarregue um receptor lento |
 | **Subcamadas (IEEE)** | LLC (Logical Link Control, 802.2) e MAC (Media Access Control, 802.3/802.11) |
 
-# 🖥️ Aula - 04: Camada Física, Camada de Enlace e Ethernet
+### Na prática
 
 - **Switch Ethernet:** opera na camada 2, encaminhando quadros com base no endereço MAC de destino
 - **Placa de rede (NIC):** implementa a camada 2, encapsulando dados em quadros Ethernet e verificando CRC
 - **Wi-Fi (802.11):** usa a camada de enlace para gerenciar o acesso ao meio sem fio via CSMA/CA
 - **Erro detectado:** quando um quadro chega corrompido, o CRC falha e o quadro é descartado silenciosamente
 
-# 🖥️ Aula - 04: Camada Física, Camada de Enlace e Ethernet
+### As subcamadas
 
 | **Subcamada** | **Padrão** | **Função** |
 | --- | --- | --- |
@@ -133,7 +132,7 @@ Modelo OSI com 7 camadas empilhadas, camadas 1 (Física) e 2 (Enlace) destacadas
 
 ---
 
-# 🖥️ Aula - 04: Camada Física, Camada de Enlace e Ethernet
+## Endereço MAC
 
 **Definição:** O endereço MAC (Kurose, Cap. 6, Seção 6.4) é um identificador único de **48 bits** atribuído à interface de rede (NIC) pelo fabricante. É gravado na ROM da placa de rede e usado pela camada 2 para identificar origem e destino dentro da rede local.
 
@@ -151,13 +150,13 @@ Modelo OSI com 7 camadas empilhadas, camadas 1 (Física) e 2 (Enlace) destacadas
 
 Endereço MAC "AA:BB:CC:DD:EE:FF" com destaque visual: primeiros 3 bytes = OUI (fabricante) em ciano, últimos 3 bytes = ID do dispositivo em roxo. Exemplos de OUI de Apple, Intel e Cisco.
 
-# 🖥️ Aula - 04: Camada Física, Camada de Enlace e Ethernet
+### Na prática
 
 - **Filtragem MAC no roteador:** alguns roteadores domésticos permitem restringir o acesso Wi-Fi a uma lista de MACs autorizados (embora contornável via MAC spoofing)
 - **Identificação do fabricante:** o OUI `00:50:56` identifica uma interface VMware, `AC:DE:48` identifica Apple, `00:1B:21` identifica Intel
 - **Comando para descobrir:** no Windows, `ipconfig /all` exibe o "Endereço Físico" (MAC); no Linux, `ip link show`
 
-# 🖥️ Aula - 04: Camada Física, Camada de Enlace e Ethernet
+### MAC × IP
 
 | **Aspecto** | **Endereço MAC** | **Endereço IP** |
 | --- | --- | --- |
@@ -174,7 +173,7 @@ Endereço MAC "AA:BB:CC:DD:EE:FF" com destaque visual: primeiros 3 bytes = OUI (
 
 ---
 
-# 🖥️ Aula - 04: Camada Física, Camada de Enlace e Ethernet
+## Ethernet
 
 **Definição:** Ethernet (Kurose, Cap. 6, Seção 6.4) é a tecnologia dominante para redes locais (LANs) desde os anos 1980. Padronizada pelo IEEE como 802.3, ela define o formato do quadro, o esquema de endereçamento (MAC) e o mecanismo de acesso ao meio (originalmente CSMA/CD).
 
@@ -190,7 +189,7 @@ Endereço MAC "AA:BB:CC:DD:EE:FF" com destaque visual: primeiros 3 bytes = OUI (
 
 ---
 
-# 🖥️ Aula - 04: Camada Física, Camada de Enlace e Ethernet
+## O quadro Ethernet
 
 **Definição:** O quadro Ethernet (Tanenbaum, Cap. 4, Seção 4.3) é a unidade de dados da camada 2. Ele encapsula os dados da camada superior (pacote IP) e adiciona cabeçalho e trailer para entrega local.
 
@@ -208,7 +207,7 @@ Barra horizontal dividida em seções coloridas mostrando cada campo do quadro E
 | **Dados** (Payload) | 46 a 1500 bytes | Conteúdo útil: pacote IP, quadro ARP, etc. |
 | **FCS** (Frame Check Sequence) | 4 bytes | CRC-32 para detecção de erros de transmissão |
 
-# 🖥️ Aula - 04: Camada Física, Camada de Enlace e Ethernet
+### Na prática
 
 - **MTU (Maximum Transmission Unit):** o payload máximo de 1500 bytes define o MTU padrão Ethernet. Pacotes IP maiores precisam ser fragmentados
 - **Tamanho mínimo:** 64 bytes (sem preâmbulo/SFD). Se o payload for menor que 46 bytes, são adicionados bytes de preenchimento (padding)
@@ -219,9 +218,8 @@ Barra horizontal dividida em seções coloridas mostrando cada campo do quadro E
 
 ---
 
-# 🖥️ Aula - 04: Camada Física, Camada de Enlace e Ethernet
 
-# 🖥️ Aula - 04: Camada Física, Camada de Enlace e Ethernet
+## CSMA/CD
 
 **Definição:** O CSMA/CD (Tanenbaum, Cap. 4, Seção 4.3) é o mecanismo de acesso ao meio originalmente usado pelo Ethernet em redes half-duplex (barramento ou hubs). Ele permite que múltiplos dispositivos compartilhem o mesmo meio, detectando e tratando colisões.
 
@@ -249,7 +247,7 @@ Fluxograma do algoritmo CSMA/CD: escutar canal → canal livre? → transmitir �
 
 ---
 
-# 🖥️ Aula - 04: Camada Física, Camada de Enlace e Ethernet
+## CSMA/CA
 
 **Definição:** O CSMA/CA (Tanenbaum, Cap. 4, Seção 4.4) é usado em redes sem fio (IEEE 802.11). Em redes wireless, detectar colisões durante a transmissão é impraticável (problema do terminal oculto), então o mecanismo busca **evitar** colisões em vez de detectá-las.
 
@@ -270,7 +268,7 @@ Fluxograma do algoritmo CSMA/CD: escutar canal → canal livre? → transmitir �
 
 ---
 
-# 🖥️ Aula - 04: Camada Física, Camada de Enlace e Ethernet
+### CSMA/CD × CSMA/CA
 
 | **Aspecto** | **CSMA/CD** | **CSMA/CA** |
 | --- | --- | --- |
@@ -286,7 +284,7 @@ Fluxograma do algoritmo CSMA/CD: escutar canal → canal livre? → transmitir �
 
 ---
 
-# 🖥️ Aula - 04: Camada Física, Camada de Enlace e Ethernet
+## O switch Ethernet
 
 **Definição:** O switch Ethernet (Kurose, Cap. 6, Seção 6.4) é um dispositivo de camada 2 que encaminha quadros de forma inteligente, usando uma **tabela de endereços MAC** (também chamada tabela CAM) para direcionar cada quadro apenas à porta onde está o dispositivo de destino.
 
@@ -294,7 +292,7 @@ Fluxograma do algoritmo CSMA/CD: escutar canal → canal livre? → transmitir �
 
 Switch com 4 portas numeradas, cada uma conectada a um dispositivo (PC-A, PC-B, PC-C, Servidor). Abaixo, tabela MAC mostrando a associação porta → endereço MAC. Seta mostrando quadro de PC-A encaminhado apenas para a porta do Servidor.
 
-# 🖥️ Aula - 04: Camada Física, Camada de Enlace e Ethernet
+### Como o switch aprende
 
 | **Etapa** | **Ação** | **Descrição** |
 | --- | --- | --- |
@@ -305,7 +303,7 @@ Switch com 4 portas numeradas, cada uma conectada a um dispositivo (PC-A, PC-B, 
 | 4b | **Inundar (flooding)** | Se **não** encontrar o MAC de destino, envia o quadro por **todas** as portas (exceto a de origem) |
 | 5 | **Envelhecimento** | Entradas na tabela MAC expiram após um tempo (padrão: 300 segundos) se não forem renovadas |
 
-# 🖥️ Aula - 04: Camada Física, Camada de Enlace e Ethernet
+### Exemplo passo a passo
 
 Considere um switch com 4 portas e tabela MAC inicialmente vazia:
 
@@ -318,13 +316,13 @@ Considere um switch com 4 portas e tabela MAC inicialmente vazia:
 | 5 | PC-B (porta 2) envia para PC-C | Porta 1 → MAC-A, Porta 2 → MAC-B, Porta 3 → MAC-C |
 | 6 | Switch conhece MAC-C: encaminha **apenas** para porta 3 | Sem alteração |
 
-# 🖥️ Aula - 04: Camada Física, Camada de Enlace e Ethernet
+### Na prática
 
 - **Switch gerenciável:** administradores podem visualizar a tabela MAC via CLI com comandos como `show mac address-table` (Cisco IOS)
 - **Segurança (Port Security):** switches corporativos podem limitar o número de MACs por porta, prevenindo ataques de MAC flooding
 - **VLANs:** switches gerenciáveis segmentam a rede em VLANs, criando domínios de broadcast separados na camada 2
 
-# 🖥️ Aula - 04: Camada Física, Camada de Enlace e Ethernet
+### Hub × Switch
 
 | **Aspecto** | **Hub** | **Switch** |
 | --- | --- | --- |
@@ -340,7 +338,7 @@ Considere um switch com 4 portas e tabela MAC inicialmente vazia:
 
 ---
 
-# 🖥️ Aula - 04: Camada Física, Camada de Enlace e Ethernet
+### Camada 1 × Camada 2
 
 | **Critério** | **Camada 1 (Física)** | **Camada 2 (Enlace)** |
 | --- | --- | --- |
@@ -354,7 +352,7 @@ Considere um switch com 4 portas e tabela MAC inicialmente vazia:
 
 ---
 
-# 🖥️ Aula - 04: Camada Física, Camada de Enlace e Ethernet
+### Tendências
 
 | **Tendência** | **Descrição** | **Impacto** |
 | --- | --- | --- |
@@ -366,7 +364,7 @@ Considere um switch com 4 portas e tabela MAC inicialmente vazia:
 
 ---
 
-# 🖥️ Aula - 04: Camada Física, Camada de Enlace e Ethernet
+## ✅ Resumo — conceitos em uma frase
 
 | **Conceito** | **Definição em Uma Frase** |
 | --- | --- |
@@ -384,9 +382,8 @@ Considere um switch com 4 portas e tabela MAC inicialmente vazia:
 
 ---
 
-# 🖥️ Aula - 04: Camada Física, Camada de Enlace e Ethernet
 
-# 🖥️ Aula - 04: Camada Física, Camada de Enlace e Ethernet
+## Desafio
 
 Você é o técnico de TI de um escritório com 8 computadores conectados a um switch de 16 portas. O gerente relata os seguintes problemas:
 
@@ -406,7 +403,7 @@ Você é o técnico de TI de um escritório com 8 computadores conectados a um s
 
 ---
 
-# 🖥️ Aula - 04: Camada Física, Camada de Enlace e Ethernet
+## ➡️ Próxima aula
 
 **Para a próxima aula (Semana 4: Modelo OSI vs. TCP/IP, Jornada do Pacote):**
 
@@ -420,9 +417,8 @@ Você é o técnico de TI de um escritório com 8 computadores conectados a um s
 
 ---
 
-# 🖥️ Aula - 04: Camada Física, Camada de Enlace e Ethernet
 
-# 🖥️ Aula - 04: Camada Física, Camada de Enlace e Ethernet
+## 📚 Referências
 
 | **Autor** | **Obra** | **Capítulo/Seção Utilizada** |
 | --- | --- | --- |
@@ -430,14 +426,14 @@ Você é o técnico de TI de um escritório com 8 computadores conectados a um s
 | KUROSE, J. F. | Redes de Computadores e a Internet. 8. ed. Pearson, 2021 | Cap. 6: A Camada de Enlace e Redes Locais (Seções 6.1 a 6.4) |
 | LACERDA, P. S. P. et al. | Projeto de Redes de Computadores. Sagah, 2021 | Cap. 3: Cabeamento estruturado e padrões Ethernet |
 
-# 🖥️ Aula - 04: Camada Física, Camada de Enlace e Ethernet
+### Leitura complementar
 
 | **Autor** | **Obra** | **Relevância** |
 | --- | --- | --- |
 | MAITINO NETO, R. et al. | Sistemas Operacionais de Redes Abertas. Sagah, 2020 | Interfaces de rede e drivers na camada de enlace (Cap. 4) |
 | ROHLING, L. J. | Segurança de Redes de Computadores. Contentus, 2020 | Ataques na camada 2: MAC flooding, ARP spoofing, VLAN hopping (Cap. 3) |
 
-# 🖥️ Aula - 04: Camada Física, Camada de Enlace e Ethernet
+### Recursos
 
 | **Recurso** | **Descrição** | **Link** |
 | --- | --- | --- |
