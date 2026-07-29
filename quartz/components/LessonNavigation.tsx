@@ -10,7 +10,7 @@ function parseLessonTitle(raw: string) {
   const str = raw.trim()
   
   // Tenta capturar: [emoji opicional] [Aula XX opicional] [separador opicional] [título]
-  const m = str.match(/^([\p{Emoji_Presentation}\p{Extended_Pictographic}]+)?\s*(Aula\s*\d+[\w\s]*?)?\s*[-–—:]\s*(.*)|^(.*)/u)
+  const m = str.match(/^([\p{Emoji_Presentation}\p{Extended_Pictographic}️‍]+)?\s*(Aula\s*[-–—]?\s*\d+[\w\s]*?)?\s*[-–—:]\s*(.*)|^(.*)/u)
   
   const emoji = m?.[1]?.trim() ?? "📖"
   const lessonNum = m?.[2]?.trim() ?? ""
@@ -22,8 +22,11 @@ function parseLessonTitle(raw: string) {
 // Ordena as aulas: primeiro por número de aula no título, depois alfabético
 function sortLessons(a: any, b: any) {
   const getNum = (f: any) => {
-    const t = f.frontmatter?.title ?? f.slug ?? ""
-    const m = t.match(/Aula\s*(\d+)/i)
+    // Aceita "Aula 07", "Aula - 07:", "Aula – 07" — e cai para o slug se o
+    // frontmatter nao trouxer numero. Sem isso, titulo com separador viraria
+    // Infinity e a aula iria para o fim da lista.
+    const re = /Aula\s*[-–—:]*\s*(\d+)/i
+    const m = (f.frontmatter?.title ?? "").match(re) ?? (f.slug ?? "").match(re)
     return m ? parseInt(m[1], 10) : Infinity
   }
   const na = getNum(a), nb = getNum(b)

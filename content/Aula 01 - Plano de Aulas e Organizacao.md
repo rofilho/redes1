@@ -43,9 +43,8 @@ Começo por aqui porque é o que vale a partir de agora, não em novembro.
 
 Eu incentivo o uso.
 
-> **A IA ajuda. A IA não cria.**
-
-Ela pode ajudar. O que ela **não** pode é criar por você.
+> [!TIP] 🤖 A IA ajuda. A IA não cria.
+> Ela pode ajudar. O que ela **não** pode é criar por você.
 
 ---
 
@@ -53,7 +52,7 @@ Ela pode ajudar. O que ela **não** pode é criar por você.
 
 ### Em uma frase
 
-Ao final do semestre você deve conseguir **planejar, configurar e testar** uma rede local ou de médio porte — endereçar, ligar redes distintas por um roteador, colocar serviços no ar e diagnosticar quando não funciona.
+Ao final do semestre você deve conseguir **planejar, configurar e testar** uma rede local ou de médio porte. Na prática: endereçar, ligar redes distintas por um roteador, colocar serviços no ar e diagnosticar quando não funciona.
 
 Isso é o **perfil do egresso** que o plano de ensino define, não uma promessa minha.
 
@@ -111,7 +110,7 @@ O calendário da universidade tem cinco sábados letivos de reposição:
 | :--: |
 | **29/08** · **12/09** · **03/10** · **24/10** · **07/11** |
 
-A Turma 12 perde quatro encontros, e os sábados são cinco. Mas **eu ainda não confirmei com a secretaria qual sábado repõe qual segunda**, e não anuncio data de aula por suposição minha. Quando a secretaria fechar, publico no AVA e atualizo esta página no mesmo dia.
+A Turma 12 perde quatro encontros, e os sábados são cinco. Mas eu **ainda não confirmei** com a secretaria qual sábado repõe qual segunda, e não anuncio data de aula por suposição minha. Quando a secretaria fechar, publico no AVA e atualizo esta página no mesmo dia.
 
 **O que a Turma 12 pode contar desde já:** o conteúdo não vai ser cortado. **Se a reposição não cobrir os quatro encontros, eu digo em sala o que encolhe — e endereçamento, roteamento e serviços não entram nessa conta**, porque são pré-requisito de Redes II. `[CONFIRMAR: qual conteúdo cede primeiro]`
 
@@ -204,7 +203,7 @@ Quem chega na faixa dos 40–59 com o AVA zerado **não tem direito à recupera�
 
 E o mecanismo importa: a recuperação vale o total das provas do semestre — **25 + 30 = 55 pontos** — e **substitui** as notas das provas, que são zeradas. Ela não soma em cima do que você já tinha.
 
-A consequência é contraintuitiva e vale entender agora, não em dezembro: **quem foi bem nas provas e mal na atividade contínua não se beneficia da recuperação** — jogaria fora justamente a parte boa. Somado ao teto de 60, ninguém sai da recuperação com mais do que o mínimo de aprovação.
+A consequência é contraintuitiva e vale entender agora, não em dezembro: quem foi bem nas provas e mal na atividade contínua **não se beneficia da recuperação** — jogaria fora justamente a parte boa. Somado ao teto de 60, ninguém sai da recuperação com mais do que o mínimo de aprovação.
 
 ---
 
@@ -248,7 +247,9 @@ Esta aula é administrativa: quase nada dela sai de livro. Vale você saber o qu
 
 **Norma da coordenação, que vale acima do meu plano:**
 
-As regras de **aprovação, segunda chamada e recuperação** são as definidas pela coordenação para os cursos de Engenharias, Gestão e Tecnologia da Informação do **Campus Uberlândia** neste semestre. Não são minhas e eu não posso alterá-las. Trago para cá porque decidem nota e prazo, e porque ninguém lê norma por conta própria em julho. **O texto que vale é o publicado no AVA.**
+As regras de **aprovação, segunda chamada e recuperação** são as definidas pela coordenação para os cursos de Engenharias, Gestão e Tecnologia da Informação do **Campus Uberlândia** neste semestre. Não são minhas e eu não posso alterá-las.
+
+Trago para cá porque decidem nota e prazo, e porque ninguém lê norma por conta própria em julho. **O texto que vale é o publicado no AVA.**
 
 **As bibliografias do componente**, todas na biblioteca virtual da Uniube:
 

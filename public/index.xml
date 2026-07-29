@@ -6,16 +6,34 @@
       <description>Últimas 10 notas on 🌐 Redes de Computadores I</description>
       <generator>Quartz -- quartz.jzhao.xyz</generator>
       <item>
-    <title>🖥️ Aula - 03: Topologias e Meios de Transmissão</title>
-    <link>https://rofilho.github.io/redes1/Aula-03---Topologias-e-Meios</link>
-    <guid>https://rofilho.github.io/redes1/Aula-03---Topologias-e-Meios</guid>
-    <description><![CDATA[ 🖥️ Aula - 03: Topologias e Meios de Transmissão ⚠️ Material de referência — confira a semana no calendário Esta página vem de uma oferta anterior da disciplina e continua no ar porque o conteúdo serve para estudo. ]]></description>
-    <pubDate>Tue, 28 Jul 2026 19:56:21 GMT</pubDate>
+    <title>🖥️ Aula - 07: Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake</title>
+    <link>https://rofilho.github.io/redes1/Aula-07---Camada-de-Transporte-TCP-UDP-Portas-e-Three-Way-Handshake</link>
+    <guid>https://rofilho.github.io/redes1/Aula-07---Camada-de-Transporte-TCP-UDP-Portas-e-Three-Way-Handshake</guid>
+    <description><![CDATA[ Disciplina: Redes de Computadores I (Cód. ]]></description>
+    <pubDate>Wed, 29 Jul 2026 16:45:43 GMT</pubDate>
+  </item><item>
+    <title>🖥️ Aula - 04: Camada Física, Camada de Enlace e Ethernet</title>
+    <link>https://rofilho.github.io/redes1/Aula-04---Camada-Fisica-e-Enlace</link>
+    <guid>https://rofilho.github.io/redes1/Aula-04---Camada-Fisica-e-Enlace</guid>
+    <description><![CDATA[  Disciplina: Redes de Computadores I (Cód. 49325) | Curso: Sistemas de Informação, Uniube | Semana 04 — semana de 17/08 | Prof. ]]></description>
+    <pubDate>Wed, 29 Jul 2026 16:40:45 GMT</pubDate>
+  </item><item>
+    <title>🖥️ Aula - 05: Modelo OSI vs. TCP/IP, ARP e Prática no Packet Tracer</title>
+    <link>https://rofilho.github.io/redes1/Aula-05---Modelo-OSI-vs-TCP-IP</link>
+    <guid>https://rofilho.github.io/redes1/Aula-05---Modelo-OSI-vs-TCP-IP</guid>
+    <description><![CDATA[  Disciplina: Redes de Computadores I (Cód. 49325) | Curso: Sistemas de Informação, Uniube | Semana 05 — semana de 24/08 | Prof. ]]></description>
+    <pubDate>Wed, 29 Jul 2026 16:40:45 GMT</pubDate>
   </item><item>
     <title>🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer</title>
     <link>https://rofilho.github.io/redes1/Aula-06---Pratica-Enderecamento-IPv4-e-Sub-redes-Packet-Tracer</link>
     <guid>https://rofilho.github.io/redes1/Aula-06---Pratica-Enderecamento-IPv4-e-Sub-redes-Packet-Tracer</guid>
-    <description><![CDATA[ 🖥️ Aula - 06: Prática — Endereçamento IPv4, Sub-redes e Roteamento no Packet Tracer ⚠️ Material de referência — confira a semana no calendário Esta página vem de uma oferta anterior da disciplina e continua no ar porque o conteúdo serve para estudo. ]]></description>
+    <description><![CDATA[  Disciplina: Redes de Computadores I (Cód. 49325) | Curso: Sistemas de Informação, Uniube | Semana 07 — semana de 07/09 | Prof. ]]></description>
+    <pubDate>Wed, 29 Jul 2026 16:40:45 GMT</pubDate>
+  </item><item>
+    <title>🖥️ Aula - 03: Topologias e Meios de Transmissão</title>
+    <link>https://rofilho.github.io/redes1/Aula-03---Topologias-e-Meios</link>
+    <guid>https://rofilho.github.io/redes1/Aula-03---Topologias-e-Meios</guid>
+    <description><![CDATA[ 🖥️ Aula - 03: Topologias e Meios de Transmissão ⚠️ Material de referência — confira a semana no calendário Esta página vem de uma oferta anterior da disciplina e continua no ar porque o conteúdo serve para estudo. ]]></description>
     <pubDate>Tue, 28 Jul 2026 19:56:21 GMT</pubDate>
   </item><item>
     <title>Aula 10 e Aula 11 - Enderecamento IP DHCP e Pratica Wireshark</title>
@@ -28,24 +46,6 @@
     <link>https://rofilho.github.io/redes1/Aula-02---Introducao-a-Redes</link>
     <guid>https://rofilho.github.io/redes1/Aula-02---Introducao-a-Redes</guid>
     <description><![CDATA[ 🖥️ Aula - 02: Introdução a Redes de Computadores ⚠️ Material de referência — confira a semana no calendário Esta página vem de uma oferta anterior da disciplina e continua no ar porque o conteúdo serve para estudo. ]]></description>
-    <pubDate>Mon, 27 Jul 2026 23:37:02 GMT</pubDate>
-  </item><item>
-    <title>🖥️ Aula - 04: Camada Física, Camada de Enlace e Ethernet</title>
-    <link>https://rofilho.github.io/redes1/Aula-04---Camada-Fisica-e-Enlace</link>
-    <guid>https://rofilho.github.io/redes1/Aula-04---Camada-Fisica-e-Enlace</guid>
-    <description><![CDATA[ 🖥️ Aula - 04: Camada Física, Camada de Enlace e Ethernet ⚠️ Material de referência — confira a semana no calendário Esta página vem de uma oferta anterior da disciplina e continua no ar porque o conteúdo serve para estudo. ]]></description>
-    <pubDate>Mon, 27 Jul 2026 23:37:02 GMT</pubDate>
-  </item><item>
-    <title>🖥️ Aula - 05: Modelo OSI vs. TCP/IP, ARP e Prática no Packet Tracer</title>
-    <link>https://rofilho.github.io/redes1/Aula-05---Modelo-OSI-vs-TCP-IP</link>
-    <guid>https://rofilho.github.io/redes1/Aula-05---Modelo-OSI-vs-TCP-IP</guid>
-    <description><![CDATA[ 🖥️ Aula - 05: Modelo OSI vs. ]]></description>
-    <pubDate>Mon, 27 Jul 2026 23:37:02 GMT</pubDate>
-  </item><item>
-    <title>🖥️ Aula - 07: Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake</title>
-    <link>https://rofilho.github.io/redes1/Aula-07---Camada-de-Transporte-TCP-UDP-Portas-e-Three-Way-Handshake</link>
-    <guid>https://rofilho.github.io/redes1/Aula-07---Camada-de-Transporte-TCP-UDP-Portas-e-Three-Way-Handshake</guid>
-    <description><![CDATA[  disciplina: Redes de Computadores I codigo: “49325” aula: 7 titulo: “Camada de Transporte — TCP, UDP, Portas e Three-Way Handshake” tipo: teorica semana: 7 data: 2026-05-07 status: publicado tags: redes tcp udp transporte handshake portas publicar: true 🖥️ Aula - 07: Camada de Transporte — TCP, UD... ]]></description>
     <pubDate>Mon, 27 Jul 2026 23:37:02 GMT</pubDate>
   </item><item>
     <title>Aula 08 - Protocolos de Aplicacao HTTP e FTP</title>
