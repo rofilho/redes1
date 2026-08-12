@@ -166,10 +166,15 @@ LessonNavigation.css = `
   white-space: nowrap;
 }
 
+/* --gray puro reprova a WCAG AA sobre o fundo translucido do cartao nos DOIS
+   temas (2.87:1 no claro, 3.57:1 no escuro) com 11px. O --gray e calibrado
+   contra o fundo da pagina, nao contra este cartao. Puxar 45% na direcao de
+   --dark resolve os dois de uma vez, porque --dark inverte junto com o tema:
+   ~5.9:1 no claro e ~7:1 no escuro, sem chegar ao brilho do titulo. */
 .nav-pill__num {
   display: block;
   font-size: 0.7rem;
-  color: var(--gray);
+  color: color-mix(in srgb, var(--gray) 55%, var(--dark));
   margin-bottom: 2px;
 }
 
@@ -185,18 +190,21 @@ LessonNavigation.css = `
   -webkit-box-orient: vertical;
 }
 
-/* ── Modo escuro ── */
+/* ── Modo escuro ──
+   ATENCAO: no Quartz os nomes da paleta sao POSICIONAIS, nao literais. No
+   darkMode, --darkgray vale #e2e5ef (claro) e --light vale #10131f (o fundo).
+   Este bloco usava os dois como se fossem literais, e o resultado era um
+   cartao de fundo claro com titulo quase preto — ilegivel — no tema escuro.
+   A regra base ja usa --lightgray e --dark, que trocam de valor sozinhos; por
+   isso o titulo nao precisa de override nenhum aqui.
+   (Sem crase neste comentario: o CSS vive num template literal.) */
 :root[saved-theme="dark"] .nav-pill {
-  background: color-mix(in srgb, var(--darkgray) 60%, transparent);
+  background: color-mix(in srgb, var(--lightgray) 60%, transparent);
   border-color: rgba(255,255,255,0.08);
 }
 
 :root[saved-theme="dark"] .nav-pill:hover {
-  background: var(--darkgray);
-}
-
-:root[saved-theme="dark"] .nav-pill__title {
-  color: var(--light);
+  background: var(--lightgray);
 }
 
 /* ── Mobile ── */
