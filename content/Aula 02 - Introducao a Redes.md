@@ -1,5 +1,6 @@
 ---
 title: "Aula 02 — Introdução a Redes de Computadores"
+date: 2026-08-03
 publicar: true
 tags: [redes, lan, wan, tcp-ip]
 ---

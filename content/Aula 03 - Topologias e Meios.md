@@ -1,5 +1,6 @@
 ---
 title: "Aula 03 — Topologias de Rede e Meios de Transmissão"
+date: 2026-08-10
 publicar: true
 tags: [redes, topologia, meios-transmissao, estrela, fibra-optica]
 ---
