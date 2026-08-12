@@ -1,120 +1,268 @@
 ---
-title: "🖥️ Aula - 03: Topologias e Meios de Transmissão"
+title: "Aula 03 — Topologias de Rede e Meios de Transmissão"
+publicar: true
+tags: [redes, topologia, meios-transmissao, estrela, fibra-optica]
 ---
 
-# 🖥️ Aula - 03: Topologias e Meios de Transmissão
-> [!WARNING] ⚠️ Material de referência — confira a semana no calendário
-> Esta página vem de uma oferta anterior da disciplina e continua no ar porque o conteúdo serve para estudo. **A numeração dela pode não corresponder à semana do calendário de 2026-2** — o calendário que vale é o do [Plano de Ensino e Contrato](./Plano-de-Ensino-e-Contrato). Se ela pedir uma ferramenta antes da semana em que o plano a introduz, siga o plano.
+<div class="au-leitura" data-aula="s03">
 
-Hoje vamos aprofundar nossos conhecimentos sobre como as redes são organizadas fisicamente e logicamente. Vamos estudar as topologias de redes e os diferentes meios de transmissão utilizados para interligar dispositivos, entendendo como essas escolhas impactam o desempenho e a segurança da comunicação.
+# Aula 03 — Topologias de Rede e Meios de Transmissão
 
-A topologia de rede define como os dispositivos estão conectados entre si e como os dados trafegam pela rede. Podemos falar em topologia física (como os cabos e dispositivos estão realmente ligados) e topologia lógica (como os dados circulam).
-
-Diferentes topologias trazem vantagens e desvantagens em termos de desempenho, custo, facilidade de expansão e tolerância a falhas.
-
-1. **Topologia em Barramento (Bus)**
-    
-    Na topologia em barramento, todos os dispositivos compartilham o mesmo meio de transmissão. Isso significa que apenas um dispositivo transmite por vez e todos “ouvem” o que é enviado.
-    
-    Se o cabo principal (barramento) falhar, toda a rede pode ficar comprometida, o que reduz a confiabilidade; esse modelo era comum em redes antigas com cabos coaxiais.
-2. **Topologia em Anel (Ring)**
-    
-    Na topologia em anel, os dispositivos formam um círculo fechado, em que cada nó está ligado ao próximo. Os dados circulam de nó em nó até alcançar o destino, frequentemente seguindo um único sentido.
-    
-    Um exemplo clássico são as redes Token Ring, que utilizavam um “token” para controlar quem podia transmitir, reduzindo colisões, mas tornando a rede sensível a falhas em um único ponto do anel.
-3. **Topologia em Estrela (Star)**
-    
-    Na topologia em estrela, todos os dispositivos se conectam a um ponto central, como um switch ou hub. Esse dispositivo central atua como concentrador do tráfego entre as máquinas.
-    
-    Se um cabo individual falhar, apenas o nó correspondente é afetado; porém, se o equipamento central falhar, toda a rede para. Essa é a topologia física predominante em redes Ethernet modernas.
-4. **Topologia em Malha (Mesh)**
-    
-    Na topologia em malha, cada dispositivo se conecta a vários outros, criando caminhos redundantes entre os nós. Isso aumenta bastante a tolerância a falhas e a disponibilidade da rede.ademi.
-    
-    Esse modelo é muito usado em infraestruturas críticas, como redes de data centers e algumas redes wireless avançadas (Wi‑Fi mesh), onde a continuidade do serviço é essencial.
-5. **Topologia Híbrida**
-    
-    Topologias híbridas combinam duas ou mais topologias diferentes (por exemplo, estrela com malha ou barramento).mksolutions+1
-    
-    Elas são comuns em redes corporativas de médio e grande porte, em que setores diferentes são organizados em estrela, mas interligados entre si em uma estrutura de malha ou árvore.
-
-
-Os meios de transmissão determinam como os bits viajam na rede, podendo ser classificados em guiados (com fio) e não guiados (sem fio).
-
-A escolha do meio influencia diretamente a velocidade, o alcance, a imunidade a interferências, o custo da infraestrutura e até requisitos de segurança.
-
-1. **Par Trançado (Twisted Pair)**
-    
-    O cabo de par trançado é o meio físico mais comum em redes Ethernet atuais. Ele é composto por pares de fios de cobre trançados, o que ajuda a reduzir interferências.
-    Exemplos típicos são os cabos CAT5e, CAT6 e CAT7, que oferecem boas velocidades para redes locais, embora tenham alcance limitado sem repetidores ou switches intermediários.
-    
-
-1. **Cabo Coaxial**
-    
-    O cabo coaxial foi muito utilizado em redes locais mais antigas, especialmente em topologias em barramento. Ele apresenta boa resistência a interferências eletromagnéticas.
-    
-    Hoje é mais comum em serviços de TV a cabo e acesso à internet residencial, embora ainda possa aparecer em cenários legados de rede interna.
-1. **Fibra Óptica**
-    
-    
-    A fibra óptica utiliza pulsos de luz, em vez de sinais elétricos, para transmitir dados. Isso permite altíssimas taxas de transmissão, baixa latência e grande alcance.
-    
-    Por ser imune a interferências eletromagnéticas e oferecer grande capacidade, é amplamente usada em backbones de rede, interligação de prédios e enlaces de longa distância.
-
-
-1. **Wi-Fi (Wireless LAN - WLAN)**
-    
-    O Wi‑Fi (redes locais sem fio) utiliza ondas de rádio para transmitir dados entre dispositivos e pontos de acesso. Ele oferece mobilidade e facilidade de instalação.
-    
-    Por outro lado, é mais sensível a interferências, obstáculos físicos e à competição com outras redes na mesma faixa de frequência, o que pode reduzir desempenho e estabilidade.
-    
-2. **Bluetooth**
-    
-    O Bluetooth é uma tecnologia de comunicação sem fio de curta distância e baixo consumo de energia. É muito usada para conectar fones, teclados, mouses e sensores IoT.
-    
-    Ele é adequado para pequenas quantidades de dados em curtas distâncias, mas não substitui redes Wi‑Fi ou cabeadas em termos de alcance e velocidade.
-    
-3. **Micro-ondas e Satélite**
-    
-    Links de micro-ondas e satélite permitem comunicação sem fio em longas distâncias, muitas vezes em regiões onde não há infraestrutura cabeada.
-    
-    Eles são usados em provedores de acesso e enlaces ponto a ponto, mas tendem a ter maior latência, custo mais alto e dependência de condições climáticas, especialmente no caso de satélites.
-    
-
-| Meio de Transmissão | Vantagens | Desvantagens |
-| --- | --- | --- |
-| **Par Trançado (Ethernet)** | Custo acessível, fácil instalação, boa velocidade para redes locais. | Suscetível a interferências eletromagnéticas, alcance limitado. |
-| **Cabo Coaxial** | Boa resistência a interferências, utilizado para TV a cabo e internet. | Mais rígido que o par trançado, taxa de transmissão inferior. |
-| **Fibra Óptica** | Altíssima velocidade, baixa latência, resistente a interferências. | Alto custo, necessidade de infraestrutura especializada. |
-| **Wi-Fi** | Mobilidade, fácil instalação, utilizado em diversos dispositivos. | Menor velocidade em comparação a redes cabeadas, vulnerável a interferências. |
-| **Bluetooth** | Baixo consumo de energia, ideal para curtas distâncias. | Alcance muito limitado, velocidade inferior a outros meios. |
-| **Satélite** | Cobertura global, útil para áreas remotas sem infraestrutura terrestre. | Alta latência, custo elevado, dependência de condições climáticas. |
-
-Vamos medir a latência e velocidade da rede utilizando diferentes meios de transmissão:
-
-- Teste de velocidade em Wi-Fi vs. cabo Ethernet.
-- Utilização do comando `tracert` para visualizar o caminho dos pacotes na rede.
-- Análise de interferências em redes sem fio.
-
-Agora que conhecemos as topologias e os meios de transmissão, vamos refletir:
-
-1. Qual topologia é mais eficiente para grandes empresas?
-2. Como escolher o melhor meio de transmissão para um ambiente específico?
-3. Como interferências podem afetar redes sem fio?
-
-Nesta aula, exploramos como as redes são estruturadas por meio de diferentes topologias e estudamos os principais meios de transmissão, tanto guiados quanto não guiados. Esses conceitos são fundamentais para projetar redes eficientes, escaláveis e confiáveis.
-
-**Tarefa:** pesquise sobre tecnologias emergentes de conectividade — **5G** e **Wi‑Fi 6/6E**. Pense em como elas podem impactar o desenho de redes nos próximos anos. Traga dúvidas e descobertas para a próxima aula.
+**Disciplina:** 49304 — Redes de Computadores I · Sistemas de Informação — Uniube<br>
+**Professor:** Romualdo Mathias Filho<br>
+**Semana:** 3 · Semana de 10/08/2026 · `[CONFIRMAR sala]` · 📘 Teórica (75 min)<br>
+**Página de referência:** [Plano de Ensino e Contrato](./Plano-de-Ensino-e-Contrato)
 
 ---
 
-- **Livro:** "Redes de Computadores" - Tanenbaum
-- **Cisco Networking Academy:** [https://www.netacad.com/](https://www.netacad.com/)
-- **Artigo:** "The Role of Network Topologies in Modern Communication Systems" - *IEEE Communications Surveys & Tutorials*
-- **Vídeo:** "Tipos de topologias de redes explicadas" - YouTube
+<div class="au-caminho">
+<b>Nosso caminho até aqui</b>
 
-Bons estudos e até a próxima aula!
+Responda **antes** de abrir. Se errar, você acabou de descobrir o que revisar hoje.
 
+<details>
+<summary>Na Aula 02, por que a VPN aparece na mesma tabela que LAN, MAN e WAN sem ser um tamanho de rede?</summary>
 
+Porque **alcance e privacidade são eixos diferentes**. LAN, MAN e WAN classificam por área geográfica; a VPN é um **túnel lógico criptografado** que roda *em cima* de outra rede — normalmente a WAN. Ela entra na lista por ser um tipo de rede que você vai encontrar, não por ocupar uma faixa de tamanho.
 
+</details>
 
+<details>
+<summary>O <code>ping</code> para um servidor não respondeu. Isso prova que ele está fora do ar?</summary>
+
+**Não.** Muitos servidores e firewalls corporativos bloqueiam ICMP por política. O `ping` que responde prova que o host está vivo; o silêncio dele **não prova o contrário**.
+
+</details>
+</div>
+
+---
+
+<aside class="au-antes">
+<b class="au-nota-t">Antes de começar</b>
+
+**Topologia** — a estrutura de organização de uma rede. Tem duas leituras: a **física** (onde os cabos e equipamentos realmente estão) e a **lógica** (como os dados de fato trafegam).
+
+**Ponto único de falha (SPOF)** — o elemento cuja queda derruba tudo o que depende dele. Reconhecer o SPOF de uma topologia é metade do trabalho de projetá-la.
+
+**Diafonia (crosstalk)** — interferência causada pelo acoplamento eletromagnético entre cabos paralelos vizinhos. É o problema que o trançamento do par trançado existe para resolver.
+
+**Atenuação** — a perda de intensidade do sinal ao longo da distância ou ao atravessar uma barreira física.
+
+</aside>
+
+---
+
+## 1. Topologia física e topologia lógica [Teoria ⏳ 5 min]
+
+A **topologia de rede** define a estrutura de organização física e lógica de uma rede:
+
+- **Topologia física:** o leiaute real — a disposição dos computadores, a passagem dos cabos metálicos e ópticos, a interconexão das portas dos ativos de rede.
+- **Topologia lógica:** como os dados trafegam pelo meio compartilhado, ou seja, as regras de controle de acesso ao meio impostas pelos protocolos.
+
+A escolha da topologia decide desempenho, custo, facilidade de expansão e tolerância a falhas — os quatro eixos que todo projeto de rede negocia entre si.
+
+<details class="au-aposta">
+<summary>Antes de rolar: uma rede cabeada em estrela pode ter topologia lógica de barramento?</summary>
+
+**Pode — e teve, por muito tempo.** Uma rede ligada fisicamente em estrela num **hub** se comportava logicamente como barramento: o hub repetia o sinal em todas as portas, todo mundo ouvia todo mundo e as colisões aconteciam como num cabo único. O desenho dos cabos mudou; a regra de acesso ao meio, não. Foi o **switch** que separou de fato as duas coisas — e é exatamente o assunto da próxima aula.
+
+</details>
+
+---
+
+## 2. As cinco topologias [Teoria ⏳ 20 min]
+
+### 2.1 — Barramento (Bus)
+
+Todos os dispositivos compartilham o mesmo meio de transmissão. Apenas um transmite por vez, e todos "ouvem" o que é enviado. Se o cabo principal romper em qualquer ponto, o barramento perde a terminação resistiva e **toda a rede entra em colapso**. Comum em redes legadas com cabo coaxial (10Base2).
+
+<figure class="au-fig">
+<img src="assets/image%206.png" alt="Topologia física em barramento, com todos os hosts ligados à mesma linha">
+<figcaption class="au-legenda">Topologia física em barramento, onde todos os hosts dividem a mesma linha. Fonte: Tanenbaum (2021).</figcaption>
+</figure>
+
+### 2.2 — Anel (Ring)
+
+Os dispositivos formam um circuito fechado e unidirecional, cada host ligado a dois vizinhos. Os dados circulam de nó em nó até alcançar o destino.
+
+O exemplo clássico é o Token Ring (IEEE 802.5), que usava uma ficha digital (*token*) para controlar quem podia transmitir, reduzindo colisões. A quebra de um único cabo rompe o anel e inutiliza a rede — a menos que seja um anel duplo redundante.
+
+<figure class="au-fig">
+<img src="assets/image%207.png" alt="Disposição circular de hosts na topologia em anel">
+<figcaption class="au-legenda">Disposição de rede circular na topologia em anel. Fonte: Kurose (2021).</figcaption>
+</figure>
+
+### 2.3 — Estrela (Star)
+
+Cada host conecta-se a um concentrador central (switch ou hub) por um link individual ponto a ponto. É a topologia física predominante nas redes Ethernet modernas. Se um cabo individual falha, **apenas aquele host** é afetado; se o equipamento central falha, a rede local inteira para.
+
+<figure class="au-fig">
+<img src="assets/image%208.png" alt="Hosts conectados de forma centralizada a um switch na topologia em estrela">
+<figcaption class="au-legenda">Hosts conectados de forma centralizada na topologia em estrela. Fonte: Cisco Networking Academy.</figcaption>
+</figure>
+
+### 2.4 — Malha (Mesh)
+
+Cada dispositivo se conecta a vários outros, criando caminhos redundantes. Isso aumenta muito a tolerância a falhas: se um enlace cai, os pacotes seguem por caminho alternativo. Usada em infraestrutura crítica — WANs de operadoras, data centers e redes Wi-Fi mesh.
+
+<figure class="au-fig">
+<img src="assets/image%209.png" alt="Rede com múltiplos caminhos redundantes na topologia em malha">
+<figcaption class="au-legenda">Rede altamente redundante na topologia em malha. Fonte: IEEE Communications.</figcaption>
+</figure>
+
+### 2.5 — Híbrida
+
+Combina duas ou mais topologias na mesma infraestrutura. Comum em redes corporativas de médio e grande porte: setores organizados em estrela, interligados entre si por uma estrutura de malha ou árvore.
+
+<figure class="au-fig">
+<img src="assets/image%2010.png" alt="Fusão de estruturas diferentes compondo uma rede híbrida">
+<figcaption class="au-legenda">Fusão de estruturas diferentes compondo uma rede híbrida. Fonte: Sagah (2021).</figcaption>
+</figure>
+
+> [!NOTE] 💼 Pergunta de entrevista
+> *"Se a malha é a mais tolerante a falhas, por que praticamente nenhuma LAN corporativa é em malha?"* — Porque o custo de cabeamento cresce com o **quadrado** do número de nós: cem hosts em malha completa exigiriam 4.950 enlaces. A estrela troca tolerância por viabilidade, e a redundância volta depois só onde dói — entre switches, não entre estações.
+
+---
+
+## 3. Meios guiados (com fio) [Teoria ⏳ 20 min]
+
+Meios guiados conduzem as ondas eletromagnéticas ou ópticas por um caminho físico delimitado.
+
+### 3.1 — Par trançado
+
+Pares de fios de cobre isolados e trançados helicoidalmente. O trançamento cancela o ruído eletromagnético externo e a diafonia entre pares vizinhos. É o meio mais comum nas redes Ethernet atuais.
+
+- **UTP** *(Unshielded Twisted Pair):* sem blindagem. Flexível e econômico, padrão de escritório.
+- **STP** *(Shielded Twisted Pair):* com blindagem metálica, para interferência industrial severa.
+- **Categorias:** CAT5e (até 1 Gbps a 100 m), CAT6 (até 10 Gbps a 55 m), CAT7/CAT8 para data centers.
+
+<figure class="au-fig">
+<img src="assets/image%2011.png" alt="Estrutura interna de um cabo de par trançado UTP Cat6">
+<figcaption class="au-legenda">Estrutura interna de um cabo de par trançado UTP Cat6. Fonte: Sagah.</figcaption>
+</figure>
+
+### 3.2 — Cabo coaxial
+
+Condutor de cobre central, camada isolante dielétrica, blindagem em malha metálica (retorno de terra e escudo contra ruído) e capa externa. Boa resistência a interferência eletromagnética. Muito usado em redes locais antigas em barramento; hoje predomina em TV a cabo e acesso residencial à Internet (HFC).
+
+<figure class="au-fig">
+<img src="assets/image%2013.png" alt="Camadas concêntricas de proteção do cabo coaxial">
+<figcaption class="au-legenda">Detalhe das camadas concêntricas de proteção do cabo coaxial. Fonte: Tanenbaum.</figcaption>
+</figure>
+
+### 3.3 — Fibra óptica
+
+Transmite dados como pulsos de luz, não como sinal elétrico. Núcleo de vidro de alta pureza cercado por uma casca de índice de refração diferente, o que provoca reflexão interna total.
+
+- **Imunidade eletromagnética total:** não conduz eletricidade, logo não sofre interferência de motores, cabos elétricos ou descargas atmosféricas.
+- **Alcance:** dezenas de quilômetros sem regeneradores de sinal.
+- **Monomodo (SMF):** núcleo estreito (~9 µm), caminho único de luz coerente (laser). Longas distâncias, WAN e operadoras.
+- **Multimodo (MMF):** núcleo largo (~50 a 62,5 µm), múltiplos caminhos de propagação (LED). Enlaces curtos dentro de edifícios.
+
+<figure class="au-fig">
+<img src="assets/image%2015.png" alt="Refração interna e propagação da luz dentro da fibra óptica">
+<figcaption class="au-legenda">Refração interna e propagação da luz na fibra óptica. Fonte: Tanenbaum (2021).</figcaption>
+</figure>
+
+> [!WARNING] ⚠️ Gotcha
+> O limite de **100 metros por segmento** do par trançado não é sugestão de fabricante: é o que o padrão Ethernet garante para o sinal chegar íntegro. Passar de 100 m "porque funcionou no teste" produz a pior classe de defeito de rede — o que só aparece sob carga, meses depois, e ninguém associa ao cabo.
+
+---
+
+## 4. Meios não guiados (sem fio) [Teoria ⏳ 10 min]
+
+Transmitem pelo espaço livre, por ondas de rádio propagadas por antenas.
+
+- **Wi-Fi (IEEE 802.11):** redes locais sem fio. Oferece mobilidade e instalação fácil, mas é sensível a interferência, a obstáculos físicos e à competição com outras redes na mesma faixa.
+- **Bluetooth:** curta distância e baixo consumo. Fones, teclados, mouses e sensores IoT. Não substitui Wi-Fi nem cabo em alcance ou velocidade.
+- **Micro-ondas e satélite:** enlaces de longa distância onde não há infraestrutura cabeada. Maior latência, custo mais alto e, no caso do satélite, dependência de condições climáticas.
+
+### 4.1 — Comparativo dos meios
+
+| Meio | Vantagens | Desvantagens |
+| :--- | :--- | :--- |
+| **Par trançado** | custo acessível, instalação fácil, boa velocidade em LAN | suscetível a interferência eletromagnética, alcance limitado |
+| **Coaxial** | boa resistência a interferência; TV a cabo e Internet residencial | mais rígido que o par trançado, taxa de transmissão inferior |
+| **Fibra óptica** | altíssima velocidade, baixa latência, imune a interferência | alto custo, exige infraestrutura e mão de obra especializadas |
+| **Wi-Fi** | mobilidade, instalação fácil, presente em todo dispositivo | menor velocidade que o cabo, vulnerável a interferência |
+| **Bluetooth** | baixo consumo, ideal para curtas distâncias | alcance muito limitado, velocidade inferior |
+| **Satélite** | cobertura global, útil em áreas remotas | alta latência, custo elevado, sensível ao clima |
+
+<div class="au-slot">
+<div class="au-slot-h"><b>Interativo</b> · votação em sala · 5 min</div>
+<div class="au-slot-c">
+
+Três cenários no projetor — um galpão industrial com cabos de alta tensão na canaleta, um prédio de apartamentos e um campus com dois blocos a 800 m. Para cada um, votar no meio de transmissão adequado e justificar em uma frase.
+
+</div>
+<p class="au-slot-b"><b>Plano B:</b> se a rede cair, os mesmos três cenários vão no quadro e a votação é por levantada de dedos, cenário a cenário. Mesmo conteúdo, mesmo tempo.</p>
+</div>
+
+---
+
+## 5. Prática: medir o meio [Hands-On ⏳ 10 min]
+
+<div class="au-pratica">
+<b>Prática — 10 min, em duplas</b>
+
+1. Faça um teste de velocidade conectado ao **Wi-Fi**. Anote a taxa e a latência.
+2. Repita o mesmo teste conectado por **cabo Ethernet**, se houver ponto disponível. Anote os dois números de novo.
+3. Execute `tracert google.com` e observe o **caminho dos pacotes**: quantos saltos até sair da rede da Uniube.
+4. Compare os resultados e escreva uma frase: qual diferença veio do **meio** e qual veio da **distância**.
+
+<p class="au-pronto"><b>Critério de pronto:</b> você tem os dois pares de números anotados e consegue apontar, no <code>tracert</code>, em que salto o pacote deixou a rede local.</p>
+</div>
+
+> [!TIP] 💡 Dica de produção
+> A latência que o teste de velocidade mostra é quase toda **distância**, não meio. Trocar Wi-Fi por cabo melhora muito a estabilidade e a taxa, mas quase nada o RTT até um servidor em outro estado — a luz na fibra já está perto do limite físico. Saber separar as duas coisas evita meia dúzia de diagnósticos errados por semestre.
+
+---
+
+<div class="au-resumo">
+<b>Resumo da aula</b>
+
+| Conceito | Definição em uma frase |
+|---|---|
+| Topologia física | onde os cabos e equipamentos realmente estão |
+| Topologia lógica | como os dados de fato trafegam pelo meio |
+| Barramento | meio único compartilhado; o rompimento derruba tudo |
+| Anel | circuito fechado unidirecional; a quebra de um cabo rompe o anel |
+| **Estrela** | cada host num link próprio ao switch central — padrão das LANs modernas |
+| Malha | caminhos redundantes, tolerância máxima, custo que cresce ao quadrado |
+| Par trançado | cobre trançado contra diafonia; **limite de 100 m por segmento** |
+| Coaxial | condutor central blindado; TV a cabo e banda larga residencial |
+| Fibra óptica | luz em vidro; imune a interferência, chega a dezenas de km |
+| Monomodo × Multimodo | núcleo estreito e laser para longa distância × núcleo largo e LED para enlace curto |
+| SPOF | o elemento cuja queda derruba tudo que depende dele |
+| Diafonia | interferência entre cabos paralelos vizinhos |
+
+</div>
+
+---
+
+<div class="au-reflexao">
+<b>Para pensar até a próxima aula</b>
+
+<p>A topologia em estrela concentra todo o risco num único switch, e mesmo assim venceu a malha, que não tem esse problema. Que outros lugares da computação você conhece em que a solução tecnicamente superior perdeu para a viável? O que isso diz sobre o que "melhor" significa dentro de um projeto de rede?</p>
+</div>
+
+---
+
+<div class="au-refs">
+<b>Referências desta aula</b>
+
+- KUROSE, J. F.; ROSS, K. W. **Redes de computadores e a Internet: uma abordagem top-down.** 8. ed. São Paulo: Pearson, 2021. <span class="au-pag">cap. 1, p. 15–35</span> — meios físicos de transmissão.
+- TANENBAUM, A. S.; FEAMSTER, N.; WETHERALL, D. J. **Redes de Computadores.** 6. ed. São Paulo: Pearson, 2021. <span class="au-pag">cap. 2, p. 60–110</span> — meios guiados, não guiados e topologias.
+- LACERDA, P. S. P.; SOARES, J. A.; LENZ, M. L. et al. **Projeto de Redes de Computadores.** Porto Alegre: Sagah, 2021. <span class="au-pag">cap. 2, p. 30–65</span> — topologias de rede e cabos.
+
+</div>
+
+---
+
+<div class="au-proxima">
+<b>Na próxima aula</b>
+
+<p>Hoje você decidiu por onde o sinal viaja. Na próxima, a pergunta é o que acontece <b>quando dois hosts falam ao mesmo tempo</b> no mesmo meio — e como o switch aprende, sozinho e sem ninguém configurar, quem está em cada porta.</p>
+</div>
+
+</div>
