@@ -1,0 +1,168 @@
+<!-- BRIEF: Os 3 tipos de Switch Virtual do Hyper-V (Externo/Bridge, Interno/NAT, Privado/Isolado). Estetica hand-drawn whiteboard. Fundo TRANSPARENTE (sem rect de fundo); texto com halo claro via paint-order:stroke para legibilidade em tema claro e escuro. Paleta Uniube. pt-BR. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 760" width="100%" role="img" aria-label="Os tres tipos de switch virtual do Hyper-V: Externo em bridge na LAN real, Interno via NAT, e Privado isolado">
+  <style>
+    text {
+      font-family: 'Comic Sans MS','Comic Neue',cursive;
+      fill: #1d2057;
+      paint-order: stroke;
+      stroke: #fafaf8;
+      stroke-width: 3px;
+      stroke-linejoin: round;
+    }
+    text[fill="#ffffff"] { stroke: none; }
+    .title { font-size: 30px; font-weight: 700; }
+    .mode  { font-size: 20px; font-weight: 700; }
+    .lbl   { font-size: 14px; }
+    .ip    { font-size: 13px; font-style: italic; }
+    .leg   { font-size: 15px; }
+    .sketch { fill: none; stroke-linecap: round; stroke-linejoin: round; }
+  </style>
+
+  <!-- ============ TITULO ============ -->
+  <text class="title" x="480" y="40" text-anchor="middle">Os 3 tipos de Switch Virtual do Hyper-V</text>
+  <path class="sketch" d="M250 52 q40 -8 230 -5 q130 2 232 6" stroke="#1d2057" stroke-width="2.5"/>
+
+  <!-- ========== BLOCO 1: SWITCH EXTERNO (azul) ======= -->
+  <g id="externo">
+    <path class="sketch" d="M24 92 q-4 -6 150 -6 l120 1 q12 0 12 14 l-1 610 q1 10 -12 10 l-258 -2 q-11 1 -11 -12 l1 -605 q-2 -8 -1 -10z" stroke="#2778c4" stroke-width="3"/>
+    <text class="mode" x="155" y="118" text-anchor="middle" fill="#2778c4">1 · SWITCH EXTERNO</text>
+    <text class="lbl" x="155" y="138" text-anchor="middle" fill="#2778c4">(modo Bridge)</text>
+
+    <g>
+      <path class="sketch" d="M110 185 q-22 0 -22 -18 q0 -16 20 -16 q4 -20 28 -20 q22 0 26 18 q24 -4 24 18 q0 18 -22 18 z" stroke="#00aa9f" stroke-width="2.5"/>
+      <text class="lbl" x="128" y="172" text-anchor="middle" fill="#00aa9f">Internet</text>
+    </g>
+    <path class="sketch" d="M128 200 q3 14 1 30" stroke="#1d2057" stroke-width="2.2" marker-end="url(#arrB)"/>
+
+    <g>
+      <path class="sketch" d="M86 236 q-2 -6 6 -6 l72 1 q8 -1 8 7 l0 32 q1 7 -8 7 l-72 -1 q-7 1 -6 -7 z" stroke="#1d2057" stroke-width="2.5"/>
+      <circle cx="98" cy="262" r="3" fill="#1d2057" stroke="none"/>
+      <circle cx="110" cy="262" r="3" fill="#1d2057" stroke="none"/>
+      <path class="sketch" d="M140 248 l14 -8 M150 240 l4 0 0 5" stroke="#1d2057" stroke-width="2"/>
+      <text class="lbl" x="128" y="224" text-anchor="middle" fill="#1d2057">Roteador</text>
+    </g>
+
+    <path class="sketch" d="M128 283 l0 26" stroke="#2778c4" stroke-width="2.6" marker-end="url(#arrB)"/>
+    <g>
+      <path class="sketch" d="M72 314 q-2 -5 5 -5 l102 0 q6 0 6 6 l0 18 q0 6 -6 6 l-102 0 q-6 0 -5 -6 z" stroke="#2778c4" stroke-width="2.3"/>
+      <text class="lbl" x="128" y="328" text-anchor="middle" fill="#2778c4">NIC física do Host</text>
+    </g>
+
+    <path class="sketch" d="M128 340 l0 40" stroke="#2778c4" stroke-width="2.6" marker-end="url(#arrB)"/>
+    <g>
+      <path class="sketch" d="M74 386 q-2 -6 6 -6 l96 1 q7 -1 7 7 l0 56 q1 7 -7 7 l-96 -1 q-7 1 -6 -7 z" stroke="#2778c4" stroke-width="2.8"/>
+      <path class="sketch" d="M110 452 l36 0 M128 450 l0 10" stroke="#2778c4" stroke-width="2.2"/>
+      <text class="lbl" x="128" y="408" text-anchor="middle" fill="#2778c4">VM</text>
+      <text class="ip"  x="128" y="428" text-anchor="middle" fill="#1d2057">192.168.1.50</text>
+    </g>
+
+    <text class="lbl" x="155" y="500" text-anchor="middle" fill="#2778c4">VM na MESMA rede</text>
+    <text class="lbl" x="155" y="519" text-anchor="middle" fill="#2778c4">que o Roteador</text>
+    <path class="sketch" d="M50 540 q100 -10 210 -2" stroke="#2778c4" stroke-width="1.6" stroke-dasharray="2 6"/>
+    <text class="ip" x="155" y="562" text-anchor="middle" fill="#1d2057">IP da LAN real ✓</text>
+    <text class="ip" x="155" y="582" text-anchor="middle" fill="#1d2057">Rede física VÊ a VM</text>
+  </g>
+
+  <!-- ========== BLOCO 2: SWITCH INTERNO (verde) ====== -->
+  <g id="interno">
+    <path class="sketch" d="M344 92 q-4 -6 150 -6 l120 1 q12 0 12 14 l-1 610 q1 10 -12 10 l-258 -2 q-11 1 -11 -12 l1 -605 q-2 -8 -1 -10z" stroke="#2e7d52" stroke-width="3"/>
+    <text class="mode" x="475" y="118" text-anchor="middle" fill="#2e7d52">2 · SWITCH INTERNO</text>
+    <text class="lbl" x="475" y="138" text-anchor="middle" fill="#2e7d52">(NAT / Host-Only)</text>
+
+    <g>
+      <path class="sketch" d="M430 185 q-22 0 -22 -18 q0 -16 20 -16 q4 -20 28 -20 q22 0 26 18 q24 -4 24 18 q0 18 -22 18 z" stroke="#00aa9f" stroke-width="2.5"/>
+      <text class="lbl" x="448" y="172" text-anchor="middle" fill="#00aa9f">Internet</text>
+    </g>
+    <path class="sketch" d="M448 200 q3 12 1 24" stroke="#1d2057" stroke-width="2.2" marker-end="url(#arrG)"/>
+
+    <g>
+      <path class="sketch" d="M398 230 q-2 -6 6 -6 l142 1 q8 -1 8 8 l0 44 q1 8 -8 8 l-142 -1 q-8 1 -6 -8 z" stroke="#1d2057" stroke-width="2.8"/>
+      <path class="sketch" d="M430 268 l72 0 M475 266 l0 10" stroke="#1d2057" stroke-width="2.2"/>
+      <text class="lbl" x="475" y="250" text-anchor="middle" fill="#1d2057">Host (faz NAT)</text>
+    </g>
+    <text class="lbl" x="475" y="298" text-anchor="middle" fill="#2e7d52">só sai pela Internet via NAT</text>
+
+    <path class="sketch" d="M475 283 l0 24" stroke="#2e7d52" stroke-width="2.6" marker-end="url(#arrG)"/>
+    <g>
+      <path class="sketch" d="M402 312 q-2 -6 6 -6 l138 0 q7 0 7 7 l0 20 q0 7 -7 7 l-138 0 q-7 0 -6 -7 z" stroke="#2e7d52" stroke-width="2.3"/>
+      <text class="lbl" x="475" y="328" text-anchor="middle" fill="#2e7d52">vSwitch Interno</text>
+    </g>
+
+    <path class="sketch" d="M475 340 l0 40" stroke="#2e7d52" stroke-width="2.6" marker-end="url(#arrG)"/>
+    <g>
+      <path class="sketch" d="M421 386 q-2 -6 6 -6 l96 1 q7 -1 7 7 l0 56 q1 7 -7 7 l-96 -1 q-7 1 -6 -7 z" stroke="#2e7d52" stroke-width="2.8"/>
+      <path class="sketch" d="M457 452 l36 0 M475 450 l0 10" stroke="#2e7d52" stroke-width="2.2"/>
+      <text class="lbl" x="475" y="408" text-anchor="middle" fill="#2e7d52">VM</text>
+      <text class="ip"  x="475" y="428" text-anchor="middle" fill="#1d2057">172.18.x.x</text>
+    </g>
+
+    <text class="lbl" x="475" y="500" text-anchor="middle" fill="#2e7d52">IP privado · fala com o Host</text>
+    <path class="sketch" d="M370 540 q100 -10 210 -2" stroke="#2e7d52" stroke-width="1.6" stroke-dasharray="2 6"/>
+    <text class="ip" x="475" y="562" text-anchor="middle" fill="#b1541b">Rede física NÃO vê a VM ✗</text>
+    <text class="ip" x="475" y="582" text-anchor="middle" fill="#1d2057">Internet só via NAT do Host</text>
+  </g>
+
+  <!-- ========== BLOCO 3: SWITCH PRIVADO (laranja) ==== -->
+  <g id="privado">
+    <path class="sketch" d="M664 92 q-4 -6 150 -6 l120 1 q12 0 12 14 l-1 610 q1 10 -12 10 l-258 -2 q-11 1 -11 -12 l1 -605 q-2 -8 -1 -10z" stroke="#b1541b" stroke-width="3"/>
+    <text class="mode" x="795" y="118" text-anchor="middle" fill="#b1541b">3 · SWITCH PRIVADO</text>
+    <text class="lbl" x="795" y="138" text-anchor="middle" fill="#b1541b">(rede isolada · air-gap)</text>
+
+    <g>
+      <path class="sketch" d="M742 182 q-20 0 -20 -16 q0 -14 18 -14 q4 -18 26 -18 q20 0 24 16 q22 -4 22 16 q0 16 -20 16 z" stroke="#9aa0ad" stroke-width="2"/>
+      <text class="lbl" x="759" y="170" text-anchor="middle" fill="#9aa0ad">Internet</text>
+      <path class="sketch" d="M716 150 l88 42" stroke="#b1541b" stroke-width="3"/>
+    </g>
+    <text class="lbl" x="795" y="212" text-anchor="middle" fill="#b1541b">sem Host · sem Internet</text>
+
+    <g>
+      <path class="sketch" d="M722 234 q-2 -6 6 -6 l138 0 q7 0 7 7 l0 22 q0 7 -7 7 l-138 0 q-7 0 -6 -7 z" stroke="#b1541b" stroke-width="2.6"/>
+      <text class="lbl" x="795" y="252" text-anchor="middle" fill="#b1541b">vSwitch Privado</text>
+    </g>
+
+    <path class="sketch" d="M758 266 l-18 42" stroke="#b1541b" stroke-width="2.6" marker-end="url(#arrO)"/>
+    <g>
+      <path class="sketch" d="M688 312 q-2 -6 6 -6 l92 1 q7 -1 7 7 l0 52 q1 7 -7 7 l-92 -1 q-7 1 -6 -7 z" stroke="#b1541b" stroke-width="2.8"/>
+      <path class="sketch" d="M722 374 l34 0 M739 372 l0 10" stroke="#b1541b" stroke-width="2.2"/>
+      <text class="lbl" x="739" y="332" text-anchor="middle" fill="#b1541b">VM-A</text>
+      <text class="ip"  x="739" y="352" text-anchor="middle" fill="#1d2057">192.168.100.10</text>
+    </g>
+
+    <path class="sketch" d="M832 266 l18 42" stroke="#b1541b" stroke-width="2.6" marker-end="url(#arrO)"/>
+    <g>
+      <path class="sketch" d="M802 312 q-2 -6 6 -6 l92 1 q7 -1 7 7 l0 52 q1 7 -7 7 l-92 -1 q-7 1 -6 -7 z" stroke="#b1541b" stroke-width="2.8"/>
+      <path class="sketch" d="M836 374 l34 0 M853 372 l0 10" stroke="#b1541b" stroke-width="2.2"/>
+      <text class="lbl" x="853" y="332" text-anchor="middle" fill="#b1541b">VM-B</text>
+      <text class="ip"  x="853" y="352" text-anchor="middle" fill="#1d2057">192.168.100.20</text>
+    </g>
+
+    <path class="sketch" d="M786 405 q10 8 28 0" stroke="#b1541b" stroke-width="2.4" marker-end="url(#arrO)" marker-start="url(#arrO)"/>
+    <text class="lbl" x="795" y="430" text-anchor="middle" fill="#b1541b">só falam entre si</text>
+
+    <text class="lbl" x="795" y="500" text-anchor="middle" fill="#b1541b">Ilha fechada</text>
+    <path class="sketch" d="M690 540 q100 -10 210 -2" stroke="#b1541b" stroke-width="1.6" stroke-dasharray="2 6"/>
+    <text class="ip" x="795" y="562" text-anchor="middle" fill="#1d2057">Nada entra · nada sai</text>
+    <text class="ip" x="795" y="582" text-anchor="middle" fill="#1d2057">ideal p/ laboratório</text>
+  </g>
+
+  <!-- ============ LEGENDA RODAPE ============ -->
+  <path class="sketch" d="M80 648 q400 -10 800 -3" stroke="#1d2057" stroke-width="2"/>
+  <text class="leg" x="480" y="690" text-anchor="middle" fill="#1d2057">
+    <tspan fill="#2778c4">Externo</tspan> = na LAN real ·
+    <tspan fill="#2e7d52">Interno</tspan> = privado via NAT ·
+    <tspan fill="#b1541b">Privado</tspan> = ilha isolada.
+  </text>
+
+  <!-- ============ MARCADORES DE SETA ============ -->
+  <defs>
+    <marker id="arrB" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M1 1 L9 5 L1 9" fill="none" stroke="#2778c4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arrG" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M1 1 L9 5 L1 9" fill="none" stroke="#2e7d52" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+    <marker id="arrO" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M1 1 L9 5 L1 9" fill="none" stroke="#b1541b" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+    </marker>
+  </defs>
+</svg>
