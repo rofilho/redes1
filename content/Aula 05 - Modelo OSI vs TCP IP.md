@@ -38,39 +38,8 @@ Ao final desta aula, o aluno deve ser capaz de:
 Existem dois grandes modelos que padronizam a arquitetura de redes. O modelo OSI é o nosso mapa teórico de 7 camadas, mas o mundo real roda essencialmente sobre a arquitetura TCP/IP de 4 (ou 5, dependendo dos autores) camadas.
 
 
-```mermaid
-graph TD
-    subgraph Modelo TCP/IP
-    TCP4[4. Aplicação]:::tcp
-    TCP3[3. Transporte]:::tcp
-    TCP2[2. Internet/Rede]:::tcp
-    TCP1[1. Acesso à Rede]:::tcp
-    end
-
-    subgraph Modelo OSI
-    OSI7[7. Aplicação]:::osi
-    OSI6[6. Apresentação]:::osi
-    OSI5[5. Sessão]:::osi
-    OSI4[4. Transporte]:::osi
-    OSI3[3. Rede]:::osi
-    OSI2[2. Enlace de Dados]:::osi
-    OSI1[1. Física]:::osi
-    end
-
-    OSI7 -.-> TCP4
-    OSI6 -.-> TCP4
-    OSI5 -.-> TCP4
-
-    OSI4 -.-> TCP3
-
-    OSI3 -.-> TCP2
-
-    OSI2 -.-> TCP1
-    OSI1 -.-> TCP1
-
-    classDef osi fill:#0078D7,stroke:#333,stroke-width:2px,color:#fff;
-    classDef tcp fill:#107C10,stroke:#333,stroke-width:2px,color:#fff;
-```
+![[assets/aula05_osi_vs_tcpip.svg]]
+> *Figura 1: As duas pilhas lado a lado. As três camadas superiores do OSI (Aplicação, Apresentação e Sessão) colapsam numa só no TCP/IP, e Enlace + Física viram o Acesso à Rede.*
 
 | **Camada OSI (7 camadas)** | **Camada TCP/IP (4 camadas)** | **Unidade de Protocolo (PDU)** | **Exemplos de Protocolos** |
 | --- | --- | --- | --- |
@@ -93,20 +62,8 @@ A comunicação através dos modelos de referência ocorre por **encapsulamento*
 
 **O passo a passo (Origem / Envio):**
 
-```mermaid
-flowchart TD
-    Navegador("📡 Navegador (Web)") --> A["Camada 7/4: DADOS"]
-    A -->|"Encapsula"| B["Camada 4/3: SEGMENTO\n(+ Cabeçalho TCP)"]
-    B -->|"Encapsula"| C["Camada 3/2: PACOTE\n(+ Cabeçalho IP)"]
-    C -->|"Encapsula"| D["Camada 2/1: QUADRO (FRAME)\n(+ Cabeçalho MAC + FCS)"]
-    D -->|"Converte e Transmite"| E(("Camada 1: BITS\n(Sinais Elétricos/Luz)"))
-
-    style A fill:#FF9A33,color:#fff,stroke:#333,stroke-width:2px
-    style B fill:#33D4FF,color:#333,stroke:#333,stroke-width:2px
-    style C fill:#33FF57,color:#333,stroke:#333,stroke-width:2px
-    style D fill:#FF33A8,color:#fff,stroke:#333,stroke-width:2px
-    style E fill:#8333FF,color:#fff,stroke:#333,stroke-width:2px
-```
+![[assets/aula05_encapsulamento.svg]]
+> *Figura 2: A jornada do pacote. O dado original (laranja) permanece no centro e ganha um novo cabeçalho a cada camada — TCP, depois IP, depois MAC/FCS — até virar bits no meio físico. No destino, desembrulha na ordem inversa.*
 
 1. **Camada de Aplicação:** O seu navegador gera o “Dado” (ex: requisição web).
 2. **Camada de Transporte:** Pega esse dado e coloca num envelope chamado **Segmento**. Adiciona o cabeçalho TCP (com porta de origem e destino).
@@ -127,21 +84,8 @@ Nós sabíamos o IP do roteador (camada 3), mas para colocar o pacote no quadro 
 
 **Como funciona (A Dinâmica do “Quem é?”):**
 
-```mermaid
-sequenceDiagram
-    participant PCA as PC-A (IP: .10)
-    participant Switch
-    participant PCB as PC-B (IP: .100)
-    participant Outros as Outros PCs
-
-    PCA->>Switch: 1. ARP Request (Broadcast FF:FF...)<br/>"Quem tem o IP .100?"
-    Switch-->>Outros: Inunda portas (Ignoram pacote)
-    Switch->>PCB: Inunda até destino correto
-    Note over PCB: PC-B checa: "Sou eu!"
-    PCB-->>Switch: 2. ARP Reply (Unicast)<br/>"Meu MAC é BB:22:CC"
-    Switch-->>PCA: Resposta Direta
-    Note over PCA: 3. Tabela ARP <br/>atualizada com sucesso!
-```
+![[assets/aula05_arp.svg]]
+> *Figura 3: A dinâmica do ARP. O PC-A grita em broadcast "Quem tem o IP .100?" (chega em todos pelo switch); só o PC-B se reconhece e responde em unicast com o seu MAC, direto ao PC-A, que então atualiza o cache ARP.*
 
 1. PC-A quer conversar com PC-B, que tem o IP `192.168.1.100`.
 2. PC-A sabe o IP, mas **não tem o MAC** na sua tabela (Cache ARP).
