@@ -71,25 +71,8 @@ Em redes corporativas de médio e grande porte, a função de servidor DHCP é f
 
 No Cisco Packet Tracer, simulamos este cenário utilizando o dispositivo **Server-PT**.
 
-```mermaid
-graph LR
-    subgraph LAN_LOCAL ["Rede Local (Sub-rede 192.168.1.0/24)"]
-        PC0["PC0 (Cliente)<br/>IP: DHCP"]:::device
-        PC1["PC1 (Cliente)<br/>IP: DHCP"]:::device
-        SRV["Servidor DHCP<br/>IP: 192.168.1.2"]:::server
-        SW["Switch0 (2960)"]:::device
-    end
-    
-    R0["Router0 (Gateway)<br/>IP: 192.168.1.1"]:::device
-    
-    PC0 --- SW
-    PC1 --- SW
-    SRV --- SW
-    SW --- R0
-    
-    classDef device fill:#1f2937,stroke:#4b5563,stroke-width:2px,color:#f3f4f6;
-    classDef server fill:#1e3a8a,stroke:#3b82f6,stroke-width:2px,color:#f3f4f6;
-```
+![[assets/aula12_topologia_dhcp.svg]]
+> *Figura: a topologia do laboratório. PC0 e PC1 (clientes) e o servidor DHCP (IP fixo 192.168.1.2) ligam-se ao Switch0; o Router0 é o gateway 192.168.1.1. Os clientes pedem IP ao servidor dentro da sub-rede 192.168.1.0/24.*
 
 ### 🔧 Roteiro de Configuração Passo a Passo:
 
@@ -158,20 +141,8 @@ O **Dynamic Host Configuration Protocol (DHCP)** é um protocolo da **Camada de 
 
 Quando um computador Windows liga ou clica em "Obter IP automaticamente", ele executa exatamente estas 4 etapas:
 
-```mermaid
-sequenceDiagram
-    autonumber
-    actor C as 💻 Cliente Windows
-    actor S as 🖥️ Servidor DHCP
-    C->>S: DHCP DISCOVER (Broadcast)
-    Note over C,S: Src IP: 0.0.0.0 | Dst IP: 255.255.255.255<br/>Src MAC: AA:BB:CC:DD:EE:FF | Dst MAC: FF:FF:FF:FF:FF:FF<br/>UDP Src Port: 68 → Dst Port: 67
-    S->>C: DHCP OFFER (Unicast/Broadcast)
-    Note over C,S: Servidor reserva 192.168.1.10 para o MAC do cliente<br/>Inclui: IP oferecido, máscara, gateway, DNS, lease time
-    C->>S: DHCP REQUEST (Broadcast)
-    Note over C,S: Cliente confirma que aceita a oferta<br/>Broadcast para avisar outros servidores DHCP
-    S->>C: DHCP ACK (Unicast/Broadcast)
-    Note over C,S: Confirmação oficial — IP válido por lease time<br/>Cliente grava as configurações na interface de rede
-```
+![[assets/aula12_dhcp_dora_wireshark.svg]]
+> *Figura: os 4 pacotes DORA como aparecem numa captura do Wireshark. Repare nos cabeçalhos: DISCOVER e REQUEST saem em broadcast (Dst MAC FF:FF:FF:FF:FF:FF), as portas UDP 68→67 (cliente→servidor) e 67→68 (servidor→cliente), e o IP 192.168.1.10 reservado para o MAC do cliente.*
 
 #### 📦 Etapa 1 — DISCOVER: "Tem algum servidor DHCP aí?"
 - O cliente ainda **não tem IP**, então usa `0.0.0.0` como origem.

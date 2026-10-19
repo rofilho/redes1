@@ -110,33 +110,8 @@ Uma **ISO** é um arquivo de imagem de disco — uma cópia byte a byte de um CD
 
 Esta é a seção mais importante da aula. Os três tipos de Virtual Switch implementam conceitos fundamentais de redes que já estudamos.
 
-```mermaid
-graph TB
-    INTERNET["🌐 Internet"]
-    ROTEADOR["🔁 Roteador / Gateway"]
-    HOST["💻 Máquina Host (Windows)"]
-    
-    subgraph EXTERNO["Switch Externo — Modo Bridge"]
-        VM_EXT["🖥️ VM com IP da LAN\n(ex: 192.168.1.50)"]
-    end
-    
-    subgraph INTERNO["Switch Interno — Modo NAT/Host-Only"]
-        VM_INT["🖥️ VM com IP privado\n(ex: 172.18.x.x)"]
-    end
-    
-    subgraph PRIVADO["Switch Privado — Rede Isolada"]
-        VM_PRI1["🖥️ VM-A\n(192.168.100.10)"]
-        VM_PRI2["🖥️ VM-B\n(192.168.100.20)"]
-    end
-
-    INTERNET <--> ROTEADOR
-    ROTEADOR <--> HOST
-    HOST <--> VM_EXT
-    ROTEADOR <--> VM_EXT
-    HOST <--> VM_INT
-    VM_INT -.NAT.-> INTERNET
-    VM_PRI1 <--> VM_PRI2
-```
+![[assets/aula09_switches_virtuais.svg]]
+> *Figura: os três modos de switch virtual. O Externo (bridge) põe a VM na LAN real; o Interno sai para a internet só via NAT do host e esconde a VM da rede física; o Privado isola as VMs numa ilha, sem host e sem internet.*
 
 ### 3.1 — Switch Externo (Bridge Mode)
 

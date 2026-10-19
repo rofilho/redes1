@@ -78,16 +78,8 @@ O **Internet Protocol version 4 (IPv4)** é o protocolo padrão da Camada de Red
 
 Um endereço IPv4 é uma sequência lógica de **32 bits** (sinais binários 0 e 1). Para facilitar a leitura humana, esses 32 bits são divididos em **quatro octetos** (grupos de 8 bits) separados por pontos. Esta notação é chamada de **Decimal Pontuado**.
 
-```mermaid
-graph TD
-    subgraph "Endereço IPv4 (32 bits)"
-        O1["1º Octeto (8 bits)<br/>192<br/>11000000"]:::oct
-        O2["2º Octeto (8 bits)<br/>168<br/>10101000"]:::oct
-        O3["3º Octeto (8 bits)<br/>10<br/>00001010"]:::oct
-        O4["4º Octeto (8 bits)<br/>1<br/>00000001"]:::oct
-    end
-    classDef oct fill:#1f2937,stroke:#4b5563,stroke-width:2px,color:#f3f4f6;
-```
+![[assets/aula10_endereco_ipv4_octetos.svg]]
+> *Figura: um endereço IPv4 tem 32 bits, divididos em 4 octetos de 8 bits. Cada octeto vai de 0 a 255 (decimal) — o valor de cada bit segue potências de 2, de 2⁷ (128) a 2⁰ (1).*
 
 Cada bit em um octeto possui um peso posicional baseado em potências de 2, variando de $2^7$ (128) a $2^0$ (1). O valor decimal de cada octeto varia de **0 a 255**.
 
@@ -267,21 +259,8 @@ O **Dynamic Host Configuration Protocol (DHCP)** é o protocolo da camada de apl
 
 O ciclo de concessão de um endereço IP pelo DHCP baseia-se em quatro mensagens de controle fundamentais trocadas sequencialmente, conhecidas como o acrônimo **DORA**:
 
-```mermaid
-sequenceDiagram
-    autonumber
-    actor Cliente as Cliente DHCP
-    actor Servidor as Servidor DHCP
-    
-    Cliente->>Servidor: 1. DISCOVER (Broadcast L2/L3)
-    Note over Cliente,Servidor: Origem: 0.0.0.0 | Destino: 255.255.255.255 | Portas UDP 68 -> 67
-    Servidor->>Cliente: 2. OFFER (Unicast/Broadcast)
-    Note over Cliente,Servidor: Contém IP oferecido, Máscara, Gateway, DNS e Tempo de Lease
-    Cliente->>Servidor: 3. REQUEST (Broadcast L2/L3)
-    Note over Cliente,Servidor: Solicita formalmente o IP oferecido, confirmando a todos os servidores
-    Servidor->>Cliente: 4. ACK (Unicast/Broadcast)
-    Note over Cliente,Servidor: Confirmação final da alocação e gravação na tabela de concessões
-```
+![[assets/aula10_dhcp_dora.svg]]
+> *Figura: o "aperto de mão" DORA. O cliente (sem IP) faz DISCOVER em broadcast, o servidor responde com OFFER, o cliente confirma com REQUEST (também broadcast, avisando os demais servidores) e o servidor fecha com ACK — a partir daí o IP é do cliente pelo tempo do lease.*
 
 1.  **D — Discover (Descoberta):** O cliente inicializa sem IP (`0.0.0.0`) e envia um pacote de broadcast para localizar servidores DHCP ativos. 
     - *L2 Destination:* `ff:ff:ff:ff:ff:ff` (Broadcast Físico)
