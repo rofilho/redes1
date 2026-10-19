@@ -1,0 +1,156 @@
+<!-- BRIEF: Encapsulamento (a jornada do pacote). Metafora de envelopes aninhados.
+     5 etapas de cima para baixo: DADOS (Aplicacao, laranja) -> SEGMENTO (+TCP, azul)
+     -> PACOTE (+IP, verde) -> QUADRO/FRAME (+MAC/FCS, magenta) -> BITS (Fisica, roxo).
+     O dado original fica sempre ao centro-direita, ganhando um cabecalho a cada camada.
+     Setas sketchy 'encapsula' (1->2->3->4) e 'transmite' (4->5). Fundo transparente.
+     Estetica Excalidraw/whiteboard: traco irregular, cantos arredondados, fonte manuscrita. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 720" width="100%" role="img"
+     aria-label="Encapsulamento: o dado desce as camadas e ganha um cabecalho a cada etapa, ate virar bits">
+  <defs>
+    <style>
+      .sk      { fill:none; stroke-linecap:round; stroke-linejoin:round; }
+      text     { paint-order:stroke; stroke:#fafaf8; stroke-width:3px; stroke-linejoin:round; }
+      .lbl     { font-family:'Comic Sans MS','Comic Neue',cursive; fill:#1d2057; }
+      .lbl-w   { font-family:'Comic Sans MS','Comic Neue',cursive; fill:#ffffff; stroke:none; }
+      .cap     { font-weight:bold; }
+      .legend  { font-family:'Comic Sans MS','Comic Neue',cursive; fill:#1d2057; font-style:italic; }
+    </style>
+    <!-- ponta de seta sketchy -->
+    <marker id="arrow" viewBox="0 0 12 12" refX="9" refY="6" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+      <path d="M1,1 L10,6 L1,11" class="sk" stroke="#1d2057" stroke-width="2"/>
+    </marker>
+  </defs>
+
+  <!-- ========================= ETAPA 1: DADOS (Aplicacao) ========================= -->
+  <g id="dados">
+    <!-- rotulo de camada -->
+    <text x="40" y="58" class="lbl cap" font-size="19" fill="#b1541b">1 - Aplicação</text>
+    <!-- envelope DADOS (laranja), traco sketchy -->
+    <path d="M300,40 Q470,36 640,40 Q646,78 642,114 Q470,120 302,116 Q296,78 300,40 Z"
+          class="sk" stroke="#b1541b" stroke-width="3" fill="#b1541b" fill-opacity="0.10"/>
+    <!-- icone pagina web -->
+    <path d="M324,56 L364,54 Q368,54 368,60 L369,100 Q369,104 364,104 L324,102 Q320,102 320,96 L320,60 Q320,56 324,56 Z"
+          class="sk" stroke="#b1541b" stroke-width="2.5" fill="#ffffff" fill-opacity="0.6"/>
+    <line x1="320" y1="68" x2="369" y2="69" class="sk" stroke="#b1541b" stroke-width="2"/>
+    <circle cx="328" cy="62" r="2.2" fill="#b1541b"/>
+    <circle cx="336" cy="62" r="2.2" fill="#b1541b"/>
+    <line x1="328" y1="80" x2="360" y2="80" class="sk" stroke="#b1541b" stroke-width="1.8"/>
+    <line x1="328" y1="90" x2="356" y2="90" class="sk" stroke="#b1541b" stroke-width="1.8"/>
+    <text x="400" y="72" class="lbl cap" font-size="22" fill="#b1541b">DADOS</text>
+    <text x="400" y="98" class="lbl" font-size="15" fill="#1d2057">conteúdo original (ex.: página web)</text>
+  </g>
+
+  <!-- seta encapsula 1->2 -->
+  <g>
+    <path d="M470,120 Q476,136 472,154" class="sk" stroke="#1d2057" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <text x="486" y="144" class="lbl" font-size="15" fill="#1d2057">encapsula</text>
+  </g>
+
+  <!-- ========================= ETAPA 2: SEGMENTO (Transporte) ========================= -->
+  <g id="segmento">
+    <text x="40" y="192" class="lbl cap" font-size="19" fill="#2778c4">2 - Transporte</text>
+    <!-- cabecalho TCP (azul) a esquerda -->
+    <path d="M258,168 Q300,164 300,166 L300,236 Q300,238 258,234 Q252,201 258,168 Z"
+          class="sk" stroke="#2778c4" stroke-width="3" fill="#2778c4" fill-opacity="0.85"/>
+    <text x="279" y="196" class="lbl-w cap" font-size="13" text-anchor="middle">TCP</text>
+    <text x="279" y="213" class="lbl-w cap" font-size="13" text-anchor="middle">hdr</text>
+    <!-- dado original (sempre ao centro) -->
+    <path d="M302,170 Q470,166 640,170 Q646,202 642,234 Q470,238 304,234 Q298,202 302,170 Z"
+          class="sk" stroke="#b1541b" stroke-width="2.6" fill="#b1541b" fill-opacity="0.10"/>
+    <text x="471" y="208" class="lbl cap" font-size="17" fill="#b1541b" text-anchor="middle">DADOS</text>
+    <!-- rotulo da etapa -->
+    <text x="668" y="196" class="lbl cap" font-size="19" fill="#2778c4">= SEGMENTO</text>
+    <text x="668" y="220" class="lbl" font-size="14" fill="#1d2057">+ Cabecalho TCP</text>
+  </g>
+
+  <!-- seta encapsula 2->3 -->
+  <g>
+    <path d="M470,240 Q476,256 472,274" class="sk" stroke="#1d2057" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <text x="486" y="264" class="lbl" font-size="15" fill="#1d2057">encapsula</text>
+  </g>
+
+  <!-- ========================= ETAPA 3: PACOTE (Rede) ========================= -->
+  <g id="pacote">
+    <text x="40" y="312" class="lbl cap" font-size="19" fill="#2e7d52">3 - Rede</text>
+    <!-- cabecalho IP (verde) -->
+    <path d="M206,288 Q248,284 248,286 L248,356 Q248,358 206,354 Q200,321 206,288 Z"
+          class="sk" stroke="#2e7d52" stroke-width="3" fill="#2e7d52" fill-opacity="0.85"/>
+    <text x="227" y="316" class="lbl-w cap" font-size="13" text-anchor="middle">IP</text>
+    <text x="227" y="333" class="lbl-w cap" font-size="13" text-anchor="middle">hdr</text>
+    <!-- cabecalho TCP acumulado -->
+    <path d="M250,288 Q292,284 292,286 L292,356 Q292,358 250,354 Q244,321 250,288 Z"
+          class="sk" stroke="#2778c4" stroke-width="2.6" fill="#2778c4" fill-opacity="0.85"/>
+    <text x="271" y="316" class="lbl-w cap" font-size="12" text-anchor="middle">TCP</text>
+    <text x="271" y="333" class="lbl-w cap" font-size="12" text-anchor="middle">hdr</text>
+    <!-- dado original -->
+    <path d="M294,290 Q470,286 640,290 Q646,322 642,354 Q470,358 296,354 Q290,322 294,290 Z"
+          class="sk" stroke="#b1541b" stroke-width="2.6" fill="#b1541b" fill-opacity="0.10"/>
+    <text x="467" y="328" class="lbl cap" font-size="17" fill="#b1541b" text-anchor="middle">DADOS</text>
+    <text x="668" y="316" class="lbl cap" font-size="19" fill="#2e7d52">= PACOTE</text>
+    <text x="668" y="340" class="lbl" font-size="14" fill="#1d2057">+ Cabecalho IP</text>
+  </g>
+
+  <!-- seta encapsula 3->4 -->
+  <g>
+    <path d="M470,360 Q476,376 472,394" class="sk" stroke="#1d2057" stroke-width="2.5" marker-end="url(#arrow)"/>
+    <text x="486" y="384" class="lbl" font-size="15" fill="#1d2057">encapsula</text>
+  </g>
+
+  <!-- ========================= ETAPA 4: QUADRO / FRAME (Enlace) ========================= -->
+  <g id="quadro">
+    <text x="40" y="432" class="lbl cap" font-size="19" fill="#c2185b">4 - Enlace</text>
+    <!-- cabecalho MAC (magenta) na frente -->
+    <path d="M154,408 Q196,404 196,406 L196,476 Q196,478 154,474 Q148,441 154,408 Z"
+          class="sk" stroke="#c2185b" stroke-width="3" fill="#c2185b" fill-opacity="0.85"/>
+    <text x="175" y="436" class="lbl-w cap" font-size="12" text-anchor="middle">MAC</text>
+    <text x="175" y="453" class="lbl-w cap" font-size="12" text-anchor="middle">hdr</text>
+    <!-- IP acumulado -->
+    <path d="M198,408 Q240,404 240,406 L240,476 Q240,478 198,474 Q192,441 198,408 Z"
+          class="sk" stroke="#2e7d52" stroke-width="2.6" fill="#2e7d52" fill-opacity="0.85"/>
+    <text x="219" y="444" class="lbl-w cap" font-size="12" text-anchor="middle">IP</text>
+    <!-- TCP acumulado -->
+    <path d="M242,408 Q284,404 284,406 L284,476 Q284,478 242,474 Q236,441 242,408 Z"
+          class="sk" stroke="#2778c4" stroke-width="2.6" fill="#2778c4" fill-opacity="0.85"/>
+    <text x="263" y="444" class="lbl-w cap" font-size="11" text-anchor="middle">TCP</text>
+    <!-- dado original -->
+    <path d="M286,410 Q440,406 594,410 Q600,442 596,474 Q440,478 288,474 Q282,442 286,410 Z"
+          class="sk" stroke="#b1541b" stroke-width="2.6" fill="#b1541b" fill-opacity="0.10"/>
+    <text x="440" y="448" class="lbl cap" font-size="17" fill="#b1541b" text-anchor="middle">DADOS</text>
+    <!-- FCS no fim (magenta) -->
+    <path d="M598,410 Q640,406 640,408 L640,474 Q640,476 598,474 Q592,442 598,410 Z"
+          class="sk" stroke="#c2185b" stroke-width="3" fill="#c2185b" fill-opacity="0.85"/>
+    <text x="619" y="444" class="lbl-w cap" font-size="12" text-anchor="middle">FCS</text>
+    <text x="668" y="430" class="lbl cap" font-size="18" fill="#c2185b">= QUADRO</text>
+    <text x="668" y="452" class="lbl cap" font-size="15" fill="#c2185b">(FRAME)</text>
+    <text x="668" y="472" class="lbl" font-size="13" fill="#1d2057">+ MAC + FCS</text>
+  </g>
+
+  <!-- seta transmite 4->5 -->
+  <g>
+    <path d="M400,480 Q406,500 402,520" class="sk" stroke="#6a1b9a" stroke-width="2.8" marker-end="url(#arrow)"/>
+    <text x="416" y="506" class="lbl cap" font-size="16" fill="#6a1b9a">transmite</text>
+  </g>
+
+  <!-- ========================= ETAPA 5: BITS (Fisica) ========================= -->
+  <g id="bits">
+    <text x="40" y="560" class="lbl cap" font-size="19" fill="#6a1b9a">5 - Física</text>
+    <!-- moldura sketchy do meio fisico -->
+    <path d="M160,534 Q470,530 780,534 Q786,572 782,610 Q470,616 162,610 Q156,572 160,534 Z"
+          class="sk" stroke="#6a1b9a" stroke-width="3" fill="#6a1b9a" fill-opacity="0.08"/>
+    <!-- sequencia de bits -->
+    <text x="190" y="580" class="lbl cap" font-size="20" fill="#6a1b9a">0 1 0 1 1 0 1 0</text>
+    <!-- onda / sinal eletrico-luz -->
+    <path d="M190,598 L205,598 L205,588 L225,588 L225,598 L240,598 L240,588 L258,588 L258,598 L275,598 L275,588 L295,588 L295,598 L312,598"
+          class="sk" stroke="#6a1b9a" stroke-width="2.6"/>
+    <text x="520" y="582" class="lbl cap" font-size="19" fill="#6a1b9a">BITS</text>
+    <text x="520" y="604" class="lbl" font-size="14" fill="#1d2057">sinais elétricos / luz no meio físico</text>
+  </g>
+
+  <!-- ========================= LEGENDA ========================= -->
+  <g id="legenda">
+    <path d="M70,648 Q470,644 830,648 Q834,668 832,690 Q470,694 72,690 Q66,668 70,648 Z"
+          class="sk" stroke="#1d2057" stroke-width="2" stroke-dasharray="6 5" fill="none"/>
+    <text x="450" y="667" class="legend" font-size="16" text-anchor="middle">Cada camada embrulha o dado num envelope.</text>
+    <text x="450" y="686" class="legend" font-size="16" text-anchor="middle">No destino, desembrulha na ordem inversa.</text>
+  </g>
+</svg>
