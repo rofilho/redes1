@@ -1,0 +1,140 @@
+<!-- BRIEF: ARP "Quem tem o IP .100?" - quadrinho didatico (Redes, pt-BR). PC-A(.10,azul) grita broadcast FF:FF:FF:FF:FF:FF para todos via switch; PC-B(.100,verde) responde unicast com seu MAC; PC-A atualiza o cache ARP. Broadcast(laranja/todos) vs Unicast(turquesa/um so). Estetica hand-drawn/Excalidraw, fonte manuscrita, fundo transparente. Paleta Uniube. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 640" width="100%" role="img" aria-label="ARP: PC-A grita em broadcast quem tem o IP 100, PC-B responde em unicast com seu MAC, PC-A atualiza o cache ARP" font-family="'Comic Sans MS','Comic Neue',cursive">
+  <defs>
+    <style>
+      .sk  { stroke-linecap:round; stroke-linejoin:round; }
+      .lbl { font-family:'Comic Sans MS','Comic Neue',cursive; }
+      .mono{ font-family:'Comic Sans MS','Comic Neue',cursive; letter-spacing:.3px; }
+      text { paint-order:stroke; stroke:#fafaf8; stroke-width:3px; stroke-linejoin:round; }
+      text[fill="#ffffff"] { stroke:none; }
+    </style>
+    <marker id="ar-orange" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#b1541b"/>
+    </marker>
+    <marker id="ar-turq" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#00aa9f"/>
+    </marker>
+  </defs>
+
+  <!-- ============ TITULO ============ -->
+  <text x="480" y="46" text-anchor="middle" class="lbl" font-size="30" font-weight="bold" fill="#1d2057">ARP: "Quem tem o IP .100?"</text>
+  <path class="sk" d="M300,58 q90,8 180,4 q90,-4 182,2" stroke="#1d2057" stroke-width="2.5" fill="none"/>
+
+  <!-- ============ SWITCH (centro) ============ -->
+  <g id="switch">
+    <path class="sk" d="M402,300 q-4,-16 12,-15 l130,1 q16,-1 14,15 l0,44 q2,16 -14,15 l-130,-1 q-16,1 -12,-15 z" fill="#1d2057" stroke="#1d2057" stroke-width="3"/>
+    <text x="480" y="321" text-anchor="middle" class="lbl" font-size="17" font-weight="bold" fill="#ffffff">SWITCH</text>
+    <g fill="#9fb0e8">
+      <rect x="420" y="335" width="13" height="9" rx="2"/>
+      <rect x="440" y="335" width="13" height="9" rx="2"/>
+      <rect x="460" y="335" width="13" height="9" rx="2"/>
+      <rect x="480" y="335" width="13" height="9" rx="2"/>
+      <rect x="500" y="335" width="13" height="9" rx="2"/>
+      <rect x="520" y="335" width="13" height="9" rx="2"/>
+    </g>
+  </g>
+
+  <!-- ============ PC-A (azul, .10) - esquerda ============ -->
+  <g id="pc-a">
+    <path class="sk" d="M70,360 q-4,-15 12,-14 l150,1 q15,-1 14,14 l0,96 q1,15 -14,14 l-150,-1 q-15,1 -12,-14 z" fill="#eaf2fb" stroke="#2778c4" stroke-width="3.5"/>
+    <path class="sk" d="M142,470 l0,20 M120,492 q28,6 56,0" stroke="#2778c4" stroke-width="3.5" fill="none"/>
+    <!-- carinha feliz/decidida -->
+    <circle cx="118" cy="398" r="8" fill="#2778c4"/>
+    <circle cx="196" cy="398" r="8" fill="#2778c4"/>
+    <path class="sk" d="M112,428 q45,26 90,0" stroke="#2778c4" stroke-width="4" fill="none"/>
+    <text x="157" y="372" text-anchor="middle" class="lbl" font-size="18" font-weight="bold" fill="#2778c4">PC-A</text>
+    <text x="157" y="455" text-anchor="middle" class="mono" font-size="15" fill="#1d2057">IP .10</text>
+  </g>
+
+  <!-- ============ PC-B (verde, .100) - direita ============ -->
+  <g id="pc-b">
+    <path class="sk" d="M716,360 q-4,-15 12,-14 l150,1 q15,-1 14,14 l0,96 q1,15 -14,14 l-150,-1 q-15,1 -12,-14 z" fill="#e7f4ec" stroke="#2e7d52" stroke-width="3.5"/>
+    <path class="sk" d="M788,470 l0,20 M766,492 q28,6 56,0" stroke="#2e7d52" stroke-width="3.5" fill="none"/>
+    <!-- carinha "sou eu!" olhos animados -->
+    <circle cx="764" cy="398" r="8" fill="#2e7d52"/>
+    <circle cx="842" cy="398" r="8" fill="#2e7d52"/>
+    <path class="sk" d="M756,424 q47,30 94,0" stroke="#2e7d52" stroke-width="4" fill="none"/>
+    <path class="sk" d="M750,386 l14,6 M842,392 l14,-6" stroke="#2e7d52" stroke-width="3" fill="none"/>
+    <text x="803" y="372" text-anchor="middle" class="lbl" font-size="18" font-weight="bold" fill="#2e7d52">PC-B</text>
+    <text x="803" y="455" text-anchor="middle" class="mono" font-size="15" fill="#1d2057">IP .100</text>
+  </g>
+
+  <!-- ============ OUTROS PCs (cinza) - topo ============ -->
+  <g id="outros">
+    <!-- Outro 1 -->
+    <path class="sk" d="M372,120 q-3,-12 10,-11 l108,1 q12,-1 11,11 l0,66 q1,12 -11,11 l-108,-1 q-12,1 -10,-11 z" fill="#f0f1f3" stroke="#8a8f98" stroke-width="3"/>
+    <path class="sk" d="M430,198 l0,14 M413,214 q22,5 42,0" stroke="#8a8f98" stroke-width="3" fill="none"/>
+    <circle cx="408" cy="148" r="6" fill="#8a8f98"/>
+    <circle cx="462" cy="148" r="6" fill="#8a8f98"/>
+    <path class="sk" d="M406,176 q30,-10 60,0" stroke="#8a8f98" stroke-width="3.5" fill="none"/>
+    <text x="436" y="110" text-anchor="middle" class="lbl" font-size="14" fill="#8a8f98">Outro PC</text>
+    <text x="436" y="236" text-anchor="middle" class="lbl" font-size="12.5" fill="#8a8f98">"não sou eu"</text>
+    <!-- Outro 2 -->
+    <path class="sk" d="M548,120 q-3,-12 10,-11 l108,1 q12,-1 11,11 l0,66 q1,12 -11,11 l-108,-1 q-12,1 -10,-11 z" fill="#f0f1f3" stroke="#8a8f98" stroke-width="3"/>
+    <path class="sk" d="M606,198 l0,14 M589,214 q22,5 42,0" stroke="#8a8f98" stroke-width="3" fill="none"/>
+    <circle cx="584" cy="148" r="6" fill="#8a8f98"/>
+    <circle cx="638" cy="148" r="6" fill="#8a8f98"/>
+    <path class="sk" d="M582,176 q30,-10 60,0" stroke="#8a8f98" stroke-width="3.5" fill="none"/>
+    <text x="612" y="110" text-anchor="middle" class="lbl" font-size="14" fill="#8a8f98">Outro PC</text>
+    <text x="612" y="236" text-anchor="middle" class="lbl" font-size="12.5" fill="#8a8f98">"não sou eu"</text>
+  </g>
+
+  <!-- ============ PASSO 1: ARP REQUEST (BROADCAST / laranja) ============ -->
+  <g id="passo1">
+    <!-- circulo numero 1 -->
+    <path class="sk" d="M60,250 q-20,-1 -20,20 q-1,20 20,20 q20,1 20,-20 q1,-20 -20,-20 z" fill="#b1541b" stroke="#b1541b" stroke-width="2.5"/>
+    <text x="60" y="277" text-anchor="middle" class="lbl" font-size="22" font-weight="bold" fill="#ffffff">1</text>
+    <text x="108" y="266" class="lbl" font-size="15" font-weight="bold" fill="#b1541b">ARP REQUEST</text>
+    <text x="108" y="286" class="lbl" font-size="13" fill="#b1541b">BROADCAST (p/ TODOS)</text>
+
+    <!-- balao de fala do PC-A gritando -->
+    <path class="sk" d="M44,180 q-10,-50 60,-54 l150,-2 q70,2 66,40 q4,36 -66,40 l-120,2 l-28,30 l6,-30 q-70,-4 -72,-26 z" fill="#fff3ea" stroke="#b1541b" stroke-width="3"/>
+    <text x="178" y="152" text-anchor="middle" class="lbl" font-size="16" font-weight="bold" fill="#b1541b">Quem tem o IP</text>
+    <text x="178" y="176" text-anchor="middle" class="lbl" font-size="16" font-weight="bold" fill="#b1541b">192.168.1.100?!</text>
+    <text x="178" y="200" text-anchor="middle" class="mono" font-size="11.5" fill="#1d2057">Dest MAC = FF:FF:FF:FF:FF:FF</text>
+
+    <!-- quadro broadcast: PC-A -> switch -->
+    <path class="sk" d="M248,392 q90,-20 158,-48" stroke="#b1541b" stroke-width="3.5" fill="none" marker-end="url(#ar-orange)"/>
+    <!-- switch -> TODOS (broadcast) -->
+    <path class="sk" d="M470,300 q-20,-70 -36,-108" stroke="#b1541b" stroke-width="3" fill="none" stroke-dasharray="7 6" marker-end="url(#ar-orange)"/>
+    <path class="sk" d="M490,300 q60,-70 118,-108" stroke="#b1541b" stroke-width="3" fill="none" stroke-dasharray="7 6" marker-end="url(#ar-orange)"/>
+    <path class="sk" d="M540,330 q110,20 172,38" stroke="#b1541b" stroke-width="3" fill="none" stroke-dasharray="7 6" marker-end="url(#ar-orange)"/>
+    <text x="230" y="312" text-anchor="middle" class="lbl" font-size="13" font-weight="bold" fill="#b1541b">broadcast = chega em TODOS</text>
+  </g>
+
+  <!-- ============ PASSO 2: ARP REPLY (UNICAST / turquesa) ============ -->
+  <g id="passo2">
+    <!-- circulo numero 2 -->
+    <path class="sk" d="M900,250 q-20,-1 -20,20 q-1,20 20,20 q20,1 20,-20 q1,-20 -20,-20 z" fill="#00aa9f" stroke="#00aa9f" stroke-width="2.5"/>
+    <text x="900" y="277" text-anchor="middle" class="lbl" font-size="22" font-weight="bold" fill="#ffffff">2</text>
+    <text x="852" y="266" text-anchor="end" class="lbl" font-size="15" font-weight="bold" fill="#00aa9f">ARP REPLY</text>
+    <text x="852" y="286" text-anchor="end" class="lbl" font-size="13" fill="#00aa9f">UNICAST (só p/ PC-A)</text>
+
+    <!-- balao de fala do PC-B "sou eu!" -->
+    <path class="sk" d="M702,180 q-6,-48 66,-52 l150,-2 q70,2 66,38 q4,34 -66,38 l-28,0 l-26,30 l4,-30 l-96,2 q-70,-4 -74,-24 z" fill="#e5fbf9" stroke="#00aa9f" stroke-width="3"/>
+    <text x="836" y="150" text-anchor="middle" class="lbl" font-size="15" font-weight="bold" fill="#00aa9f">Sou eu! Meu MAC é</text>
+    <text x="836" y="176" text-anchor="middle" class="mono" font-size="14" font-weight="bold" fill="#1d2057">00:AA:11:BB:22:CC</text>
+
+    <!-- seta UNICA unicast: PC-B -> PC-A (direto, por cima) -->
+    <path class="sk" d="M716,418 q-240,96 -464,2" stroke="#00aa9f" stroke-width="4" fill="none" marker-end="url(#ar-turq)"/>
+    <text x="480" y="540" text-anchor="middle" class="lbl" font-size="13" font-weight="bold" fill="#00aa9f">unicast = só o dono responde (direto ao PC-A)</text>
+  </g>
+
+  <!-- ============ PASSO 3: PC-A atualiza o Cache ARP ============ -->
+  <g id="passo3">
+    <!-- circulo numero 3 -->
+    <path class="sk" d="M62,500 q-18,-1 -18,18 q-1,18 18,18 q18,1 18,-18 q1,-18 -18,-18 z" fill="#2778c4" stroke="#2778c4" stroke-width="2.5"/>
+    <text x="62" y="525" text-anchor="middle" class="lbl" font-size="20" font-weight="bold" fill="#ffffff">3</text>
+
+    <!-- cartaozinho Cache ARP -->
+    <path class="sk" d="M98,492 q-4,-13 11,-12 l186,1 q13,-1 12,12 l0,54 q1,13 -12,12 l-186,-1 q-13,1 -11,-12 z" fill="#eaf2fb" stroke="#2778c4" stroke-width="3"/>
+    <text x="202" y="513" text-anchor="middle" class="lbl" font-size="14" font-weight="bold" fill="#2778c4">Cache ARP (PC-A) OK</text>
+    <path class="sk" d="M110,520 q92,5 184,0" stroke="#2778c4" stroke-width="1.5" fill="none" stroke-dasharray="4 4"/>
+    <text x="202" y="540" text-anchor="middle" class="mono" font-size="12.5" fill="#1d2057">.100 -&gt; 00:AA:11:BB:22:CC</text>
+  </g>
+
+  <!-- ============ LEGENDA (rodape) ============ -->
+  <g id="legenda">
+    <text x="480" y="624" text-anchor="middle" class="lbl" font-size="13" fill="#1d2057">ARP grita para todos (broadcast) e só o dono do IP responde (unicast).</text>
+  </g>
+</svg>

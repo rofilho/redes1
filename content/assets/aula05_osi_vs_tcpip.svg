@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- BRIEF: Figura didatica "Modelo OSI vs TCP/IP" (Redes 1, ensino superior pt-BR).
+     Esquerda: pilha OSI 7 camadas. Direita: pilha TCP/IP 4 camadas.
+     Conectores turquesa tracejados mostram o mapeamento (OSI 7+6+5 -> TCP/IP 4;
+     OSI 4 -> 3; OSI 3 -> 2; OSI 2+1 -> 1). Estetica hand-drawn/whiteboard (Excalidraw).
+     Paleta Uniube: OSI azul #2778c4/borda #1d2057, TCP/IP verde #2e7d52,
+     texto #1d2057, conectores turquesa #00aa9f. Fundo transparente. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 700" width="100%"
+     font-family="'Comic Sans MS','Comic Neue',cursive" role="img"
+     aria-label="Comparacao entre o modelo OSI de 7 camadas e o modelo TCP/IP de 4 camadas">
+  <style>
+    .lbl   { font-family:'Comic Sans MS','Comic Neue',cursive; fill:#1d2057; }
+    .num   { font-family:'Segoe UI',Arial,sans-serif; font-weight:700; fill:#1d2057; }
+    .name  { font-family:'Segoe UI',Arial,sans-serif; fill:#1d2057; }
+    .nameW { font-family:'Segoe UI',Arial,sans-serif; fill:#ffffff; stroke:none; }
+    .title { font-family:'Comic Sans MS','Comic Neue',cursive; font-size:19px; fill:#1d2057; }
+    .foot  { font-family:'Comic Sans MS','Comic Neue',cursive; font-size:16px; fill:#1d2057; }
+    .sk    { stroke-linejoin:round; stroke-linecap:round; }
+    text   { paint-order:stroke; stroke:#fafaf8; stroke-width:3px; stroke-linejoin:round; }
+    .nameW, text.nameW { stroke:none; }
+  </style>
+
+  <!-- Titulo geral -->
+  <text x="450" y="34" text-anchor="middle" class="title" font-size="24">Modelo OSI  vs.  TCP/IP</text>
+  <path class="sk" d="M300 44 q75 6 150 0 q75 -5 150 1" stroke="#00aa9f" stroke-width="2.5" fill="none"/>
+
+  <!-- ================= COLUNA OSI ================= -->
+  <g id="osi">
+    <text x="185" y="78" text-anchor="middle" class="title" font-size="17">Modelo OSI</text>
+    <text x="185" y="97" text-anchor="middle" class="lbl" font-size="12.5" fill="#2778c4">(teórico &#183; 7 camadas)</text>
+
+    <!-- 7 caixas OSI. Paths com leve jitter para estetica sketchy. y de cada caixa: topo 112, passo 72 -->
+    <!-- Camada 7 -->
+    <path class="sk" d="M70 114 q130 -4 230 0 q4 32 0 64 q-130 5 -230 0 q-3 -33 0 -64 z"
+          fill="#e4f0fb" stroke="#1d2057" stroke-width="2.4"/>
+    <text x="86" y="152" class="num" font-size="18">7.</text>
+    <text x="112" y="152" class="name" font-size="16">Aplicação</text>
+    <!-- icone janelinha/app -->
+    <g stroke="#2778c4" stroke-width="2" fill="none" class="sk">
+      <path d="M258 128 q18 -3 34 1 q3 18 -1 34 q-17 2 -33 -1 q-2 -16 0 -34 z"/>
+      <path d="M258 137 q17 2 34 0" />
+      <circle cx="263" cy="132" r="1.4" fill="#2778c4"/>
+    </g>
+
+    <!-- Camada 6 -->
+    <path class="sk" d="M70 186 q130 -4 230 0 q4 32 0 64 q-130 5 -230 0 q-3 -33 0 -64 z"
+          fill="#e4f0fb" stroke="#1d2057" stroke-width="2.4"/>
+    <text x="86" y="224" class="num" font-size="18">6.</text>
+    <text x="112" y="224" class="name" font-size="16">Apresentação</text>
+    <!-- icone cadeado/TLS -->
+    <g stroke="#2778c4" stroke-width="2" fill="none" class="sk">
+      <path d="M262 212 q14 -3 28 1 q2 13 -1 26 q-13 2 -26 -1 q-2 -12 -1 -26 z"/>
+      <path d="M268 212 q0 -9 9 -9 q9 0 9 9"/>
+      <circle cx="276" cy="224" r="2" fill="#2778c4" stroke="none"/>
+    </g>
+
+    <!-- Camada 5 -->
+    <path class="sk" d="M70 258 q130 -4 230 0 q4 32 0 64 q-130 5 -230 0 q-3 -33 0 -64 z"
+          fill="#e4f0fb" stroke="#1d2057" stroke-width="2.4"/>
+    <text x="86" y="296" class="num" font-size="18">5.</text>
+    <text x="112" y="296" class="name" font-size="16">Sessão</text>
+    <!-- icone handshake/dialogo -->
+    <g stroke="#2778c4" stroke-width="2" fill="none" class="sk">
+      <path d="M258 280 q16 -3 32 0 q2 11 0 20 q-16 2 -32 0 q-1 -10 0 -20 z"/>
+      <path d="M266 296 l-4 10 l10 -5"/>
+    </g>
+
+    <!-- Camada 4 -->
+    <path class="sk" d="M70 330 q130 -4 230 0 q4 32 0 64 q-130 5 -230 0 q-3 -33 0 -64 z"
+          fill="#d4e7f8" stroke="#1d2057" stroke-width="2.4"/>
+    <text x="86" y="368" class="num" font-size="18">4.</text>
+    <text x="112" y="368" class="name" font-size="16">Transporte</text>
+    <!-- icone engrenagem -->
+    <g stroke="#2778c4" stroke-width="2" fill="none" class="sk">
+      <circle cx="276" cy="362" r="12"/>
+      <circle cx="276" cy="362" r="4"/>
+      <path d="M276 350 v-5 M276 374 v5 M264 362 h-5 M288 362 h5 M268 354 l-4 -4 M284 370 l4 4 M284 354 l4 -4 M268 370 l-4 4"/>
+    </g>
+
+    <!-- Camada 3 -->
+    <path class="sk" d="M70 402 q130 -4 230 0 q4 32 0 64 q-130 5 -230 0 q-3 -33 0 -64 z"
+          fill="#d4e7f8" stroke="#1d2057" stroke-width="2.4"/>
+    <text x="86" y="440" class="num" font-size="18">3.</text>
+    <text x="112" y="440" class="name" font-size="16">Rede</text>
+    <!-- icone globo/roteador -->
+    <g stroke="#2778c4" stroke-width="2" fill="none" class="sk">
+      <circle cx="276" cy="434" r="12"/>
+      <path d="M264 434 h24 M276 422 v24 M268 426 q8 8 0 16 M284 426 q-8 8 0 16"/>
+    </g>
+
+    <!-- Camada 2 -->
+    <path class="sk" d="M70 474 q130 -4 230 0 q4 32 0 64 q-130 5 -230 0 q-3 -33 0 -64 z"
+          fill="#c4ddf3" stroke="#1d2057" stroke-width="2.4"/>
+    <text x="86" y="512" class="num" font-size="18">2.</text>
+    <text x="112" y="512" class="name" font-size="16">Enlace de Dados</text>
+    <!-- icone switch/portas -->
+    <g stroke="#2778c4" stroke-width="2" fill="none" class="sk">
+      <path d="M262 500 q16 -2 30 0 q2 10 0 18 q-16 2 -30 0 q-1 -9 0 -18 z"/>
+      <path d="M267 518 v5 M274 518 v5 M281 518 v5 M288 518 v5"/>
+    </g>
+
+    <!-- Camada 1 -->
+    <path class="sk" d="M70 546 q130 -4 230 0 q4 32 0 64 q-130 5 -230 0 q-3 -33 0 -64 z"
+          fill="#c4ddf3" stroke="#1d2057" stroke-width="2.4"/>
+    <text x="86" y="584" class="num" font-size="18">1.</text>
+    <text x="112" y="584" class="name" font-size="16">Física</text>
+    <!-- icone plug/cabo -->
+    <g stroke="#2778c4" stroke-width="2" fill="none" class="sk">
+      <path d="M268 572 q10 -2 18 0 q2 9 0 16 q-9 2 -18 0 q-1 -8 0 -16 z"/>
+      <path d="M272 572 v-6 M282 572 v-6 M277 588 v8"/>
+    </g>
+  </g>
+
+  <!-- ================= COLUNA TCP/IP ================= -->
+  <g id="tcpip">
+    <text x="705" y="78" text-anchor="middle" class="title" font-size="17">Modelo TCP/IP</text>
+    <text x="705" y="97" text-anchor="middle" class="lbl" font-size="12.5" fill="#2e7d52">(real &#183; 4 camadas)</text>
+
+    <!-- Camada 4 (Aplicacao) - cobre a altura das OSI 7,6,5 (112..322) -->
+    <path class="sk" d="M600 114 q110 -4 210 0 q4 102 0 204 q-110 5 -210 0 q-3 -103 0 -204 z"
+          fill="#2e7d52" stroke="#1d5538" stroke-width="2.6"/>
+    <text x="616" y="150" class="num" fill="#ffffff" font-size="18">4.</text>
+    <text x="642" y="150" class="nameW" font-size="16">Aplicação</text>
+    <text x="616" y="300" class="lbl" fill="#d7f0e2" font-size="12">(junta Aplic. + Apres. + Sessão)</text>
+    <!-- icone janelinha branca -->
+    <g stroke="#ffffff" stroke-width="2" fill="none" class="sk">
+      <path d="M762 128 q20 -3 38 1 q3 20 -1 38 q-19 2 -37 -1 q-2 -18 0 -38 z"/>
+      <path d="M762 139 q19 2 38 0"/>
+    </g>
+
+    <!-- Camada 3 (Transporte) - alinha com OSI 4 (330..394) -->
+    <path class="sk" d="M600 330 q110 -4 210 0 q4 32 0 64 q-110 5 -210 0 q-3 -33 0 -64 z"
+          fill="#2e7d52" stroke="#1d5538" stroke-width="2.6"/>
+    <text x="616" y="368" class="num" fill="#ffffff" font-size="18">3.</text>
+    <text x="642" y="368" class="nameW" font-size="16">Transporte</text>
+    <g stroke="#ffffff" stroke-width="2" fill="none" class="sk">
+      <circle cx="782" cy="362" r="12"/><circle cx="782" cy="362" r="4"/>
+      <path d="M782 350 v-5 M782 374 v5 M770 362 h-5 M794 362 h5"/>
+    </g>
+
+    <!-- Camada 2 (Internet/Rede) - alinha com OSI 3 (402..466) -->
+    <path class="sk" d="M600 402 q110 -4 210 0 q4 32 0 64 q-110 5 -210 0 q-3 -33 0 -64 z"
+          fill="#2e7d52" stroke="#1d5538" stroke-width="2.6"/>
+    <text x="616" y="440" class="num" fill="#ffffff" font-size="18">2.</text>
+    <text x="642" y="440" class="nameW" font-size="16">Internet / Rede</text>
+    <g stroke="#ffffff" stroke-width="2" fill="none" class="sk">
+      <circle cx="790" cy="434" r="11"/>
+      <path d="M779 434 h22 M790 423 v22 M782 426 q8 8 0 16 M798 426 q-8 8 0 16"/>
+    </g>
+
+    <!-- Camada 1 (Acesso a Rede) - cobre OSI 2+1 (474..610) -->
+    <path class="sk" d="M600 474 q110 -4 210 0 q4 68 0 136 q-110 5 -210 0 q-3 -69 0 -136 z"
+          fill="#2e7d52" stroke="#1d5538" stroke-width="2.6"/>
+    <text x="616" y="512" class="num" fill="#ffffff" font-size="18">1.</text>
+    <text x="642" y="512" class="nameW" font-size="16">Acesso à Rede</text>
+    <text x="616" y="560" class="lbl" fill="#d7f0e2" font-size="12">(junta Enlace + Física)</text>
+    <!-- icone cabo/plug branco -->
+    <g stroke="#ffffff" stroke-width="2" fill="none" class="sk">
+      <path d="M770 580 q14 -2 26 0 q2 11 0 20 q-13 2 -26 0 q-1 -10 0 -20 z"/>
+      <path d="M776 580 v-6 M790 580 v-6"/>
+    </g>
+  </g>
+
+  <!-- ================= MAPEAMENTO ================= -->
+  <g id="mapeamento" stroke="#00aa9f" stroke-width="2.6" fill="none"
+     stroke-dasharray="7 6" class="sk">
+    <!-- chave agrupando OSI 7+6+5 -> TCP/IP 4 -->
+    <path d="M302 146 q24 2 40 60 q-16 56 -40 110"/>
+    <path d="M344 216 q120 4 254 0"/>
+    <!-- OSI 4 -> TCP/IP 3 -->
+    <path d="M302 362 q148 2 296 0"/>
+    <!-- OSI 3 -> TCP/IP 2 -->
+    <path d="M302 434 q148 2 296 0"/>
+    <!-- chave agrupando OSI 2+1 -> TCP/IP 1 -->
+    <path d="M302 510 q24 2 40 32 q-16 28 -40 72"/>
+    <path d="M344 542 q120 4 254 0"/>
+  </g>
+  <!-- setinhas nas pontas (lado TCP/IP) -->
+  <g fill="#00aa9f" stroke="none">
+    <path d="M598 216 l-12 -5 l2 10 z"/>
+    <path d="M598 362 l-12 -5 l2 10 z"/>
+    <path d="M598 434 l-12 -5 l2 10 z"/>
+    <path d="M598 542 l-12 -5 l2 10 z"/>
+  </g>
+
+  <!-- ================= LEGENDA ================= -->
+  <g id="legenda">
+    <path class="sk" d="M150 640 q300 -6 600 0 q4 20 0 40 q-300 6 -600 0 q-3 -21 0 -40 z"
+          fill="none" stroke="#00aa9f" stroke-width="2" stroke-dasharray="4 5"/>
+    <text x="450" y="666" text-anchor="middle" class="foot">As três camadas superiores do OSI viram uma só no mundo real.</text>
+  </g>
+</svg>
