@@ -1,0 +1,125 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 720" width="100%" role="img" aria-label="DHCP DORA: como o cliente ganha um IP">
+<!-- BRIEF: Figura didatica whiteboard/Excalidraw pt-BR, aula de Redes. DHCP DORA em 4 passos entre Cliente DHCP (azul, esq.) e Servidor DHCP (verde, dir.). Setas sketchy numeradas alternando direcao com balao de dialogo. Discover/Request = BROADCAST (laranja), Offer/Ack = resposta (turquesa). Mnemonico DORA. Fundo TRANSPARENTE (tema claro e escuro), sem rect de fundo. Texto com halo claro #fafaf8 via paint-order. Paleta Uniube. -->
+<style>
+  text{font-family:'Comic Sans MS','Comic Neue',cursive;fill:#1d2057;paint-order:stroke;stroke:#fafaf8;stroke-width:3px;stroke-linejoin:round;}
+  .ttl{font-size:30px;font-weight:bold;}
+  .sub{font-size:15px;}
+  .lbl{font-size:19px;font-weight:bold;}
+  .say{font-size:14px;}
+  .meta{font-size:12px;fill:#444;}
+  .num{font-size:18px;font-weight:bold;fill:#fff;stroke:none;}
+  .whiteonbox{fill:#fff;stroke:none;}
+  .foot{font-size:16px;font-weight:bold;}
+  .sk{fill:none;stroke-linecap:round;stroke-linejoin:round;}
+</style>
+
+<!-- TITULO -->
+<text class="ttl" x="480" y="46" text-anchor="middle">DHCP DORA: como o cliente ganha um IP</text>
+<text class="sub" x="480" y="72" text-anchor="middle">O "aperto de mão" em 4 passos (ida e volta)</text>
+
+<!-- ======= CLIENTE (esquerda, azul) ======= -->
+<g id="cliente">
+  <path class="sk" stroke="#2778c4" stroke-width="3.5"
+    d="M80 140 q-6 1 -5 8 l1 92 q0 7 7 7 l118 1 q7 0 7 -7 l-1 -92 q0 -7 -7 -7 z"/>
+  <circle cx="110" cy="178" r="6" fill="#2778c4"/>
+  <circle cx="162" cy="178" r="6" fill="#2778c4"/>
+  <path class="sk" stroke="#2778c4" stroke-width="3" d="M108 212 q28 -16 56 1"/>
+  <path d="M186 160 q6 10 0 16 q-6 -6 0 -16z" fill="#2778c4"/>
+  <path class="sk" stroke="#2778c4" stroke-width="3.5" d="M120 248 l1 20 M158 248 l1 20 M100 272 l82 1"/>
+  <text class="lbl" x="140" y="110" text-anchor="middle" fill="#2778c4">CLIENTE DHCP</text>
+  <text class="say" x="140" y="300" text-anchor="middle">ainda sem IP...</text>
+  <text class="meta" x="140" y="320" text-anchor="middle">(0.0.0.0)</text>
+</g>
+
+<!-- ======= SERVIDOR (direita, verde) ======= -->
+<g id="servidor">
+  <path class="sk" stroke="#2e7d52" stroke-width="3.5"
+    d="M790 136 q-5 0 -5 6 l-1 128 q0 6 6 6 l100 1 q6 0 6 -6 l0 -128 q0 -6 -6 -6 z"/>
+  <path class="sk" stroke="#2e7d52" stroke-width="2.5" d="M796 160 l88 1 M796 184 l88 1 M796 208 l88 1 M796 232 l88 1"/>
+  <circle cx="806" cy="160" r="3.5" fill="#00aa9f"/>
+  <circle cx="806" cy="184" r="3.5" fill="#00aa9f"/>
+  <circle cx="806" cy="208" r="3.5" fill="#b1541b"/>
+  <circle cx="806" cy="232" r="3.5" fill="#00aa9f"/>
+  <text class="lbl" x="840" y="110" text-anchor="middle" fill="#2e7d52">SERVIDOR DHCP</text>
+  <text class="meta" x="840" y="300" text-anchor="middle">Pool de IPs</text>
+  <text class="meta" x="840" y="318" text-anchor="middle">UDP 67</text>
+</g>
+
+<!-- ======= PASSO 1: DISCOVER (Cliente -> Servidor, BROADCAST, laranja) ======= -->
+<g id="passo1-discover">
+  <path class="sk" stroke="#b1541b" stroke-width="3.5" d="M210 380 q180 -14 500 3"/>
+  <path class="sk" stroke="#b1541b" stroke-width="3.5" d="M710 383 l-22 -11 M710 383 l-20 13"/>
+  <circle cx="200" cy="378" r="15" fill="#b1541b"/>
+  <text class="num" x="200" y="384" text-anchor="middle">1</text>
+  <text class="meta" x="455" y="400" text-anchor="middle" fill="#b1541b">DISCOVER · BROADCAST · UDP 68 -> 67</text>
+  <path class="sk" stroke="#b1541b" stroke-width="2.5" fill="#fff" fill-opacity="0.92"
+    d="M250 300 q-8 0 -8 8 l0 24 q0 8 8 8 l40 0 l-6 12 l14 -12 l240 0 q8 0 8 -8 l0 -24 q0 -8 -8 -8 z"/>
+  <text class="say" x="310" y="320" text-anchor="middle">Tem algum servidor DHCP aí?</text>
+  <text class="say" x="310" y="338" text-anchor="middle">Preciso de um IP!</text>
+</g>
+
+<!-- ======= PASSO 2: OFFER (Servidor -> Cliente, turquesa) ======= -->
+<g id="passo2-offer">
+  <path class="sk" stroke="#00aa9f" stroke-width="3.5" d="M750 468 q-180 16 -500 -3"/>
+  <path class="sk" stroke="#00aa9f" stroke-width="3.5" d="M250 465 l22 -12 M250 465 l20 14"/>
+  <circle cx="760" cy="470" r="15" fill="#00aa9f"/>
+  <text class="num" x="760" y="476" text-anchor="middle">2</text>
+  <text class="meta" x="505" y="490" text-anchor="middle" fill="#00aa9f">OFFER · Servidor -> Cliente (resposta)</text>
+  <path class="sk" stroke="#00aa9f" stroke-width="2.5" fill="#fff" fill-opacity="0.92"
+    d="M440 404 q-8 0 -8 8 l0 24 q0 8 8 8 l230 0 l6 12 l6 -12 l40 0 q8 0 8 -8 l0 -24 q0 -8 -8 -8 z"/>
+  <text class="say" x="585" y="424" text-anchor="middle">Tenho! Te ofereço 192.168.1.10</text>
+  <text class="say" x="585" y="442" text-anchor="middle">(+ máscara, gateway, DNS, lease).</text>
+</g>
+
+<!-- ======= PASSO 3: REQUEST (Cliente -> Servidor, BROADCAST, laranja) ======= -->
+<g id="passo3-request">
+  <path class="sk" stroke="#b1541b" stroke-width="3.5" d="M210 560 q180 -14 500 3"/>
+  <path class="sk" stroke="#b1541b" stroke-width="3.5" d="M710 563 l-22 -11 M710 563 l-20 13"/>
+  <circle cx="200" cy="558" r="15" fill="#b1541b"/>
+  <text class="num" x="200" y="564" text-anchor="middle">3</text>
+  <text class="meta" x="455" y="580" text-anchor="middle" fill="#b1541b">REQUEST · BROADCAST · avisa TODOS os servidores</text>
+  <path class="sk" stroke="#b1541b" stroke-width="2.5" fill="#fff" fill-opacity="0.92"
+    d="M250 484 q-8 0 -8 8 l0 22 q0 8 8 8 l40 0 l-6 12 l14 -12 l230 0 q8 0 8 -8 l0 -22 q0 -8 -8 -8 z"/>
+  <text class="say" x="305" y="504" text-anchor="middle">Aceito o 192.168.1.10!</text>
+  <text class="say" x="305" y="521" text-anchor="middle">(avisando todos os servidores)</text>
+</g>
+
+<!-- ======= PASSO 4: ACK (Servidor -> Cliente, turquesa) ======= -->
+<g id="passo4-ack">
+  <path class="sk" stroke="#00aa9f" stroke-width="3.5" d="M750 648 q-180 16 -500 -3"/>
+  <path class="sk" stroke="#00aa9f" stroke-width="3.5" d="M250 645 l22 -12 M250 645 l20 14"/>
+  <circle cx="760" cy="650" r="15" fill="#00aa9f"/>
+  <text class="num" x="760" y="656" text-anchor="middle">4</text>
+  <text class="meta" x="505" y="670" text-anchor="middle" fill="#00aa9f">ACK · Servidor -> Cliente (confirmação)</text>
+  <path class="sk" stroke="#00aa9f" stroke-width="2.5" fill="#fff" fill-opacity="0.92"
+    d="M470 584 q-8 0 -8 8 l0 22 q0 8 8 8 l200 0 l6 12 l6 -12 l10 0 q8 0 8 -8 l0 -22 q0 -8 -8 -8 z"/>
+  <text class="say" x="585" y="604" text-anchor="middle">Confirmado! O IP é seu</text>
+  <text class="say" x="585" y="621" text-anchor="middle">pelo tempo do lease.</text>
+</g>
+
+<!-- ======= CLIENTE FELIZ com IP .10 (desfecho) ======= -->
+<g id="cliente-feliz">
+  <path class="sk" stroke="#2778c4" stroke-width="3" d="M66 420 q-5 1 -4 6 l1 50 q0 6 6 6 l66 1 q6 0 6 -6 l-1 -50 q0 -6 -6 -6 z"/>
+  <circle cx="88" cy="442" r="4.5" fill="#2778c4"/>
+  <circle cx="118" cy="442" r="4.5" fill="#2778c4"/>
+  <path class="sk" stroke="#2778c4" stroke-width="3" d="M86 456 q17 14 34 0"/>
+  <path class="sk" stroke="#2778c4" stroke-width="2.5" d="M94 482 l1 10 M112 482 l1 10 M80 494 l44 1"/>
+  <path class="sk" stroke="#2e7d52" stroke-width="2.5" fill="#2e7d52" d="M150 428 l62 0 l10 12 l-10 12 l-62 0 z"/>
+  <text class="whiteonbox" x="184" y="445" text-anchor="middle" style="font-size:14px;font-weight:bold;">.10 é meu!</text>
+  <text class="say" x="100" y="520" text-anchor="middle" fill="#2778c4">IP: 192.168.1.10</text>
+</g>
+
+<!-- ======= MNEMONICO DORA ======= -->
+<g id="mnemonico-dora">
+  <path class="sk" stroke="#1d2057" stroke-width="2.5" fill="#fff" fill-opacity="0.9"
+    d="M780 540 q-6 0 -6 6 l0 100 q0 6 6 6 l116 1 q6 0 6 -6 l0 -101 q0 -6 -6 -6 z"/>
+  <text x="838" y="562" text-anchor="middle" style="font-size:18px;font-weight:bold;">DORA</text>
+  <text x="792" y="588" style="font-size:13px;"><tspan fill="#b1541b" style="font-weight:bold;">D</tspan>iscover</text>
+  <text x="792" y="608" style="font-size:13px;"><tspan fill="#00aa9f" style="font-weight:bold;">O</tspan>ffer</text>
+  <text x="792" y="628" style="font-size:13px;"><tspan fill="#b1541b" style="font-weight:bold;">R</tspan>equest</text>
+  <text x="792" y="648" style="font-size:13px;"><tspan fill="#00aa9f" style="font-weight:bold;">A</tspan>ck</text>
+</g>
+
+<!-- ======= LEGENDA rodape ======= -->
+<text class="foot" x="480" y="706" text-anchor="middle">DORA: Discover, Offer, Request, Ack -- o aperto de mão que entrega um IP.</text>
+</svg>
