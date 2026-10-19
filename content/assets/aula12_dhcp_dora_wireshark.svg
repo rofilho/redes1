@@ -1,0 +1,95 @@
+<!-- BRIEF: DHCP DORA visto no Wireshark. Cliente Windows (azul #2778c4, esq) e Servidor DHCP (verde #2e7d52, dir). 4 passos DORA com cartoes de pacote mostrando cabecalhos (Src/Dst IP, MAC, UDP 67/68). Discover/Request destacados como BROADCAST (laranja #b1541b); Offer/Ack como respostas (turquesa #00aa9f). Estilo whiteboard/Excalidraw sketchy, fonte Comic. Fundo TRANSPARENTE: sem rect de fundo; halo claro em todo texto via paint-order:stroke. Valores MAC/IP/porta em monospace. Legenda no rodape. pt-BR com acentos; termos tecnicos em ingles. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 980 760" width="100%" role="img" aria-label="Troca DHCP DORA vista no Wireshark com cabecalhos de pacote">
+  <style>
+    text { font-family:'Comic Sans MS','Comic Neue',cursive; fill:#1d2057; paint-order:stroke; stroke:#fafaf8; stroke-width:3px; stroke-linejoin:round; }
+    text[fill="#ffffff"]{ stroke:none; }
+    .mono { font-family:'Courier New',monospace; }
+    .ttl { font-weight:700; }
+    .box { fill:#fafaf8; stroke:#1d2057; stroke-width:2; stroke-linejoin:round; }
+    .skt { fill:none; stroke-linecap:round; stroke-linejoin:round; }
+  </style>
+
+  <!-- ====== Titulo ====== -->
+  <text x="490" y="40" text-anchor="middle" class="ttl" font-size="27">DHCP DORA visto no Wireshark</text>
+
+  <!-- ====== Atores ====== -->
+  <g id="ator-cliente">
+    <path class="skt" d="M70 92 q-6 5 0 94 q-5 7 150 3 q8 -5 2 -98 q4 -8 -152 1 z" fill="#eaf2fb" stroke="#2778c4" stroke-width="3"/>
+    <rect x="92" y="108" width="108" height="56" rx="4" fill="#ffffff" stroke="#2778c4" stroke-width="2"/>
+    <path class="skt" d="M98 116 h96 M98 128 h70 M98 140 h88 M98 152 h58" stroke="#2778c4" stroke-width="2"/>
+    <path class="skt" d="M120 166 h52 M130 166 v12 M162 166 v12 M118 180 h58" stroke="#2778c4" stroke-width="2.5"/>
+    <text x="146" y="206" text-anchor="middle" class="ttl" font-size="18" fill="#2778c4">Cliente Windows</text>
+  </g>
+
+  <g id="ator-servidor">
+    <path class="skt" d="M778 92 q-6 5 0 94 q-5 7 150 3 q8 -5 2 -98 q4 -8 -152 1 z" fill="#e8f4ee" stroke="#2e7d52" stroke-width="3"/>
+    <rect x="802" y="106" width="104" height="18" rx="3" fill="#ffffff" stroke="#2e7d52" stroke-width="2"/>
+    <rect x="802" y="130" width="104" height="18" rx="3" fill="#ffffff" stroke="#2e7d52" stroke-width="2"/>
+    <rect x="802" y="154" width="104" height="18" rx="3" fill="#ffffff" stroke="#2e7d52" stroke-width="2"/>
+    <circle cx="812" cy="115" r="2.6" fill="#2e7d52"/>
+    <circle cx="812" cy="139" r="2.6" fill="#2e7d52"/>
+    <circle cx="812" cy="163" r="2.6" fill="#2e7d52"/>
+    <text x="854" y="206" text-anchor="middle" class="ttl" font-size="18" fill="#2e7d52">Servidor DHCP</text>
+  </g>
+
+  <!-- ====== Passo 1 : DISCOVER ====== -->
+  <g id="passo1-discover">
+    <path class="skt" d="M205 258 q190 -14 560 2" stroke="#b1541b" stroke-width="3.5"/>
+    <path class="skt" d="M765 260 l-20 -8 M765 260 l-18 9" stroke="#b1541b" stroke-width="3.5"/>
+    <circle cx="150" cy="255" r="15" fill="#b1541b" stroke="#1d2057" stroke-width="2"/>
+    <text x="150" y="261" text-anchor="middle" class="ttl" font-size="17" fill="#ffffff">1</text>
+    <text x="300" y="248" class="ttl" font-size="17" fill="#b1541b">DHCP DISCOVER</text>
+    <text x="470" y="248" class="ttl" font-size="13" fill="#b1541b">[ BROADCAST ]</text>
+    <rect class="box" x="238" y="268" width="500" height="68" rx="7"/>
+    <text x="252" y="289" class="mono" font-size="13">Src IP 0.0.0.0        Dst IP 255.255.255.255</text>
+    <text x="252" y="309" class="mono" font-size="13">Src MAC AA:BB:CC:DD:EE:FF   Dst MAC FF:FF:FF:FF:FF:FF</text>
+    <text x="252" y="329" class="mono" font-size="13">UDP  68 -&gt; 67   (cliente pergunta: "tem servidor DHCP?")</text>
+  </g>
+
+  <!-- ====== Passo 2 : OFFER ====== -->
+  <g id="passo2-offer">
+    <path class="skt" d="M795 374 q-190 16 -560 0" stroke="#00aa9f" stroke-width="3.5"/>
+    <path class="skt" d="M235 374 l20 -8 M235 374 l18 9" stroke="#00aa9f" stroke-width="3.5"/>
+    <circle cx="850" cy="371" r="15" fill="#00aa9f" stroke="#1d2057" stroke-width="2"/>
+    <text x="850" y="377" text-anchor="middle" class="ttl" font-size="17" fill="#ffffff">2</text>
+    <text x="588" y="364" class="ttl" font-size="17" fill="#00aa9f">DHCP OFFER</text>
+    <text x="690" y="364" class="ttl" font-size="13" fill="#00aa9f">(resposta)</text>
+    <rect class="box" x="238" y="384" width="500" height="84" rx="7"/>
+    <text x="252" y="405" font-size="13">Servidor reserva <tspan class="mono">192.168.1.10</tspan> para o MAC do cliente</text>
+    <text x="252" y="425" class="mono" font-size="13">IP 192.168.1.10   Mascara 255.255.255.0</text>
+    <text x="252" y="445" class="mono" font-size="13">Gateway 192.168.1.1   DNS 8.8.8.8</text>
+    <text x="252" y="462" class="mono" font-size="13">Lease time 86400s   UDP 67 -&gt; 68</text>
+  </g>
+
+  <!-- ====== Passo 3 : REQUEST ====== -->
+  <g id="passo3-request">
+    <path class="skt" d="M205 510 q190 -14 560 2" stroke="#b1541b" stroke-width="3.5"/>
+    <path class="skt" d="M765 512 l-20 -8 M765 512 l-18 9" stroke="#b1541b" stroke-width="3.5"/>
+    <circle cx="150" cy="507" r="15" fill="#b1541b" stroke="#1d2057" stroke-width="2"/>
+    <text x="150" y="513" text-anchor="middle" class="ttl" font-size="17" fill="#ffffff">3</text>
+    <text x="300" y="500" class="ttl" font-size="17" fill="#b1541b">DHCP REQUEST</text>
+    <text x="470" y="500" class="ttl" font-size="13" fill="#b1541b">[ BROADCAST ]</text>
+    <rect class="box" x="238" y="520" width="500" height="68" rx="7"/>
+    <text x="252" y="541" font-size="13">Cliente aceita a oferta e confirma <tspan class="mono">192.168.1.10</tspan></text>
+    <text x="252" y="561" font-size="13">Broadcast avisa os outros servidores DHCP (recusa as demais)</text>
+    <text x="252" y="581" class="mono" font-size="13">Dst IP 255.255.255.255   UDP 68 -&gt; 67</text>
+  </g>
+
+  <!-- ====== Passo 4 : ACK ====== -->
+  <g id="passo4-ack">
+    <path class="skt" d="M795 626 q-190 16 -560 0" stroke="#00aa9f" stroke-width="3.5"/>
+    <path class="skt" d="M235 626 l20 -8 M235 626 l18 9" stroke="#00aa9f" stroke-width="3.5"/>
+    <circle cx="850" cy="623" r="15" fill="#00aa9f" stroke="#1d2057" stroke-width="2"/>
+    <text x="850" y="629" text-anchor="middle" class="ttl" font-size="17" fill="#ffffff">4</text>
+    <text x="610" y="616" class="ttl" font-size="17" fill="#00aa9f">DHCP ACK</text>
+    <text x="700" y="616" class="ttl" font-size="13" fill="#00aa9f">(confirmação)</text>
+    <rect class="box" x="238" y="636" width="500" height="68" rx="7"/>
+    <text x="252" y="657" font-size="13">Confirmação oficial: IP válido pelo lease time</text>
+    <text x="252" y="677" font-size="13">Cliente grava as configurações na interface de rede</text>
+    <text x="252" y="697" class="mono" font-size="13">Src IP 192.168.1.1   Dst MAC AA:BB:CC:DD:EE:FF   UDP 67 -&gt; 68</text>
+  </g>
+
+  <!-- ====== Legenda rodape ====== -->
+  <path class="skt" d="M70 724 q440 -8 840 2" stroke="#1d2057" stroke-width="1.6" stroke-dasharray="2 6"/>
+  <text x="490" y="746" text-anchor="middle" font-size="14" font-style="italic">No Wireshark você vê os 4 pacotes DORA — repare nos MACs e portas UDP 67/68.</text>
+</svg>

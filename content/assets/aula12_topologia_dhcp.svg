@@ -1,0 +1,104 @@
+<!-- BRIEF: Topologia de rede didatica (Redes, pt-BR) estilo whiteboard/Excalidraw. Sub-rede 192.168.1.0/24 com Switch0 (2960) central, PC0 e PC1 (clientes IP DHCP), Servidor DHCP (IP fixo 192.168.1.2) e Router0 (gateway 192.168.1.1) para fora. Setas pontilhadas 'pede IP' dos PCs ao servidor. Fundo TRANSPARENTE, halo claro em todos os textos para legibilidade em tema claro e escuro. Paleta Uniube. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 640" width="100%" role="img" aria-label="Topologia de rede: servidor DHCP dedicado na sub-rede 192.168.1.0/24">
+  <style>
+    text {
+      font-family: 'Comic Sans MS','Comic Neue',cursive;
+      paint-order: stroke;
+      stroke: #fafaf8;
+      stroke-width: 3px;
+      stroke-linejoin: round;
+      fill: #1d2057;
+    }
+    .lbl { font-size: 18px; font-weight: 700; }
+    .ip  { font-size: 14px; }
+    .cap { font-size: 16px; font-style: italic; }
+    .title { font-size: 22px; font-weight: 700; }
+    .pede { font-size: 13px; fill: #2e7d52; }
+    .whitetext { fill: #ffffff; stroke: none; }
+    .sketch { stroke-linecap: round; stroke-linejoin: round; fill: none; }
+  </style>
+
+  <!-- Titulo -->
+  <text x="450" y="38" class="title" text-anchor="middle">Topologia: servidor DHCP dedicado na LAN</text>
+  <text x="450" y="62" class="ip" text-anchor="middle">Sub-rede 192.168.1.0/24</text>
+
+  <!-- ============ CABOS (sketchy, desenhados antes dos nos) ============ -->
+  <path id="cabo-pc0" class="sketch" d="M 360 360 Q 300 350 240 300 T 150 250" stroke="#2778c4" stroke-width="3"/>
+  <path id="cabo-pc1" class="sketch" d="M 540 360 Q 600 350 660 300 T 750 250" stroke="#2778c4" stroke-width="3"/>
+  <path id="cabo-srv" class="sketch" d="M 450 400 Q 452 450 448 490 T 450 520" stroke="#2778c4" stroke-width="3"/>
+  <path id="cabo-router" class="sketch" d="M 450 355 Q 448 290 452 230 T 450 170" stroke="#2778c4" stroke-width="3"/>
+
+  <!-- ============ SETAS PONTILHADAS 'pede IP' (PCs -> Servidor) ============ -->
+  <defs>
+    <marker id="seta" markerWidth="10" markerHeight="10" refX="7" refY="3" orient="auto">
+      <path d="M0,0 L7,3 L0,6 Z" fill="#2e7d52"/>
+    </marker>
+  </defs>
+  <path id="pedeip-pc0" class="sketch" d="M 150 290 Q 260 430 400 500" stroke="#2e7d52" stroke-width="2" stroke-dasharray="6 6" marker-end="url(#seta)"/>
+  <path id="pedeip-pc1" class="sketch" d="M 750 290 Q 640 430 500 500" stroke="#2e7d52" stroke-width="2" stroke-dasharray="6 6" marker-end="url(#seta)"/>
+  <text x="250" y="455" class="pede" text-anchor="middle">pede IP</text>
+  <text x="650" y="455" class="pede" text-anchor="middle">pede IP</text>
+
+  <!-- ============ ROTEADOR ============ -->
+  <g id="router0">
+    <ellipse cx="450" cy="130" rx="55" ry="38" class="sketch" stroke="#1d2057" stroke-width="3" fill="#eef3fb"/>
+    <ellipse cx="450" cy="130" rx="42" ry="26" class="sketch" stroke="#00aa9f" stroke-width="2.5"/>
+    <path class="sketch" d="M 432 122 L 468 122 M 462 116 L 470 122 L 462 128" stroke="#00aa9f" stroke-width="2.5"/>
+    <path class="sketch" d="M 468 138 L 432 138 M 438 132 L 430 138 L 438 144" stroke="#00aa9f" stroke-width="2.5"/>
+    <text x="450" y="186" class="lbl" text-anchor="middle">Router0</text>
+    <text x="450" y="206" class="ip" text-anchor="middle">Gateway 192.168.1.1</text>
+  </g>
+
+  <!-- Nuvem Internet removida: colidia com o titulo; o Router0 ja representa a saida para fora. -->
+
+  <!-- ============ SWITCH central ============ -->
+  <g id="switch0">
+    <rect x="365" y="355" width="170" height="48" rx="8" class="sketch" stroke="#1d2057" stroke-width="3" fill="#dfe6f3"/>
+    <rect x="378" y="384" width="12" height="10" fill="#1d2057"/>
+    <rect x="396" y="384" width="12" height="10" fill="#1d2057"/>
+    <rect x="414" y="384" width="12" height="10" fill="#1d2057"/>
+    <rect x="432" y="384" width="12" height="10" fill="#1d2057"/>
+    <rect x="450" y="384" width="12" height="10" fill="#1d2057"/>
+    <rect x="468" y="384" width="12" height="10" fill="#1d2057"/>
+    <rect x="486" y="384" width="12" height="10" fill="#1d2057"/>
+    <rect x="504" y="384" width="12" height="10" fill="#1d2057"/>
+    <text x="450" y="375" class="lbl whitetext" text-anchor="middle" font-size="16">Switch0</text>
+    <text x="450" y="425" class="ip" text-anchor="middle">Switch 2960 (camada 2)</text>
+  </g>
+
+  <!-- ============ PC0 ============ -->
+  <g id="pc0">
+    <rect x="100" y="195" width="100" height="66" rx="6" class="sketch" stroke="#2778c4" stroke-width="3" fill="#e3effb"/>
+    <rect x="112" y="207" width="76" height="42" rx="3" class="sketch" stroke="#2778c4" stroke-width="2" fill="#ffffff"/>
+    <path class="sketch" d="M 135 261 L 165 261 M 150 261 L 150 272 M 128 274 L 172 274" stroke="#2778c4" stroke-width="3"/>
+    <text x="150" y="135" class="lbl" text-anchor="middle" fill="#2778c4">PC0 (Cliente)</text>
+    <text x="150" y="156" class="ip" text-anchor="middle">IP: DHCP</text>
+  </g>
+
+  <!-- ============ PC1 ============ -->
+  <g id="pc1">
+    <rect x="700" y="195" width="100" height="66" rx="6" class="sketch" stroke="#2778c4" stroke-width="3" fill="#e3effb"/>
+    <rect x="712" y="207" width="76" height="42" rx="3" class="sketch" stroke="#2778c4" stroke-width="2" fill="#ffffff"/>
+    <path class="sketch" d="M 735 261 L 765 261 M 750 261 L 750 272 M 728 274 L 772 274" stroke="#2778c4" stroke-width="3"/>
+    <text x="750" y="135" class="lbl" text-anchor="middle" fill="#2778c4">PC1 (Cliente)</text>
+    <text x="750" y="156" class="ip" text-anchor="middle">IP: DHCP</text>
+  </g>
+
+  <!-- ============ SERVIDOR DHCP ============ -->
+  <g id="servidor-dhcp">
+    <rect x="410" y="505" width="80" height="90" rx="6" class="sketch" stroke="#2e7d52" stroke-width="3" fill="#e4f3ea"/>
+    <rect x="420" y="516" width="60" height="14" rx="2" class="sketch" stroke="#2e7d52" stroke-width="2" fill="#ffffff"/>
+    <circle cx="470" cy="523" r="3" fill="#2e7d52"/>
+    <rect x="420" y="536" width="60" height="14" rx="2" class="sketch" stroke="#2e7d52" stroke-width="2" fill="#ffffff"/>
+    <circle cx="470" cy="543" r="3" fill="#2e7d52"/>
+    <rect x="420" y="556" width="60" height="14" rx="2" class="sketch" stroke="#2e7d52" stroke-width="2" fill="#ffffff"/>
+    <circle cx="470" cy="563" r="3" fill="#2e7d52"/>
+    <rect x="420" y="576" width="60" height="12" rx="2" class="sketch" stroke="#2e7d52" stroke-width="2" fill="#ffffff"/>
+    <text x="450" y="612" class="lbl" text-anchor="middle" fill="#2e7d52" font-size="15">Servidor DHCP</text>
+    <text x="600" y="540" class="ip" text-anchor="middle">IP fixo: 192.168.1.2</text>
+    <text x="600" y="560" class="ip" text-anchor="middle" fill="#2e7d52" font-size="13">entrega os IPs</text>
+  </g>
+
+  <!-- ============ LEGENDA rodape ============ -->
+  <text x="450" y="632" class="cap" text-anchor="middle" font-size="14">Um servidor DHCP dedicado entrega IPs aos clientes da sub-rede 192.168.1.0/24.</text>
+</svg>

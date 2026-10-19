@@ -1,0 +1,75 @@
+<!-- BRIEF: Endereco IPv4 = 32 bits em 4 octetos. IP exemplo 192.168.10.1 decomposto em 4 octetos sketchy (decimal grande + 8 bits binario + rotulo '8 bits'), chave turquesa '32 bits no total' abrangendo os 4, pontos grandes entre caixas, legenda rodape. Fundo transparente, halo claro global para legibilidade em tema claro e escuro. Paleta Uniube. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 480" width="100%" role="img" aria-label="Endereco IPv4 com 32 bits divididos em 4 octetos de 8 bits">
+  <style>
+    text {
+      font-family: 'Comic Sans MS','Comic Neue',cursive;
+      paint-order: stroke;
+      stroke: #fafaf8;
+      stroke-width: 3px;
+      stroke-linejoin: round;
+    }
+    .titulo  { font-size: 30px; font-weight: 700; fill: #1d2057; }
+    .decimal { font-size: 52px; font-weight: 700; fill: #1d2057; }
+    .binario { font-size: 21px; font-weight: 700; fill: #2778c4; letter-spacing: 1px; }
+    .bits8   { font-size: 18px; fill: #1d2057; }
+    .ponto   { font-size: 64px; font-weight: 700; fill: #1d2057; }
+    .chave   { font-size: 24px; font-weight: 700; fill: #00aa9f; stroke-width: 3px; }
+    .legenda { font-size: 20px; fill: #1d2057; }
+    .caixa   { fill: #e4f0fb; stroke: #1d2057; stroke-width: 3; stroke-linejoin: round; stroke-linecap: round; }
+  </style>
+
+  <!-- Titulo -->
+  <text class="titulo" x="480" y="46" text-anchor="middle">Endereço IPv4 = 32 bits em 4 octetos</text>
+
+  <!-- chave horizontal superior desenhada sketchy -->
+  <path d="M 70 118 q 2 -14 18 -14 l 370 0 q 14 0 22 -13 q 8 13 22 13 l 368 0 q 16 0 18 14"
+        fill="none" stroke="#00aa9f" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+  <text class="chave" x="480" y="94" text-anchor="middle">32 bits no total</text>
+
+  <!-- ============ OCTETO 1: 192 ============ -->
+  <g id="octeto1">
+    <path class="caixa" d="M 70 150 q -3 90 2 170 q 100 5 196 1 q 4 -88 -1 -172 q -98 -4 -197 1 z"/>
+    <text class="decimal" x="169" y="248" text-anchor="middle">192</text>
+    <text class="binario" x="169" y="292" text-anchor="middle">11000000</text>
+    <text class="bits8"  x="169" y="326" text-anchor="middle">8 bits</text>
+  </g>
+
+  <!-- ponto -->
+  <text class="ponto" x="282" y="262" text-anchor="middle">.</text>
+
+  <!-- ============ OCTETO 2: 168 ============ -->
+  <g id="octeto2">
+    <path class="caixa" d="M 300 152 q -4 88 1 169 q 99 6 197 -1 q 5 -86 -2 -170 q -97 -5 -196 2 z"/>
+    <text class="decimal" x="398" y="248" text-anchor="middle">168</text>
+    <text class="binario" x="398" y="292" text-anchor="middle">10101000</text>
+    <text class="bits8"  x="398" y="326" text-anchor="middle">8 bits</text>
+  </g>
+
+  <!-- ponto -->
+  <text class="ponto" x="512" y="262" text-anchor="middle">.</text>
+
+  <!-- ============ OCTETO 3: 10 ============ -->
+  <g id="octeto3">
+    <path class="caixa" d="M 530 150 q -3 90 3 171 q 98 4 196 0 q 3 -89 -2 -171 q -99 -3 -197 0 z"/>
+    <text class="decimal" x="629" y="248" text-anchor="middle">10</text>
+    <text class="binario" x="629" y="292" text-anchor="middle">00001010</text>
+    <text class="bits8"  x="629" y="326" text-anchor="middle">8 bits</text>
+  </g>
+
+  <!-- ponto -->
+  <text class="ponto" x="742" y="262" text-anchor="middle">.</text>
+
+  <!-- ============ OCTETO 4: 1 ============ -->
+  <g id="octeto4">
+    <path class="caixa" d="M 760 152 q -4 88 1 169 q 99 6 197 -2 q 4 -86 -2 -169 q -98 -4 -196 2 z"/>
+    <text class="decimal" x="859" y="248" text-anchor="middle">1</text>
+    <text class="binario" x="859" y="292" text-anchor="middle">00000001</text>
+    <text class="bits8"  x="859" y="326" text-anchor="middle">8 bits</text>
+  </g>
+
+  <!-- Legenda rodape -->
+  <text class="legenda" x="480" y="420" text-anchor="middle">Um endereço IPv4 tem 32 bits, divididos em 4 octetos de 8 bits cada.</text>
+
+  <!-- IP de exemplo (reforco) -->
+  <text x="480" y="456" text-anchor="middle" style="font-size:22px;font-weight:700;fill:#2778c4;">IP de exemplo: 192.168.10.1</text>
+</svg>
