@@ -1,0 +1,66 @@
+<!-- BRIEF: Topologia do lab A06 (Redes 1). Rede A (192.168.10.0/24): PC0+PC1 -> Switch0 -> R0. Rede B (192.168.20.0/24): R0 -> Switch1 -> PC2+PC3. O roteador R0 e a fronteira entre as duas redes. Estetica hand-drawn/Excalidraw, fundo transparente, halo off-white para o tema escuro. Paleta Uniube. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 420" width="100%" role="img"
+     font-family="'Comic Sans MS','Comic Neue',cursive"
+     aria-label="Topologia do laboratorio: PC0 e PC1 na rede A 192.168.10.0/24 ligados ao Switch0 e ao roteador R0; R0 liga ao Switch1 e aos PC2 e PC3 na rede B 192.168.20.0/24.">
+  <defs>
+    <style>
+      .sk   { stroke-linecap:round; stroke-linejoin:round; fill:none; }
+      .lbl  { font-family:'Comic Sans MS','Comic Neue',cursive; }
+      text  { paint-order:stroke; stroke:#fafaf8; stroke-width:3px; stroke-linejoin:round; }
+      text[fill="#ffffff"] { stroke:none; }
+      .pc   { fill:#e4f0fb; stroke:#2778c4; stroke-width:2.4; }
+      .pcg  { fill:#eaf5ee; stroke:#2e7d52; stroke-width:2.4; }
+    </style>
+  </defs>
+
+  <text x="450" y="34" text-anchor="middle" class="lbl" font-size="22" font-weight="bold" fill="#1d2057">A rede do laboratório — duas redes, um roteador</text>
+  <path class="sk" d="M300,46 q75,7 150,3 q75,-4 150,2" stroke="#00aa9f" stroke-width="2.5"/>
+
+  <!-- fundos de area -->
+  <path class="sk" d="M30,80 q180,-8 340,0 q6,150 0,300 q-180,8 -340,0 q-6,-150 0,-300 z" fill="#2778c4" fill-opacity="0.06" stroke="#2778c4" stroke-width="1.6" stroke-dasharray="7 6"/>
+  <path class="sk" d="M530,80 q180,-8 340,0 q6,150 0,300 q-180,8 -340,0 q-6,-150 0,-300 z" fill="#2e7d52" fill-opacity="0.06" stroke="#2e7d52" stroke-width="1.6" stroke-dasharray="7 6"/>
+  <text x="200" y="104" text-anchor="middle" class="lbl" font-size="15" font-weight="bold" fill="#2778c4">Rede A &#183; 192.168.10.0/24</text>
+  <text x="700" y="104" text-anchor="middle" class="lbl" font-size="15" font-weight="bold" fill="#2e7d52">Rede B &#183; 192.168.20.0/24</text>
+
+  <!-- PCs rede A -->
+  <g>
+    <rect x="56" y="140" width="76" height="52" rx="7" class="pc"/><text x="94" y="162" text-anchor="middle" class="lbl" font-size="13" font-weight="bold" fill="#1d2057">PC0</text><text x="94" y="180" text-anchor="middle" class="lbl" font-size="10.5" fill="#1d2057">.10</text>
+    <rect x="56" y="268" width="76" height="52" rx="7" class="pc"/><text x="94" y="290" text-anchor="middle" class="lbl" font-size="13" font-weight="bold" fill="#1d2057">PC1</text><text x="94" y="308" text-anchor="middle" class="lbl" font-size="10.5" fill="#1d2057">.11</text>
+  </g>
+  <!-- Switch0 -->
+  <g>
+    <path class="sk" d="M190,210 q-4,-14 12,-13 l76,1 q14,-1 12,13 l0,36 q2,14 -12,13 l-76,-1 q-14,1 -12,-13 z" fill="#1d2057" stroke="#1d2057" stroke-width="2.4"/>
+    <text x="230" y="234" text-anchor="middle" class="lbl" font-size="12.5" font-weight="bold" fill="#ffffff">Switch0</text>
+  </g>
+  <!-- R0 (centro, fronteira) -->
+  <g>
+    <circle cx="450" cy="230" r="40" class="sk" fill="#fbeee6" stroke="#b1541b" stroke-width="3.2"/>
+    <text x="450" y="228" text-anchor="middle" class="lbl" font-size="18" font-weight="bold" fill="#b1541b">R0</text>
+    <text x="450" y="246" text-anchor="middle" class="lbl" font-size="10.5" fill="#b1541b">roteador</text>
+    <text x="450" y="300" text-anchor="middle" class="lbl" font-size="12" fill="#1d2057">.10.1 | .20.1</text>
+    <text x="450" y="318" text-anchor="middle" class="lbl" font-size="11" fill="#b1541b">a fronteira das redes</text>
+  </g>
+  <!-- Switch1 -->
+  <g>
+    <path class="sk" d="M610,210 q-4,-14 12,-13 l76,1 q14,-1 12,13 l0,36 q2,14 -12,13 l-76,-1 q-14,1 -12,-13 z" fill="#1d2057" stroke="#1d2057" stroke-width="2.4"/>
+    <text x="650" y="234" text-anchor="middle" class="lbl" font-size="12.5" font-weight="bold" fill="#ffffff">Switch1</text>
+  </g>
+  <!-- PCs rede B -->
+  <g>
+    <rect x="768" y="140" width="76" height="52" rx="7" class="pcg"/><text x="806" y="162" text-anchor="middle" class="lbl" font-size="13" font-weight="bold" fill="#1d2057">PC2</text><text x="806" y="180" text-anchor="middle" class="lbl" font-size="10.5" fill="#1d2057">.10</text>
+    <rect x="768" y="268" width="76" height="52" rx="7" class="pcg"/><text x="806" y="290" text-anchor="middle" class="lbl" font-size="13" font-weight="bold" fill="#1d2057">PC3</text><text x="806" y="308" text-anchor="middle" class="lbl" font-size="10.5" fill="#1d2057">.11</text>
+  </g>
+
+  <!-- cabos rede A -->
+  <g stroke="#2778c4" stroke-width="2.6" class="sk">
+    <path d="M132,166 q40,30 58,52"/>
+    <path d="M132,294 q40,-30 58,-52"/>
+    <path d="M290,228 q80,0 120,0"/>
+  </g>
+  <!-- cabos rede B -->
+  <g stroke="#2e7d52" stroke-width="2.6" class="sk">
+    <path d="M768,166 q-40,30 -58,52"/>
+    <path d="M768,294 q-40,-30 -58,-52"/>
+    <path d="M490,228 q80,0 120,0"/>
+  </g>
+</svg>
