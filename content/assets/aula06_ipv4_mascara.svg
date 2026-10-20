@@ -1,0 +1,54 @@
+<!-- BRIEF: Anatomia do endereco IPv4 + mascara. 192.168.10.10/24: os 4 octetos, a parte de REDE (azul, os bits que a mascara marca com 1) e a parte de HOST (verde, os bits 0). A barra /24 = 24 bits de rede. Tabela curta: /24, /26, /30 e quantos hosts. Estetica hand-drawn/Excalidraw, fundo transparente, halo off-white para o tema escuro. Paleta Uniube. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400" width="100%" role="img"
+     font-family="'Comic Sans MS','Comic Neue',cursive"
+     aria-label="Anatomia do endereco IPv4 192.168.10.10 barra 24: os primeiros tres octetos sao a rede, o ultimo e o host; a mascara 255.255.255.0 marca os bits de rede. Tabela com barra 24, 26 e 30 e o numero de hosts.">
+  <defs>
+    <style>
+      .sk   { stroke-linecap:round; stroke-linejoin:round; fill:none; }
+      .lbl  { font-family:'Comic Sans MS','Comic Neue',cursive; }
+      .mono { font-family:'JetBrains Mono','Consolas',monospace; }
+      text  { paint-order:stroke; stroke:#fafaf8; stroke-width:3px; stroke-linejoin:round; }
+      text[fill="#ffffff"] { stroke:none; }
+    </style>
+  </defs>
+
+  <text x="450" y="34" text-anchor="middle" class="lbl" font-size="22" font-weight="bold" fill="#1d2057">O endereço IPv4 tem duas partes: rede e host</text>
+  <path class="sk" d="M300,46 q75,7 150,3 q75,-4 150,2" stroke="#00aa9f" stroke-width="2.5"/>
+
+  <!-- endereco em 4 octetos. 3 de rede (azul), 1 de host (verde) -->
+  <g>
+    <rect x="80" y="96" width="150" height="56" rx="8" fill="#e4f0fb" stroke="#2778c4" stroke-width="2.6"/><text x="155" y="132" text-anchor="middle" class="mono" font-size="22" fill="#1d2057">192</text>
+    <rect x="236" y="96" width="150" height="56" rx="8" fill="#e4f0fb" stroke="#2778c4" stroke-width="2.6"/><text x="311" y="132" text-anchor="middle" class="mono" font-size="22" fill="#1d2057">168</text>
+    <rect x="392" y="96" width="150" height="56" rx="8" fill="#e4f0fb" stroke="#2778c4" stroke-width="2.6"/><text x="467" y="132" text-anchor="middle" class="mono" font-size="22" fill="#1d2057">10</text>
+    <rect x="548" y="96" width="150" height="56" rx="8" fill="#eaf5ee" stroke="#2e7d52" stroke-width="2.6"/><text x="623" y="132" text-anchor="middle" class="mono" font-size="22" fill="#1d2057">10</text>
+    <!-- /24 -->
+    <text x="712" y="132" class="mono" font-size="22" font-weight="bold" fill="#b1541b">/24</text>
+  </g>
+  <!-- chaves rede/host -->
+  <path class="sk" d="M80,164 q0,10 10,10 l222,0 q10,0 10,-10 M211,174 l0,12" stroke="#2778c4" stroke-width="2.2"/>
+  <text x="311" y="204" text-anchor="middle" class="lbl" font-size="15" font-weight="bold" fill="#2778c4">REDE — os 24 bits que a máscara marca</text>
+  <path class="sk" d="M548,164 q0,10 10,10 l130,0 q10,0 10,-10 M623,174 l0,12" stroke="#2e7d52" stroke-width="2.2"/>
+  <text x="623" y="204" text-anchor="middle" class="lbl" font-size="15" font-weight="bold" fill="#2e7d52">HOST</text>
+
+  <!-- mascara -->
+  <text x="80" y="246" class="lbl" font-size="14" fill="#1d2057">máscara /24 =</text>
+  <text x="212" y="246" class="mono" font-size="15" fill="#2778c4">255.255.255</text>
+  <text x="372" y="246" class="mono" font-size="15" fill="#2e7d52">.0</text>
+  <text x="430" y="246" class="lbl" font-size="13" fill="#1d2057">&#8594; três octetos "cheios" (rede), um "zerado" (host)</text>
+
+  <!-- tabela CIDR do lab -->
+  <g>
+    <path class="sk" d="M80,270 q360,-8 740,0 q5,56 0,100 q-360,8 -740,0 q-5,-50 0,-100 z" fill="#fafaf8" fill-opacity="0.04" stroke="#00aa9f" stroke-width="2"/>
+    <text x="150" y="296" text-anchor="middle" class="lbl" font-size="14" font-weight="bold" fill="#00aa9f">máscara</text>
+    <text x="400" y="296" text-anchor="middle" class="lbl" font-size="14" font-weight="bold" fill="#00aa9f">bits de host</text>
+    <text x="680" y="296" text-anchor="middle" class="lbl" font-size="14" font-weight="bold" fill="#00aa9f">hosts utilizáveis</text>
+    <line x1="100" y1="306" x2="800" y2="306" stroke="#c8ccdd" stroke-width="1.4" stroke-dasharray="3 4"/>
+    <g class="mono" font-size="15" fill="#1d2057" text-anchor="middle">
+      <text x="150" y="330">/24</text><text x="400" y="330">8</text><text x="680" y="330">254</text>
+      <text x="150" y="356">/26</text><text x="400" y="356">6</text><text x="680" y="356">62</text>
+    </g>
+    <text x="150" y="382" text-anchor="middle" class="mono" font-size="15" fill="#1d2057">/30</text>
+    <text x="400" y="382" text-anchor="middle" class="mono" font-size="15" fill="#1d2057">2</text>
+    <text x="680" y="382" text-anchor="middle" class="mono" font-size="15" fill="#1d2057">2 (ponto a ponto)</text>
+  </g>
+</svg>
