@@ -31,6 +31,9 @@ Ao final desta aula prática, o aluno deve ser capaz de:
 
 > **Contexto:** Na Aula 05 vimos como os pacotes viajam dentro de uma mesma rede. Hoje vamos cruzar fronteiras: dois grupos de máquinas em redes diferentes se comunicando via roteador.
 
+![[assets/aula06_ipv4_mascara.svg]]
+> *Figura 2: todo endereço IPv4 se divide em uma parte de **rede** e uma de **host** — a máscara (/24, /26, /30) é quem marca onde termina uma e começa a outra.*
+
 ---
 
 ## Antes de começar
@@ -53,13 +56,8 @@ Ao final desta aula prática, o aluno deve ser capaz de:
 
 **Topologia a montar:**
 
-```
-[PC0] ---+                          +--- [PC2]
-[PC1] ---+--- [Switch0] --- [R0] ---+--- [PC3]
-                         (Roteador)
-                         
-Rede A: 192.168.10.0/24        Rede B: 192.168.20.0/24
-```
+![[assets/aula06_topologia.svg]]
+> *Figura 1: a rede do laboratório — duas redes (A e B) separadas pelo roteador R0, cada uma com seu switch e seus dois PCs.*
 
 **Passos:**
 1. Abra o Packet Tracer → clique em **New** para criar um projeto em branco
