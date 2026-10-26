@@ -1,0 +1,56 @@
+<!-- BRIEF: modelo cliente-servidor HTTP. Cliente (navegador) à esquerda manda GET pela porta 80; servidor à direita responde com a pagina. Mostra a porta como "endereco do servico". Estetica hand-drawn/Excalidraw, halo off-white, fundo transparente, paleta Uniube. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 400" width="100%" role="img"
+     font-family="'Comic Sans MS','Comic Neue',cursive"
+     aria-label="Cliente navegador envia uma requisicao GET pela porta 80 ao servidor, que responde com a pagina web">
+  <defs>
+    <style>
+      .sk  { stroke-linecap:round; stroke-linejoin:round; fill:none; }
+      .lbl { font-family:'Comic Sans MS','Comic Neue',cursive; }
+      text { paint-order:stroke; stroke:#fafaf8; stroke-width:3px; stroke-linejoin:round; }
+      text[fill="#ffffff"] { stroke:none; }
+    </style>
+    <marker id="a-blue" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2778c4"/>
+    </marker>
+    <marker id="a-grn" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2e7d52"/>
+    </marker>
+  </defs>
+
+  <!-- TITULO -->
+  <text x="450" y="40" text-anchor="middle" class="lbl" font-size="24" font-weight="bold" fill="#1d2057">Cliente pede, servidor responde</text>
+  <path class="sk" d="M300,52 q75,7 150,3 q75,-4 150,2" stroke="#00aa9f" stroke-width="2.5"/>
+
+  <!-- CLIENTE -->
+  <g>
+    <rect x="70" y="150" width="170" height="100" rx="12" class="sk" fill="#e4f0fb" stroke="#2778c4" stroke-width="3.5"/>
+    <text x="155" y="188" text-anchor="middle" class="lbl" font-size="18" font-weight="bold" fill="#2778c4">Cliente</text>
+    <text x="155" y="212" text-anchor="middle" class="lbl" font-size="14" fill="#1d2057">navegador</text>
+    <text x="155" y="233" text-anchor="middle" class="lbl" font-size="13" fill="#1d2057">(no seu celular)</text>
+  </g>
+
+  <!-- SERVIDOR -->
+  <g>
+    <rect x="660" y="150" width="170" height="100" rx="12" class="sk" fill="#eaf5ee" stroke="#2e7d52" stroke-width="3.5"/>
+    <text x="745" y="188" text-anchor="middle" class="lbl" font-size="18" font-weight="bold" fill="#2e7d52">Servidor</text>
+    <text x="745" y="212" text-anchor="middle" class="lbl" font-size="14" fill="#1d2057">guarda o site</text>
+    <text x="745" y="233" text-anchor="middle" class="lbl" font-size="13" fill="#1d2057">porta 80 (HTTP)</text>
+  </g>
+
+  <!-- REQUISICAO (cliente -> servidor) -->
+  <g>
+    <path class="sk" d="M242,178 q210,-30 416,0" stroke="#2778c4" stroke-width="3.5" marker-end="url(#a-blue)"/>
+    <rect x="360" y="128" width="180" height="32" rx="9" fill="#e4f0fb" stroke="#2778c4" stroke-width="2"/>
+    <text x="450" y="150" text-anchor="middle" class="lbl" font-size="14" font-weight="bold" fill="#2778c4">GET / &#183; porta 80</text>
+  </g>
+
+  <!-- RESPOSTA (servidor -> cliente) -->
+  <g>
+    <path class="sk" d="M658,224 q-210,30 -416,0" stroke="#2e7d52" stroke-width="3.5" marker-end="url(#a-grn)"/>
+    <rect x="356" y="242" width="188" height="32" rx="9" fill="#eaf5ee" stroke="#2e7d52" stroke-width="2"/>
+    <text x="450" y="264" text-anchor="middle" class="lbl" font-size="14" font-weight="bold" fill="#2e7d52">a página (HTML)</text>
+  </g>
+
+  <!-- RODAPE -->
+  <text x="450" y="330" text-anchor="middle" class="lbl" font-size="15" fill="#1d2057">O IP leva até a máquina &#183; a porta leva até o serviço certo dentro dela</text>
+</svg>
