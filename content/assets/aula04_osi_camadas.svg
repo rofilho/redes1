@@ -1,0 +1,70 @@
+<!-- BRIEF: pilha OSI 7 camadas, com a 1 (Fisica) e a 2 (Enlace) destacadas. Mostra a fronteira: camada 1 = bit/sinal; camada 2 = quadro enderecado. Estetica hand-drawn/Excalidraw, halo off-white para sobreviver ao tema escuro, fundo transparente, paleta Uniube. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 540" width="100%" role="img"
+     font-family="'Comic Sans MS','Comic Neue',cursive"
+     aria-label="Pilha OSI de 7 camadas, com as camadas 1 (Fisica, unidade bit) e 2 (Enlace, unidade quadro) destacadas na base">
+  <defs>
+    <style>
+      .sk  { stroke-linecap:round; stroke-linejoin:round; fill:none; }
+      .lbl { font-family:'Comic Sans MS','Comic Neue',cursive; }
+      text { paint-order:stroke; stroke:#fafaf8; stroke-width:3px; stroke-linejoin:round; }
+      text[fill="#ffffff"] { stroke:none; }
+    </style>
+  </defs>
+
+  <!-- TITULO -->
+  <text x="450" y="40" text-anchor="middle" class="lbl" font-size="24" font-weight="bold" fill="#1d2057">Modelo OSI &#8212; o fundo da pilha</text>
+  <path class="sk" d="M300,52 q75,7 150,3 q75,-4 150,2" stroke="#00aa9f" stroke-width="2.5"/>
+
+  <!-- CAMADAS 7..3 (claras, contexto) -->
+  <g>
+    <rect x="250" y="70"  width="400" height="46" rx="10" class="sk" fill="#eef1f7" stroke="#9aa4bd" stroke-width="2"/>
+    <text x="276" y="99" class="lbl" font-size="16" fill="#1d2057">7 &#183; Aplicação</text>
+    <text x="628" y="99" text-anchor="end" class="lbl" font-size="13" fill="#6a7390">Mensagem</text>
+
+    <rect x="250" y="122" width="400" height="46" rx="10" class="sk" fill="#eef1f7" stroke="#9aa4bd" stroke-width="2"/>
+    <text x="276" y="151" class="lbl" font-size="16" fill="#1d2057">6 &#183; Apresentação</text>
+    <text x="628" y="151" text-anchor="end" class="lbl" font-size="13" fill="#6a7390">Mensagem</text>
+
+    <rect x="250" y="174" width="400" height="46" rx="10" class="sk" fill="#eef1f7" stroke="#9aa4bd" stroke-width="2"/>
+    <text x="276" y="203" class="lbl" font-size="16" fill="#1d2057">5 &#183; Sessão</text>
+    <text x="628" y="203" text-anchor="end" class="lbl" font-size="13" fill="#6a7390">Mensagem</text>
+
+    <rect x="250" y="226" width="400" height="46" rx="10" class="sk" fill="#eef1f7" stroke="#9aa4bd" stroke-width="2"/>
+    <text x="276" y="255" class="lbl" font-size="16" fill="#1d2057">4 &#183; Transporte</text>
+    <text x="628" y="255" text-anchor="end" class="lbl" font-size="13" fill="#6a7390">Segmento</text>
+
+    <rect x="250" y="278" width="400" height="46" rx="10" class="sk" fill="#eef1f7" stroke="#9aa4bd" stroke-width="2"/>
+    <text x="276" y="307" class="lbl" font-size="16" fill="#1d2057">3 &#183; Rede</text>
+    <text x="628" y="307" text-anchor="end" class="lbl" font-size="13" fill="#6a7390">Pacote &#183; IP</text>
+  </g>
+
+  <!-- CAMADA 2 (destaque verde) -->
+  <g>
+    <rect x="230" y="336" width="440" height="56" rx="12" class="sk" fill="#eaf5ee" stroke="#2e7d52" stroke-width="3.5"/>
+    <text x="256" y="362" class="lbl" font-size="18" font-weight="bold" fill="#2e7d52">2 &#183; Enlace de Dados</text>
+    <text x="256" y="382" class="lbl" font-size="13" fill="#1d2057">quadro + MAC + CRC + acesso ao meio</text>
+    <text x="648" y="370" text-anchor="end" class="lbl" font-size="15" font-weight="bold" fill="#2e7d52">Quadro</text>
+  </g>
+
+  <!-- CAMADA 1 (destaque azul) -->
+  <g>
+    <rect x="230" y="402" width="440" height="56" rx="12" class="sk" fill="#e4f0fb" stroke="#2778c4" stroke-width="3.5"/>
+    <text x="256" y="428" class="lbl" font-size="18" font-weight="bold" fill="#2778c4">1 &#183; Física</text>
+    <text x="256" y="448" class="lbl" font-size="13" fill="#1d2057">transmite bits brutos pelo meio (tensão, luz, rádio)</text>
+    <text x="648" y="436" text-anchor="end" class="lbl" font-size="15" font-weight="bold" fill="#2778c4">Bit</text>
+  </g>
+
+  <!-- FRONTEIRA / NOTA -->
+  <g>
+    <path class="sk" d="M90,336 q-10,60 0,122" stroke="#b1541b" stroke-width="2.5"/>
+    <text x="80" y="360" text-anchor="middle" class="lbl" font-size="13" font-weight="bold" fill="#b1541b">aqui</text>
+    <text x="80" y="378" text-anchor="middle" class="lbl" font-size="13" font-weight="bold" fill="#b1541b">mora</text>
+    <text x="80" y="396" text-anchor="middle" class="lbl" font-size="13" font-weight="bold" fill="#b1541b">a</text>
+    <text x="80" y="414" text-anchor="middle" class="lbl" font-size="13" font-weight="bold" fill="#b1541b">aula</text>
+    <text x="80" y="432" text-anchor="middle" class="lbl" font-size="13" font-weight="bold" fill="#b1541b">de</text>
+    <text x="80" y="450" text-anchor="middle" class="lbl" font-size="13" font-weight="bold" fill="#b1541b">hoje</text>
+  </g>
+
+  <!-- RODAPE -->
+  <text x="450" y="500" text-anchor="middle" class="lbl" font-size="15" fill="#1d2057">A física põe o bit no meio &#183; a de enlace o endereça e confere &#8212; dois problemas, duas camadas</text>
+</svg>

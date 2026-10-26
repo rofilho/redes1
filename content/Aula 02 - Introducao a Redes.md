@@ -2,16 +2,16 @@
 title: "Aula 02 — Introdução a Redes de Computadores"
 date: 2026-08-03
 publicar: true
-tags: [redes, lan, wan, tcp-ip]
+tags: [redes, {{PERIODO}}, aula02, lan, wan, tcp-ip]
 ---
 
 <div class="au-leitura" data-aula="s02">
 
 # Aula 02 — Introdução a Redes de Computadores
 
-**Disciplina:** 49304 — Redes de Computadores I · Sistemas de Informação — Uniube<br>
-**Professor:** Romualdo Mathias Filho<br>
-**Semana:** 2 · Semana de 03/08/2026 · `[CONFIRMAR sala]` · 📘 Teórica (75 min)<br>
+**Disciplina:** {{CODIGO}} — Redes de Computadores I · Sistemas de Informação — Uniube<br>
+**Professor:** Romualdo Mathias Filho · **romualdo.filho@uniube.br**<br>
+**Período:** {{PERIODO}} · 📘 Teórica (75 min)<br>
 **Página de referência:** [Plano de Ensino e Contrato](./Plano-de-Ensino-e-Contrato)
 
 ---
@@ -57,10 +57,10 @@ Uma **rede de computadores** é um conjunto de dispositivos computacionais (host
 
 No cotidiano brasileiro, as redes sustentam sistemas essenciais:
 
-- **Redes domésticas (Wi-Fi):** conectam smartphones, computadores, consoles e Smart TVs de forma integrada.
-- **Redes corporativas e bancárias:** interligam agências, caixas eletrônicos e servidores centrais para processar transações em tempo real.
-- **Aplicativos distribuídos:** WhatsApp, Zoom e iFood operam sobre redes de milhares de servidores replicados geograficamente.
-- **Ecossistemas de pagamento:** o processamento instantâneo do Pix depende de uma malha robusta de comunicação entre o Banco Central e os bancos comerciais.
+1. **Redes domésticas (Wi-Fi):** conectam smartphones, computadores, consoles e Smart TVs de forma integrada.
+2. **Redes corporativas e bancárias:** interligam agências, caixas eletrônicos e servidores centrais para processar transações em tempo real.
+3. **Aplicativos distribuídos:** WhatsApp, Zoom e iFood operam sobre redes de milhares de servidores replicados geograficamente.
+4. **Ecossistemas de pagamento:** o processamento instantâneo do Pix depende de uma malha robusta de comunicação entre o Banco Central e os bancos comerciais.
 
 ---
 
@@ -94,18 +94,21 @@ As redes são classificadas pelo alcance físico e pela área geográfica que co
 
 ### 3.1 — Componentes físicos (hardware)
 
-- **Hosts (dispositivos finais):** computadores, celulares, servidores de arquivos, câmeras IP e impressoras.
-- **Dispositivos intermediários:**
-  - *Switches (comutadores):* conectam dispositivos dentro de uma mesma LAN (camada 2).
-  - *Roteadores:* interconectam redes diferentes e determinam o melhor caminho para os pacotes (camada 3).
-- **Meios de transmissão:** cabo metálico par trançado (UTP Cat6), fibra óptica e o ar (rádio em 2,4 GHz e 5 GHz).
+| Componente | Papel | Camada |
+| :-- | :-- | :-- |
+| **Host** (dispositivo final) | origina ou consome dados: computador, celular, servidor, câmera IP, impressora | — |
+| **Switch** (comutador) | conecta dispositivos dentro de uma mesma LAN | 2 (enlace) |
+| **Roteador** | interconecta redes diferentes e escolhe o melhor caminho para os pacotes | 3 (rede) |
+| **Meio de transmissão** | par trançado (UTP Cat6), fibra óptica, ar (rádio 2,4/5 GHz) | 1 (física) |
 
 ### 3.2 — Componentes lógicos (protocolos)
 
 Dois protocolos da camada de transporte exemplificam a troca entre confiabilidade e velocidade:
 
-- **TCP** *(Transmission Control Protocol):* orientado à conexão. Garante a entrega ordenada de todos os bytes, com confirmação (ACK), ao custo de mais overhead. Usado no HTTP e no e-mail.
-- **UDP** *(User Datagram Protocol):* não orientado à conexão. Envia os pacotes rapidamente, sem checar se chegaram. Usado em streaming de vídeo e jogos online.
+| Protocolo | Como entrega | Custo | Onde se usa |
+| :-- | :-- | :-- | :-- |
+| **TCP** (Transmission Control Protocol) | orientado à conexão; entrega ordenada e confirmada (ACK) | mais overhead | HTTP, e-mail |
+| **UDP** (User Datagram Protocol) | sem conexão; envia rápido, sem checar se chegou | sem garantia | streaming de vídeo, jogos online |
 
 > [!NOTE] 💼 Pergunta de entrevista
 > *"Se o TCP garante a entrega e o UDP não, por que alguém escolheria UDP?"* — Porque a garantia custa tempo. Retransmitir um pacote de vídeo que já passou não adianta nada: quando a retransmissão chegar, aquele quadro já não é mais o quadro atual. Em tempo real, chegar tarde e chegar errado são a mesma coisa.
@@ -161,7 +164,7 @@ Resposta de 142.250.78.238: bytes=32 tempo=11ms TTL=118</div>
 > [!WARNING] ⚠️ Gotcha
 > `ping` que falha **não** significa host fora do ar. Muitos servidores e firewalls corporativos bloqueiam ICMP por política. O `ping` prova que respondeu; o silêncio dele não prova o contrário.
 
----
+<hr class="au-fim-aula">
 
 <div class="au-resumo">
 <b>Resumo da aula</b>
@@ -207,3 +210,41 @@ Resposta de 142.250.78.238: bytes=32 tempo=11ms TTL=118</div>
 </div>
 
 </div>
+
+%%
+BANCO DE QUESTÕES — Aula 02 (Introdução a Redes de Computadores)
+Uso interno do professor. 4 questões de múltipla escolha com gabarito.
+
+1) Uma empresa interliga, por um canal criptografado sobre a Internet, a filial de Uberlândia à
+   matriz de São Paulo. Essa conexão é classificada como qual tipo de rede?
+   a) LAN, porque conecta computadores de um mesmo trabalho.
+   b) MAN, porque cobre duas cidades.
+   c) WAN, porque liga pontos em cidades diferentes.
+   d) VPN — e VPN não é um tamanho de rede, é um túnel lógico que roda sobre a WAN.
+   GABARITO: d)  —  alcance e privacidade são eixos diferentes; a VPN trafega sobre a WAN (Internet).
+
+2) Qual dispositivo intermediário interconecta redes DIFERENTES e escolhe o melhor caminho para
+   os pacotes, operando na camada 3?
+   a) Switch (comutador).
+   b) Roteador.
+   c) Hub.
+   d) Placa de rede (NIC).
+   GABARITO: b)  —  o roteador opera na camada 3 (rede); o switch conecta dispositivos dentro de uma mesma LAN (camada 2).
+
+3) Por que o streaming de vídeo ao vivo costuma usar UDP (User Datagram Protocol) em vez de TCP
+   (Transmission Control Protocol)?
+   a) Porque o UDP garante a entrega ordenada de todos os pacotes.
+   b) Porque retransmitir um quadro de vídeo já vencido não adianta: em tempo real, chegar tarde
+      é o mesmo que chegar errado.
+   c) Porque o UDP é criptografado e o TCP não.
+   d) Porque o TCP não funciona na Internet.
+   GABARITO: b)  —  a garantia do TCP custa tempo; em tempo real, a retransmissão chega tarde demais para ser útil.
+
+4) O comando `ping google.com` não recebe resposta. O que se pode concluir com segurança?
+   a) O host google.com está fora do ar.
+   b) A Internet está desconectada.
+   c) Nada com certeza — muitos servidores e firewalls bloqueiam ICMP por política; o silêncio do
+      ping não prova que o host está fora.
+   d) O DNS falhou obrigatoriamente.
+   GABARITO: c)  —  o ping prova que respondeu; o silêncio dele não prova o contrário.
+%%
