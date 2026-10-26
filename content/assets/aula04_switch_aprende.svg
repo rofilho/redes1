@@ -1,0 +1,72 @@
+<!-- BRIEF: o switch aprende MAC->porta. Switch central com 4 portas ligadas a PC-A, PC-B, PC-C, Servidor. Tabela CAM ao lado mostrando porta->MAC. Seta: quadro de PC-A encaminhado SO para a porta do destino conhecido, nao inundado. Contraste com o hub (que inundaria). Estetica hand-drawn/Excalidraw, halo off-white, fundo transparente, paleta Uniube. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" width="100%" role="img"
+     font-family="'Comic Sans MS','Comic Neue',cursive"
+     aria-label="Switch com quatro portas ligadas a PC-A, PC-B, PC-C e Servidor; tabela CAM associa porta a MAC; o quadro de PC-A segue so para a porta do destino conhecido, sem inundar">
+  <defs>
+    <style>
+      .sk  { stroke-linecap:round; stroke-linejoin:round; fill:none; }
+      .lbl { font-family:'Comic Sans MS','Comic Neue',cursive; }
+      text { paint-order:stroke; stroke:#fafaf8; stroke-width:3px; stroke-linejoin:round; }
+      text[fill="#ffffff"] { stroke:none; }
+    </style>
+    <marker id="s-grn" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2e7d52"/>
+    </marker>
+  </defs>
+
+  <!-- TITULO -->
+  <text x="450" y="40" text-anchor="middle" class="lbl" font-size="24" font-weight="bold" fill="#1d2057">O switch aprende quem está em cada porta</text>
+  <path class="sk" d="M290,52 q80,7 160,3 q80,-4 160,2" stroke="#00aa9f" stroke-width="2.5"/>
+
+  <!-- SWITCH central -->
+  <g>
+    <rect x="300" y="210" width="200" height="70" rx="12" class="sk" fill="#e4f0fb" stroke="#1d2057" stroke-width="3.5"/>
+    <text x="400" y="252" text-anchor="middle" class="lbl" font-size="19" font-weight="bold" fill="#1d2057">SWITCH (camada 2)</text>
+  </g>
+
+  <!-- PC-A (porta 1, topo esq) -->
+  <g>
+    <rect x="70" y="100" width="92" height="50" rx="8" class="sk" fill="#eaf5ee" stroke="#2e7d52" stroke-width="2.5"/>
+    <text x="116" y="131" text-anchor="middle" class="lbl" font-size="15" font-weight="bold" fill="#2e7d52">PC-A</text>
+    <path class="sk" d="M162,138 q110,50 150,78" stroke="#2e7d52" stroke-width="3.5" marker-end="url(#s-grn)"/>
+    <text x="210" y="168" class="lbl" font-size="12" fill="#2e7d52">porta 1</text>
+  </g>
+  <!-- PC-B (porta 2, meio-esq) -->
+  <g>
+    <rect x="96" y="214" width="92" height="50" rx="8" class="sk" fill="#eef1f7" stroke="#9aa4bd" stroke-width="2.5"/>
+    <text x="142" y="245" text-anchor="middle" class="lbl" font-size="15" fill="#1d2057">PC-B</text>
+    <path class="sk" d="M188,244 q70,6 118,2" stroke="#9aa4bd" stroke-width="2.5"/>
+    <text x="236" y="230" class="lbl" font-size="12" fill="#6a7390">porta 2</text>
+  </g>
+  <!-- PC-C (porta 3, topo dir) -->
+  <g>
+    <rect x="636" y="100" width="92" height="50" rx="8" class="sk" fill="#eef1f7" stroke="#9aa4bd" stroke-width="2.5"/>
+    <text x="682" y="131" text-anchor="middle" class="lbl" font-size="15" fill="#1d2057">PC-C</text>
+    <path class="sk" d="M636,138 q-110,50 -150,78" stroke="#9aa4bd" stroke-width="2.5"/>
+    <text x="560" y="168" class="lbl" font-size="12" fill="#6a7390">porta 3</text>
+  </g>
+  <!-- Servidor (porta 4, baixo dir) = DESTINO -->
+  <g>
+    <rect x="648" y="356" width="100" height="50" rx="8" class="sk" fill="#eaf5ee" stroke="#2e7d52" stroke-width="3"/>
+    <text x="698" y="381" text-anchor="middle" class="lbl" font-size="14" font-weight="bold" fill="#2e7d52">Servidor</text>
+    <text x="698" y="397" text-anchor="middle" class="lbl" font-size="11" fill="#1d2057">destino</text>
+    <path class="sk" d="M648,366 q-100,-34 -150,-66" stroke="#2e7d52" stroke-width="3.5" marker-end="url(#s-grn)"/>
+    <text x="610" y="320" class="lbl" font-size="12" fill="#2e7d52">porta 4</text>
+  </g>
+
+  <!-- TABELA CAM (menor e à esquerda, longe da seta da porta 4) -->
+  <g>
+    <rect x="70" y="300" width="230" height="124" rx="10" class="sk" fill="#fffdf7" stroke="#b1541b" stroke-width="2.5"/>
+    <text x="185" y="326" text-anchor="middle" class="lbl" font-size="14" font-weight="bold" fill="#b1541b">Tabela MAC (CAM)</text>
+    <line x1="86" y1="337" x2="284" y2="337" class="sk" stroke="#b1541b" stroke-width="1.5"/>
+    <text x="96" y="361" class="lbl" font-size="13" fill="#1d2057">porta 1  →  MAC-A</text>
+    <text x="96" y="385" class="lbl" font-size="13" fill="#1d2057">porta 3  →  MAC-C</text>
+    <text x="96" y="409" class="lbl" font-size="13" font-weight="bold" fill="#2e7d52">porta 4  →  MAC-Serv</text>
+  </g>
+
+  <!-- NOTA de contraste -->
+  <g>
+    <text x="450" y="464" text-anchor="middle" class="lbl" font-size="14" font-weight="bold" fill="#2e7d52">Destino conhecido → encaminha só para a porta certa (unicast)</text>
+    <text x="450" y="486" text-anchor="middle" class="lbl" font-size="13" fill="#b1541b">O hub (camada 1) mandaria para TODAS as portas. O switch, não.</text>
+  </g>
+</svg>
