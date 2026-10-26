@@ -2,16 +2,16 @@
 title: "Aula 03 — Topologias de Rede e Meios de Transmissão"
 date: 2026-08-10
 publicar: true
-tags: [redes, topologia, meios-transmissao, estrela, fibra-optica]
+tags: [redes, {{PERIODO}}, aula03, topologia, meios-transmissao, estrela, fibra-optica]
 ---
 
 <div class="au-leitura" data-aula="s03">
 
 # Aula 03 — Topologias de Rede e Meios de Transmissão
 
-**Disciplina:** 49304 — Redes de Computadores I · Sistemas de Informação — Uniube<br>
-**Professor:** Romualdo Mathias Filho<br>
-**Semana:** 3 · Semana de 10/08/2026 · `[CONFIRMAR sala]` · 📘 Teórica (75 min)<br>
+**Disciplina:** {{CODIGO}} — Redes de Computadores I · Sistemas de Informação — Uniube<br>
+**Professor:** Romualdo Mathias Filho · **romualdo.filho@uniube.br**<br>
+**Período:** {{PERIODO}} · 📘 Teórica (75 min)<br>
 **Página de referência:** [Plano de Ensino e Contrato](./Plano-de-Ensino-e-Contrato)
 
 ---
@@ -165,7 +165,7 @@ Transmite dados como pulsos de luz, não como sinal elétrico. Núcleo de vidro 
 <figcaption class="au-legenda">Refração interna e propagação da luz na fibra óptica. Fonte: Tanenbaum (2021).</figcaption>
 </figure>
 
-> [!WARNING] ⚠️ Gotcha
+> [!WARNING] ⚠️ Cuidado
 > O limite de **100 metros por segmento** do par trançado não é sugestão de fabricante: é o que o padrão Ethernet garante para o sinal chegar íntegro. Passar de 100 m "porque funcionou no teste" produz a pior classe de defeito de rede — o que só aparece sob carga, meses depois, e ninguém associa ao cabo.
 
 ---
@@ -201,7 +201,7 @@ Três cenários no projetor — um galpão industrial com cabos de alta tensão 
 
 ---
 
-## 5. Prática: medir o meio [Hands-On ⏳ 10 min]
+## 5. Prática: medir o meio [Prática ⏳ 10 min]
 
 <div class="au-pratica">
 <b>Prática — 10 min, em duplas</b>
@@ -217,7 +217,7 @@ Três cenários no projetor — um galpão industrial com cabos de alta tensão 
 > [!TIP] 💡 Dica de produção
 > A latência que o teste de velocidade mostra é quase toda **distância**, não meio. Trocar Wi-Fi por cabo melhora muito a estabilidade e a taxa, mas quase nada o RTT até um servidor em outro estado — a luz na fibra já está perto do limite físico. Saber separar as duas coisas evita meia dúzia de diagnósticos errados por semestre.
 
----
+<hr class="au-fim-aula">
 
 <div class="au-resumo">
 <b>Resumo da aula</b>
