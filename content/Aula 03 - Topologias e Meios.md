@@ -2,16 +2,16 @@
 title: "Aula 03 — Topologias de Rede e Meios de Transmissão"
 date: 2026-08-10
 publicar: true
-tags: [redes, topologia, meios-transmissao, estrela, fibra-optica]
+tags: [redes, {{PERIODO}}, aula03, topologia, meios-transmissao, estrela, fibra-optica]
 ---
 
 <div class="au-leitura" data-aula="s03">
 
 # Aula 03 — Topologias de Rede e Meios de Transmissão
 
-**Disciplina:** 49304 — Redes de Computadores I · Sistemas de Informação — Uniube<br>
-**Professor:** Romualdo Mathias Filho<br>
-**Semana:** 3 · Semana de 10/08/2026 · `[CONFIRMAR sala]` · 📘 Teórica (75 min)<br>
+**Disciplina:** {{CODIGO}} — Redes de Computadores I · Sistemas de Informação — Uniube<br>
+**Professor:** Romualdo Mathias Filho · **romualdo.filho@uniube.br**<br>
+**Período:** {{PERIODO}} · 📘 Teórica (75 min)<br>
 **Página de referência:** [Plano de Ensino e Contrato](./Plano-de-Ensino-e-Contrato)
 
 ---
@@ -165,7 +165,7 @@ Transmite dados como pulsos de luz, não como sinal elétrico. Núcleo de vidro 
 <figcaption class="au-legenda">Refração interna e propagação da luz na fibra óptica. Fonte: Tanenbaum (2021).</figcaption>
 </figure>
 
-> [!WARNING] ⚠️ Gotcha
+> [!WARNING] ⚠️ Cuidado
 > O limite de **100 metros por segmento** do par trançado não é sugestão de fabricante: é o que o padrão Ethernet garante para o sinal chegar íntegro. Passar de 100 m "porque funcionou no teste" produz a pior classe de defeito de rede — o que só aparece sob carga, meses depois, e ninguém associa ao cabo.
 
 ---
@@ -201,7 +201,7 @@ Três cenários no projetor — um galpão industrial com cabos de alta tensão 
 
 ---
 
-## 5. Prática: medir o meio [Hands-On ⏳ 10 min]
+## 5. Prática: medir o meio [Prática ⏳ 10 min]
 
 <div class="au-pratica">
 <b>Prática — 10 min, em duplas</b>
@@ -217,7 +217,7 @@ Três cenários no projetor — um galpão industrial com cabos de alta tensão 
 > [!TIP] 💡 Dica de produção
 > A latência que o teste de velocidade mostra é quase toda **distância**, não meio. Trocar Wi-Fi por cabo melhora muito a estabilidade e a taxa, mas quase nada o RTT até um servidor em outro estado — a luz na fibra já está perto do limite físico. Saber separar as duas coisas evita meia dúzia de diagnósticos errados por semestre.
 
----
+<hr class="au-fim-aula">
 
 <div class="au-resumo">
 <b>Resumo da aula</b>
@@ -267,3 +267,39 @@ Três cenários no projetor — um galpão industrial com cabos de alta tensão 
 </div>
 
 </div>
+
+%%
+BANCO DE QUESTÕES — Aula 03 (Topologias de Rede e Meios de Transmissão)
+Uso interno do professor. 4 questões de múltipla escolha com gabarito.
+
+1) Numa rede cabeada fisicamente em estrela ligada a um HUB, qual é a topologia LÓGICA?
+   a) Estrela, porque os cabos saem de um ponto central.
+   b) Barramento, porque o hub repete o sinal em todas as portas e todos ouvem todos (com colisões).
+   c) Anel, porque o sinal circula de porta em porta.
+   d) Malha, porque há vários caminhos.
+   GABARITO: b)  —  física e lógica são eixos diferentes; o hub faz a estrela física se comportar como barramento lógico. Foi o switch que separou de fato as duas.
+
+2) Por que praticamente nenhuma LAN corporativa usa topologia em malha completa, apesar de ela ser
+   a mais tolerante a falhas?
+   a) Porque a malha não detecta falhas.
+   b) Porque o custo de cabeamento cresce com o quadrado do número de nós (100 hosts → 4.950 enlaces).
+   c) Porque a malha é mais lenta que a estrela.
+   d) Porque switches não suportam malha.
+   GABARITO: b)  —  a estrela troca tolerância por viabilidade; a redundância volta só entre switches, onde compensa.
+
+3) Um galpão industrial tem motores e cabos de alta tensão nas canaletas. Qual meio de transmissão
+   é o mais adequado para o enlace de dados que passa por ali, e por quê?
+   a) Par trançado UTP, por ser barato.
+   b) Coaxial, por ser rígido.
+   c) Fibra óptica, porque não conduz eletricidade e é imune a interferência eletromagnética.
+   d) Wi-Fi, porque dispensa cabos.
+   GABARITO: c)  —  a fibra transmite luz, não sinal elétrico, logo não sofre interferência de motores nem de cabos de energia.
+
+4) O limite de 100 metros por segmento do par trançado é:
+   a) Uma sugestão do fabricante que pode ser ignorada se o teste passar.
+   b) O que o padrão Ethernet garante para o sinal chegar íntegro — ultrapassar produz defeito que
+      só aparece sob carga, meses depois.
+   c) Válido apenas para CAT5e, não para CAT6.
+   d) O alcance máximo da fibra óptica.
+   GABARITO: b)  —  passar de 100 m "porque funcionou no teste" gera a pior classe de defeito de rede.
+%%
