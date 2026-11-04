@@ -1,0 +1,83 @@
+<!-- BRIEF: consolidacao de servidores. Esquerda: 30 servidores fisicos pequenos, cada um com 1 servico (grade 6x5), risco de custo alto. Seta grande "consolida". Direita: 3 servidores fisicos grandes, cada um com 10 VMs dentro (grade 2x5 pequenas). Rodape: mesmo isolamento, menos hardware; cuidado: um host que cai derruba 10. Hand-drawn, halo off-white, fundo transparente, paleta Uniube. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 460" width="100%" role="img"
+     font-family="'Comic Sans MS','Comic Neue',cursive"
+     aria-label="Consolidação: 30 servidores físicos com um serviço cada viram 3 servidores físicos com 10 máquinas virtuais cada, mantendo o isolamento">
+  <defs>
+    <style>
+      .sk  { stroke-linecap:round; stroke-linejoin:round; fill:none; }
+      .lbl { font-family:'Comic Sans MS','Comic Neue',cursive; }
+      text { paint-order:stroke; stroke:#fafaf8; stroke-width:3px; stroke-linejoin:round; }
+      text[fill="#ffffff"] { stroke:none; }
+    </style>
+    <marker id="c-grn9" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#2e7d52"/>
+    </marker>
+  </defs>
+
+  <!-- TITULO -->
+  <text x="450" y="38" text-anchor="middle" class="lbl" font-size="24" font-weight="bold" fill="#1d2057">30 servidores viram 3 — o isolamento fica</text>
+  <path class="sk" d="M290,50 q80,7 160,3 q80,-4 160,2" stroke="#00aa9f" stroke-width="2.5"/>
+
+  <!-- LADO ESQUERDO: 30 servidores fisicos -->
+  <g>
+    <text x="180" y="82" text-anchor="middle" class="lbl" font-size="15" font-weight="bold" fill="#b1541b">antes: 1 serviço por máquina</text>
+    <rect x="40" y="96" width="280" height="280" rx="12" class="sk" fill="#fbeee6" stroke="#b1541b" stroke-width="2" stroke-dasharray="7 5"/>
+    <!-- grade 6x5 de mini servidores -->
+    <g fill="#ffffff" stroke="#b1541b" stroke-width="1.5">
+      <rect x="56" y="112" width="38" height="42" rx="4" class="sk"/><rect x="102" y="112" width="38" height="42" rx="4" class="sk"/><rect x="148" y="112" width="38" height="42" rx="4" class="sk"/><rect x="194" y="112" width="38" height="42" rx="4" class="sk"/><rect x="240" y="112" width="38" height="42" rx="4" class="sk"/>
+      <rect x="56" y="162" width="38" height="42" rx="4" class="sk"/><rect x="102" y="162" width="38" height="42" rx="4" class="sk"/><rect x="148" y="162" width="38" height="42" rx="4" class="sk"/><rect x="194" y="162" width="38" height="42" rx="4" class="sk"/><rect x="240" y="162" width="38" height="42" rx="4" class="sk"/>
+      <rect x="56" y="212" width="38" height="42" rx="4" class="sk"/><rect x="102" y="212" width="38" height="42" rx="4" class="sk"/><rect x="148" y="212" width="38" height="42" rx="4" class="sk"/><rect x="194" y="212" width="38" height="42" rx="4" class="sk"/><rect x="240" y="212" width="38" height="42" rx="4" class="sk"/>
+      <rect x="56" y="262" width="38" height="42" rx="4" class="sk"/><rect x="102" y="262" width="38" height="42" rx="4" class="sk"/><rect x="148" y="262" width="38" height="42" rx="4" class="sk"/><rect x="194" y="262" width="38" height="42" rx="4" class="sk"/><rect x="240" y="262" width="38" height="42" rx="4" class="sk"/>
+      <rect x="56" y="312" width="38" height="42" rx="4" class="sk"/><rect x="102" y="312" width="38" height="42" rx="4" class="sk"/><rect x="148" y="312" width="38" height="42" rx="4" class="sk"/><rect x="194" y="312" width="38" height="42" rx="4" class="sk"/><rect x="240" y="312" width="38" height="42" rx="4" class="sk"/>
+    </g>
+    <text x="180" y="392" text-anchor="middle" class="lbl" font-size="14" font-weight="bold" fill="#b1541b">30 servidores físicos</text>
+  </g>
+
+  <!-- SETA CONSOLIDA -->
+  <g>
+    <path class="sk" d="M332,236 q60,-8 118,0" stroke="#2e7d52" stroke-width="4" marker-end="url(#c-grn9)"/>
+    <text x="392" y="212" text-anchor="middle" class="lbl" font-size="15" font-weight="bold" fill="#2e7d52">consolida</text>
+  </g>
+
+  <!-- LADO DIREITO: 3 hosts com 10 VMs cada -->
+  <g>
+    <text x="680" y="82" text-anchor="middle" class="lbl" font-size="15" font-weight="bold" fill="#2e7d52">depois: VMs em 3 hosts</text>
+    <!-- host 1 -->
+    <rect x="478" y="96" width="128" height="268" rx="12" class="sk" fill="#eaf5ee" stroke="#2e7d52" stroke-width="2.5"/>
+    <text x="542" y="120" text-anchor="middle" class="lbl" font-size="13" font-weight="bold" fill="#2e7d52">host 1</text>
+    <g fill="#ffffff" stroke="#2e7d52" stroke-width="1.2">
+      <rect x="492" y="132" width="44" height="20" rx="3" class="sk"/><rect x="544" y="132" width="44" height="20" rx="3" class="sk"/>
+      <rect x="492" y="158" width="44" height="20" rx="3" class="sk"/><rect x="544" y="158" width="44" height="20" rx="3" class="sk"/>
+      <rect x="492" y="184" width="44" height="20" rx="3" class="sk"/><rect x="544" y="184" width="44" height="20" rx="3" class="sk"/>
+      <rect x="492" y="210" width="44" height="20" rx="3" class="sk"/><rect x="544" y="210" width="44" height="20" rx="3" class="sk"/>
+      <rect x="492" y="236" width="44" height="20" rx="3" class="sk"/><rect x="544" y="236" width="44" height="20" rx="3" class="sk"/>
+    </g>
+    <text x="542" y="290" text-anchor="middle" class="lbl" font-size="12" fill="#1d2057">10 VMs</text>
+    <!-- host 2 -->
+    <rect x="618" y="96" width="128" height="268" rx="12" class="sk" fill="#eaf5ee" stroke="#2e7d52" stroke-width="2.5"/>
+    <text x="682" y="120" text-anchor="middle" class="lbl" font-size="13" font-weight="bold" fill="#2e7d52">host 2</text>
+    <g fill="#ffffff" stroke="#2e7d52" stroke-width="1.2">
+      <rect x="632" y="132" width="44" height="20" rx="3" class="sk"/><rect x="684" y="132" width="44" height="20" rx="3" class="sk"/>
+      <rect x="632" y="158" width="44" height="20" rx="3" class="sk"/><rect x="684" y="158" width="44" height="20" rx="3" class="sk"/>
+      <rect x="632" y="184" width="44" height="20" rx="3" class="sk"/><rect x="684" y="184" width="44" height="20" rx="3" class="sk"/>
+      <rect x="632" y="210" width="44" height="20" rx="3" class="sk"/><rect x="684" y="210" width="44" height="20" rx="3" class="sk"/>
+      <rect x="632" y="236" width="44" height="20" rx="3" class="sk"/><rect x="684" y="236" width="44" height="20" rx="3" class="sk"/>
+    </g>
+    <text x="682" y="290" text-anchor="middle" class="lbl" font-size="12" fill="#1d2057">10 VMs</text>
+    <!-- host 3 -->
+    <rect x="758" y="96" width="128" height="268" rx="12" class="sk" fill="#eaf5ee" stroke="#2e7d52" stroke-width="2.5"/>
+    <text x="822" y="120" text-anchor="middle" class="lbl" font-size="13" font-weight="bold" fill="#2e7d52">host 3</text>
+    <g fill="#ffffff" stroke="#2e7d52" stroke-width="1.2">
+      <rect x="772" y="132" width="44" height="20" rx="3" class="sk"/><rect x="824" y="132" width="44" height="20" rx="3" class="sk"/>
+      <rect x="772" y="158" width="44" height="20" rx="3" class="sk"/><rect x="824" y="158" width="44" height="20" rx="3" class="sk"/>
+      <rect x="772" y="184" width="44" height="20" rx="3" class="sk"/><rect x="824" y="184" width="44" height="20" rx="3" class="sk"/>
+      <rect x="772" y="210" width="44" height="20" rx="3" class="sk"/><rect x="824" y="210" width="44" height="20" rx="3" class="sk"/>
+      <rect x="772" y="236" width="44" height="20" rx="3" class="sk"/><rect x="824" y="236" width="44" height="20" rx="3" class="sk"/>
+    </g>
+    <text x="822" y="290" text-anchor="middle" class="lbl" font-size="12" fill="#1d2057">10 VMs</text>
+    <text x="682" y="392" text-anchor="middle" class="lbl" font-size="14" font-weight="bold" fill="#2e7d52">3 servidores físicos</text>
+  </g>
+
+  <!-- RODAPE -->
+  <text x="450" y="430" text-anchor="middle" class="lbl" font-size="14" fill="#1d2057">mesmo isolamento, menos hardware &#8212; <tspan font-weight="bold" fill="#b1541b">cuidado:</tspan> um host que cai derruba as 10 VMs dele</text>
+</svg>
