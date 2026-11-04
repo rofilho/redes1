@@ -1,395 +1,332 @@
 ---
-disciplina: Redes de Computadores I
-codigo: "REDES-01"
-aula: 9
-titulo: "Redes Virtuais — VMs, ISOs e Hyper-V"
-tipo: pratica
-semana: 9
-data: 2026-05-19
-status: publicado
-tags:
-  - redes
-  - hyper-v
-  - virtualizacao
-  - vswitch
-  - nat
-  - segmentacao
-  - vm
+title: "Aula 09 — Redes Virtuais: VMs, ISOs e Hyper-V"
+date: 2026-11-04
 publicar: true
+tags: [redes, {{PERIODO}}, aula09, virtualizacao, hipervisor, hyper-v, vm, iso, vhd, switch-virtual]
 ---
 
-# 🌐 Aula 09: Redes Virtuais — VMs, ISOs e Hyper-V
-> [!WARNING] ⚠️ Material de referência — confira a semana no calendário
-> Esta página vem de uma oferta anterior da disciplina e continua no ar porque o conteúdo serve para estudo. **A numeração dela pode não corresponder à semana do calendário de 2026-2** — o calendário que vale é o do [Plano de Ensino e Contrato](./Plano-de-Ensino-e-Contrato). Se ela pedir uma ferramenta antes da semana em que o plano a introduz, siga o plano.
+<div class="au-leitura" data-aula="s09">
 
-**Disciplina:** Redes de Computadores I<br>
-**Curso:** Sistemas de Informação — Uniube<br>
-**Semana:** 9<br>
-**Professor:** Romualdo Mathias Filho<br>
-**Tipo:** 🔬 Teórica + Prática (Laboratório)<br>
-**Tópicos:** Virtualização, Hypervisor, Virtual Switches (Externo/Interno/Privado), NAT, Bridging, ISOs, Segmentação de Rede Virtual.
+# 🖥️ Aula 09 — Redes Virtuais: VMs, ISOs e Hyper-V
 
----
-
-> 💬 *"Redes virtuais não são uma simulação da realidade — elas são a realidade dos datacenters modernos. Toda cloud pública (AWS, Azure, GCP) é construída sobre exatamente os mesmos princípios que você aprenderá hoje."*
+**Disciplina:** {{CODIGO}} — Redes de Computadores I · Sistemas de Informação — Uniube<br>
+**Professor:** Romualdo Mathias Filho · **romualdo.filho@uniube.br**<br>
+**Período:** {{PERIODO}} · 📘 Teórica (75 min) · turma conjunta · 04/11/2026<br>
+**Página de referência:** [Plano de Ensino e Contrato](./Plano-de-Ensino-e-Contrato)
 
 ---
 
-## 🎯 Objetivo da Aula
+<div class="au-caminho">
+<b>Nosso caminho até aqui</b>
 
-Ao final desta aula, os alunos serão capazes de:
-- **Compreender** como a virtualização de redes permite criar infraestruturas completas de rede dentro de uma única máquina física.
-- **Distinguir** os três modos de rede virtual do Hyper-V (Externo, Interno, Privado) e mapeá-los aos conceitos de **bridge, NAT e rede isolada** já estudados na disciplina.
-- **Criar e configurar** uma Máquina Virtual (VM) com Ubuntu Server, conectando-a em rede com o host e com outras VMs.
-- **Analisar** como o tráfego de rede se comporta em cada tipo de switch virtual usando ferramentas práticas (`ping`, `ip a`, `netplan`).
+Responda **antes** de abrir. Se errar, você acabou de descobrir o que revisar hoje. As três perguntas vêm das Aulas 04, 06 e 08, e cada uma reaparece hoje dentro de uma máquina virtual.
 
----
+<details>
+<summary>Como o switch descobre em qual porta está cada máquina, sem ninguém configurar?</summary>
 
-## 🔄 Revisão Rápida (5 min)
+Ele grava o **MAC de origem** de cada quadro que chega, junto com a porta por onde entrou (Aula 04). Hoje você vê um switch que faz o mesmo trabalho sem existir em metal: o **switch virtual**, um programa que liga máquinas virtuais.
 
-| **Conceito (Aulas Anteriores)** | **Conexão com hoje** |
-| --- | --- |
-| **Endereçamento IPv4 e Subnetting** | Cada rede virtual do Hyper-V é uma sub-rede. Hoje vamos alocar endereços e configurar máscaras manualmente. |
-| **Camada de Rede — Roteamento** | O Default Switch do Hyper-V implementa NAT na camada de rede — o mesmo conceito do seu roteador doméstico. |
-| **Camada de Enlace — Switches** | Virtual Switches são abstrações de software dos switches Ethernet físicos que estudamos. As mesmas regras de encaminhamento se aplicam. |
-| **Modelo OSI vs. TCP/IP** | Redes virtuais operam em todas as camadas: física (emulada), enlace (Virtual Switch), rede (IP + NAT), transporte (TCP/UDP) e aplicação (SSH, HTTP). |
+</details>
 
----
+<details>
+<summary>Dois computadores com IP na mesma sub-rede precisam de roteador para conversar?</summary>
 
-## 📌 1. Por que Virtualizar Redes?
+Não. Na mesma sub-rede eles se falam direto, pelo switch (Aula 06). É por isso que, hoje, ligar a máquina virtual e o seu computador à **mesma rede de camada 2** basta para os dois trocarem pacotes — e é por isso também que, no switch privado, nem isso resolve: lá o host nem participa da rede.
 
-Antes de criar uma rede virtual, precisamos entender **por que ela existe**.
+</details>
 
-Em um datacenter tradicional, montar um laboratório de redes exige:
-- Vários servidores físicos
-- Switches e cabos Ethernet reais
-- Horas de cabeamento e configuração
+<details>
+<summary>Um servidor web é um computador ou um programa?</summary>
 
-Com virtualização, fazemos tudo isso dentro de **uma única máquina**. O resultado é idêntico do ponto de vista da rede — o protocolo TCP/IP não sabe (nem se importa) se está trafegando por um cabo de cobre ou por um barramento de software.
+É um **programa** que escuta numa porta, a 80 ou a 443 (Aula 08). O computador só o hospeda. Se o servidor é um programa, por que ele precisaria de uma máquina física inteira só para ele? Essa é a pergunta que abre a aula.
 
-> 💡 **Conexão com o mercado:** AWS EC2, Azure Virtual Machines e Google Cloud Compute Engine são todos baseados em hypervisors que implementam exatamente esses mesmos conceitos. Ao aprender Hyper-V hoje, você está aprendendo a base tecnológica de toda computação em nuvem.
+</details>
+</div>
 
----
-
-## 📌 2. Conceitos de Virtualização de Rede
-
-### 2.1 — Hypervisor: o gerenciador de VMs
-
-O **hypervisor** é o software responsável por criar e gerenciar Máquinas Virtuais (VMs). Existem dois tipos:
-
-| **Tipo** | **Onde roda** | **Exemplos** | **Desempenho** |
-| --- | --- | --- | --- |
-| **Tipo 1 (Bare-Metal)** | Diretamente sobre o hardware | Hyper-V, VMware ESXi, KVM | ⭐ Alto |
-| **Tipo 2 (Hosted)** | Dentro de um SO hospedeiro | VirtualBox, VMware Workstation | Moderado |
-
-> 💡 **Analogia:** O Hyper-V Tipo 1 é o **gerente de condomínio** que controla o prédio inteiro (hardware). O VirtualBox Tipo 2 é um **inquilino** que subaluga um quarto do próprio apartamento — funciona, mas com mais overhead.
-
-O **Microsoft Hyper-V** é um hypervisor Tipo 1 nativo do Windows 10/11 Pro/Enterprise. Uma vez ativado, o próprio Windows passa a rodar como uma VM privilegiada sobre ele.
+> [!INFO] 🎯 O que você leva desta aula
+> - Por que empresas trocam dezenas de servidores físicos por poucos, sem perder o isolamento entre serviços.
+> - O que é uma **VM** (*Virtual Machine*, máquina virtual) e o **hipervisor** que a sustenta, nos tipos 1 e 2.
+> - A diferença entre **host** e **guest**, e entre o arquivo **ISO** e o disco **VHD**.
+> - Como ativar o **Hyper-V** no Windows, criar uma VM e escolher o **switch virtual** certo: externo, interno ou privado.
+>
+> **📂 Recursos**
+> - [Plano de Ensino e Contrato](./Plano-de-Ensino-e-Contrato) — calendário, notas, prazos e regras.
+> - [Microsoft Learn — Instalar o Hyper-V](https://learn.microsoft.com/pt-br/windows-server/virtualization/hyper-v/get-started/install-hyper-v) — requisitos e ativação.
+> - [Microsoft Learn — Criar um switch virtual](https://learn.microsoft.com/pt-br/windows-server/virtualization/hyper-v/get-started/create-a-virtual-switch-for-hyper-v-virtual-machines) — os três tipos de switch.
 
 ---
 
-### 2.2 — O que é uma ISO?
+## 📌 1. Por que virtualizar: o custo de um servidor por máquina [Fundamentação ⏳ 10 min]
 
-Uma **ISO** é um arquivo de imagem de disco — uma cópia byte a byte de um CD/DVD ou mídia de instalação. Para instalar um sistema operacional em uma VM, usamos um arquivo `.iso` no lugar de uma mídia física.
+Durante muito tempo, cada serviço de uma empresa ganhava um computador próprio. O e-mail num servidor, os arquivos em outro, o banco de dados num terceiro, o site num quarto. A regra tinha um motivo bom: **isolamento**. Se o banco de dados travasse o sistema, o e-mail não caía junto.
 
-| **Aspecto** | **Mídia Física** | **Arquivo ISO** |
-| --- | --- | --- |
-| Velocidade de leitura | Limitada pelo hardware óptico | Limitada apenas pela RAM/disco do host |
-| Distribuição | Física (correios, loja) | Download direto da internet |
-| Reusabilidade | Uma cópia por vez | Infinitas VMs simultâneas |
-| Armazenamento | CD/DVD (descartável) | Arquivo no disco |
+O problema é o que essa regra custa. Cada servidor físico traz CPU (*Central Processing Unit*, unidade central de processamento), RAM (*Random Access Memory*, memória de acesso aleatório), fonte, disco, espaço no armário de servidores (o *rack*), energia, refrigeração, cabo e porta de switch. E um servidor dedicado a um único serviço costuma passar boa parte do tempo esperando requisição.
 
-**Fontes oficiais de ISOs para laboratório:**
-- **Ubuntu Server:** [ubuntu.com/download/server](https://ubuntu.com/download/server) → Versão **24.04 LTS**
-- **Debian:** [debian.org/distrib](https://www.debian.org/distrib/)
-- **Windows Server:** [Microsoft Evaluation Center](https://www.microsoft.com/evalcenter)
+A virtualização separa as duas coisas que estavam coladas. O **isolamento** continua: cada serviço roda no próprio sistema, numa VM. O **hardware** passa a ser dividido: várias VMs rodam no mesmo servidor físico, cada uma achando que tem uma máquina só para ela.
 
----
+Veja num exemplo da aula, com números redondos para a conta ficar visível:
 
-## 📌 3. Tipos de Switch Virtual no Hyper-V
+| Situação | Antes: 1 servidor por serviço | Depois: virtualizado |
+| :-- | :-- | :-- |
+| Serviços | 30 | 30 (um por VM) |
+| Servidores físicos | 30 | 3, com 10 VMs cada |
+| Portas de switch físico (no mínimo uma por servidor) | 30 | 3 |
+| Isolamento entre serviços | uma máquina por serviço | uma VM por serviço |
+| Servidor novo | comprar, instalar e cabear hardware | criar mais uma VM num host com folga |
 
-Esta é a seção mais importante da aula. Os três tipos de Virtual Switch implementam conceitos fundamentais de redes que já estudamos.
+<figure class="au-fig">
+<img src="assets/aula09_consolidacao.svg" alt="À esquerda, 30 servidores físicos, cada um com um único serviço; à direita, 3 servidores físicos, cada um com 10 máquinas virtuais, ligadas por setas que indicam a consolidação">
+<figcaption class="au-legenda">Figura 1: a consolidação — 30 serviços que ocupavam 30 servidores físicos passam a rodar como 30 VMs em 3 servidores físicos, cada serviço ainda isolado na própria VM.</figcaption>
+</figure>
 
-![[assets/aula09_switches_virtuais.svg]]
-> *Figura: os três modos de switch virtual. O Externo (bridge) põe a VM na LAN real; o Interno sai para a internet só via NAT do host e esconde a VM da rede física; o Privado isola as VMs numa ilha, sem host e sem internet.*
+Três motivos levam alguém a virtualizar, e os três aparecem na sua vida profissional:
 
-### 3.1 — Switch Externo (Bridge Mode)
+1. **Consolidação:** menos hardware para o mesmo número de serviços.
+2. **Isolamento:** cada serviço tem SO (sistema operacional) próprio; um travamento não derruba o vizinho.
+3. **Laboratório:** você monta uma rede com vários servidores dentro do seu notebook, testa, quebra e apaga, sem tocar em nada real.
 
-**Conceito de rede equivalente:** **Bridge** (Ponte)
+> [!WARNING] ⚠️ Cuidado: consolidar também concentra o risco
+> No exemplo, se um dos 3 servidores físicos queimar, **10 serviços caem de uma vez**, e não um. Por isso, quem consolida planeja folga: os hosts que sobram precisam ter CPU e RAM livres para religar as VMs do que caiu. Virtualizar sem essa folga troca 30 riscos pequenos por 3 riscos grandes.
 
-O switch externo "liga" a VM diretamente à **placa de rede física do Host**, como se a VM tivesse seu próprio cabo de rede conectado ao switch físico da sala.
-
-- A VM recebe um IP **do mesmo roteador da rede física** (via DHCP ou estático)
-- Outros computadores da rede conseguem enxergar e acessar a VM
-- A VM pode acessar a internet diretamente
-
-> 🔧 **Caso de uso:** Servidor web que precisa ser acessado por todos os PCs do laboratório. Simulação de um servidor em produção na rede local.
-
-```
-Roteador (192.168.1.1)
-    ├── PC do Aluno A (192.168.1.10)
-    ├── PC do Aluno B (192.168.1.11)
-    └── VM no Hyper-V (192.168.1.50) ← mesma rede, mesmo switch físico (em modo bridge)
-```
+> [!NOTE] 📖 A nuvem é isto, em escala
+> Quando você aluga uma máquina na AWS, no Azure ou no Google Cloud, recebe uma VM rodando num hipervisor do provedor, num servidor físico que você nunca vai ver. Os conceitos de hoje são os mesmos; muda o tamanho.
 
 ---
 
-### 3.2 — Switch Interno (NAT / Host-Only)
+## 📌 2. VM e hipervisor: quem divide o hardware [Teoria ⏳ 10 min]
 
-**Conceito de rede equivalente:** **NAT** (Network Address Translation) + Host-Only
+Uma **VM** é um computador feito de software: tem CPU, RAM, disco e placa de rede **virtuais**, e roda um SO completo, como se fosse uma máquina de verdade. Quem cria essa ilusão e reparte o hardware real entre as VMs é o **hipervisor\***.
 
-O switch interno cria uma **rede privada entre o Host e as VMs**. O Host consegue acessar as VMs, mas a rede física externa não. Para ter internet, o Hyper-V usa NAT (o Host "empresta" sua conexão).
+Dois nomes aparecem o tempo todo e vale fixar agora:
 
-- VM e Host se comunicam normalmente
-- Rede física (outros PCs) **não vê** as VMs
-- Com o **Default Switch**, o NAT é automático e as VMs têm internet
+| Termo | O que é | No seu laboratório |
+| :-- | :-- | :-- |
+| **Host** (hospedeiro) | a máquina física e o sistema que controla o hardware | o seu notebook com Windows |
+| **Guest** (convidado) | o sistema que roda dentro da VM | o Ubuntu Server instalado na VM |
 
-> 🔧 **Caso de uso:** Laboratório de estudo onde você precisa acessar a VM do seu próprio computador sem expô-la para a rede da sala. Desenvolvimento e testes.
+O hipervisor existe em dois tipos, e a diferença é **onde ele está** em relação ao hardware:
 
----
+| Tipo | Onde roda | Exemplos | Consequência |
+| :-- | :-- | :-- | :-- |
+| **Tipo 1** (*bare-metal*, "metal nu") | direto sobre o hardware, sem SO por baixo | Hyper-V, VMware ESXi, KVM\* | menos camadas entre a VM e o hardware; é o padrão em servidor |
+| **Tipo 2** (hospedado) | como um programa dentro de um SO comum | VirtualBox, VMware Workstation | mais camadas, porque cada pedido da VM passa pelo SO hospedeiro; prático para estudo |
 
-### 3.3 — Switch Privado (Rede Isolada)
+<figure class="au-fig">
+<img src="assets/aula09_hipervisor_tipos.svg" alt="Duas pilhas lado a lado. Tipo 1: hardware, hipervisor e, acima, as VMs e o sistema de gerência. Tipo 2: hardware, sistema operacional hospedeiro, programa de virtualização e, acima, as VMs">
+<figcaption class="au-legenda">Figura 2: no tipo 1, o hipervisor fica logo acima do hardware; no tipo 2, existe um sistema operacional inteiro entre o hipervisor e o hardware.</figcaption>
+</figure>
 
-**Conceito de rede equivalente:** **Rede Isolada / Air-gapped network**
+<details class="au-aposta">
+<summary>Antes de rolar: você ativa o Hyper-V no seu Windows 11 e reinicia. Onde o Windows que você está usando passa a rodar?</summary>
 
-O switch privado cria uma rede onde **apenas as VMs conectadas a ele se comunicam**. O Host não tem acesso. Não há internet. É um segmento completamente isolado.
+**Sobre o hipervisor, como uma partição privilegiada\*.** O Hyper-V é tipo 1 mesmo no notebook: ao ativá-lo, o hipervisor passa a carregar antes do Windows, direto sobre o hardware. O Windows de sempre continua na tela, mas agora roda numa camada acima do hipervisor e ganha o papel de gerenciar as outras VMs. Parece tipo 2, porque você o liga "dentro do Windows", e é justamente essa a pegadinha.
 
-- Sem acesso à internet
-- Sem acesso ao Host
-- Apenas VMs↔VMs
+</details>
 
-> 🔧 **Caso de uso:** Simular uma rede de backend isolada (banco de dados, microserviços internos). Implementar segurança por segmentação — exatamente o que empresas fazem com VLANs em redes físicas.
-
----
-
-### 3.4 — Default Switch (Bônus Hyper-V)
-
-O Windows cria automaticamente o **"Default Switch"** — um switch **Interno com NAT automático configurado**. As VMs conectadas a ele têm acesso à internet (via NAT do host) sem nenhuma configuração adicional. É o modo ideal para laboratório e instalação de SO.
-
-**Tabela Comparativa Completa:**
-
-| **Tipo** | **VM → Internet** | **VM → Host** | **VM → VM** | **Rede física → VM** | **Conceito equivalente** |
-| --- | --- | --- | --- | --- | --- |
-| **Externo** | ✅ Direto | ✅ Sim | ✅ Sim | ✅ Sim | Bridge / Modo promíscuo |
-| **Interno** | ❌ (NAT manual) | ✅ Sim | ✅ Sim | ❌ Não | Host-Only + NAT opcional |
-| **Default Switch** | ✅ NAT automático | ✅ Sim | ✅ Sim | ❌ Não | NAT automático |
-| **Privado** | ❌ Não | ❌ Não | ✅ Sim | ❌ Não | Rede isolada / Air-gap |
+<p class="au-nota">* <b>Hipervisor:</b> software que cria as máquinas virtuais e reparte entre elas a CPU, a RAM, o disco e a rede da máquina física. · <b>KVM</b> (<i>Kernel-based Virtual Machine</i>): módulo do kernel (o núcleo do sistema operacional) do Linux que transforma o próprio Linux em hipervisor; por isso entra na coluna do tipo 1. · <b>Partição privilegiada</b> (ou partição raiz): no Hyper-V, é onde o Windows de gerência roda, com acesso direto aos dispositivos e controle sobre as outras VMs.</p>
 
 ---
 
-## 📌 4. Laboratório Prático — Criando e Conectando VMs em Rede
+## 📌 3. ISO e VHD: o disco de instalação e o disco da VM [Teoria ⏳ 8 min]
 
-### Pré-requisitos
-- Windows 10/11 Pro, Enterprise ou Education (64 bits)
-- CPU com suporte a virtualização: **Intel VT-x** ou **AMD-V** (verificar BIOS/UEFI)
-- Mínimo **8 GB RAM** (recomendado para rodar host + 2 VMs)
-- ISO do Ubuntu Server 24.04 LTS baixada
+Uma VM nova é como um computador recém-montado: tem disco vazio e nenhum SO. Para instalar o sistema você precisa de dois arquivos, com papéis bem diferentes.
 
-### Passo 4.1 — Ativando o Hyper-V
+O **arquivo ISO** (extensão `.iso`, do padrão ISO 9660 da *International Organization for Standardization*, o formato de imagem de CD/DVD) é a imagem de um disco de instalação: um único arquivo com o conteúdo inteiro de um CD ou DVD. Você o "insere" na unidade de DVD virtual da VM, e ela dá a partida por ele como daria por um disco físico.
 
-**Via PowerShell (como Administrador):**
-```powershell
-Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All
-```
+O **VHD** (*Virtual Hard Disk*, disco rígido virtual) é o disco da VM. É um arquivo no disco do host que, para o guest, aparece como um HD (*hard disk*, disco rígido) inteiro. O Hyper-V usa hoje o formato **VHDX**, a versão mais nova do VHD, que aceita discos maiores e protege melhor os dados numa queda de energia.
 
-Ou via interface: `Painel de Controle → Programas → Ativar recursos do Windows → ✅ Hyper-V`
+| Aspecto | Arquivo ISO | Arquivo VHD / VHDX |
+| :-- | :-- | :-- |
+| Papel | mídia de instalação | disco onde o SO fica instalado |
+| A VM lê ou escreve? | só lê | lê e escreve |
+| Quando é usado | na instalação; depois, pode ser ejetado | o tempo todo, enquanto a VM existir |
+| Pode servir a várias VMs? | sim, a mesma ISO instala quantas VMs você quiser | em regra, não; cada VM tem o seu disco |
+| Se você apagar o arquivo | perde o instalador, a VM continua | **perde a VM inteira** |
 
-> ⚠️ **Reinicie** o computador após a ativação.
+A instalação, então, segue sempre a mesma ordem:
 
----
+1. Crie a VM com um VHDX novo e vazio.
+2. Monte a ISO na unidade de DVD virtual.
+3. Dê a partida pela ISO e instale o SO **no VHDX**.
+4. Ejete a ISO. Daqui em diante, a VM dá a partida pelo próprio disco.
 
-### Passo 4.2 — Criando o Switch Virtual Interno
-
-Antes de criar a VM, vamos preparar a rede:
-
-1. Abra o **Gerenciador do Hyper-V**
-2. No painel direito: **Gerenciador de Comutador Virtual**
-3. Selecione **Interno** → **Criar Comutador Virtual**
-4. Nome: `Rede-Redes-Lab`
-5. Clique em **Aplicar** e **OK**
-
-> 💡 Um adaptador virtual (`vEthernet (Rede-Redes-Lab)`) será criado no Host — você pode dar a ele um IP estático para comunicação Host↔VM.
+> [!TIP] 💡 Dica: baixe a ISO da fonte oficial e confira o hash
+> Fontes oficiais para o laboratório: [Ubuntu Server](https://ubuntu.com/download/server), [Debian](https://www.debian.org/distrib/) e o [Microsoft Evaluation Center](https://www.microsoft.com/evalcenter) para o Windows Server. O site oficial publica o **hash** (uma "impressão digital" do arquivo, calculada por um algoritmo como o SHA-256). No PowerShell, `Get-FileHash arquivo.iso` calcula o seu; se não bater, a ISO veio corrompida ou adulterada.
 
 ---
 
-### Passo 4.3 — Criando a Máquina Virtual
+## 📌 4. Hyper-V no Windows: requisitos e ativação [Teoria ⏳ 8 min]
 
-1. Hyper-V → **Novo → Máquina Virtual**
-2. Siga o assistente:
+O **Hyper-V** é o hipervisor da Microsoft. Ele já vem dentro do Windows como um recurso opcional: não existe download, você só o ativa. A documentação da Microsoft lista estes requisitos para o Windows 10 e 11:
 
-| **Configuração** | **Valor** | **Justificativa** |
-| --- | --- | --- |
-| Nome | `SRV-UBUNTU-REDES` | Nomenclatura de servidor |
-| Geração | **Geração 2** | UEFI, boot moderno |
-| RAM | **2048 MB** + Memória Dinâmica | Econômico para lab |
-| Rede | **Default Switch** | Internet durante instalação |
-| Disco | **20 GB** (novo VHDX) | Suficiente para Ubuntu Server |
-| ISO | Apontar para `ubuntu-24.04-live-server-amd64.iso` | — |
+| Requisito | O que conferir |
+| :-- | :-- |
+| Edição do Windows | Pro, Enterprise ou Education; o **Home não aceita** o Hyper-V |
+| Processador | 64 bits, com SLAT\* |
+| Extensões de virtualização | Intel VT-x ou AMD-V, **ativadas no firmware** (BIOS ou UEFI\*) |
+| Memória | mínimo de 4 GB de RAM |
 
----
+São três caminhos para ativar, todos como administrador:
 
-### Passo 4.4 — Configurando Secure Boot para Linux
+1. **PowerShell:** `Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V -All`
+2. **DISM** (*Deployment Image Servicing and Management*, a ferramenta de manutenção de imagens do Windows): `DISM /Online /Enable-Feature /All /FeatureName:Microsoft-Hyper-V`
+3. **Interface:** Painel de Controle → Programas → Ativar ou desativar recursos do Windows → marcar **Hyper-V**.
 
-> ⚠️ **CRÍTICO — sem isso a VM não inicia!**
+Nos três casos, o Windows pede para **reiniciar**. É nesse reinício que o hipervisor passa a carregar por baixo do Windows, como você viu na aposta da seção 2.
 
-1. Clique com o botão direito na VM → **Configurações**
-2. **Segurança → Inicialização Segura**
-3. Modelo: **`Autoridade de Certificação UEFI da Microsoft`**
-4. Clique em **OK**
+> [!WARNING] ⚠️ Cuidado: Hyper-V e VirtualBox disputam o mesmo recurso
+> Com o hipervisor do Hyper-V ativo, programas como o VirtualBox e o VMware Workstation, que usam as mesmas extensões do processador, podem não iniciar as VMs deles, ou rodar instáveis. Se você já usa um deles, decida antes qual hipervisor fica no seu notebook.
 
----
-
-### Passo 4.5 — Instalando o Ubuntu Server
-
-1. Inicie a VM → **Conectar → Iniciar**
-2. Siga o instalador:
-
-| **Tela** | **Ação** |
-| --- | --- |
-| Idioma | **English** (recomendado para servidores) |
-| Network | Verifique que `eth0` recebeu IP via DHCP ✅ |
-| Storage | Disco inteiro com **LVM** |
-| Profile | Username: `aluno` / Server: `srv-redes-01` |
-| **SSH** | ✅ **Marque "Install OpenSSH server"** |
-| Finalização | **Reboot Now** |
+<p class="au-nota">* <b>SLAT</b> (<i>Second Level Address Translation</i>, tradução de endereço em segundo nível): recurso do processador que traduz a memória da VM para a memória física no próprio hardware, sem o hipervisor fazer essa conta em software. · <b>UEFI</b> (<i>Unified Extensible Firmware Interface</i>): o firmware que sucedeu à BIOS (<i>Basic Input/Output System</i>); é a tela de configuração que abre antes do sistema, onde se liga a virtualização. · <b>Firmware</b>: o programa gravado no chip da placa-mãe que acorda o hardware antes do sistema operacional; BIOS e UEFI são os dois tipos que você encontra.</p>
 
 ---
 
-### Passo 4.6 — Configurando a Segunda Interface de Rede
+## 📌 5. Criar uma VM no Hyper-V, passo a passo [Teoria ⏳ 8 min]
 
-Após a instalação, vamos adicionar o switch interno à VM para comunicação Host↔VM:
+Com o Hyper-V ativo, o **Gerenciador do Hyper-V** cria a VM por um assistente. O roteiro resumido, com os valores que usamos no laboratório:
 
-1. VM → **Configurações → Adicionar Hardware → Adaptador de Rede**
-2. Selecione o Switch: `Rede-Redes-Lab`
-3. Clique em **OK**
+1. **Novo → Máquina Virtual** e dê um nome: `SRV-UBUNTU-REDES`.
+2. **Geração:** escolha a **Geração 2** (detalhe na tabela abaixo).
+3. **Memória:** 2048 MB, com **Memória Dinâmica** marcada, para o host emprestar RAM à VM só quando ela precisar.
+4. **Rede:** ligue ao **Default Switch**, para a VM ter internet durante a instalação (seção 6).
+5. **Disco:** crie um VHDX novo de 20 GB, suficiente para um Ubuntu Server de laboratório.
+6. **Instalação:** aponte a ISO, por exemplo `ubuntu-24.04-live-server-amd64.iso`.
+7. **Antes de ligar** uma VM Linux: Configurações → Segurança → Inicialização Segura\* → modelo **Autoridade de Certificação UEFI da Microsoft**.
+8. Conecte, inicie a VM e siga o instalador do SO.
 
-Dentro da VM, configure o IP estático via **Netplan**:
+| Geração | Firmware da VM | Quando usar |
+| :-- | :-- | :-- |
+| Geração 1 | BIOS emulada | SO antigo, que não dá partida por UEFI |
+| **Geração 2** | UEFI, com Inicialização Segura | SO atual: Windows 10 e 11, Windows Server, Ubuntu e outras distribuições Linux recentes |
 
-```bash
-# Verificar interfaces disponíveis
-ip a
+> [!WARNING] ⚠️ Cuidado: VM Linux de Geração 2 que não dá partida
+> O modelo padrão da Inicialização Segura na Geração 2 é o do Windows. Com ele, a VM recusa a partida de um Linux, e parece que a ISO está estragada. A ISO está boa: troque o modelo para **Autoridade de Certificação UEFI da Microsoft** (passo 7) e tente de novo.
 
-# Editar a configuração de rede
-sudo nano /etc/netplan/00-installer-config.yaml
-```
-
-**Conteúdo do arquivo** (adapte `eth1` ao nome real da sua interface):
-
-```yaml
-network:
-  version: 2
-  ethernets:
-    eth0:          # Interface do Default Switch (DHCP/internet)
-      dhcp4: true
-    eth1:          # Interface do Switch Interno (IP estático)
-      dhcp4: false
-      addresses:
-        - 192.168.100.10/24
-```
-
-```bash
-# Aplicar as configurações
-sudo netplan apply
-
-# Verificar
-ip a
-```
-
-**No Host (adaptador virtual):** Configure o IP `192.168.100.1/24` no adaptador `vEthernet (Rede-Redes-Lab)`:
-- `Win + R` → `ncpa.cpl` → Propriedades → TCP/IPv4 → `192.168.100.1` / `255.255.255.0`
-
-**Teste de conectividade:**
-```bash
-# Da VM para o Host
-ping 192.168.100.1 -c 4
-
-# Do Host (PowerShell) para a VM
-ping 192.168.100.10
-```
+<p class="au-nota">* <b>Inicialização Segura</b> (<i>Secure Boot</i>): recurso do UEFI que só deixa dar a partida um carregador de sistema assinado por uma autoridade que o firmware reconhece; impede que um programa malicioso se instale antes do SO.</p>
 
 ---
 
-### Passo 4.7 — Acesso via SSH
+## 📌 6. Switch virtual: externo, interno e privado [Teoria ⏳ 13 min]
 
-Com a rede funcionando, acesse o servidor como um sysadmin real:
+Uma VM com placa de rede e sem cabo não fala com ninguém. O "cabo" dela é o **switch virtual**: um switch de camada 2 feito em software, dentro do host, que encaminha quadros pelo endereço MAC como o switch físico da Aula 04. O Hyper-V oferece três tipos, e a diferença entre eles é **quem alcança quem**.
 
-```bash
-# No PowerShell ou Terminal do Windows
-ssh aluno@192.168.100.10
-```
+<figure class="au-fig">
+<img src="assets/aula09_switches_virtuais.svg" alt="Três cenários lado a lado: switch externo ligando a VM à rede física e ao roteador; switch interno ligando VMs e host, com saída para a internet só por NAT do host; switch privado ligando apenas VMs entre si">
+<figcaption class="au-legenda">Figura 3: os três tipos de switch virtual. O externo põe a VM na rede física; o interno liga VMs e host, longe da rede física; o privado liga só as VMs entre si.</figcaption>
+</figure>
 
-> 🎯 **Parabéns!** Você está administrando um servidor Linux virtualizado via SSH através de uma rede virtual configurada por você — exatamente como é feito em AWS EC2, Azure VMs e datacenters corporativos.
+### 6.1 Externo: a VM entra na rede física
 
----
+O switch **externo** se prende à placa de rede física do host. A VM passa a aparecer na rede do laboratório como mais um computador, com MAC e IP próprios, recebidos do mesmo DHCP (*Dynamic Host Configuration Protocol*, o serviço que entrega IP automaticamente) que atende as outras máquinas. Esse modo se chama **ponte\*** (*bridge*). Uso típico: um servidor que todos os PCs da sala precisam acessar.
 
-## 🧪 Exercício Avaliativo
+### 6.2 Interno: VMs e host, longe da rede física
 
-### Desafio — Segmentação de Rede Virtual
+O switch **interno** cria uma rede só entre as VMs e o host. O Windows ganha um adaptador novo, `vEthernet (nome-do-switch)`, por onde conversa com elas. A rede física **não enxerga** essas VMs. E, sozinho, o switch interno **não dá internet**: para isso o host precisa fazer NAT\*, configurado à parte.
 
-**Objetivo:** Aplicar os conceitos de redes virtuais e endereçamento IP estático em um cenário de isolamento de rede.
+### 6.3 Privado: só as VMs, entre si
 
-**Passos:**
+O switch **privado** liga apenas as VMs conectadas a ele. Nem o host participa, e não há caminho para a internet. Serve para simular uma rede de bastidor (*backend*): a rede interna dos serviços, que não fica exposta ao usuário — como a de um banco de dados que só o servidor de aplicação pode acessar.
 
-1. ✅ Crie a VM `SRV-UBUNTU-REDES` conforme o roteiro desta aula (com Default Switch)
-2. ✅ No Hyper-V, crie um **Switch Virtual Privado** chamado `Rede-Isolada-Redes`
-3. ✅ Adicione uma **segunda interface de rede** à VM, conectada ao switch `Rede-Isolada-Redes`
-4. ✅ Configure o IP estático `192.168.200.10/24` na nova interface via Netplan
-5. ✅ Verifique com `ip a` que a VM tem **duas interfaces**: uma com DHCP (internet) e outra com IP estático (rede isolada)
-6. ✅ No terminal da VM, execute:
+### 6.4 O Default Switch, que já vem pronto
 
-```bash
-# Mostrar tabela de roteamento
-ip route show
+No Windows 10 e 11, o Hyper-V traz um switch chamado **Default Switch**. Ele é um switch interno **com NAT e DHCP já configurados**: a VM ligada a ele recebe IP sozinha e sai para a internet usando a conexão do host. Por isso é o modo mais cômodo para instalar o SO. Duas limitações: a faixa de IP é escolhida pelo Windows e pode mudar, e ninguém de fora alcança a VM.
 
-# Listar todas as interfaces com seus IPs
-ip -4 addr show
-```
+| Tipo | VM → internet | VM ↔ host | VM ↔ VM | Rede física → VM | Ideia de rede por trás |
+| :-- | :-- | :-- | :-- | :-- | :-- |
+| **Externo** | sim, direto | sim, se o host compartilha a placa (padrão) | sim | **sim** | ponte (*bridge*) |
+| **Interno** | não, sem NAT configurado | sim | sim | não | rede só com o host |
+| **Default Switch** | sim, por NAT | sim | sim | não | interno + NAT + DHCP |
+| **Privado** | não | **não** | sim | não | rede isolada entre VMs |
 
-7. ✅ Tire **prints** de cada etapa
+> [!WARNING] ⚠️ O erro clássico: "switch interno é NAT"
+> Não é. O switch interno só liga VMs e host. O que dá internet ao Default Switch é o **NAT que vem junto**, e não o fato de ele ser interno. Um switch interno que você cria à mão fica sem internet até alguém configurar o NAT no host.
 
-**Entrega:** Relatório em PDF contendo:
-- Print do Gerenciador do Hyper-V mostrando a VM e os switches criados
-- Print do `ip a` mostrando as duas interfaces configuradas
-- Print do `ip route show` mostrando a tabela de rotas
-- Uma explicação de **1 parágrafo** respondendo: *"Por que a VM consegue acessar a internet pela interface DHCP mas não pela interface do Switch Privado?"*
+> [!TIP] 💡 Dica: NAT só funciona de dentro para fora
+> Uma VM atrás de NAT abre conexões para a internet, mas ninguém de fora abre conexão para ela sem uma regra de redirecionamento de porta no host. É o mesmo motivo pelo qual ninguém acessa o computador da sua casa só sabendo o IP da operadora. Precisa que a sala inteira acesse a VM? Use o switch **externo**.
+
+<p class="au-nota">* <b>Ponte</b> (<i>bridge</i>): ligação em camada 2 que junta dois segmentos numa mesma rede; o quadro passa sem que o endereço IP seja trocado. · <b>NAT</b> (<i>Network Address Translation</i>, tradução de endereço de rede): técnica em que o host troca o IP privado das VMs pelo IP dele ao sair para a internet, e guarda uma tabela para devolver as respostas a quem pediu. · <b>Redirecionamento de porta</b> (<i>port forwarding</i>): regra no host que entrega o que chega num IP e porta de fora para uma VM de dentro; é o que abriria exceção ao "NAT só deixa sair".</p>
 
 ---
 
-## 📋 Resumo Estrutural
+<div class="au-slot">
+<b>🖥️ Momento interativo — vote antes de eu abrir o Hyper-V</b>
 
-| **Conceito** | **Definição em Uma Frase** |
-| --- | --- |
-| **Hypervisor Tipo 1 (Bare-Metal)** | Roda diretamente sobre o hardware antes do SO; gerencia VMs com alto desempenho (ex: Hyper-V). |
-| **Hypervisor Tipo 2 (Hosted)** | Roda dentro de um SO existente, com overhead adicional (ex: VirtualBox). |
-| **Arquivo ISO** | Imagem bit a bit de uma mídia de instalação, usada para instalar SOs em VMs sem mídia física. |
-| **Switch Virtual Externo** | Liga a VM à placa de rede física do Host — VM recebe IP do roteador real (modo bridge). |
-| **Switch Virtual Interno** | Cria rede privada entre VMs e Host; sem exposição à rede física. |
-| **Switch Virtual Privado** | Isola VMs entre si; o Host não tem acesso — equivalente a uma VLAN isolada. |
-| **Default Switch** | Switch Interno com NAT automático — VMs têm internet via conexão do Host. |
-| **Netplan** | Utilitário do Ubuntu para configurar interfaces de rede via arquivos YAML. |
-| **NAT (Network Address Translation)** | Técnica que permite múltiplos dispositivos internos compartilharem um único IP externo. |
-| **Geração 2 (Hyper-V)** | Formato de VM moderna com suporte a UEFI e Secure Boot — obrigatório para SOs modernos. |
+Sua VM está ligada ao **Default Switch** e roda um servidor web. Um colega, em outro computador do laboratório, digita o IP dela e **não** abre nada. Você troca a VM para o switch **externo**. **O site abre para ele agora?** Vote no Plickers.
+
+<p class="au-slot-b"><b>Plano B — se o Plickers ou a internet do campus cair:</b> mão levantada — abre (um dedo) ou não abre (dois dedos). Depois da votação, voltamos à tabela da seção 6 para justificar; o importante é você se comprometer com um palpite antes de ver.</p>
+</div>
+
+<div class="au-podcast" style="background:var(--au-sfc,var(--secondary,#f0f3f8));color:var(--au-tx,var(--dark,#1d2057));border:1px solid color-mix(in srgb,var(--au-par-verde,#2e7d52) 30%,transparent);border-radius:14px;padding:1.25rem 1.5rem;margin:1.5rem auto;max-width:720px">
+<b>🎧 Podcast da Aula 09 — Redes Virtuais</b>
+<p class="au-podcast-origem">O áudio chega em breve — gerado por IA a partir do material da disciplina.</p>
+</div>
+
+<hr class="au-fim-aula">
+
+<div class="au-resumo">
+<b>📋 Resumo — a folha de consulta</b>
+
+| Conceito | O que é | Como lembrar |
+|---|---|---|
+| Consolidação | vários serviços, cada um na própria VM, em poucos servidores físicos | 30 servidores viram 3, sem perder o isolamento |
+| VM | computador feito de software, com SO próprio | hardware virtual, sistema de verdade |
+| Hipervisor | software que cria as VMs e reparte o hardware | o "síndico" do servidor físico |
+| Tipo 1 | hipervisor direto sobre o hardware | Hyper-V, ESXi, KVM; padrão em servidor |
+| Tipo 2 | hipervisor como programa dentro de um SO | VirtualBox, VMware Workstation |
+| Host / guest | a máquina física / o sistema dentro da VM | quem hospeda / quem é hospedado |
+| ISO | imagem de um disco de instalação | o "DVD" que você ejeta depois |
+| VHD / VHDX | o disco rígido da VM, num arquivo | apagou, perdeu a VM |
+| Geração 2 | VM com UEFI e Inicialização Segura | Linux pede o modelo de Autoridade de Certificação UEFI da Microsoft |
+| Switch externo | VM na rede física, em ponte | a sala inteira enxerga |
+| Switch interno | VMs e host, sem a rede física | só o host enxerga |
+| Switch privado | só as VMs entre si | nem o host enxerga |
+| Default Switch | interno com NAT e DHCP prontos | internet de dentro para fora |
+
+| O erro clássico | A correção |
+|---|---|
+| "o Hyper-V é tipo 2, porque eu ligo pelo Windows" | não — ele é tipo 1; o Windows passa a rodar sobre o hipervisor |
+| "a ISO é o disco da VM" | não — a ISO só instala; o SO fica no VHDX |
+| "switch interno é NAT" | não — o NAT é configurado à parte; o Default Switch é que já vem com ele |
+| "no Default Switch, os colegas acessam minha VM pelo IP" | não — NAT só deixa sair; para ser acessada, use o switch externo |
+| "consolidar só traz vantagem" | não — um host que cai derruba todas as VMs que estavam nele |
+
+</div>
 
 ---
 
+<div class="au-reflexao">
+<b>🤔 Para pensar até a próxima aula</b>
 
-## 📄 Artigo de Aprofundamento
+<p>No switch externo, a sua VM pede um IP ao mesmo DHCP do laboratório e recebe um, sem você digitar nada. Para o servidor DHCP, ela é só mais um MAC pedindo endereço. Como ele sabe que aquele pedido veio de uma VM, e não de um computador físico? E faz alguma diferença ele saber?</p>
 
-- [Microsoft Learn — Tipos de Switch Virtual do Hyper-V](https://learn.microsoft.com/pt-br/windows-server/virtualization/hyper-v/get-started/create-a-virtual-switch-for-hyper-v-virtual-machines)
-> *Documentação oficial cobrindo todos os tipos de switch, requisitos e boas práticas. Essencial para aprofundamento na configuração avançada.*
+<p><i>Não há resposta nesta página de propósito.</i></p>
+</div>
 
-- [Ubuntu Server — Netplan Documentation](https://netplan.io/reference)
-> *Guia completo de configuração de rede via Netplan no Ubuntu Server — o método padrão para configurar IPs estáticos e múltiplas interfaces.*
+---
+
+## 🧩 Antes de fechar: a analogia que amarra tudo
+
+Pense num prédio. O **servidor físico** é o prédio; cada **VM** é um apartamento, com porta e chave próprias. O **hipervisor tipo 1** é a estrutura do prédio, que divide água e luz entre os apartamentos; o **tipo 2** é um inquilino que aluga quartos para terceiros dentro do apartamento onde mora, e tudo passa por ele antes de chegar ao condomínio. A **ISO** é o caminhão de mudança: traz os móveis e vai embora; o **VHDX** é o apartamento mobiliado que fica. O **switch externo** é a porta que dá para a rua, o **interno** é o interfone que fala com os outros apartamentos e com a portaria, sem linha para fora, e o **privado** é o corredor entre apartamentos, sem ligação nem com a portaria.
 
 ---
 
-## 📚 Referências Bibliográficas e Citações
+<div class="au-refs-wrap">
+<b>📚 O que sustenta esta aula</b>
 
-- **TANENBAUM, Andrew S.** *Redes de Computadores*. 5ª ed. Pearson, 2011. **(Cap. 5 — Camada de Rede: NAT, pp. 450–455; Cap. 8 — Segurança de Redes, p. 767)**. Base conceitual para NAT e SSH.
-- **KUROSE, James F.; ROSS, Keith W.** *Redes de Computadores e a Internet: Uma Abordagem Top-Down*. 8ª ed. Pearson, 2021. **(Cap. 4 — Camada de Rede: O Plano de Dados, pp. 305–330; Cap. 6 — A Camada de Enlace e Redes Locais, pp. 440–478)**. Complementa a visão de switches, VLANs e encaminhamento.
-- **TANENBAUM, Andrew S.; WOODHULL, Albert S.** *Sistemas Operacionais: Projeto e Implementação*. 3ª ed. Bookman, 2008. **(Cap. 8 — Virtualização, pp. 487–512)**. Fundamentos de hypervisors Tipo 1 e Tipo 2.
-- **Microsoft Learn.** *Hyper-V no Windows Server — Tipos de Switch Virtual*. Disponível em: [https://learn.microsoft.com/pt-br/windows-server/virtualization/hyper-v/get-started/create-a-virtual-switch-for-hyper-v-virtual-machines](https://learn.microsoft.com/pt-br/windows-server/virtualization/hyper-v/get-started/create-a-virtual-switch-for-hyper-v-virtual-machines). Acesso em: Maio 2026.
-- **Canonical Ltd.** *Ubuntu Server 24.04 LTS — Netplan Configuration*. Disponível em: [https://netplan.io/reference](https://netplan.io/reference). Acesso em: Maio 2026.
+<div class="au-refs">
 
----
-*Última atualização: 2026-05-18 | Status: publicado*
+- **TANENBAUM, A. S.; BOS, H.** *Sistemas Operacionais Modernos.* 4. ed. São Paulo: Pearson, 2016. <span class="au-pag">cap. 7 (virtualização e a nuvem), página não conferida</span> — hipervisores tipo 1 e tipo 2. Edição e páginas a conferir no acervo antes de citar número.
+- **KUROSE, J. F.; ROSS, K. W.** *Redes de computadores e a Internet: uma abordagem top-down.* 8. ed. São Paulo: Pearson, 2021. <span class="au-pag">cap. 4 (NAT) e cap. 6 (enlace, switches e VLAN), página não conferida</span> — NAT e o switch de camada 2 que o switch virtual reproduz.
+- **MICROSOFT.** *Instalar o Hyper-V.* Microsoft Learn. <span class="au-pag">página web, sem paginação</span> — requisitos do Windows 10 e 11, ativação por PowerShell, DISM e interface, conflito com outros hipervisores. Acesso em: 4 nov. 2026.
+- **MICROSOFT.** *Criar e configurar um switch virtual com o Hyper-V.* Microsoft Learn. <span class="au-pag">página web, sem paginação</span> — switches externo, interno e privado, compartilhamento da placa com o sistema de gerência, rede NAT sobre switch interno. Acesso em: 4 nov. 2026.
+
+</div>
+</div>
+
+<div class="au-proxima">
+<b>➡️ Na próxima aula</b>
+
+<p>Hoje a sua VM ganhou um IP sem você digitar nada, e você aceitou isso como mágica. Na próxima, abrimos a mágica: como um endereço IP se organiza, como o <b>DHCP</b> o entrega em quatro mensagens, e como o <b>Wireshark</b> deixa você ver cada uma delas passando pelo cabo.</p>
+</div>
+
+</div>
