@@ -1,0 +1,79 @@
+<!-- BRIEF: Aula 10 (Redes I). Endereco IPv4 de exemplo 192.168.10.25 dividido em rede (3 octetos, num /24) e host (1 octeto); abaixo, o mapa das faixas reservadas: privado (RFC 1918, 3 faixas), loopback 127.0.0.1, APIPA 169.254.x.x e publico. Fundo: cartao off-white fixo, vale nos temas claro e escuro. Paleta Uniube. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 490" width="100%" role="img"
+     font-family="'Comic Sans MS','Comic Neue',cursive"
+     aria-label="Endereço IPv4 de exemplo 192.168.10.25: os três primeiros octetos formam a rede e o último é o host. Abaixo, as faixas reservadas: privado, loopback, endereço automático 169.254 e público.">
+  <defs>
+    <style>
+      .sk  { stroke-linecap:round; stroke-linejoin:round; fill:none; }
+      .lbl { font-family:'Comic Sans MS','Comic Neue',cursive; }
+      .mono { font-family:'Courier New',Consolas,monospace; }
+      text { paint-order:stroke; stroke:#fafaf8; stroke-width:3px; stroke-linejoin:round; }
+      text[fill="#ffffff"] { stroke:none; }
+    </style>
+  </defs>
+  <rect id="fundo-card" x="0" y="0" width="900" height="490" rx="18" fill="#fafaf8"/>
+
+  <!-- TITULO -->
+  <text x="450" y="38" text-anchor="middle" class="lbl" font-size="22" font-weight="bold" fill="#1d2057">Endereço IPv4: rede e host, mais as faixas reservadas</text>
+  <path class="sk" d="M170,48 q140,7 280,3 q140,-4 280,2" stroke="#00aa9f" stroke-width="2.5"/>
+
+  <!-- EXEMPLO -->
+  <text x="450" y="72" text-anchor="middle" class="lbl" font-size="14" fill="#1d2057">exemplo: 192.168.10.25 com máscara 255.255.255.0 (/24)</text>
+
+  <!-- QUATRO OCTETOS -->
+  <g>
+    <rect x="150" y="84" width="130" height="54" rx="9" class="sk" fill="#e4f0fb" stroke="#2778c4" stroke-width="2.5"/>
+    <rect x="300" y="84" width="130" height="54" rx="9" class="sk" fill="#e4f0fb" stroke="#2778c4" stroke-width="2.5"/>
+    <rect x="450" y="84" width="130" height="54" rx="9" class="sk" fill="#e4f0fb" stroke="#2778c4" stroke-width="2.5"/>
+    <rect x="600" y="84" width="130" height="54" rx="9" class="sk" fill="#eaf5ee" stroke="#2e7d52" stroke-width="2.5"/>
+    <text x="215" y="123" text-anchor="middle" class="lbl" font-size="32" font-weight="bold" fill="#1d2057">192</text>
+    <text x="365" y="123" text-anchor="middle" class="lbl" font-size="32" font-weight="bold" fill="#1d2057">168</text>
+    <text x="515" y="123" text-anchor="middle" class="lbl" font-size="32" font-weight="bold" fill="#1d2057">10</text>
+    <text x="665" y="123" text-anchor="middle" class="lbl" font-size="32" font-weight="bold" fill="#1d2057">25</text>
+    <text x="290" y="130" text-anchor="middle" class="lbl" font-size="40" font-weight="bold" fill="#1d2057">.</text>
+    <text x="440" y="130" text-anchor="middle" class="lbl" font-size="40" font-weight="bold" fill="#1d2057">.</text>
+    <text x="590" y="130" text-anchor="middle" class="lbl" font-size="40" font-weight="bold" fill="#1d2057">.</text>
+  </g>
+
+  <!-- CHAVES: REDE E HOST -->
+  <path class="sk" d="M150,150 q0,12 12,12 l406,0 q12,0 12,-12" stroke="#2778c4" stroke-width="3"/>
+  <text x="365" y="188" text-anchor="middle" class="lbl" font-size="16" font-weight="bold" fill="#2778c4">rede: os três primeiros octetos</text>
+  <path class="sk" d="M600,150 q0,12 12,12 l106,0 q12,0 12,-12" stroke="#2e7d52" stroke-width="3"/>
+  <text x="665" y="188" text-anchor="middle" class="lbl" font-size="16" font-weight="bold" fill="#2e7d52">host: o último</text>
+
+  <!-- SECAO DAS FAIXAS -->
+  <text x="30" y="226" class="lbl" font-size="17" font-weight="bold" fill="#1d2057">Nem todo endereço vale na internet</text>
+
+  <!-- CARTAO PRIVADO -->
+  <g>
+    <rect x="30" y="238" width="440" height="228" rx="12" class="sk" fill="#eaf5ee" stroke="#2e7d52" stroke-width="2.5"/>
+    <text x="50" y="268" class="lbl" font-size="19" font-weight="bold" fill="#2e7d52">Privado: só dentro da rede</text>
+    <text x="50" y="291" class="lbl" font-size="14" fill="#1d2057">as três faixas da RFC 1918</text>
+    <text x="50" y="328" class="mono" font-size="16" font-weight="bold" fill="#1d2057">10.0.0.0 a 10.255.255.255</text>
+    <text x="50" y="360" class="mono" font-size="16" font-weight="bold" fill="#1d2057">172.16.0.0 a 172.31.255.255</text>
+    <text x="50" y="392" class="mono" font-size="16" font-weight="bold" fill="#1d2057">192.168.0.0 a 192.168.255.255</text>
+    <text x="50" y="428" class="lbl" font-size="14" fill="#1d2057">a internet não roteia estes endereços</text>
+    <text x="50" y="450" class="lbl" font-size="14" fill="#1d2057">o NAT (Aula 09) troca por um público na saída</text>
+  </g>
+
+  <!-- CARTAO LOOPBACK -->
+  <g>
+    <rect x="490" y="238" width="380" height="68" rx="12" class="sk" fill="#f1ebf8" stroke="#7a4fb0" stroke-width="2.5"/>
+    <text x="508" y="268" class="lbl" font-size="17" font-weight="bold" fill="#7a4fb0">127.0.0.1: a própria máquina</text>
+    <text x="508" y="291" class="lbl" font-size="14" fill="#1d2057">teste local, sem depender da rede</text>
+  </g>
+
+  <!-- CARTAO APIPA -->
+  <g>
+    <rect x="490" y="318" width="380" height="68" rx="12" class="sk" fill="#fbeee6" stroke="#b1541b" stroke-width="2.5"/>
+    <text x="508" y="348" class="lbl" font-size="16" font-weight="bold" fill="#b1541b">169.254.x.x: o DHCP não respondeu</text>
+    <text x="508" y="371" class="lbl" font-size="14" fill="#1d2057">o Windows se dá este endereço sozinho</text>
+  </g>
+
+  <!-- CARTAO PUBLICO -->
+  <g>
+    <rect x="490" y="398" width="380" height="68" rx="12" class="sk" fill="#e4f0fb" stroke="#2778c4" stroke-width="2.5"/>
+    <text x="508" y="428" class="lbl" font-size="17" font-weight="bold" fill="#2778c4">Público: vale na internet</text>
+    <text x="508" y="451" class="lbl" font-size="14" fill="#1d2057">a internet encaminha os pacotes dele</text>
+  </g>
+</svg>
