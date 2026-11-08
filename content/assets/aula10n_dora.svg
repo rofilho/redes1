@@ -1,0 +1,78 @@
+<!-- BRIEF: Aula 10 (Redes I). As quatro mensagens do DHCP (Discover, Offer, Request, Ack) entre cliente e servidor: quem envia, se vai a todos (broadcast) ou ao cliente, e as portas UDP 68 e 67. Sem enderecos IP de origem/destino na figura (ficam para a captura no Wireshark). Fundo: cartao off-white fixo, vale nos temas claro e escuro. Paleta Uniube. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" width="100%" role="img"
+     font-family="'Comic Sans MS','Comic Neue',cursive"
+     aria-label="As quatro mensagens do DHCP entre cliente e servidor: 1 Discover do cliente para todos da rede, 2 Offer do servidor, 3 Request do cliente para todos, 4 Ack do servidor. O cliente usa a porta UDP 68 e o servidor a 67.">
+  <defs>
+    <style>
+      .sk  { stroke-linecap:round; stroke-linejoin:round; fill:none; }
+      .lbl { font-family:'Comic Sans MS','Comic Neue',cursive; }
+      text { paint-order:stroke; stroke:#fafaf8; stroke-width:3px; stroke-linejoin:round; }
+      text[fill="#ffffff"] { stroke:none; }
+    </style>
+    <marker id="d-lar" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#b1541b"/>
+    </marker>
+    <marker id="d-tur" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" fill="#00aa9f"/>
+    </marker>
+  </defs>
+  <rect id="fundo-card" x="0" y="0" width="900" height="560" rx="18" fill="#fafaf8"/>
+
+  <!-- TITULO -->
+  <text x="450" y="38" text-anchor="middle" class="lbl" font-size="22" font-weight="bold" fill="#1d2057">As quatro mensagens do DHCP: quem fala com quem</text>
+  <path class="sk" d="M190,48 q130,7 260,3 q130,-4 260,2" stroke="#00aa9f" stroke-width="2.5"/>
+
+  <!-- CLIENTE E SERVIDOR -->
+  <g>
+    <rect x="60" y="70" width="180" height="58" rx="10" class="sk" fill="#e4f0fb" stroke="#2778c4" stroke-width="2.5"/>
+    <text x="150" y="96" text-anchor="middle" class="lbl" font-size="18" font-weight="bold" fill="#2778c4">Cliente</text>
+    <text x="150" y="117" text-anchor="middle" class="lbl" font-size="13" fill="#1d2057">ainda sem endereço</text>
+    <rect x="660" y="70" width="180" height="58" rx="10" class="sk" fill="#eaf5ee" stroke="#2e7d52" stroke-width="2.5"/>
+    <text x="750" y="96" text-anchor="middle" class="lbl" font-size="18" font-weight="bold" fill="#2e7d52">Servidor DHCP</text>
+    <text x="750" y="117" text-anchor="middle" class="lbl" font-size="13" fill="#1d2057">guarda a lista de endereços</text>
+    <path class="sk" d="M150,130 L150,448" stroke="#1d2057" stroke-width="2" stroke-dasharray="6 6"/>
+    <path class="sk" d="M750,130 L750,448" stroke="#1d2057" stroke-width="2" stroke-dasharray="6 6"/>
+  </g>
+
+  <!-- 1 DISCOVER -->
+  <g>
+    <path class="sk" d="M170,186 q140,-8 280,2 q140,6 280,-2" stroke="#b1541b" stroke-width="3.5" marker-end="url(#d-lar)"/>
+    <circle cx="150" cy="186" r="15" fill="#b1541b"/>
+    <text x="150" y="192" text-anchor="middle" class="lbl" font-size="17" font-weight="bold" fill="#ffffff">1</text>
+    <text x="450" y="165" text-anchor="middle" class="lbl" font-size="19" font-weight="bold" fill="#b1541b">Discover: &#8220;tem servidor DHCP aí?&#8221;</text>
+    <text x="450" y="213" text-anchor="middle" class="lbl" font-size="14" fill="#1d2057">vai a todas as máquinas da rede (broadcast) · UDP 68 para 67</text>
+  </g>
+
+  <!-- 2 OFFER -->
+  <g>
+    <path class="sk" d="M730,266 q-140,8 -280,-2 q-140,-6 -280,2" stroke="#00aa9f" stroke-width="3.5" marker-end="url(#d-tur)"/>
+    <circle cx="750" cy="266" r="15" fill="#00aa9f"/>
+    <text x="750" y="272" text-anchor="middle" class="lbl" font-size="17" font-weight="bold" fill="#ffffff">2</text>
+    <text x="450" y="245" text-anchor="middle" class="lbl" font-size="19" font-weight="bold" fill="#00aa9f">Offer: &#8220;te ofereço este endereço&#8221;</text>
+    <text x="450" y="293" text-anchor="middle" class="lbl" font-size="14" fill="#1d2057">volta ao cliente, com máscara, gateway, DNS e tempo · UDP 67 para 68</text>
+  </g>
+
+  <!-- 3 REQUEST -->
+  <g>
+    <path class="sk" d="M170,346 q140,-8 280,2 q140,6 280,-2" stroke="#b1541b" stroke-width="3.5" marker-end="url(#d-lar)"/>
+    <circle cx="150" cy="346" r="15" fill="#b1541b"/>
+    <text x="150" y="352" text-anchor="middle" class="lbl" font-size="17" font-weight="bold" fill="#ffffff">3</text>
+    <text x="450" y="325" text-anchor="middle" class="lbl" font-size="19" font-weight="bold" fill="#b1541b">Request: &#8220;fico com aquele endereço&#8221;</text>
+    <text x="450" y="373" text-anchor="middle" class="lbl" font-size="14" fill="#1d2057">broadcast: os outros servidores ficam sabendo · UDP 68 para 67</text>
+  </g>
+
+  <!-- 4 ACK -->
+  <g>
+    <path class="sk" d="M730,426 q-140,8 -280,-2 q-140,-6 -280,2" stroke="#00aa9f" stroke-width="3.5" marker-end="url(#d-tur)"/>
+    <circle cx="750" cy="426" r="15" fill="#00aa9f"/>
+    <text x="750" y="432" text-anchor="middle" class="lbl" font-size="17" font-weight="bold" fill="#ffffff">4</text>
+    <text x="450" y="405" text-anchor="middle" class="lbl" font-size="19" font-weight="bold" fill="#00aa9f">Ack: &#8220;confirmado, é seu por um tempo&#8221;</text>
+    <text x="450" y="453" text-anchor="middle" class="lbl" font-size="14" fill="#1d2057">volta ao cliente · UDP 67 para 68 · começa a concessão</text>
+  </g>
+
+  <!-- RODAPE: DORA -->
+  <g>
+    <text x="450" y="496" text-anchor="middle" class="lbl" font-size="17" font-weight="bold" fill="#1d2057"><tspan fill="#b1541b" font-size="22">D</tspan>iscover · <tspan fill="#00aa9f" font-size="22">O</tspan>ffer · <tspan fill="#b1541b" font-size="22">R</tspan>equest · <tspan fill="#00aa9f" font-size="22">A</tspan>ck</text>
+    <text x="450" y="524" text-anchor="middle" class="lbl" font-size="13" fill="#1d2057">laranja: o cliente fala · turquesa: o servidor responde</text>
+  </g>
+</svg>
