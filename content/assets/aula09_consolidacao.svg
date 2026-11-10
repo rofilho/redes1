@@ -13,6 +13,7 @@
       <path d="M0,0 L10,5 L0,10 z" fill="#2e7d52"/>
     </marker>
   </defs>
+  <rect id="fundo-card" x="0" y="0" width="900" height="460" rx="18" fill="#fafaf8"/>
 
   <!-- TITULO -->
   <text x="450" y="38" text-anchor="middle" class="lbl" font-size="24" font-weight="bold" fill="#1d2057">30 servidores viram 3 — o isolamento fica</text>
@@ -22,13 +23,13 @@
   <g>
     <text x="180" y="82" text-anchor="middle" class="lbl" font-size="15" font-weight="bold" fill="#b1541b">antes: 1 serviço por máquina</text>
     <rect x="40" y="96" width="280" height="280" rx="12" class="sk" fill="#fbeee6" stroke="#b1541b" stroke-width="2" stroke-dasharray="7 5"/>
-    <!-- grade 6x5 de mini servidores -->
+    <!-- grade 6 colunas x 5 linhas = 30 mini servidores (corrigida em 2026-11-10: eram 25) -->
     <g fill="#ffffff" stroke="#b1541b" stroke-width="1.5">
-      <rect x="56" y="112" width="38" height="42" rx="4" class="sk"/><rect x="102" y="112" width="38" height="42" rx="4" class="sk"/><rect x="148" y="112" width="38" height="42" rx="4" class="sk"/><rect x="194" y="112" width="38" height="42" rx="4" class="sk"/><rect x="240" y="112" width="38" height="42" rx="4" class="sk"/>
-      <rect x="56" y="162" width="38" height="42" rx="4" class="sk"/><rect x="102" y="162" width="38" height="42" rx="4" class="sk"/><rect x="148" y="162" width="38" height="42" rx="4" class="sk"/><rect x="194" y="162" width="38" height="42" rx="4" class="sk"/><rect x="240" y="162" width="38" height="42" rx="4" class="sk"/>
-      <rect x="56" y="212" width="38" height="42" rx="4" class="sk"/><rect x="102" y="212" width="38" height="42" rx="4" class="sk"/><rect x="148" y="212" width="38" height="42" rx="4" class="sk"/><rect x="194" y="212" width="38" height="42" rx="4" class="sk"/><rect x="240" y="212" width="38" height="42" rx="4" class="sk"/>
-      <rect x="56" y="262" width="38" height="42" rx="4" class="sk"/><rect x="102" y="262" width="38" height="42" rx="4" class="sk"/><rect x="148" y="262" width="38" height="42" rx="4" class="sk"/><rect x="194" y="262" width="38" height="42" rx="4" class="sk"/><rect x="240" y="262" width="38" height="42" rx="4" class="sk"/>
-      <rect x="56" y="312" width="38" height="42" rx="4" class="sk"/><rect x="102" y="312" width="38" height="42" rx="4" class="sk"/><rect x="148" y="312" width="38" height="42" rx="4" class="sk"/><rect x="194" y="312" width="38" height="42" rx="4" class="sk"/><rect x="240" y="312" width="38" height="42" rx="4" class="sk"/>
+      <rect x="56" y="112" width="34" height="42" rx="4" class="sk"/><rect x="98" y="112" width="34" height="42" rx="4" class="sk"/><rect x="140" y="112" width="34" height="42" rx="4" class="sk"/><rect x="182" y="112" width="34" height="42" rx="4" class="sk"/><rect x="224" y="112" width="34" height="42" rx="4" class="sk"/><rect x="266" y="112" width="34" height="42" rx="4" class="sk"/>
+      <rect x="56" y="162" width="34" height="42" rx="4" class="sk"/><rect x="98" y="162" width="34" height="42" rx="4" class="sk"/><rect x="140" y="162" width="34" height="42" rx="4" class="sk"/><rect x="182" y="162" width="34" height="42" rx="4" class="sk"/><rect x="224" y="162" width="34" height="42" rx="4" class="sk"/><rect x="266" y="162" width="34" height="42" rx="4" class="sk"/>
+      <rect x="56" y="212" width="34" height="42" rx="4" class="sk"/><rect x="98" y="212" width="34" height="42" rx="4" class="sk"/><rect x="140" y="212" width="34" height="42" rx="4" class="sk"/><rect x="182" y="212" width="34" height="42" rx="4" class="sk"/><rect x="224" y="212" width="34" height="42" rx="4" class="sk"/><rect x="266" y="212" width="34" height="42" rx="4" class="sk"/>
+      <rect x="56" y="262" width="34" height="42" rx="4" class="sk"/><rect x="98" y="262" width="34" height="42" rx="4" class="sk"/><rect x="140" y="262" width="34" height="42" rx="4" class="sk"/><rect x="182" y="262" width="34" height="42" rx="4" class="sk"/><rect x="224" y="262" width="34" height="42" rx="4" class="sk"/><rect x="266" y="262" width="34" height="42" rx="4" class="sk"/>
+      <rect x="56" y="312" width="34" height="42" rx="4" class="sk"/><rect x="98" y="312" width="34" height="42" rx="4" class="sk"/><rect x="140" y="312" width="34" height="42" rx="4" class="sk"/><rect x="182" y="312" width="34" height="42" rx="4" class="sk"/><rect x="224" y="312" width="34" height="42" rx="4" class="sk"/><rect x="266" y="312" width="34" height="42" rx="4" class="sk"/>
     </g>
     <text x="180" y="392" text-anchor="middle" class="lbl" font-size="14" font-weight="bold" fill="#b1541b">30 servidores físicos</text>
   </g>
