@@ -244,6 +244,13 @@ html, body, #quartz-root, #quartz-body, .page, .center, .center-content, article
         <div class="card-meta"><span>Acessar Aula</span><span></span></div>
       </div>
     </a>
+    <a href="./Trabalho-Final---A-Romuutech-Abre-uma-Filial" class="card" data-spa>
+      <div class="card-thumb"><div class="card-progress-bar"><div class="card-progress" style="width: 100%"></div></div></div>
+      <div class="card-content">
+        <div class="card-title">🏢 Trabalho Final - A Romuutech abre uma filial</div>
+        <div class="card-meta"><span>Entrega em Estudos Autônomos até 28/11 · 20 pontos</span><span></span></div>
+      </div>
+    </a>
     <a href="./Aula-10---Endereco-IPv4-DHCP-e-Wireshark" class="card" data-spa>
       <div class="card-thumb" style="background-image: url('assets/capa_aula10.png'); background-size: cover; background-position: center;"><div class="card-progress-bar"><div class="card-progress" style="width: 100%"></div></div></div>
       <div class="card-content">
