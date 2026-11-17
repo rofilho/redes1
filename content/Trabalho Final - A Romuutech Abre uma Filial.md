@@ -19,7 +19,7 @@ tags: [redes, {{PERIODO}}, trabalho-final, packet-tracer, dhcp, dns]
 | **Vale** | 20 pontos, todos pelo que o grupo entrega. A prova vale outros 20. |
 | **Grupo** | Até **3 pessoas**, todas da **mesma turma** (segunda ou quarta). |
 | **Entrega** | No **AVA**, em **Estudos Autônomos**, até **sábado, 28/11, às 23h59**. Um integrante envia pelo grupo. Não há apresentação: a nota sai só do que foi enviado. |
-| **O que enviar** | 2 arquivos: o `.pkt` da Parte 2 e um PDF com as respostas da Parte 1 e os prints das Partes 2 e 3. Os nomes estão na seção 6. |
+| **O que enviar** | 2 arquivos: o `.pkt` da Parte 2 e um PDF com as respostas da Parte 1 e os prints das Partes 2 e 3. Os nomes estão na Etapa 7 da seção 6. |
 
 ---
 
@@ -321,29 +321,65 @@ Cada desafio feito **e explicado no PDF** vale 1 ponto, inteiro ou nada. Fizeram
 
 ---
 
-## 6. Checklist e entrega
+## 6. Checklist do estudo autônomo
 
-### ☐ Parte 1
-- [ ] Respondemos às 10 perguntas com as nossas palavras.
+Sigam na ordem. Só passem para a etapa seguinte quando o **ponto de parada** funcionar. Cada etapa diz qual aula rever se travar.
 
-### ☐ Parte 2
-- [ ] Montamos a rede do desenho com os endereços do nosso grupo.
-- [ ] As rotas estáticas estão nos 3 roteadores. **Ponto de parada:** os testes 3 e 4 passam com os PCs ainda em endereço fixo provisório.
-- [ ] Passamos os PCs para DHCP. **Ponto de parada:** os testes 1, 2 e 8 passam.
-- [ ] DNS e web prontos. **Ponto de parada:** os 8 testes passam.
+### ☐ Etapa 1: Teoria, antes de abrir qualquer programa
+
+- [ ] Lemos as 10 perguntas da Parte 1 e separamos quem rascunha cada uma.
+- [ ] Revimos as Aulas 05 (camadas), 07 (portas e UDP), 10 e 12 (DHCP) e 09 (switches virtuais).
+- [ ] Escrevemos as respostas com as nossas palavras e cada integrante leu as do outro.
+- [ ] **Ponto de parada:** as 10 respostas estão no rascunho do PDF.
+
+> 💡 **Teste rápido:** sem olhar a aula, digam em voz alta as quatro mensagens do DHCP e quem manda cada uma. Travou? Revejam a Aula 10.
+
+### ☐ Etapa 2: Endereços, com papel e caneta
+
+- [ ] Pegamos o número `G` do grupo na lista do AVA.
+- [ ] Trocamos o `G` em toda a tabela de endereços da Parte 2 e anotamos o resultado.
+- [ ] Anotamos os endereços da Parte 3 (`192.168.G.x`).
+- [ ] **Ponto de parada:** a tabela do grupo está pronta, sem nenhum `G` sobrando.
+
+> 💡 **Teste rápido:** num `/30`, quantos endereços servem para equipamentos? Por que é o tamanho certo para ligar dois roteadores? *(Revejam a Aula 06.)*
+
+### ☐ Etapa 3: Os roteadores conversando (Packet Tracer)
+
+- [ ] Montamos a rede do desenho: 3 roteadores, 3 switches, 4 PCs e o servidor.
+- [ ] Configuramos as interfaces dos roteadores com `ip address` e `no shutdown`.
+- [ ] Pusemos as rotas estáticas nos 3 roteadores.
+- [ ] Demos endereço fixo provisório a um PC da matriz e a um da filial, só para testar.
+- [ ] **Ponto de parada:** os testes 3 e 4 passam.
+
+> 💡 **Teste rápido:** o PC da matriz pinga o próprio gateway, mas não chega à filial. Em qual roteador falta rota, e para qual rede? *(Revejam a Aula 06.)*
+
+### ☐ Etapa 4: DHCP, DNS e web no Packet Tracer
+
+- [ ] Criamos os dois pools no SERVIDOR (veja o "Apoio" da Parte 2).
+- [ ] Pusemos o `ip helper-address` no R-MATRIZ e no R-FILIAL.
+- [ ] Passamos os 4 PCs para DHCP.
+- [ ] Criamos o registro do DNS e editamos a página web.
+- [ ] **Ponto de parada:** os 8 testes da Parte 2 passam.
 
 > 💡 **Teste rápido:** o PC da matriz recebe endereço, mas o da filial fica em `169.254`. O que falta no R-FILIAL? *(Revejam a Aula 12.)*
 
-### ☐ Parte 3
+### ☐ Etapa 5: O servidor de verdade (Ubuntu Server)
+
 - [ ] Criamos as duas VMs e, no Default Switch, instalamos o `isc-dhcp-server`, o `bind9` e o Wireshark (passo 1).
-- [ ] Passamos as duas para o switch privado e fixamos o IP do Ubuntu (passos 2 a 4).
+- [ ] Criamos o switch privado, passamos as duas VMs para ele e fixamos o IP do Ubuntu (passos 2 a 4).
 - [ ] O DHCP está ativo e o cliente recebeu endereço (passos 5 a 7 e o `ipconfig` do passo 11).
 - [ ] O DNS está ativo e o cliente resolve `www.romuutech.com` (passos 8 a 11).
-- [ ] **Ponto de parada:** os 8 prints estão prontos.
+- [ ] **Ponto de parada:** os 8 prints da Parte 3 estão prontos.
 
 > 💡 **Teste rápido:** o serviço do DHCP não sobe e o status mostra erro. O motivo mais comum é "No subnet declaration": o IP fixo não foi aplicado ou o `G` não foi trocado. *(Revejam os passos 4, 5 e 6.)* E se o `nslookup` falhar? Rodem o `named-checkzone` de novo, confiram os pontos no fim dos nomes do passo 9, reiniciem o `named` e vejam se o DNS do `ipconfig /all` é `192.168.G.10`.
 
-### ☐ O PDF
+### ☐ Etapa 6: Desafios (opcional)
+
+- [ ] Escolhemos até 2 desafios e fizemos.
+- [ ] Os 8 testes da Parte 2 e os 8 prints da Parte 3 continuam valendo depois dos desafios.
+
+
+### ☐ Etapa 7: O PDF
 
 - [ ] Nome de todos os integrantes e da turma na capa.
 - [ ] Parte 1: as 10 respostas.
@@ -363,7 +399,7 @@ Troque `<turma>` por SEG ou QUA e `<grupo>` pelo número do grupo com dois dígi
 
 `trabalho_final_AGORA_VAI_v3.pkt` não é um nome. Nem `trabalho_final_AGORA_VAI_v4.pkt`.
 
-### ☐ Envio no AVA
+### ☐ Etapa 8: Envio no AVA
 
 1. Entre no AVA e abra a disciplina Redes de Computadores 1.
 2. Abra **Estudos Autônomos** e, dentro dele, o Trabalho Final.
