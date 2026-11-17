@@ -15,7 +15,7 @@ tags: [redes, {{PERIODO}}, trabalho-final, packet-tracer, dhcp, dns]
 
 | Item | Resumo |
 |---|---|
-| **O que é** | Três partes: perguntas de teoria, uma rede com DHCP, DNS e servidor web no Packet Tracer, e um servidor DHCP de verdade numa máquina virtual. |
+| **O que é** | Três partes: perguntas de teoria, uma rede com DHCP, DNS e servidor web no Packet Tracer, e um servidor DHCP e DNS de verdade numa máquina virtual com Ubuntu Server, com os comandos prontos. |
 | **Vale** | 20 pontos, todos pelo que o grupo entrega. A prova vale outros 20. |
 | **Grupo** | Até **3 pessoas**, todas da **mesma turma** (segunda ou quarta). |
 | **Entrega** | No **AVA**, em **Estudos Autônomos**, até **sábado, 28/11, às 23h59**. Um integrante envia pelo grupo. Não há apresentação: a nota sai só do que foi enviado. |
@@ -118,31 +118,198 @@ A Aula 12 configurou um pool só, na rede do próprio servidor. Aqui o servidor 
 
 ---
 
-## 4. Parte 3: Servidor DHCP numa máquina virtual (4 pontos)
+## 4. Parte 3: DHCP e DNS numa máquina virtual com Ubuntu Server (4 pontos)
 
-Agora o DHCP sai do simulador e vai para um sistema de verdade, como na Aula 12. Use um computador com Hyper-V (Aula 09) ou o do laboratório.
+Agora o DHCP e o DNS saem do simulador e vão para um sistema de verdade, como na Aula 12. Use um computador com Hyper-V (Aula 09) ou o do laboratório.
 
 ### O que montar
 
-- **VM 1: servidor:** Ubuntu Server, com **IP fixo** `192.168.G.10/24` configurado pelo Netplan.
-- **VM 2: cliente:** Windows, em DHCP.
-- **Primeiro, com internet:** ligue as duas VMs no **Default Switch** (Aula 09, seção 6.4). No Ubuntu, instale o `isc-dhcp-server`. No Windows, instale o Wireshark.
-- **Depois, isoladas:** crie um **switch virtual privado** e passe as duas VMs para ele. Só então ligue o servidor DHCP. No privado não há internet, e é de propósito.
-- No servidor, o `isc-dhcp-server` entregando endereços de `192.168.G.100` a `192.168.G.150`, com o gateway `192.168.G.1` e o DNS `192.168.G.10`. O gateway não precisa existir: no switch privado ninguém sai para fora.
+- **VM 1, o servidor:** Ubuntu Server, com **IP fixo** `192.168.G.10/24`. Ele faz **DHCP** (`isc-dhcp-server`) e **DNS** (`bind9`).
+- **VM 2, o cliente:** Windows, em DHCP.
+- **Primeiro, com internet:** as duas VMs no **Default Switch** (Aula 09, seção 6.4), para instalar os pacotes.
+- **Depois, isoladas:** um **switch virtual privado**, com as duas VMs nele. Só então o servidor DHCP liga. No privado não há internet, e é de propósito.
 
 > ⚠️ **Cuidado:** um servidor DHCP ligado na rede errada entrega endereço para todo mundo que estiver nela. É assim que se derruba o Wi-Fi de uma casa inteira com uma VM só. Por isso o servidor só liga no switch privado. Nem o externo nem o interno: no interno, o seu próprio computador também receberia endereço da VM.
 
-### Os 5 testes da Parte 3 (0,8 cada)
+### Passo a passo, com os comandos
+
+Em todos os arquivos abaixo, **troque `G` pelo número do grupo** (grupo 7: `192.168.7.10`). Cada comando vai numa linha do terminal do Ubuntu.
+
+**Passo 1. Instalar os pacotes (VM ainda no Default Switch, com internet)**
+
+```bash
+sudo apt update
+sudo apt install -y isc-dhcp-server bind9 bind9-dnsutils
+```
+
+Se o `isc-dhcp-server` e o `isc-dhcp-server6` mostrarem erro logo depois de instalar, é normal: eles ainda não têm configuração. No Windows, instale o Wireshark nesta mesma etapa.
+
+**Passo 2. Trocar as duas VMs para o switch privado.** No Hyper-V, abra o *Gerenciador de Comutador Virtual* e crie um switch do tipo **Privado** (Aula 09, seção 6.3). Depois, nas configurações de cada VM, em *Adaptador de rede*, escolha esse switch.
+
+**Passo 3. Descobrir o nome da placa de rede do Ubuntu**
+
+```bash
+ip a
+```
+
+No Hyper-V a placa costuma se chamar `eth0`. Se o nome for outro, use o seu nos passos 4 e 5.
+
+**Passo 4. IP fixo pelo Netplan.** Veja qual arquivo já existe em `/etc/netplan/` e **edite esse, não crie outro**. Na Aula 12 era `00-installer-config.yaml`; no Ubuntu 24.04 costuma ser `50-cloud-init.yaml`. Com dois arquivos, o Netplan junta os dois e o `dhcp4: true` do antigo continua valendo.
+
+```bash
+ls /etc/netplan/
+sudo nano /etc/netplan/<o nome que o ls mostrou>.yaml
+```
+
+Deixe o conteúdo assim, com os espaços exatamente como estão (o YAML não aceita tab):
+
+```yaml
+network:
+  version: 2
+  ethernets:
+    eth0:
+      dhcp4: false
+      addresses: [192.168.G.10/24]
+      nameservers:
+        addresses: [127.0.0.1]
+```
+
+Aplique e confira:
+
+```bash
+sudo chmod 600 /etc/netplan/*.yaml
+sudo netplan apply
+ip a
+```
+
+**Passo 5. Em que placa o DHCP escuta**
+
+```bash
+sudo nano /etc/default/isc-dhcp-server
+```
+
+Deixe a linha assim:
+
+```
+INTERFACESv4="eth0"
+```
+
+**Passo 6. A configuração do DHCP**
+
+```bash
+sudo mv /etc/dhcp/dhcpd.conf /etc/dhcp/dhcpd.conf.bak
+sudo nano /etc/dhcp/dhcpd.conf
+```
+
+Conteúdo do arquivo novo:
+
+```
+option domain-name "romuutech.com";
+option domain-name-servers 192.168.G.10;
+default-lease-time 600;
+max-lease-time 7200;
+authoritative;
+
+subnet 192.168.G.0 netmask 255.255.255.0 {
+  range 192.168.G.100 192.168.G.150;
+  option routers 192.168.G.1;
+}
+```
+
+O gateway `192.168.G.1` não precisa existir: no switch privado ninguém sai da rede.
+
+**Passo 7. Ligar o DHCP e conferir**
+
+```bash
+sudo systemctl restart isc-dhcp-server
+sudo systemctl enable isc-dhcp-server
+sudo systemctl status isc-dhcp-server
+```
+
+Tem que aparecer `active (running)`. Aperte `q` para sair da tela do status. Não subiu? Leia o motivo com `sudo journalctl -u isc-dhcp-server -n 20`.
+
+**Passo 8. Avisar o DNS de que ele cuida do domínio `romuutech.com`**
+
+```bash
+sudo nano /etc/bind/named.conf.local
+```
+
+Acrescente no fim:
+
+```
+zone "romuutech.com" {
+    type master;
+    file "/etc/bind/db.romuutech.com";
+};
+```
+
+**Passo 9. O arquivo da zona, com os nomes e os endereços.** A primeira linha, o SOA, diz quem é o dono do domínio e de quanto em quanto tempo outros servidores DNS devem conferir as mudanças. As outras ligam cada nome a um endereço.
+
+```bash
+sudo nano /etc/bind/db.romuutech.com
+```
+
+Conteúdo:
+
+```
+$TTL 604800
+@     IN  SOA  ns1.romuutech.com. admin.romuutech.com. (
+               2026111601 ; serial: aumente a cada mudança
+               604800     ; refresh
+               86400      ; retry
+               2419200    ; expire
+               604800 )   ; negative cache TTL
+@     IN  NS   ns1.romuutech.com.
+ns1   IN  A    192.168.G.10
+www   IN  A    192.168.G.10
+```
+
+Os pontos no fim de `ns1.romuutech.com.` e `admin.romuutech.com.` são obrigatórios. Sem eles, o DNS acrescenta o domínio de novo e o nome vira `ns1.romuutech.com.romuutech.com`.
+
+**Passo 10. Conferir e ligar o DNS**
+
+```bash
+sudo named-checkconf
+sudo named-checkzone romuutech.com /etc/bind/db.romuutech.com
+sudo systemctl restart named
+sudo systemctl status named
+```n
+Aperte `q` para sair da tela do status.
+
+O `named-checkconf` não mostra nada quando está tudo certo. O `named-checkzone` tem que terminar em `OK`. Testando no próprio servidor:
+
+```bash
+dig @127.0.0.1 www.romuutech.com +short
+```
+
+Tem que responder `192.168.G.10`.
+
+**Passo 11. No cliente Windows**, no Prompt de Comando como administrador:
+
+```
+ipconfig /release
+ipconfig /renew
+ipconfig /all
+nslookup www.romuutech.com
+```
+
+> 💡 **Firewall:** o Ubuntu Server vem com o firewall (`ufw`) desligado. Se o grupo o ligou, libere as portas: `sudo ufw allow 67/udp` e `sudo ufw allow 53`.
+
+### Os 8 prints da Parte 3 (0,5 cada)
 
 | # | Print | Tem que mostrar |
 |---|---|---|
 | 1 | O Gerenciador de Comutador Virtual e as configurações de rede de cada VM (pode ser um print composto) | o switch do tipo privado e as duas VMs ligadas nele |
 | 2 | `ip a` no Ubuntu Server | o endereço `192.168.G.10/24` |
 | 3 | `sudo systemctl status isc-dhcp-server` | o serviço `active (running)` |
-| 4 | `ipconfig /all` no cliente Windows | endereço entre `.100` e `.150` e "Servidor DHCP" `192.168.G.10` |
+| 4 | `ipconfig /all` no cliente Windows | endereço entre `.100` e `.150`, "Servidor DHCP" `192.168.G.10` e "Servidores DNS" `192.168.G.10` |
 | 5 | Captura no Wireshark, no cliente: comecem a captura, rodem `ipconfig /release` e `ipconfig /renew` e filtrem por `dhcp` | as quatro mensagens: Discover, Offer, Request e Ack |
+| 6 | `sudo named-checkzone romuutech.com /etc/bind/db.romuutech.com` | termina em `OK` |
+| 7 | `sudo systemctl status named` | o serviço `active (running)` |
+| 8 | `nslookup www.romuutech.com` no cliente Windows | servidor `192.168.G.10` e endereço `192.168.G.10` (aparecer "Servidor: UnKnown" é normal sem o desafio 3) |
 
 ---
+
 
 ## 5. Desafios (até 2 pontos)
 
@@ -150,7 +317,7 @@ Cada desafio feito **e explicado no PDF** vale 1 ponto, inteiro ou nada. Fizeram
 
 1. **Segundo site no Packet Tracer:** um segundo servidor na rede dos servidores, `10.G.2.20`, com a página `intranet.romuutech.com`, registrado no DNS. Print do navegador abrindo os dois nomes.
 2. **Endereço reservado:** no `dhcpd.conf` do Ubuntu, reservem um endereço fixo para o cliente Windows, pelo MAC dele (bloco `host`, com `hardware ethernet` e `fixed-address`). Print do `ipconfig /all` mostrando o endereço reservado.
-3. **DNS na máquina virtual:** instalem um servidor DNS no Ubuntu (por exemplo o `bind9`) e façam o cliente Windows resolver `www.romuutech.com`. Print do `nslookup` no cliente.
+3. **DNS ao contrário:** no `bind9`, criem a zona reversa da rede `192.168.G.0/24` (registro do tipo `PTR`), para o endereço `192.168.G.10` responder com o nome `ns1.romuutech.com`. Print do `nslookup 192.168.G.10` no cliente.
 
 ---
 
@@ -168,18 +335,20 @@ Cada desafio feito **e explicado no PDF** vale 1 ponto, inteiro ou nada. Fizeram
 > 💡 **Teste rápido:** o PC da matriz recebe endereço, mas o da filial fica em `169.254`. O que falta no R-FILIAL? *(Revejam a Aula 12.)*
 
 ### ☐ Parte 3
-- [ ] Criamos as duas VMs, instalamos o `isc-dhcp-server` e o Wireshark com elas no Default Switch.
-- [ ] Passamos as duas para o switch privado e fixamos o IP do Ubuntu.
-- [ ] **Ponto de parada:** os 5 prints estão prontos.
+- [ ] Criamos as duas VMs e, no Default Switch, instalamos o `isc-dhcp-server`, o `bind9` e o Wireshark (passo 1).
+- [ ] Passamos as duas para o switch privado e fixamos o IP do Ubuntu (passos 2 a 4).
+- [ ] O DHCP está ativo e o cliente recebeu endereço (passos 5 a 7 e o `ipconfig` do passo 11).
+- [ ] O DNS está ativo e o cliente resolve `www.romuutech.com` (passos 8 a 11).
+- [ ] **Ponto de parada:** os 8 prints estão prontos.
 
-> 💡 **Teste rápido:** o serviço não sobe e o status mostra erro. Qual arquivo diz em que interface o servidor escuta? *(Revejam o passo 5 da Aula 12.)*
+> 💡 **Teste rápido:** o serviço do DHCP não sobe e o status mostra erro. O motivo mais comum é "No subnet declaration": o IP fixo não foi aplicado ou o `G` não foi trocado. *(Revejam os passos 4, 5 e 6.)* E se o `nslookup` falhar? Rodem o `named-checkzone` de novo, confiram os pontos no fim dos nomes do passo 9, reiniciem o `named` e vejam se o DNS do `ipconfig /all` é `192.168.G.10`.
 
 ### ☐ O PDF
 
 - [ ] Nome de todos os integrantes e da turma na capa.
 - [ ] Parte 1: as 10 respostas.
 - [ ] Parte 2: a tabela de endereços do grupo e um print de cada um dos 8 testes, com uma linha dizendo o que ele prova. A nota dos testes vem do `.pkt`; o print serve de legenda.
-- [ ] Parte 3: os 5 prints, cada um com uma linha dizendo o que ele prova.
+- [ ] Parte 3: os 8 prints, cada um com uma linha dizendo o que ele prova.
 - [ ] Desafios: o print e a explicação de cada um.
 - [ ] Declaração de uso de IA, em 3 linhas: se usou, em quê e o que vocês conferiram por conta própria.
 
@@ -209,7 +378,7 @@ Troque `<turma>` por SEG ou QUA e `<grupo>` pelo número do grupo com dois dígi
 |---|---|---|
 | **Parte 1: teoria** | 5,0 | 10 perguntas, 0,5 cada |
 | **Parte 2: Packet Tracer** | 6,0 | o professor roda os 8 testes no seu `.pkt`, 0,75 cada |
-| **Parte 3: máquina virtual** | 4,0 | os 5 prints, 0,8 cada |
+| **Parte 3: máquina virtual** | 4,0 | os 8 prints, 0,5 cada |
 | **PDF e arquivos** | 3,0 | 1,0 pela tabela de endereços, 1,0 pela legenda dos prints das Partes 2 e 3, e 1,0 pelos nomes e pela organização |
 | **Desafios** | 2,0 | 1,0 cada, até 2 |
 
